@@ -1,0 +1,52 @@
+﻿::IT.Software.Network.Client
+
+FTP-клиенты
+
+--------------------------------
+FileZilla FTP Client
+https://filezilla-project.org/download.php?type=client
+``Windows
+
+
+--------------------------------
+Закачки
+Download Master
+https://westbyte.com/dm/
+``Windows
+
+
+--------------------------------
+qBittorrent
+Torrent-клиент
+Очень плохо работает с DHT: просто показывает, что подключено 0 клиентов. Проблема, судя по всему, наблюдается годами.
+https://www.qbittorrent.org/download.php
+``Windows, ``Linux, ``MacOS
+
+Ключ для проверки дистрибутивов
+.\data\qbittorrent-5B7CC9A2.asc
+
+
+--------------------------------
+--------------------------------
+::IT.Software.Network
+
+--------------------------------
+TOR
+
+TorBrowser
+https://www.torproject.org/download/
+``Windows, ``Linux
+
+Ключ для проверки дистрибутивов
+.\data\torkey-kounek7zrdx745qydx6p59t9mqjpuhdf.asc
+
+
+--------------------------------
+Whonix
+https://www.whonix.org/#download
+``Windows, ``Linux
+
+Виртуальные машины с TOR. Одна машина проксирует другую для обеспечения соединений только через TOR.
+Требует Virtual Box (см. ..\..\System\vm.20 )
+
+

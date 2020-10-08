@@ -1,0 +1,27 @@
+﻿::IT.Software.System.Win
+``Windows
+@Windows
+
+--------------------------------
+unlock-it: разблокировка заблокированных файлов
+
+https://emcosoftware.com/unlock-it
+::IT.Software.Disk
+
+--------------------------------
+openhardwaremonitor.org (Температура процессора и дисков)
+
+https://openhardwaremonitor.org/downloads/
+https://github.com/openhardwaremonitor/openhardwaremonitor
+
+Пример использования
+https://www.hackster.io/haoming-weng/get-cpu-temperature-using-open-hardware-monitor-in-c-1a3338
+
+Для работы локально через web-сервер для получения результатов другими приложениями
+http://127.0.0.1:8085/data.json
+
+SMART
+https://github.com/openhardwaremonitor/openhardwaremonitor/blob/e199e0ccc69b4da92495266ebc0faf7daad97608/Hardware/HDD/WindowsSmart.cs
+
+--------------------------------
+

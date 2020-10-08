@@ -1,0 +1,11 @@
+﻿@UEFI @EFI ::Prg.BOOT
+::Prg.OS ::Prg.System
+
+
+https://wiki.osdev.org/UEFI
+
+https://edk2-docs.gitbook.io/edk-ii-uefi-driver-writer-s-guide/5_uefi_services/51_services_that_uefi_drivers_commonly_use/511_memory_allocation_services
+
+
+Свободная прошивка BIOS/UEFI
+https://libreboot.org/

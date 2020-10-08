@@ -1,0 +1,33 @@
+﻿::IT.Software.ОперационныеСистемы
+
+@KolibriOS
+http://kolibri-n.org/download
+http://kolibrios.org/ru/download
+
+
+@Linux		``Linux
+Дистрибутивы Linux
+@Tails
+https://tails.boum.org/
+@Whonix @Хуникс
+https://www.whonix.org/
+@Mint @LinuxMint
+https://linuxmint.com/		(попробовать Мате или XFCE; 512 Мб - kernel panic в консоли ещё)
+@Fedora
+https://getfedora.org/ru/
+
+@Lite @LinuxLite
+https://www.linuxliteos.com/	(скачивать более 1,3 гигов - пока пробую это; интерфейс что-то тормозит)
+@LUbuntu
+https://lubuntu.net/			(почему-то последней версии Lubuntu нет - 404 not found)
+@lxle
+https://www.lxle.net/			(неудобная загрузка с sourceforge.net; на Lubuntu)
+@bodhilinux
+https://www.bodhilinux.com/		(неудобная загрузка с sourceforge.net)
+@crunchbangplusplus @crunchbang++
+https://crunchbangplusplus.org/ (непонятно, что они публикуют - старые версии, новые версии?)
+@puppylinux
+http://wikka.puppylinux.com/HomePage	(на основе устаревшей Ubuntu)
+@TinyCore
+http://www.tinycorelinux.net/	(Вообще не понятно что, но очень маленький дистрибутив)
+

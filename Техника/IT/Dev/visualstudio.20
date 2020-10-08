@@ -1,0 +1,89 @@
+﻿::IT.Software.Dev
+
+Установка Visual Studio
+https://docs.microsoft.com/en-us/visualstudio/install/create-an-offline-installation-of-visual-studio?view=vs-2019
+
+VS2019
+Для COSMOS
+
+Workload:
+	Visual Studio Extension Development
+	.NET Core Tools
+
+	--add Microsoft.VisualStudio.Workload.ManagedDesktop --includeOptional --add Component.GitHub.VisualStudio --add Microsoft.VisualStudio.Workload.NetCoreTools --add Microsoft.VisualStudio.Workload.VisualStudioExtension --add Microsoft.Net.Component.4.6.2.SDK --add Microsoft.Net.Component.4.7.SDK --add Microsoft.Net.Core.Component.SDK.3.0 --add Microsoft.VisualStudio.Component.Git --add Microsoft.VisualStudio.Workload.NativeDesktop --remove Component.Microsoft.VisualStudio.LiveShare --remove Component.Incredibuild --remove Component.IncredibuildMenu
+
+	Создать слой
+	vs_community.exe --layout E:\Arcs\systemly\Development\Windows\vs2019 --lang ru-RU ВСТАВИТЬ УСТАНОВКУ --add
+
+	Для проверки установки и загрузки недостающих компонентов
+		E:\Arcs\systemly\Development\Windows\vs2019\vs_Community.exe --layout E:\Arcs\systemly\Development\Windows\vs2019 --fix
+		Для обновления слоя
+		E:\Arcs\systemly\Development\Windows\vs2019\vs_Community.exe --layout E:\Arcs\systemly\Development\Windows\vs2019
+
+	Установка обновления
+	E:\Arcs\systemly\Development\Windows\vs2019\vs_Community.exe update --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community" --noUpdateInstaller -p --noWeb ВСТАВИТЬ УСТАНОВКУ
+
+
+Первичная установка
+E:\Arcs\systemly\Development\Windows\vs2019\vs_Community.exe --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community" --noUpdateInstaller --noWeb -p ВСТАВИТЬ УСТАНОВКУ
+
+--------------------------
+
+Добавить в Response.json и Layout.json раздел remove
+,"addProductLang":["ru-RU"],"remove":["Component.Incredibuild","Component.IncredibuildMenu"]
+
+	https://docs.microsoft.com/en-us/visualstudio/install/install-vs-inconsistent-quality-network
+	https://docs.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio
+	https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-community
+	https://docs.microsoft.com/en-us/visualstudio/install/controlling-updates-to-visual-studio-deployments
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe --layout E:\Arcs\systemly\Development\Windows\vs2017 --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetWeb --add Component.GitHub.VisualStudio --includeOptional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.Component.NetFX.Native -add Microsoft.VisualStudio.Component.Unity --lang ru-RU
+
+		// Microsoft.VisualStudio.Workload.ManagedGame		Microsoft.VisualStudio.Component.Unity
+		
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetWeb --add Component.GitHub.VisualStudio --includeOptional --add Microsoft.VisualStudio.Workload.NativeDesktop  --add Microsoft.Component.NetFX.Native --noWeb
+
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe modify --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetWeb --add Component.GitHub.VisualStudio --includeOptional --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.Component.NetFX.Native  --add Microsoft.VisualStudio.Component.Unity -add Microsoft.Net.Component.3.5.DeveloperTools --noWeb
+		
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe modify --layout E:\Arcs\systemly\Development\Windows\vs2017 --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --add Microsoft.VisualStudio.Workload.ManagedDesktop --includeOptional  --noUpdateInstaller --noWeb
+
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe modify --layout E:\Arcs\systemly\Development\Windows\vs2017 --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --add Microsoft.VisualStudio.Component.Unity -add Microsoft.Net.Component.3.5.DeveloperTools --remove Component.Incredibuild --remove Component.IncredibuildMenu --noWeb
+
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe update --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetWeb --add Component.GitHub.VisualStudio --includeOptional --add Microsoft.VisualStudio.Workload.NativeDesktop  --add Microsoft.Component.NetFX.Native --noWeb
+		
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe repair --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --noUpdateInstaller --noWeb
+
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe repair --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community"
+
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --noUpdateInstaller --noWeb
+		
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe update --layout E:\Arcs\systemly\Development\Windows\vs2017 --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --noUpdateInstaller --noWeb
+		
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe --layout E:\Arcs\systemly\Development\Windows\vs2017 update --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --noUpdateInstaller --noWeb
+		
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe update --layout E:\Arcs\systemly\Development\Windows\vs2017 --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --noUpdateInstaller --noWeb
+		
+		
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --noUpdateInstaller -p
+
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe uninstall --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --noUpdateInstaller --noWeb -p
+
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe --layout E:\Arcs\systemly\Development\Windows\vs2017 --clean Archive\a85a65d8-0c74-4aa7-bfd6-eb5e5a11079b\Catalog.json Archive\c88b43d1-cfda-49a3-9a5a-88587a14169c\Catalog.json
+		
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe update --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --noUpdateInstaller --noWeb
+		
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe repair --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --noUpdateInstaller --noWeb
+
+		// установка обновления
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe update --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --noUpdateInstaller -p
+
+		// установка
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe --noUpdateInstaller --noWeb
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe --noUpdateInstaller
+
+		Для проверки установки и загрузки недостающих компонентов
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe --layout E:\Arcs\systemly\Development\Windows\vs2017 --fix
+		Для обновления слоя
+		E:\Arcs\systemly\Development\Windows\vs2017\vs_Community.exe --layout E:\Arcs\systemly\Development\Windows\vs2017
+		Также можно использовать команды update, modify, repair, uninstall
+		
+		Если что-то случилось с инсталляцией, то C:\Program Files (x86)\Microsoft Visual Studio\Installer\resources\app\layout\InstallCleanup.exe -i или -f (полное удаление, включая расшаренные компоненты)

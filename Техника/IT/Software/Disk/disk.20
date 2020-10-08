@@ -1,0 +1,57 @@
+﻿::IT.Software.Disk
+
+--------------------------------
+Диски в оперативной памяти
+
+ImDisk
+http://www.ltr-data.se/opencode.html#ImDisk
+
+https://sourceforge.net/projects/imdisk-toolkit/
+Содержит ImDisk с дополнительными программами
+
+
+--------------------------------
+::IT.Software.Security
+VeraCrypt
+Шифрование дисков
+https://www.veracrypt.fr/en/Home.html
+
+Обеспечивает шифрование дисков под Windows с возможностью их чтения под Linux.
+Поддерживает как иностранные алгоритмы, такие как AES, Serpent, так и отечественный Кузнечик.
+
+Ключ для проверки дистрибутивов
+.\data\VeraCrypt_PGP_public_key.asc
+
+``Криптография
+
+--------------------------------
+::IT.Software.Security
+Перезатирание данных
+
+Eraser
+https://eraser.heidi.ie/download/
+( https://sourceforge.net/projects/eraser/ )
+
+(BlackDisplay)
+https://github.com/fdsc/old/releases
+Простая программа под Windows. Может перезатереть файл или создать много файлов на диске, чтобы перезатереть пустое место. Не требует административных привелегий.
+
+--------------------------------
+Dataram RamDisk
+http://memory.dataram.com/products-and-services/software/ramdisk
+
+Программа, создающая один диск в оперативной памяти.
+Бесплатная версия создаёт диск размером до 1 Гб.
+
+--------------------------------
+defraggler (дефрагментатор)
+
+https://www.ccleaner.com/defraggler
+
+--------------------------------
+Recuva
+Программа для восстановления случайно удалённых данных
+https://www.ccleaner.com/recuva
+
+--------------------------------
+

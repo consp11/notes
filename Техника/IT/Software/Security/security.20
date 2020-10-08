@@ -1,0 +1,72 @@
+﻿::IT.Software.Security
+
+Сетевая безопасность, см. ::IT.Software.Network
+
+--------------------------------
+Comodo Internet Security
+Интегрированный антивирус и фаервол (firewall) для Windows 7 и выше.
+
+При установке обязательно настроить состав закачки (на первой странице установщика), а то установит не то, что нужно.
+https://antivirus.comodo.com/
+
+``МСЭ, ``firewall, ``Антивирус
+
+--------------------------------
+Менеджер паролей
+
+KeePass
+https://keepass.info/
+Windows с .NET
+
+Ключ для проверки дистрибутивов
+.\data\DominikReichl.asc
+
+``Криптография
+``Менеджер паролей
+``Пароли
+
+--------------------------------
+OpenSSL
+https://www.openssl.org/
+
+Ссылки на сборки для Windows можно найти на странице
+https://wiki.openssl.org/index.php/Binaries
+
+Например,
+http://slproweb.com/products/Win32OpenSSL.html
+https://indy.fulgan.com/SSL/
+
+
+Исходники https://github.com/openssl/openssl
+
+``Криптография
+
+--------------------------------
+GnuPG: The GNU Privacy Guard
+GPG - набор программ для бесплатного ассиметричного шифрования
+
+https://gnupg.org/
+
+``Криптография
+
+--------------------------------
+GPG for Windows
+
+https://gpg4win.org/download.html
+
+Ключ для проверки дистрибутивов
+.\data\Intevation-Distribution-Key.asc
+
+``Windows, ``Криптография
+
+--------------------------------
+OpenPuff
+Программа для стеганографии с помощью картинок
+https://embeddedsw.net/OpenPuff_Steganography_Home_ru.html
+
+Стеганографирует в картинки небольшие файлы.
+Проблема лишь в том, что пароль ограничен 32-мя символами и, видимо, не подвергается стойкому криптографическому преобразованию.
+Перед стеганографированием шифруйте другими программами.
+
+
+``Стеганография

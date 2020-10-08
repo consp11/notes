@@ -1,0 +1,57 @@
+﻿::IT.Software.Data
+
+--------------------------------
+7-zip
+Бесплатный архиватор, поддерживающий архивирование в zip и 7z формате. Очень хорошо сжимает. Поддерживает шифрование архивов AES (стойкость неясна)
+
+https://www.7-zip.org/
+
+--------------------------------
+Notepad++
+Текстовый редактор с подсветкой синтаксиса языков
+
+https://notepad-plus-plus.org/
+
+.\data\nppGpgPub.asc
+
+--------------------------------
+HxD
+
+``шестнадцатеричный редактор
+
+https://mh-nexus.de/en/hxd/
+
+--------------------------------
+OpenOffice
+https://www.openoffice.org/ru/
+
+Пакет-аналог Microsoft Office
+
+--------------------------------
+Sumatra PDF
+Программа для просмотра текстовых файлов в формате PDF (удобно) и некоторых иных форматах (не удобно)
+
+https://www.sumatrapdfreader.org/free-pdf-reader.html
+
+--------------------------------
+CoolReader 3.0
+
+https://sourceforge.net/projects/crengine/
+
+--------------------------------
+STDU Viewer
+Программа для просмотра PDF-файлов
+
+http://www.stdutility.com/stduviewer.html
+
+--------------------------------
+MyTetra
+
+https://webhamster.ru/site/page/index/articles/projectcode/105
+Позволяет хранить иерархические тегированные записи
+
+Исходные коды по адресу
+https://github.com/xintrea/mytetra_dev
+
+``Windows, ``Linux
+--------------------------------

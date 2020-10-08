@@ -1,0 +1,35 @@
+﻿:: - метки-теги, такие как ::связь, ::безопасность и т.п. (перечислены ниже)
+@ - метки-имена, например, @Linux
+`` - дополнительные метки, на которые нужно обратить внимание.
+
+.20 - это 20-ые годы
+
+--------------------------------
+Метки для .20
+
+::IT.Software.ОперационныеСистемы		Перечень операционных систем
+::IT.Software.Data						Обработка данных, текст
+::IT.Software.Dev
+::IT.Software.Disk						Дисковые утилиты, включая шифрование
+	.\Техника\IT\Software\Disk\disk.20
+::IT.Software.Network
+::IT.Software.Network.Server
+::IT.Software.Network.Client
+::IT.Software.Security					СЗИ
+	.\Техника\IT\Software\Security\security.20
+::IT.Software.System.Win				Системное ПО для Windows
+	.\Техника\IT\Software\System\Windows\win.20
+::IT.Software.VM						Виртуальные машины и средства виртуализации
+	.\Техника\IT\Software\System\vm.20
+::IT.Internet
+::IT.Internet.Hosting
+::IT.Internet.Mail						Сообщения, записки, файлы в сети
+::IT.Internet.Security
+::Prg									Программирование (в папке Dev)
+::Prg.BOOT								Загрузчики
+::Prg.OS								Операционные системы и загрузчики ОС
+::Prg.System							Операционные системы
+::Organizations							Организации
+::Organizations.IT
+::ПолитикаИПродажи.Реклама				Методы рекламы в политике и продажах
+
