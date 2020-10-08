@@ -7,11 +7,20 @@
 --------------------------------
 Метки для .20
 
+::Dev									Программирование (в папке Dev)
+::Dev.BOOT								Загрузчики
+::Dev.OS								Операционные системы и загрузчики ОС
+::Dev.System							Операционные системы
+
+::Creativity							Методы "творчества" - анализ и синтез задач
+	.\Творчество\creativity.md
+
 ::IT.Software.ОперационныеСистемы		Перечень операционных систем
 ::IT.Software.Data						Обработка данных, текст
 ::IT.Software.Dev
 ::IT.Software.Disk						Дисковые утилиты, включая шифрование
 	.\Техника\IT\Software\Disk\disk.20
+::IT.Software.Games
 ::IT.Software.Network
 ::IT.Software.Network.Server
 ::IT.Software.Network.Client
@@ -25,11 +34,9 @@
 ::IT.Internet.Hosting
 ::IT.Internet.Mail						Сообщения, записки, файлы в сети
 ::IT.Internet.Security
-::Prg									Программирование (в папке Dev)
-::Prg.BOOT								Загрузчики
-::Prg.OS								Операционные системы и загрузчики ОС
-::Prg.System							Операционные системы
+
 ::Organizations							Организации
 ::Organizations.IT
+
 ::ПолитикаИПродажи.Реклама				Методы рекламы в политике и продажах
 

@@ -1,5 +1,5 @@
-﻿@UEFI @EFI ::Prg.BOOT
-::Prg.OS ::Prg.System
+﻿@UEFI @EFI ::Dev.BOOT
+::Dev.OS ::Dev.System
 
 
 https://wiki.osdev.org/UEFI
