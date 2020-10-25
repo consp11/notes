@@ -3,3 +3,9 @@
 @UEFI @EFI ::Dev.BOOT
 Сообщество разработчиков открытого ПО, включая https://libreboot.org/ , https://dragora.org/
 https://peers.community/
+
+
+``Браузер
+::IT.Software.Network.Client
+Браузерная библиотека на C++
+https://lexbor.com/
