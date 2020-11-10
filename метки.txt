@@ -14,7 +14,11 @@
 
 ::Creativity							Методы "творчества" - анализ и синтез задач
 	.\Творчество\creativity.md
-
+::Religion.Buddha
+	E:\works\bd\notes\notes\Религия\budda
+::Religion.Jesus
+	E:\works\bd\notes\notes\Религия\jesus
+::Religion.Jesus.link					Ссылки на сайты о религии
 ::IT.Software.ОперационныеСистемы		Перечень операционных систем
 ::IT.Software.Data						Обработка данных, текст
 ::IT.Software.Dev

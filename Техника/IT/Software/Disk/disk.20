@@ -20,7 +20,7 @@ https://www.veracrypt.fr/en/Home.html
 Поддерживает как иностранные алгоритмы, такие как AES, Serpent, так и отечественный Кузнечик.
 
 Ключ для проверки дистрибутивов
-.\data\VeraCrypt_PGP_public_key.asc
+..\Security\data\VeraCrypt_PGP_public_key.asc
 
 ``Криптография
 

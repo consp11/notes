@@ -34,7 +34,10 @@ https://marketplace.visualstudio.com/items?itemName=SonarSource.SonarLintforVisu
 https://marketplace.visualstudio.com/items?itemName=MadsKristensen.MarkdownEditor
 https://marketplace.visualstudio.com/items?itemName=WakaTime.WakaTime
 
-
+Code metrics
 
 https://docs.microsoft.com/ru-ru/dotnet/csharp/roslyn-sdk/get-started/semantic-analysis
 https://docs.microsoft.com/ru-ru/dotnet/csharp/roslyn-sdk/tutorials/how-to-write-csharp-analyzer-code-fix
+
+https://docs.microsoft.com/en-us/visualstudio/code-quality/install-fxcop-analyzers?view=vs-2019#to-install-fxcop-analyzers-as-a-vsix
+	Microsoft code analisys 2019
