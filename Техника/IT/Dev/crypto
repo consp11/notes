@@ -1,0 +1,8 @@
+﻿::Dev.Crypto
+
+Библиотеки для шифрования (криптографические библиотеки)
+``криптография ``шифрование
+
+https://github.com/sdrapkin/SecurityDriven.Inferno
+https://github.com/google/tink
+https://doc.libsodium.org
