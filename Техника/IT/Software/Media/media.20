@@ -2,25 +2,30 @@
 --------------------------------
 Диаграммы
 
-draw.io
+@draw.io
 	https://draw.io
 	https://app.diagrams.net/
 
 --------------------------------
-Blender
+Иконки для программ
+
+http://greenfishsoftware.org/gfie.php#apage
+
+--------------------------------
+@Blender
 Программа для создания трёхмерных сцен и мультфильмов
 
 https://www.blender.org/
 
 @Blender ``3D
 --------------------------------
-K-Lite Codec Pack
+@K-Lite Codec Pack
 Архив кодеков и MediaPlayer Classic (проигрыватель видео)
 
 https://codecguide.com/
 
 --------------------------------
-HandBrake
+@HandBrake
 Конвертор видео
 https://handbrake.fr/
 
@@ -31,19 +36,19 @@ VSDC Free Video Editor
 http://www.videosoftdev.com/free-video-editor/download
 
 --------------------------------
-AIMP
+@AIMP
 Проигрыватель музыки
 
 http://www.aimp.ru/
 
 --------------------------------
-audacity
+@audacity
 Звукозапись и редактирование звуковых файлов с возможностью перезаписи.
 
 https://www.audacityteam.org/	
 
 --------------------------------
-anvilstudio
+@anvil studio
 Midi-редактор с возможностью редактирования нотного текста
 
 https://www.anvilstudio.com/
@@ -53,6 +58,7 @@ https://www.anvilstudio.com/
 --------------------------------
 Генераторы речи и программы озвучивания
 
+@RHVoice
 https://github.com/Olga-Yakovleva/RHVoice/
 
 http://cross-plus-a.com/balabolka.htm (http://balabolka.site/balabolka.htm)

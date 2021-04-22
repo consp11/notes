@@ -30,6 +30,7 @@
 ::IT.Software.Disk						Дисковые утилиты, включая шифрование
 	.\Техника\IT\Software\Disk\disk.20
 ::IT.Software.Games
+::IT.Software.Media						Рисование, обработка видео и т.п.
 ::IT.Software.Network
 ::IT.Software.Network.Server
 ::IT.Software.Network.Client
