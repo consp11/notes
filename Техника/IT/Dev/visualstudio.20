@@ -1,9 +1,13 @@
 ﻿::IT.Software.Dev
 
-@Visual Studio @VisualStudio
+@Visual Studio @VisualStudio @VS
 
 Установка Visual Studio
 https://docs.microsoft.com/en-us/visualstudio/install/create-an-offline-installation-of-visual-studio?view=vs-2019
+
+https://docs.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio?view=vs-2019
+
+https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-community?view=vs-2019&preserve-view=true
 
 VS2019
 Для COSMOS
