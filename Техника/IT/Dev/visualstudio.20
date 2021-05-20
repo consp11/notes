@@ -18,8 +18,8 @@ Workload:
 
 	--add Microsoft.VisualStudio.Workload.ManagedDesktop;includeRecommended;includeOptional --add Microsoft.VisualStudio.Workload.VisualStudioExtension;includeRecommended;includeOptional --add Component.GitHub.VisualStudio --add Microsoft.VisualStudio.Workload.NetCoreTools --add Microsoft.Net.Component.4.7.2.TargetingPack --add Microsoft.NetCore.Component.Runtime.5.0 --add Microsoft.NetCore.Component.SDK --add Microsoft.Net.Component.4.6.2.SDK --add Microsoft.Net.Component.4.8.SDK --add Microsoft.Net.Component.4.7.SDK --add Microsoft.Net.Core.Component.SDK.3.0 --add Microsoft.VisualStudio.Component.Git --add Microsoft.VisualStudio.Workload.NativeDesktop --remove Component.Microsoft.VisualStudio.LiveShare --remove Component.Incredibuild --remove Component.IncredibuildMenu
 
-	Создать слой
-	vs_community.exe --layout E:\Arcs\systemly\Development\Windows\vs2019 --lang ru-RU ВСТАВИТЬ УСТАНОВКУ --add
+	Создать слой (или изменить слой)
+	vs_community.exe --layout E:\Arcs\systemly\Development\Windows\vs2019 --lang ru-RU --includeRecommended --includeOptional ВСТАВИТЬ УСТАНОВКУ
 
 	Для проверки установки и загрузки недостающих компонентов
 		E:\Arcs\systemly\Development\Windows\vs2019\vs_Community.exe --layout E:\Arcs\systemly\Development\Windows\vs2019 --fix
@@ -29,6 +29,8 @@ Workload:
 	Установка обновления
 	E:\Arcs\systemly\Development\Windows\vs2019\vs_Community.exe update --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community" --noUpdateInstaller -p --noWeb ВСТАВИТЬ УСТАНОВКУ
 
+	Модификация
+	E:\Arcs\systemly\Development\Windows\vs2019\vs_Community.exe modify --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community" --noUpdateInstaller -p --noWeb ВСТАВИТЬ УСТАНОВКУ
 
 Первичная установка
 E:\Arcs\systemly\Development\Windows\vs2019\vs_Community.exe --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community" --noUpdateInstaller --noWeb -p ВСТАВИТЬ УСТАНОВКУ
