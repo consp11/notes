@@ -27,7 +27,7 @@ Workload:
 		E:\Arcs\systemly\Development\Windows\vs2019\vs_Community.exe --layout E:\Arcs\systemly\Development\Windows\vs2019
 
 	Установка обновления
-	E:\Arcs\systemly\Development\Windows\vs2019\vs_Community.exe update --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community" --noUpdateInstaller -p --noWeb ВСТАВИТЬ УСТАНОВКУ
+	E:\Arcs\systemly\Development\Windows\vs2019\vs_Community.exe update --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community" --noUpdateInstaller -p --noWeb
 
 	Модификация
 	E:\Arcs\systemly\Development\Windows\vs2019\vs_Community.exe modify --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community" --noUpdateInstaller -p --noWeb ВСТАВИТЬ УСТАНОВКУ

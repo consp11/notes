@@ -38,6 +38,7 @@
 	.\Техника\IT\Software\Security\security.20
 ::IT.Software.System.Win				Системное ПО для Windows
 	.\Техника\IT\Software\System\Windows\win.20
+::IT.Software.Time
 ::IT.Software.VM						Виртуальные машины и средства виртуализации
 	.\Техника\IT\Software\System\vm.20
 ::IT.Internet
