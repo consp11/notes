@@ -45,6 +45,7 @@
 ::IT.Internet.Hosting
 ::IT.Internet.Mail						Сообщения, записки, файлы в сети
 ::IT.Internet.Security
+::IT.Internet.Services					Сервисы в интернете
 
 ::Organizations							Организации
 ::Organizations.IT

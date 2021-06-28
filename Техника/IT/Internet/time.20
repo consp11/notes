@@ -1,3 +1,6 @@
 ﻿::IT.Software.Time
 
+@NTP
 https://www.ntp-servers.net/
+
+``NTP ``серверы времени ``серверы точного времени
