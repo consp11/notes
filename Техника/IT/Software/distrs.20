@@ -23,14 +23,16 @@ https://linuxmint.com/		(попробовать Мате или XFCE; 512 Мб -
 https://getfedora.org/ru/
 @Zorin
 https://zorinos.com/download/15/lite/
-@crunchbangplusplus @crunchbang++
-	https://crunchbangplusplus.org/ (непонятно, что они публикуют - старые версии, новые версии?)
+@crunchbangplusplus @crunchbang++	(неудобная загрузка с sourceforge.net)
+	https://crunchbangplusplus.org/
 	https://github.com/CBPP/cbpp10-amd64/releases/
-@puppylinux
-	http://wikka.puppylinux.com/HomePage	(на основе устаревшей Ubuntu)
-@PureOS
+@PureOS (чего-то слетела она у меня после первого запуска; возможно, я что-то сделал не так)
 	https://pureos.net/download/
 
+@Debian
+	https://www.debian.org/distrib/
+@puppylinux
+	http://wikka.puppylinux.com/HomePage	(на основе устаревшей Ubuntu)
 @Lite @LinuxLite
 https://www.linuxliteos.com/	(скачивать более 1,3 гигов - пока пробую это; интерфейс что-то тормозит)
 @LUbuntu
