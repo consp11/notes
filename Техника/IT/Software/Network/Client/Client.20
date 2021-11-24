@@ -4,30 +4,37 @@
 Браузеры
 
 --------------------------------
-FireFox
-Opera			--proxy-server="127.0.0.1:8118"
-Falkon
-Chromium		--proxy-server="127.0.0.1:8118"
+@FireFox
+@Opera			--proxy-server="127.0.0.1:8118"
+@Falkon
+@Chromium		--proxy-server="127.0.0.1:8118"
 
 
 --------------------------------
 FTP-клиенты
 
 --------------------------------
-FileZilla FTP Client
+@FileZilla FTP Client
 https://filezilla-project.org/download.php?type=client
 ``Windows
 
 
 --------------------------------
 Закачки
-Download Master
+@Download Master
 https://westbyte.com/dm/
 ``Windows
 
+--------------------------------
+@Persepolis
+apt search persepolis
 
 --------------------------------
-qBittorrent
+@youtube-dl
+apt search youtube-dl
+
+--------------------------------
+@qBittorrent
 Torrent-клиент
 Очень плохо работает с DHT: просто показывает, что подключено 0 клиентов. Проблема, судя по всему, наблюдается годами.
 https://www.qbittorrent.org/download.php
@@ -42,18 +49,25 @@ https://www.qbittorrent.org/download.php
 ::IT.Software.Network
 
 --------------------------------
-TOR
+@TOR
 
-TorBrowser
+@TorBrowser
 https://www.torproject.org/download/
 ``Windows, ``Linux
 
 Ключ для проверки дистрибутивов
 .\data\torkey-kounek7zrdx745qydx6p59t9mqjpuhdf.asc
 
+gettor@torproject.org
+Указать в теле письма наименования ОС (Linux)
+
+gettor@torproject.org
+    get bridges – для получения мостов без обфускации
+    get ipv6 – для получения мостов с адресами IPv6
+    get transport obfs4 – для получения мостов с транспортом Obfs4
 
 --------------------------------
-Whonix
+@Whonix
 https://www.whonix.org/#download
 ``Windows, ``Linux
 
