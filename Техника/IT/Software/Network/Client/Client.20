@@ -61,6 +61,10 @@ https://www.torproject.org/download/
 gettor@torproject.org
 Указать в теле письма наименования ОС (Linux)
 
+https://tb-manual.torproject.org/circumvention/
+https://bridges.torproject.org/bridges?transport=fte
+https://bridges.torproject.org/bridges?transport=obfs4
+
 gettor@torproject.org
     get bridges – для получения мостов без обфускации
     get ipv6 – для получения мостов с адресами IPv6
