@@ -78,4 +78,20 @@ https://www.whonix.org/#download
 Виртуальные машины с TOR. Одна машина проксирует другую для обеспечения соединений только через TOR.
 Требует Virtual Box (см. ..\..\System\vm.20 )
 
+--------------------------------
+@Tox
+@Tox chat
+
+https://tox.chat/
+
+Клиенты
+@qTox
+https://flathub.org/apps/details/io.github.qtox.qTox
+https://github.com/flathub/flathub
+	flatpak install flathub io.github.qtox.qTox
+	flatpak run io.github.qtox.qTox
+
+@Toxic
+https://github.com/TokTok/toxic/
+(Написан на C)
 

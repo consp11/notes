@@ -4,11 +4,15 @@
 Диски в оперативной памяти
 
 ImDisk
+для Windows
 http://www.ltr-data.se/opencode.html#ImDisk
 
 https://sourceforge.net/projects/imdisk-toolkit/
 Содержит ImDisk с дополнительными программами
 
+
+@tmpfs
+Команда tmpfs даёт такую возможность под Linux (сделать файловую систему в памяти без возможности сохранения на диск)
 
 --------------------------------
 ::IT.Software.Security
@@ -29,6 +33,7 @@ https://www.veracrypt.fr/en/Home.html
 Перезатирание данных
 
 Eraser
+для Windows
 https://eraser.heidi.ie/download/
 ( https://sourceforge.net/projects/eraser/ )
 
@@ -38,6 +43,7 @@ https://github.com/fdsc/old/releases
 
 --------------------------------
 Dataram RamDisk
+для Windows
 http://memory.dataram.com/products-and-services/software/ramdisk
 
 Программа, создающая один диск в оперативной памяти.
@@ -45,13 +51,21 @@ http://memory.dataram.com/products-and-services/software/ramdisk
 
 --------------------------------
 defraggler (дефрагментатор)
+для Windows
 
 https://www.ccleaner.com/defraggler
 
 --------------------------------
 Recuva
+для Windows
 Программа для восстановления случайно удалённых данных
 https://www.ccleaner.com/recuva
 
 --------------------------------
+e4defrag
+Утилита Linux из пакета e2fsprogs (на Mint уже установлен)
+
+fsck - проверка жёсткого диска на ошибки (Linux)
+--------------------------------
+
 
