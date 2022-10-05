@@ -61,9 +61,14 @@ https://www.torproject.org/download/
 gettor@torproject.org
 Указать в теле письма наименования ОС (Linux)
 
+jqyzxhjk6psc6ul5jnfwloamhtyh7si74b4743k2qgpskwwxrzhsxmad.onion/index.html.en
+'/Linux_Записки_Prg/Tor Project manual.html'
+
 https://tb-manual.torproject.org/circumvention/
 https://bridges.torproject.org/bridges?transport=fte
 https://bridges.torproject.org/bridges?transport=obfs4
+
+yq5jjvr7drkjrelzhut7kgclfuro65jjlivyzfmxiq2kyv5lickrl4qd.onion/bridges?transport=obfs4
 
 gettor@torproject.org
     get bridges – для получения мостов без обфускации
@@ -94,4 +99,18 @@ https://github.com/flathub/flathub
 @Toxic
 https://github.com/TokTok/toxic/
 (Написан на C)
+
+--------------------------------
+@Session
+https://getsession.org/
+https://github.com/oxen-io
+
+
+--------------------------------
+@bitmessage
+
+https://wiki.bitmessage.org/
+https://github.com/Bitmessage/PyBitmessage
+
+
 
