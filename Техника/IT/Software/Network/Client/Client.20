@@ -21,9 +21,9 @@ https://filezilla-project.org/download.php?type=client
 
 --------------------------------
 Закачки
+``Windows
 @Download Master
 https://westbyte.com/dm/
-``Windows
 
 --------------------------------
 @Persepolis
@@ -32,6 +32,13 @@ apt search persepolis
 --------------------------------
 @youtube-dl
 apt search youtube-dl
+
+--------------------------------
+@Deluge
+
+Отличный Torrent-клиент для Linux
+Устанавливается из репозитория (deluge)
+
 
 --------------------------------
 @qBittorrent
