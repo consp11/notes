@@ -33,9 +33,19 @@ https://notepad-plus-plus.org/
 --------------------------------
 @HxD
 
-``шестнадцатеричный редактор
+``шестнадцатеричный редактор ``hexeditor
 
 https://mh-nexus.de/en/hxd/
+
+--------------------------------
+
+``шестнадцатеричный редактор ``hexeditor
+wxhexeditor (бинарник @wxHexEditor)
+
+@ncurses-hexedit
+@hexedit
+@hexdiff
+
 
 --------------------------------
 @OpenOffice
