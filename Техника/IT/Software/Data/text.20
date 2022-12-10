@@ -1,6 +1,12 @@
 ﻿::IT.Software.Data
 
 --------------------------------
+@xreader
+``Linux
+
+Читалка
+
+--------------------------------
 @7-zip
 Бесплатный архиватор, поддерживающий архивирование в zip и 7z формате. Очень хорошо сжимает. Поддерживает шифрование архивов AES (стойкость неясна)
 
@@ -61,11 +67,13 @@ https://www.sumatrapdfreader.org/free-pdf-reader.html
 
 --------------------------------
 @CoolReader 3.0
+``Windows
 
 https://sourceforge.net/projects/crengine/
 
 --------------------------------
 @STDU Viewer
+``Windows
 Программа для просмотра PDF-файлов. Менее удобный, чем Sumatra PDF
 
 http://www.stdutility.com/stduviewer.html
