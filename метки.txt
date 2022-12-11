@@ -25,7 +25,7 @@
 	E:\works\bd\notes\notes\Религия\jesus
 ::Religion.Jesus.link					Ссылки на сайты о религии
 ::IT.Software.ОперационныеСистемы		Перечень операционных систем
-::IT.Software.Data						Обработка данных, текст
+::IT.Software.Data						Обработка данных, текстовые редакторы
 ::IT.Software.Dev
 ::IT.Software.Disk						Дисковые утилиты, включая шифрование
 	.\Техника\IT\Software\Disk\disk.20

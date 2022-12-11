@@ -1,6 +1,17 @@
 ﻿::IT.Software.Data
 
 --------------------------------
+@Octave
+
+GNUOctave - заменитель matlab
+
+
+disp("~/.octaverc executed");
+
+pkg load symbolic
+format long eng
+
+--------------------------------
 @xreader
 ``Linux
 
