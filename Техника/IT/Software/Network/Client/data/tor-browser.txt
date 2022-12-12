@@ -1,0 +1,29 @@
+http://2gzyxa5ihm7nsggfxnu52rck2vv4rvmdlkiu3zzui5du4xyclen53wid.onion
+
+https://support.torproject.org/tbb/how-to-verify-signature/
+
+gpg --auto-key-locate nodefault,wkd --locate-keys torbrowser@torproject.org
+gpg --output ./tor.keyring --export 0xEF6E286DDA85EA2A4BA7DE684E2C6E8793298290
+
+Действительная подпись
+
+Команда
+gpg tor-browser-linux64-12.0_ALL.tar.xz.asc 
+
+gpg: Внимание: команда не отдана. Пытаюсь угадать, что имелось в виду ...
+gpg: предполагается, что подписанные данные находятся в 'tor-browser-linux64-12.0_ALL.tar.xz'
+gpg: Подпись сделана Ср 07 дек 2022 17:54:57 MSK
+gpg:                ключом RSA с идентификатором E53D989A9E2D47BF
+gpg: Действительная подпись пользователя "Tor Browser Developers (signing key) <torbrowser@torproject.org>" [неизвестно]
+gpg: Внимание: Данный ключ не заверен доверенной подписью!
+gpg:          Нет указаний на то, что подпись принадлежит владельцу.
+Отпечаток первичного ключа: EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290
+     Отпечаток подключа: 6131 88FC 5BE2 176E 3ED5  4901 E53D 989A 9E2D 47BF
+
+Либо команда
+gpgv --keyring ./tor.keyring ./tor-browser-linux64-12.0_ALL.tar.xz.asc ./tor-browser-linux64-12.0_ALL.tar.xz
+
+gpgv: Подпись сделана Ср 07 дек 2022 17:54:57 MSK
+gpgv:                ключом RSA с идентификатором E53D989A9E2D47BF
+gpgv: Действительная подпись пользователя "Tor Browser Developers (signing key) <torbrowser@torproject.org>"
+
