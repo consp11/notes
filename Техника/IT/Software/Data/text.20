@@ -40,6 +40,10 @@ https://notepad-plus-plus.org/
 @calibre
 
 Читалка для Linux (лучше скачивать с сайта, а не с заброшенного дистрибутива в репозитории Linux)
+https://calibre-ebook.com/download_linux
+ebook-viewer
+
+sudo mkdir -p /opt/calibre && sudo rm -rf /opt/calibre/* && sudo tar xvf /Arcs/Prg/Text/Calibre/calibre-6.9.0-x86_64.txz -C /opt/calibre && sudo /opt/calibre/calibre_postinstall
 
 --------------------------------
 Другие читалки
