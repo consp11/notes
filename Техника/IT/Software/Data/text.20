@@ -63,6 +63,7 @@ https://mh-nexus.de/en/hxd/
 ``шестнадцатеричный редактор ``hexeditor
 wxhexeditor (бинарник @wxHexEditor)
 
+@bless, @ghex или @jeex
 @ncurses-hexedit
 @hexedit
 @hexdiff
