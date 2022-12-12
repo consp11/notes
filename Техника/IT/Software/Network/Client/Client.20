@@ -63,16 +63,15 @@ https://www.torproject.org/download/
 ``Windows, ``Linux
 
 Ключ для проверки дистрибутивов
-.\data\torkey-kounek7zrdx745qydx6p59t9mqjpuhdf.asc
+см. инструкции в файле ./data/tor-browser.txt
 
 gettor@torproject.org
-Указать в теле письма наименования ОС (Linux)
+Указать в теле письма наименование ОС (Linux)
 
 jqyzxhjk6psc6ul5jnfwloamhtyh7si74b4743k2qgpskwwxrzhsxmad.onion/index.html.en
 '/Linux_Записки_Prg/Tor Project manual.html'
 
 https://tb-manual.torproject.org/circumvention/
-https://bridges.torproject.org/bridges?transport=fte
 https://bridges.torproject.org/bridges?transport=obfs4
 
 yq5jjvr7drkjrelzhut7kgclfuro65jjlivyzfmxiq2kyv5lickrl4qd.onion/bridges?transport=obfs4
