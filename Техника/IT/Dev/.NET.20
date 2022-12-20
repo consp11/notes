@@ -1,0 +1,24 @@
+
+@.NET @dotnet
+https://dotnet.microsoft.com/download
+
+@.NET ``Linux
+dotnet-runtime-7.0
+dotnet-sdk-7.0
+dotnet-targeting-pack-7.0
+
+sudo apt install dotnet-sdk-7.0 dotnet-targeting-pack-7.0
+
+
+// https://learn.microsoft.com/ru-ru/dotnet/core/tools/dotnet
+dotnet new console --framework net7.0
+// dotnet new console --framework net6.0 --use-program-main
+dotnet build
+dotnet myapp.dll
+dotnet --version
+dotnet --info
+dotnet --list-runtimes // --list-sdks
+
+
+@Mono
+https://www.mono-project.com/
