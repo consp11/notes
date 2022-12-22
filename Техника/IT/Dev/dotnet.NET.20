@@ -1,6 +1,15 @@
+@code @Visual Studio Code
+https://code.visualstudio.com/docs
+visual-studio-code
+
+Расширения
+C# for Visual Studio Code (powered by OmniSharp)
+C# XML Documentation Comments
+
 
 @.NET @dotnet
 https://dotnet.microsoft.com/download
+
 
 @.NET ``Linux
 dotnet-runtime-7.0
