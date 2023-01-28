@@ -10,6 +10,15 @@ C# XML Documentation Comments
 @.NET @dotnet
 https://dotnet.microsoft.com/download
 
+Настройка ``proxy
+https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient.defaultproxy?view=net-7.0
+HTTP_PROXY: the proxy server used on HTTP requests.
+HTTPS_PROXY: the proxy server used on HTTPS requests.
+ALL_PROXY: the proxy server used on HTTP and/or HTTPS requests in case HTTP_PROXY and/or HTTPS_PROXY are not defined.
+NO_PROXY: a comma-separated list of hostnames that should be excluded from proxying. Asterisks are not supported for wildcards; use a leading dot in case you want to match a subdomain. Examples: NO_PROXY=.example.com (with leading dot) will match www.example.com, but will not match example.com. NO_PROXY=example.com (without leading dot) will not match www.example.com. This behavior might be revisited in the future to match other ecosystems better.
+
+export ALL_PROXY="http://127.0.0.1:8118"
+
 
 @.NET ``Linux
 dotnet-runtime-7.0
