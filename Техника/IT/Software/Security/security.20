@@ -76,3 +76,32 @@ https://embeddedsw.net/OpenPuff_Steganography_Home_ru.html
 @usbguarg ``usb
 https://websetnet.net/ru/как-защитить-свой-Linux-компьютер-от-мошеннических-USB-накопителей/
 
+
+--------------------------------
+@virustotal.com
+www.virustotal.com
+
+``Антивирус
+
+--------------------------------
+@clamav
+
+apt install clamav
+
+``Антивирус
+
+sudo xed /etc/clamav/freshclam.conf
+
+# Check for new database 1 times a day
+Checks 1
+# Установка прокси для доступа (необходимо перенаправить через tor для России)
+HTTPProxyServer 127.0.0.1
+HTTPProxyPort 8890
+HTTPProxyUsername user_name
+HTTPProxyPassword user_password
+
+
+Обновление базы данных вручную
+freshclam
+sudo -u clamav freshclam
+
