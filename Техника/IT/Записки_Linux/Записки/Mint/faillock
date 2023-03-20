@@ -1,0 +1,32 @@
+faillock - программа защиты от перебора паролей (должна быть уже установлена на Mint)
+	https://www.golinuxcloud.com/pam-faillock-lock-user-account-linux/
+	https://www.tecmint.com/lock-user-accounts-after-failed-login-attempts-in-linux/
+	https://askubuntu.com/questions/1403438/how-do-i-set-up-pam-faillock
+
+sudo xed /etc/security/faillock.conf
+Установить опции
+
+Сброс pam-файлов в состояние по умолчанию (если что-то настроено неверно)
+sudo pam-auth-update
+
+
+sudo xed /etc/pam.d/login
+
+sudo xed /etc/pam.d/common-auth
+
+# Проверка подлинности
+auth requisite pam_faillock.so preauth
+
+Изменить success=1 на success=2
+auth	[success=2 default=ignore]	pam_unix.so nullok
+auth require      pam_faillock.so authfail
+
+auth optional      pam_faillock.so authsucc
+
+ll /var/run/faillock/
+
+Обнулить интервал
+sudo truncate -s 0 /var/run/faillock/user_name
+
+Настройка качества паролей
+sudo xed pwquality.conf

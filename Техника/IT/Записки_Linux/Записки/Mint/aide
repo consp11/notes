@@ -1,0 +1,32 @@
+Установка
+
+Проверить, что сейчас postfix отсутствует
+sudo systemctl status postfix.service
+(если присутствует и нужен, то не отключать в конце)
+
+
+sudo apt install -y aide
+
+man aide.conf
+sudo xed /etc/aide.conf
+
+sudo aide --config-check -c /etc/aide.conf
+
+
+# Первичное создание базы данных
+sudo aide --init -c /etc/aide.conf
+
+# Переименовать out.db в in.db
+
+# Проверка базы данных
+sudo aide --check -c /etc/aide.conf
+
+# Обновление базы данных
+sudo aide --update -c /etc/aide.conf
+
+
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/checking-integrity-with-aide_security-hardening
+
+Отключить postfix, если не требуется
+sudo systemctl disable postfix.service 
+sudo systemctl stop    postfix.service 

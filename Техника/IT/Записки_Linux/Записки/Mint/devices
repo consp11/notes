@@ -1,0 +1,71 @@
+Тестирование аудио
+speaker-test -p 250 -P 4 -t pink -s
+
+Список устройств
+cat /proc/bus/input/devices
+
+Список устройств
+aplay -L
+
+Общая информация об устройствах
+sudo lshw
+
+Посмотреть классы устройств
+sudo lshw | grep \*
+
+Всё делается через sudo
+
+Получить информацию о мультимедиа-устройствах (звуковая карта)
+lshw -class multimedia
+
+Перечислить pci-устройства
+lspci
+
+Более подробная информация об устройстве по его номеру
+lspci -s 00:1b.0 -vv
+
+Включить устройство 00:1b.0
+cd /sys/bus/pci/devices/0000:00:1b.0/power
+sudo echo enabled > wakeup
+Включить
+sudo echo disabled > wakeup
+(или тоже из текстового редактора)
+Пробовал выключать/включать аудиокарту: звук не пропадает
+
+
+Просмотреть usb-устройства
+lsusb
+
+
+Информация о процессоре
+lscpu
+
+
+Отключить pulseaudio
+sudo pulseaudio --kill
+Стартовать
+pulseaudio --start
+
+Очищает устаревшие сегменты общей памяти
+sudo pulseaudio --cleanup-shm
+
+Иногда, когда устройство не обнаруживается и звука нет, это помогает (а иногда - нет, т.к. он не видит устройства)
+
+
+ALSA mixer - это старая штука. pulseaudio должен работать вместо неё
+amixer scontents >> /inRam/audio.log
+??? amixer -c 0 sset 'Headphone Jack Sense' unmute
+
+
+
+inxi
+CPU: Quad Core Intel Core i5-2300 (-MCP-) 
+speed/min/max: 1758/1600/2800 MHz 
+Kernel: 5.4.0-126-generic x86_64 Up: 8h 32m 
+Mem: 3581.4/7681.1 MiB (46.6%) Storage: 931.51 GiB (24.6% used) 
+Procs: 289 Shell: bash 5.0.17 inxi: 3.0.38 
+
+
+sudo inxi -Fxi
+Выводит много всего
+

@@ -1,0 +1,63 @@
+https://www.apparmor.net
+https://wiki.ubuntu.com/AppArmor
+https://help.ubuntu.com/community/AppArmor
+
+Установка (на Ubuntu и иже с ними уже установлено, однако нет нужных утилит)
+sudo apt-get install apparmor-utils
+
+sudo xed /etc/sudoers.d/apparmor
+sudo xed /etc/sudoers.d/vinny-apparmor
+
+Можно разрешить запуск apparmor-status без ввода каких-либо паролей
+sudo xed /etc/sudoers.d/apparmor
+User_Alias STATUS_LIST=%first,inet
+STATUS_LIST ALL = NOPASSWD:/usr/sbin/aa-status
+STATUS_LIST ALL = NOPASSWD:/usr/sbin/aa-enforce
+
+
+Даёт возможность посмотреть, в каком режиме запущены профили
+sudo aa-status
+
+
+aa-nofity -p -s 1 -w 60
+
+Разрешить aa-logprof для какого-либо пользователя в sudoers для того, чтобы дальше могла работать aa-notify
+aa-nofity -p -s 1 -w 60 -u a1
+Возможно, стоит разрешить в sudoers всех частых пользователей
+
+
+Профили
+/etc/apparmor.d/
+
+Смотрим, что включено и включено ли
+
+sudo aa-status
+
+Смотрим логи и устанавливаем новые разрешения
+sudo aa-logprof
+
+Создать профиль и получать данные из логов, что именно нужно добавить в этот профиль (нужно запустить приложение)
+sudo aa-genprof executable
+# sudo aa-genprof opera
+
+Профиль в слабый режим
+sudo aa-complain /bin/ping
+
+Профиль в сильный режим
+sudo aa-enforce /bin/ping
+
+
+Перезагрузить все профили
+sudo service apparmor reload
+
+Переагрузить один профиль
+sudo apparmor_parser -r /etc/apparmor.d/bin.ping
+Параметр -a - просто загрузить
+
+
+Всё вообще выключить
+sudo systemctl stop apparmor
+sudo systemctl disable apparmor
+
+
+

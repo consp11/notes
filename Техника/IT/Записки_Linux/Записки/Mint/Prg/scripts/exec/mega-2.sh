@@ -1,0 +1,6 @@
+cd ~
+
+megasync
+
+disown -a
+

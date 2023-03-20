@@ -1,0 +1,13 @@
+man cgroups
+
+apt-get install -y cgroup-tools
+
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/resource_management_guide/setting_parameters
+https://andywine.dev/constrain-process-cpu-usage-with-cgroups/
+
+# slow - название группы, я так понял
+sudo cgcreate -g cpu:/slow
+
+cgset -r cpu.shares=183 slow
+
+

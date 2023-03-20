@@ -1,0 +1,29 @@
+alias mvr='xdotool mousemove_relative --'
+alias mv='xdotool mousemove --'
+alias mc='xdotool click'
+
+
+Перемещение мышки в абсолютную позицию
+xdotool mousemove 0, 0
+mousemove_relative
+
+
+# Клик левой кнопкой мыши
+# После этого какие-то проблемы начинаются
+xdotool click 1
+
+# 1 - левая, 2 - центральная, 3 - правая
+
+# Осторожно. Это не клик мышкой, а нажатие на мышку и удерживание клавиши
+xdotool mousedown 1
+
+xdotool search --class firefox windowactivate
+
+
+Может также помочь mouseemu (позволяет нажимать на другие кнопки мыши только одной)
+
+
+https://www.kernel.org/doc/Documentation/input/input.txt
+# Можно брать отсюда мышку для генерации
+sudo cat /dev/input/mouse0
+

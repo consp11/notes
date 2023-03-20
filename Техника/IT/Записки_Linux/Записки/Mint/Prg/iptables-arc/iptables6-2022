@@ -1,0 +1,14 @@
+# sudo ip6tables-restore /etc/iptables/rules.v6
+
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [1:166]
+-A INPUT -i lo -j ACCEPT
+# -A INPUT -i lo -p ipv6-icmp -j ACCEPT
+-A INPUT -j LOG
+
+-A OUTPUT -o lo -j ACCEPT
+# -A OUTPUT -p ipv6-icmp -j ACCEPT
+# -A OUTPUT -j LOG
+COMMIT

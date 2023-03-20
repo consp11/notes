@@ -1,0 +1,40 @@
+
+Создание swap-файла
+# bs можно использовать и 1М, например или 1G
+sudo dd if=/dev/zero of=/Arcs/swapfile bs=1024 count=1048576
+# или dd if=/dev/zero of=/Arcs/swapfile count=1GB iflag=count_bytes
+# или sudo fallocate -l 1G /Arcs/swapfile
+sudo chmod 0600 /Arcs/swapfile
+sudo mkswap /Arcs/swapfile
+sudo swapon /Arcs/swapfile
+
+# Если нужно создать раздел подкачки, то это делается без создания файла
+# То есть просто mkswap на разделе вызывается
+
+# Отключить все файлы подкачки
+swapoff -av
+# Включить все файлы подкачки
+swapon -a
+
+/etc/fstab
+/Arcs/swapfile none swap sw 0 0
+# /Arcs/swapfile - имя swap-файла или раздела
+
+
+# Посмотреть настройки агрессивность подкачки (100% - самое агрессивное; 0 - означает, что выгрузка будет проводится только тогда, когда места в ОЗУ не останется)
+cat /proc/sys/vm/swappiness
+# Задать настройки агрессивности подкачки
+В файл /etc/sysctl.conf внести
+vm.swappiness=10
+# Задать прямо сейчас до перезагрузки
+sudo sysctl vm.swappiness=10
+
+# Кеширование информации файловой системы в памяти (100% - самое агрессивное удаление)
+cat /proc/sys/vm/vfs_cache_pressure
+
+sudo sysctl vm.vfs_cache_pressure=1000
+sudo xed /etc/sysctl.conf
+vm.vfs_cache_pressure=1000
+# По умолчанию - 100. Можно вносить и 1000, например.
+
+# См. также команду slabtop

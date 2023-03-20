@@ -1,0 +1,22 @@
+# Нагрузка на диск
+
+sudo apt install sysstat
+
+iostat -xk -t 2
+iostat -zds
+
+pidstat -d 1
+
+
+
+apt install dstat
+
+dstat --top-bio
+dstat -d
+
+
+/proc/loadavg
+Количество работ с диском   Длина очереди диска за 1,5 минуты
+То же за 15 минут
+Количество процессов и потоков / количество операций планирования
+PID недавно созданного процесса

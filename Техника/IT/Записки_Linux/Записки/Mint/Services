@@ -1,0 +1,187 @@
+Управление сервисами (с помощью systemd)
+https://losst.ru/upravlenie-sluzhbami-linux
+см. также загруженный файл systemd_s4a_latest.pdf
+
+# https://losst.ru/avtozagruzka-linux
+Кроме управления сервисами с помощью systemd есть ещё загрузка окружения рабочего стола, которая зависит от конкретного рабочего стола (в xfce это "Сеансы и запуск")
+Также может быть автозагрузка скриптом ~/.bashrc
+
+----------------------------------------------------------------
+Вывести список сервисов
+systemctl list-units >> /inRam/services.txt
+
+Вывести список файлов сервисов: static означает, что сервис невозможно отключить, он запускается другим юнитом автоматически
+systemctl list-unit-files
+Только включённые службы (в автозагрузке)
+systemctl list-unit-files --state enabled
+
+Быстро посмотреть сервисы
+systemctl --type=service (аналогично systemctl list-units --type=service )
+systemctl list-units --type=service --all (в том числе незапущенные сервисы)
+systemctl --failed --type=service (незапустившиеся сервисы)
+
+
+Аналогичная команда list-sockets - вывод служб сокетов (похоже, это службы, которые обеспечивают работу сети и внутренние коммуникации)
+
+Команды: start stop restart reload (обновить конфигурацию), daemon-reload (обновить конфиг. всех служб), kill, is-active, is-failed и др.
+
+Параметр --runtime - не сохранять вносимые изменения после перезагрузки
+
+Получить список служб со статусом "Ошибка"
+systemctl list-units --type service --state failed
+
+Вывод информации по службе privoxy
+systemctl status privoxy
+Вывод:
+privoxy.service - Privacy enhancing HTTP Proxy
+     Loaded: loaded (/lib/systemd/system/privoxy.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2021-07-18 09:51:42 MSK; 1h 23min ago
+       Docs: man:privoxy(8)
+             https://www.privoxy.org/user-manual/
+    Process: 819 ExecStart=/usr/sbin/privoxy --pidfile $PIDFILE --user $OWNER $CONFIGFILE (code=exited, status=0/SUCCES>
+   Main PID: 829 (privoxy)
+      Tasks: 1 (limit: 9112)
+     Memory: 1.6M
+     CGroup: /system.slice/privoxy.service
+             └─829 /usr/sbin/privoxy --pidfile /run/privoxy.pid --user privoxy /etc/privoxy/config
+
+июл 18 09:51:41 pc systemd[1]: Starting Privacy enhancing HTTP Proxy...
+июл 18 09:51:42 pc systemd[1]: Started Privacy enhancing HTTP Proxy.
+
+show даёт информацию по настройкам службы (очень много)
+
+Данная команда выдаст журнал для сервиса "vinny@10010.service"
+journalctl -u vinny@10010.service
+
+
+Просмотреть зависимости службы
+systemctl list-dependencies privoxy.service
+Кто зависит от службы
+systemctl list-dependencies privoxy.service --reverse
+
+
+enable, disable, reenable, is-enabled - служба в автозагрузке либо её нет в автозагрузке
+Команда mask маскирует службу (обратная - unmask), то есть делает невозможным её запуск даже вручную (аналогично "Отключена в Windows")
+
+
+----------------------------------------------------------------
+Регистрация своей службы
+
+Файл
+[Unit]
+Description=Описание
+After=network.target
+[Service]
+Type=idle
+ExecStart=/usr/bin/local/script.sh
+[Install]
+WantedBy=multi-user.target
+
+Файл помещается в каталог /etc/systemd/system или в каталог /lib/systemd/system/ (в последнем больше данных)
+и имеет название по типу privoxy.service
+
+After - требование загрузки после инициализации каких-то других служб или групп служб
+
+В файле шаблона есть подстановочные символы %I - неэкранированный экземпляр идентификатора, %i - экранированный идентификатор экземпляра (как в выводе списка сервисов: замена символов "/" на "-" и остальных символов на экранирующие последовательности вида "\x..")
+
+Если служба работает в нескольких экземплярах, то наименование файлов происходит по другой схеме
+servicename@instancename.service
+Пример
+privoxy@main.service
+
+Допустимо выполнение команды start на экземпляр сервиса, который ещё не создан
+systemctl start privoxy@slave.service
+
+Тогда systemd произведёт поиск шаблона файла конфигурации службы исходя из названия privoxy@.service (если такой есть)
+
+# https://www.freedesktop.org/software/systemd/man/systemd.exec.html
+WorkingDirectory=/Arcs/Disks/Mega/MEGAsync/Privoxy/Privoxy/
+Позволяет задать рабочую директорию процесса
+DefaultTimeoutStartSec=infinity
+Позволяет не ждать сигнала готовности службы (tor не сигнализирует о том, что запустился, поэтому, по умолчанию, systemd его сбросит)
+
+Типы служб описаны в https://www.freedesktop.org/software/systemd/man/systemd.service.html#Type=
+
+При изменении файла службы необходимо вызвать
+systemctl daemon-reload
+
+Чтобы создать свою цель, нужно создать файл .target в директориях типа /etc/systemd/system/multi-user.target.wants (не пробовал)
+Пример из /etc/systemd/system/multi-user.target.wants/remote-fs.target
+[Unit]
+Description=Remote File Systems
+Documentation=man:systemd.special(7)
+After=remote-fs-pre.target
+DefaultDependencies=no
+Conflicts=shutdown.target
+
+[Install]
+WantedBy=multi-user.target
+
+
+----------------------------------------------------------------
+В раздел [Service] можно добавить
+PrivateNetwork=yes
+
+В таком случае, служба не будет видеть даже loopback (точнее, он будет только для неё, отличный от других служб)
+
+PrivateTmp=yes
+Служба будет иметь свой собственный изолированный каталог /tmp
+
+InaccessibleDirectories=/home
+ReadOnlyDirectories=/var
+Это запреты на доступ к директориям
+ReadOnlyDirectories не применяется рекурсивно к точкам монтирования, то есть mount внутрь каталога обеспечит доступ к подкаталогу (это может зависеть от версии ОС)
+
+apabilityBoundingSet=~CAP_SYS_PTRACE
+
+=~ отбирает capabilities у процесса (простое "=" даёт их, но это исключительный список)
+CAP_SYS_PTRACE - это отладка других процессов
+
+DeviceAllow=/dev/null rw
+Доступ к устройствам - только /dev/null
+
+[Socket]
+ListenStream=23
+
+Если служба поддерживает socket-активацию
+
+----------------------------------------------------------------
+# https://habr.com/ru/company/infobox/blog/241237/
+multi–user.target - настройка неграфической многопользовательской системы
+graphical.target  - настройка графической многопользовательской системы
+network.target
+nss-lookup.target - разрешение сетевых имён
+
+
+Просмотр всех целей
+systemctl --type=target --all
+Все, что сейчас загружены
+systemctl list-units --type target
+
+----------------------------------------------------------------
+см. также загруженный файл systemd_s4a_latest.pdf
+В загруженном файле также есть раздел "Специальные файловые системы" (перечень /proc и т.п.)
+
+∙ /sys предоставляет доступ к драйверам и устройствам, а также некоторым другим
+параметрам ядра;
+∙ /proc дает доступ к информации о выполняемых процессах, настройкам ядра, а
+также другим параметрам;
+∙ /dev отображает файлы устройств (device nodes);
+∙ /run содержит файлы и сокеты, используемые программами;
+∙ /tmp хранит временные и часто изменяемые объекты (X);
+∙ /sys/fs/cgroup (и другие файловые системы, смонтированные в подкаталогах это-
+го каталога) позволяют работать с иерархией контрольных групп;
+∙ /sys/kernel/security, /sys/kernel/debug (X), /sys/kernel/config (X) предо-
+ставляют доступ к специализированным механизмам ядра;
+∙ /sys/fs/selinux используется для взаимодействия с SELinux;
+∙ /dev/shm содержит объекты разделяемой памяти;
+∙ /dev/pts обеспечивает доступ к псевдо-TTY устройствам;
+∙ /proc/sys/fs/binfmt_misc используется для регистрации в ядре дополнительных
+бинарных форматов (X);
+∙ /dev/mqueue содержит объекты IPC-механизма mqueue (X);
+∙ /dev/hugepages позволяет программам запрашивать выделение «гигантских»
+страниц памяти (X);
+∙ /sys/fs/fuse/connections обеспечивает доступ к FUSE-соединениям (X);
+∙ /sys/firmware/efi/efivars предоставляет доступ к переменным EFI;
+
+

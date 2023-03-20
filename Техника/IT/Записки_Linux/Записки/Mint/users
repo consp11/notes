@@ -1,0 +1,141 @@
+Добавление пользователя
+
+Добавление обычного пользователя
+
+sudo adduser userName
+либо
+sudo adduser --shell /bin/bash userName
+
+sudo adduser userName --home /home/g
+
+sudo adduser userName --ingroup GroupName
+sudo adduser userName --group
+--group создаст группу с тем же именем, что у пользователя
+
+Добавление системного пользователя
+#  --shell /bin/false или  --shell /usr/sbin/nologin
+
+sudo adduser userName --system --ingroup GroupName --no-create-home --home /dev/null
+
+Пример
+sudo adduser forTor --system --ingroup vinny --no-create-home --home /dev/null
+sudo adduser g2 --ingroup g --home /home/g2/g2
+
+sudo adduser dev --ingroup vinny --home /home/g2/dev
+
+sudo adduser game --home /home/main/users/game
+
+
+Стандартные группы
+adm — разрешение на прочтение логов из папки /var/log;
+cdrom — позволяется использовать привод;
+sudo - разрешение на команду sudo
+plugdev — разрешение на монтирование внешних накопителей;
+video, audio — доступ к аудио и видеодрайверам.
+
+Добавление группы 
+sudo adduser --group GroupName
+
+
+Запуск терминала от имени другого пользователя
+su userName
+
+sudo -u userName execPath
+(например, sudo -u userName bash)
+
+pkexec --user username program args
+
+
+Кто я? (это про терминал запрос, а не про пользователя; при sudo может выдать первого пользователя)
+who
+vinny    tty7         2021-07-19 15:17 (:0)
+
+Либо
+whoami
+Выдаст текущее имя пользователя
+
+
+
+# ----------------------------------------------------------------
+Добавление пользователя в группу
+
+sudo usermod -a -G ugroup username
+
+либо
+sudo gpasswd -a username ugroup
+
+Команда обновления без перелогина:
+newgrp ugroup
+
+Удаление пользователя из группы
+sudo gpasswd -d username ugroup
+
+
+# passwd - изменяет пароли учётных записей
+
+
+Список групп пользователя
+id -Gn
+или
+id username -Gn
+(без n будет выведены номера групп, а не их понятные названия)
+
+Аналогично работает команда
+groups
+
+
+# ----------------------------------------------------------------
+Сокрытие пользователя со страницы входа операционной системы в xfce4
+Либо здесь /etc/lightdm/users.conf (скорее всего, не здесь)
+	hidden-users=nobody nobody4 noaccess opera tor-browser qite-rss
+
+Либо в настройках AccountsService
+	/var/lib/AccountsService/users/user_name
+
+Должно содержать
+[User]
+SystemAccount=true
+
+После изменения для обновления перезапутить сервис
+sudo systemctl restart accounts-daemon.service
+
+
+# ----------------------------------------------------------------
+
+Удаление пользователя
+sudo userdel -r userName
+
+Удаление группы
+sudo groupdel groupName
+
+Отключение пользователя. -L отключает возможность входа по паролю. -e устанавливает значение даты устаревания аккаунта в прошлое.
+sudo usermod -L userName -e 1
+Включение пользователя
+sudo usermod -U userName -e ''
+
+# ----------------------------------------------------------------
+Смена пароля
+
+echo user:12345678 | chpasswd
+либо passwd user
+и ввести пароль
+
+# ----------------------------------------------------------------
+
+last - просмотр истории логинов
+last user_name
+
+    /var/log/wtmp – Логи последних сеансов входа
+    /var/run/utmp – Журналы текущих сеансов входа
+    /var/log/btmp – Журналы неудачных попыток входа
+
+-x выдаст дополнительную информацию
+
+Просмотр неудачных попыток входа
+last -f /var/log/btmp
+или
+lastb
+
+
+last mia - узнать дату создания файла /var/log/wtmp
+

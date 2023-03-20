@@ -1,0 +1,31 @@
+
+gpg -se -r Bob file
+      sign and encrypt for user Bob
+
+gpg --clear-sign file
+      make a cleartext signature
+
+gpg -sb file
+      make a detached signature
+
+gpg -u 0x12345678 -sb file
+      make a detached signature with the key 0x12345678
+
+gpg --list-keys user_ID
+      show keys
+
+gpg --fingerprint user_ID
+      show fingerprint
+
+gpg --verify pgpfile
+gpg --verify sigfile [datafile]
+      Verify  the signature of the file but do not output the data un‐
+      less requested.  The second form is  used  for  detached  signa‐
+      tures, where sigfile is the detached signature (either ASCII ar‐
+      mored or binary) and datafile are the signed data;  if  this  is
+      not  given, the name of the file holding the signed data is con‐
+      structed by cutting off the extension (".asc" or ".sig") of sig‐
+      file  or  by  asking  the  user for the filename.  If the option
+      --output is also used the signed data is  written  to  the  file
+      specified by that option; use - to write the signed data to std‐
+      out.

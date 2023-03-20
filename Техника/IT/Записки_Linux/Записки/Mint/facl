@@ -1,0 +1,55 @@
+getfacl rss.trusts
+
+
+
+setfacl
+
+-m - modify
+-x - remove
+-d - defaults. Эта опция устанавливает facl по умолчанию для этого каталога (используется при создании новых файлов)
+
+
+
+Для директории dir_name установить правила по умолчанию в виде: для пользователя inet разрешены чтение, запись и выполнение
+setfacl -d -m inet:rwx dir_name
+
+getfacl dir_name
+
+# file: dir_name
+# owner: inet
+# group: group_name
+user::rwx
+group::r-x
+other::r-x
+default:user::rwx
+default:user:inet:rwx
+default:group::r-x
+default:mask::rwx
+default:other::r-x
+
+
+Установить для пользователя inet права rwx для директории dir_name
+setfacl -m inet:rwx dir_name
+
+То же самое ("u:" - префикс, говорящий о том, что мы работаем с группой)
+setfacl -m u:inet:rwx dir_name
+
+Установить для группы forall права rwx для директории dir_name
+setfacl -m g:forall:rwx dir_name
+
+Установка нескольких правил в одной строке
+setfacl -m u:john:rw,g:accounts:rwx /tmp/test
+
+Удалить все расширенные acl-записи (оставить только обычные unix-права)
+setfacl -b dir_name
+
+
+Сохраниение записей facl для всех файлов в текстовом файле (-R говорит о том, что проходятся как сами файлы, так и папки рекурсивно)
+getfacl -R * > archive_file
+
+Восстановление записей
+setfacl --restore=archive_file
+
+Записи восстанавливаются по именам (не по id пользователей), причём восстанавливаются, в том числе, и записи unix, а не только расширенные записи facl
+
+

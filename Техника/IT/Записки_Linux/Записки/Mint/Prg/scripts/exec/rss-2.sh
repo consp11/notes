@@ -1,0 +1,6 @@
+cd ~
+
+quiterss
+
+disown -a
+

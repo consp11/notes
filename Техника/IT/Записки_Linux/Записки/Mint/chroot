@@ -1,0 +1,125 @@
+https://josephmuia.ca/2018-05-16-net-namespaces-veth-nat/
+
+# Эта штука создаёт пространство имён с изолированной сетью и корнем файловой системы в директории DirForNewRoot
+# unshare -Urn -R DirForNewRoot
+
+
+man unshare
+man network_namespaces
+man veth
+
+# --------------------------------  Пробуем создать изолированное от сети пространство имён --------------------------------
+
+# Устанавливаем связь между IP-адресами внутри пространства имён и вне его
+# Создаём каталог и файл. К нему будет привязываться постоянное пространство имён
+# Затем создаём само пространство имён
+mkdir /tmp/un
+touch /tmp/un/net
+sudo unshare --net=/tmp/un/net
+
+
+# Это не в unshare
+# Создаём пару стройств veth-host и veth-net, которые являются концами виртуального канала
+# Говорим, что veth-net является алиасом /tmp/un/net (не уверен, что верно понимаю)
+# Присваиваем IP-адрес и поднимаем сеть
+sudo ip link add veth-host type veth peer name veth-net
+sudo ip link set veth-net netns /tmp/un/net
+sudo ip addr add 10.0.3.1/24 dev veth-host
+sudo ip link set veth-host up
+
+
+# в unshare
+# Присваиваем IP-адрес и поднимаем сеть. Пингуем
+ip addr add 10.0.3.2/24 dev veth-net
+ip link set veth-net up
+ping 10.0.3.1
+
+# не в unshare
+ping 10.0.3.2
+
+# Аналогично, можем поднять loopback интерфейс одной командой (в unshare)
+ip link set lo up
+
+
+
+
+# Это не про chroot, это про пространства имён
+https://www.redhat.com/sysadmin/mount-namespaces
+	https://lwn.net/Articles/689856/
+	https://www.man7.org/linux/man-pages/man7/mount_namespaces.7.html
+
+https://www.redhat.com/sysadmin/users/steve-ovens
+	https://www.redhat.com/sysadmin/building-container-namespaces
+	https://www.redhat.com/sysadmin/use-net-namespace-vpn
+
+https://www.redhat.com/sysadmin/use-net-namespace-vpn?extIdCarryOver=true&intcmp=701f20000012ngPAAQ&sc_cid=701f2000001Css5AAC
+
+
+# Кажется, это больше для программистов
+https://lwn.net/Articles/531114/
+
+# Это про capabilities
+https://man7.org/linux/man-pages/man7/capabilities.7.html
+
+
+
+
+sudo chroot "/media/mint/89891327-8fef-413f-a616-882115f3c444" dpkg --configure -a
+sudo chroot "/media/mint/89891327-8fef-413f-a616-882115f3c444" apt-get install -fy
+sudo chroot "/media/mint/89891327-8fef-413f-a616-882115f3c444" apt-get purge --allow-remove-essential -y grub*-common shim-signed
+
+
+
+
+# schroot
+https://logan.tw/posts/2018/02/24/manage-chroot-environments-with-schroot/
+
+
+
+https://wiki.debian.org/chroot
+https://wiki.debian.org/Schroot
+schroot
+
+
+# Предотвращение запуска демонов в chroot
+chroot /srv/chroot/stretch
+cat > ./usr/sbin/policy-rc.d <<EOF
+#!/bin/sh
+exit 101
+EOF
+chmod a+x ./usr/sbin/policy-rc.d
+
+#  This prevents error messages like Must be connected to a terminal or Can not access '/dev/pts/0': No such file or directory of this type
+mount --bind /dev/pts /srv/chroot/stretch/dev/pts
+
+
+Generally the file /etc/fstab might look like this:
+
+# grep chroot /etc/fstab
+/dev /srv/chroot/stretch/dev auto bind 0 0
+/dev/pts /srv/chroot/stretch/dev/pts auto bind 0 0
+/proc /srv/chroot/stretch/proc auto bind 0 0
+
+
+
+
+
+https://www.howtogeek.com/devops/what-is-chroot-on-linux-and-how-do-you-use-it/
+
+chroot [OPTION] NEWROOT [COMMAND [ARG]...]
+
+
+sudo chroot /home/main/chroot/quite-rss/
+
+
+https://phoenixnap.com/kb/grub-rescue
+
+
+sudo mount /dev/sda1 /mnt
+
+sudo mount --bind /dev /mnt/dev &&
+sudo mount --bind /dev/pts /mnt/dev/pts &&
+sudo mount --bind /proc /mnt/proc &&
+sudo mount --bind /sys /mnt/sys
+
+sudo grub-install -root-directory=/mnt/ /dev/sda

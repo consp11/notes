@@ -1,0 +1,40 @@
+sudo apt install -y clamav
+
+sudo systemctl disable clamav-freshclam.service
+
+sudo xed /etc/clamav/freshclam.conf
+# Check for new database 1 times a day
+Checks 1
+HTTPProxyServer 127.0.0.1
+HTTPProxyPort 8890
+HTTPProxyUsername QuiteRSS
+HTTPProxyPassword tx0rmE26727ERWacAkDX
+
+# Разрешить запуск freshclam из-под некоторых пользователей без прав админа
+User_Alias DMESG_LIST=%first,inet
+sudo xed /etc/sudoers.d/vinny
+DMESG_LIST ALL = (clamav:clamav) /usr/bin/freshclam ""
+
+
+Обновление базы данных вручную
+freshclam
+sudo -u clamav freshclam
+
+/Arcs/Disks/Mega/MEGAsync/Записки/Mint/Prg/scripts/clamav.txt
+
+https://docs.clamav.net/manual/Usage/Configuration.html
+https://www.golinuxcloud.com/steps-install-configure-clamav-antivirus-centos-linux/
+
+Не забыть добавить правила в iptables
+
+Запуск сканирования
+/Arcs/Disks/Mega/MEGAsync/Записки/Mint/Prg/scripts/clamav.sh
+
+
+sudo -u clamav freshclam
+
+sudo clamscan -iozr --follow-dir-symlinks=0 --follow-file-symlinks=0 --max-filesize=256M --max-scansize=256M --max-recursion=128 --max-dir-recursion=128 --alert-encrypted=yes --bytecode-timeout=600000 
+
+
+sudo clamscan -iozr --follow-dir-symlinks=0 --follow-file-symlinks=0 --max-filesize=256M --max-scansize=256M --max-recursion=128 --max-dir-recursion=128 --alert-encrypted=yes --bytecode-timeout=600000 /usr/bin /usr/sbin /usr/**/bin /usr/**/sbin /usr/lib* /usr/local/lib* /opt
+

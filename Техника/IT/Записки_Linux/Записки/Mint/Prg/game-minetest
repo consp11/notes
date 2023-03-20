@@ -1,0 +1,57 @@
+minetest
+
+
+https://pingvinus.ru/games/strategy
+https://www.igromania.ru/games/linux/strategy/
+https://losst.ru/luchshie-strategii-dlya-linux
+
+https://kanobu.ru/games/linux/strategy/popular/?years=2005-2011
+
+
+https://pingvinus.ru/game/freeorion
+sudo apt install freeorion
+
+https://pingvinus.ru/game/lincity-ng
+sudo apt install lincity-ng
+
+https://pingvinus.ru/game/flare
+https://flarerpg.org
+sudo apt install flare
+
+https://pingvinus.ru/game/lincity-ng
+sudo apt install lincity-ng
+
+
+https://pingvinus.ru/game/triplea
+sudo apt-get install triplea
+
+https://pingvinus.ru/game/openttd
+sudo apt install openttd
+либо
+flatpak install flathub org.openttd.OpenTTD
+flatpak run org.openttd.OpenTTD
+Непонятно как играть. Обучающей компании нет, только английские скрипты из интернета
+
+
+https://pingvinus.ru/game/globulation
+sudo apt install glob2
+При сохранении настроек улетает
+
+
+Гонки
+https://pingvinus.ru/game/speed-dreams
+форк torcs, а она фиговая. Но в этой игре можно мышкой работать.
+sudo add-apt-repository ppa:speed-dreams/ppa
+sudo apt-get update
+sudo apt-get install speed-dreams
+Запуск
+speed-dreams-2
+
+Авиасимулятор
+https://pingvinus.ru/game/flightgear
+https://ru.wikipedia.org/wiki/FlightGear
+sudo apt install flightgear
+
+Kerbal Space Program
+https://rutracker.org/forum/viewtopic.php?t=5631569
+

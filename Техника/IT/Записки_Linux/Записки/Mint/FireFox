@@ -1,0 +1,4 @@
+Запуск менеджера профилей FireFox
+firefox --ProfileManager
+
+firefox -p ProfileName

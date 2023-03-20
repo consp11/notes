@@ -1,0 +1,68 @@
+Восстановление после неудачной загрузки
+
+# Already installed
+sudo add-apt-repository ppa:yannubuntu/boot-repair
+sudo apt update
+sudo apt install boot-repair
+
+boot-repair
+
+
+Другие команды
+
+
+https://unix.stackexchange.com/questions/329926/grub-starts-in-command-line-after-reboot
+
+ls
+set root=(hd0,gpt1)
+ls /boot
+linux /boot/vmlinuz-<version> 
+initrd /boot/initrd.img-<version>
+boot
+
+sudo apt-get install grub-install
+lsblk
+sudo grub-install /dev/sdX
+systemctl reboot
+
+    https://www.gnu.org/software/grub/manual/grub/html_node/Command_002dline-and-menu-entry-commands.html
+    https://www.unixmen.com/fixing-a-few-common-grub-errors-broken-bootloader-and-error-1715/
+
+
+
+https://www.linuxfoundation.org/blog/blog/classic-sysadmin-how-to-rescue-a-non-booting-grub-2-on-linux
+
+
+set pager=1
+ls
+ls (hd0,1)/
+
+# hd0,1 = /dev/sda1. hd1,1 = /dev/sdb1. hd3,2 = /dev/sdd2
+set root=(hd0,1)
+linux /boot/vmlinuz-3.13.0-29-generic root=/dev/sda1
+initrd /boot/initrd.img-3.13.0-29-generic
+boot
+
+
+or grub rescue:
+grub rescue> set prefix=(hd0,1)/boot/grub
+grub rescue> set root=(hd0,1)
+grub rescue> insmod normal
+grub rescue> normal
+grub rescue> insmod linux
+grub rescue> linux /boot/vmlinuz-3.13.0-29-generic root=/dev/sda1
+grub rescue> initrd /boot/initrd.img-3.13.0-29-generic
+grub rescue> boot
+
+
+after load
+update-grub
+grub-install /dev/sda
+
+# Possible
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=debian --recheck --debug /dev/sda
+update-grub
+
+
+
+

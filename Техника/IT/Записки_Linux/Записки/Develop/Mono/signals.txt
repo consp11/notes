@@ -1,0 +1,6 @@
+Обработчики сигналов Linux в .NET
+
+Console.CancelKeyPress SIGINT
+AppDomain.CurrentDomain.ProcessExit SIGTERM
+
+

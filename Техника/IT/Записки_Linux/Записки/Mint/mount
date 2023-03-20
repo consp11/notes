@@ -1,0 +1,244 @@
+Добавление точки для автомонтирования: это файловая система в памяти (ещё бывает ramfs)
+none    /inRam  tmpfs   noexec,rw,nosuid,nodev,size=512M
+устройство		тип ФС	параметры (нет запуска, не более 512 мегабайтов)
+		точка монтирования
+
+Примерно тоже вручную
+sudo mount -t tmpfs none /inRam
+
+Для монтирования в несуществующую директорию, нужно указать параметр
+-o X-mount.mkdir
+
+
+Для обеспечения такого монтирования нужно создать директорию
+sudo mkdir /inRam
+Затем, для безопасности, нужно ограничить к ней доступ всем вообще
+Если директория не будет подгружена, то запись в директорию, созданную для монтирования окончится ошибкой
+sudo chmod 000 /inRam
+Затем можно подмонтировать в сокращённом виде (указываем только точку монтирования, остальное берётся из fstab)
+sudo mount /inRam
+
+Второй вариант: файл точки монтирования
+[Unit]
+Description=описание
+
+[Mount]
+What=адрес_раздела (устройство, которое монтируется, аналогично fstab)
+Where=точка монтирования
+Type=файловая система
+Options=опции монтирования
+
+[Install]
+WantedBy=multi-user.target
+
+Для монтирования нужно выполнить команду
+sudo systemctl start точка_монтирования_без_начального_слеша.mount
+(имена аналогично тому, как указываются в команде systemctl list-unit-files)
+
+Пример
+sudo systemctl start inRam.mount
+
+
+Монтирование файла 
+# sudo mount -o loop /inRam/1 /inRam/2
+# sudo mount -o loop=/dev/loop11 /inRam/1 /inRam/2
+# loop dev удаляется через umount -d или losetup -d
+
+# cat /proc/filesystems - перечень файловых систем
+# Доп. перечень ls /lib/modules/$(uname -r)/kernel/fs
+# Создаём файл нужного размера
+# dd if=/dev/zero of=file.img bs=1MiB count=10
+fallocate -l 1M ~/tmpfs
+
+# losetup из пакета util-linux
+# --direct-io=on - прямая запись в файл
+# losetup -v --show --direct-io=on /dev/loop11 ~/tmpfs
+sudo losetup -v --show --direct-io=on -f ~/tmpfs
+# Выводит список
+losetup -l
+losetup -j ~/tmpfs
+
+# Демонтирует устройство
+sudo losetup -d /dev/loop11
+
+
+
+----------------------------------------------------------------
+Метки диска, демонтирование /dev/loop?
+
+Изменить метку диска
+e2label /dev/loop 'Label'
+
+Вывести все точки монтирования
+systemctl -l --type mount
+
+Поиск всех замонтированных каталогов
+findmnt
+
+Узнать параметры монтирования (noatime, relatime и т.п.)
+findmnt /носитель
+
+Для размонтирования дисков
+umount /dirToUnmount
+
+Для отсоединения устройств /dev/loop?
+sudo losetup -d /dev/loop
+
+
+----------------------------------------------------------------
+Дефрагментация
+e4defrag
+Утилита Linux из пакета e2fsprogs (на Mint уже установлен)
+
+fsck - проверка жёсткого диска на ошибки (Linux)
+
+----------------------------------------------------------------
+Форматирование файловой системы
+https://www.sans.org/blog/understanding-ext4-part-1-extents/
+https://www.vidarholen.net/contents/junk/inodes.html
+https://ext4.wiki.kernel.org/index.php/Bigalloc
+https://man7.org/linux/man-pages/man5/ext4.5.html
+
+# man mkfs.ext4
+sudo mke2fs -t ext2 -b 1024 /dev/loop3
+	# На VeraCrypt-диске 14 Гб свободно 13,1 Гб.
+sudo mke2fs -t ext2 -b 16384 /dev/loop3
+	# Не монтируется потом
+sudo mke2fs -t ext2 -b 4096 /dev/loop3
+	# Свободно 13,0 Гб
+
+# Не резервируем место на диске для root
+sudo mke2fs -t ext2 -b 4096 -m 0 /dev/loop3
+	# 14 Гб => 13,7 Гб
+
+------------------------------------------------
+# Создаём один inode на один мегабайт
+sudo mke2fs -t ext2 -b 4096 -i 1048576 -m 0 /dev/loop3
+	# 14 Гб свободных
+# Можно и просто указать количество inode
+sudo mke2fs -t ext2 -b 4096 -N 1024 -m 0 /dev/loop3
+	# 14 Гб свободных
+
+sudo mke2fs -t ext4 -b 4096 -N 1024 -m 0 /dev/loop3
+	# 13.9 Гб свободных
+
+------------------------------------------------
+# Тесты на 10 Мб файле
+
+# Посмотреть информацию о файловой системе
+sudo tune2fs -l /dev/loop3
+
+# Поддерживает ли файловая система acl?
+tune2fs -l /dev/sda1 | grep acl
+Вывод (если поддерживает):
+Default mount options:    user_xattr acl
+
+
+------------------------------------------------
+
+sudo mke2fs -t ext4 -b 4096 -N 16 -m 0 /dev/loop3
+	# 5.5 Mb свободно
+
+# Это произошло за счёт снижения затрат на данные журнала файловой системы (в 4 раза меньше затрат)
+# Т.к. журнал не может быть размером менее 1024 блока
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 /dev/loop3
+	# 8,4 Мб свободно
+
+# Пытаемся отключить в ext4 журнал вообще (это не должно позволяться, но это позволяется)
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal /dev/loop3
+	# 9,4 Мб свободно
+
+# man ext4
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal,bigalloc /dev/loop3
+	# 9,5 Мб свободно
+
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal,bigalloc -C 256k /dev/loop3
+	# 8.8 Мб
+
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal,extent /dev/loop3
+	# 9,4 Мб
+
+sudo mke2fs -t ext4 -b 4096 -N 16 -m 0 -O ^has_journal,bigalloc /dev/loop3
+	# 9,2 Мб
+
+
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal,extent,bigalloc,inline_data -C 256k -I 1024 /dev/loop3
+	# 8.8 Мб
+
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal,extent,bigalloc,inline_data -C 64k -I 1024 /dev/loop3
+	# 9.3 Мб (9.4 с удалённой папкой "lost+found")
+
+sudo mke2fs -t ext4 -b 1024 -N 4 -m 0 -O ^has_journal,extent,bigalloc,inline_data -C 64k -I 1024 /dev/loop3
+	# Illegal inode number while writing reserved inodes
+
+
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal,extent,bigalloc,inline_data,^64bit -C 64k -I 1024 /dev/loop3
+	# 9.3
+
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal,extent,bigalloc,inline_data,^64bit,^large_file,^huge_file -C 64k -I 1024 /dev/loop3
+	# 9.3
+
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal,extent,bigalloc,inline_data,^64bit,^large_file,^huge_file,^metadata_csum -C 64k -I 1024 /dev/loop3
+	# 9.3
+
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal,extent,bigalloc,inline_data,^64bit,^flex_bg -C 64k -I 1024 /dev/loop3
+	# 9.3
+
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal,extent,bigalloc,inline_data,verity -C 64k -I 1024 /dev/loop3
+	# Система не монтируется
+
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal,extent,bigalloc,inline_data,^resize_inode,^dir_index,^dir_nlink -C 64k -I 1024 /dev/loop3
+	# 9.4
+
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal,extent,bigalloc,^resize_inode,^dir_index,^dir_nlink,^metadata_csum,^flex_bg -C 64k /dev/loop3
+	# 9.4. При создании 4-х пустых каталогов снижается до 9.1
+
+------------------------------------------------
+# Общий результат
+# -N 16 - 16 inode - это возможность создать примерно 5 файлов и директорий, исключая корневую.
+# Примерно 192 Кб девается непонятно куда всегда (видимо, есть ещё заголовок VeraCrypt и заголовок файловой системы)
+# Журнал отключается -O ^has_journal
+# Размер журнала - не менее 1024 блоков. Поэтому, маленький размер блока (1024) уменьшает размер журнала, если не хочется его отключать.
+# inline_data даёт возможность создавать пустые директории без выделения на них лишнего кластера.
+# -I 1024 - размер inode увеличен, чтобы можно было сделать inline_data
+# bigalloc - выделение данных кластерами. Как минимум один кластер уже выделен при создании файловой системы.
+# dir_index - это создание индекса вхождений директории. Отключаем, т.к. это нам не нужно (это для директорий с большим количеством файлов)
+# -J size=1 - размер журнала в мегабайтах. Не менее 1024 блоков
+
+
+sudo mke2fs -t ext4 -b 1024 -N 16 -m 0 -O ^has_journal,extent,bigalloc,inline_data,^resize_inode,^dir_index,^dir_nlink,^metadata_csum,^flex_bg -C 64k -I 1024 /dev/loop
+	# 9,4.  При создании 4-х пустых каталогов так и остаётся 9,1
+
+# Рекомендуемая команда форматирования такая
+
+# С журналом (8,4 Мб на 10 Мб носитель)
+sudo mke2fs -t ext4 -b 1024 -N 32 -m 0 -O has_journal,extent,bigalloc,inline_data,^resize_inode,^dir_index,^dir_nlink,^flex_bg -C 32k -I 1024 /dev/loop
+
+# Для хранения относительно больших файлов
+sudo mke2fs -t ext4 -b 4096 -N 1024 -m 0 -J size=4 -O has_journal,extent,bigalloc,inline_data,^resize_inode -I 1024 /dev/loop
+
+
+# Без журнала (9,4 Мб на 10 Мб носитель)
+sudo mke2fs -t ext4 -b 1024 -N 32 -m 0 -O ^has_journal,extent,bigalloc,inline_data,^resize_inode,^dir_index,^dir_nlink -C 32k -I 1024 /dev/loop
+
+# Без bigalloc, но с журналом (8,5 Мб свободно на 10 Мб носитель)
+sudo mke2fs -t ext4 -b 1024 -N 32 -m 0 -O has_journal,extent,inline_data,^resize_inode,^dir_index,^dir_nlink -I 1024 /dev/loop
+
+# Это для относительно больших дисков
+sudo mke2fs -t ext4 -b 4096 -m 0 -O has_journal,extent,bigalloc,inline_data,^resize_inode,large_file,huge_file -I 1024 /dev/loop
+
+# Для диска с видео
+sudo mke2fs -t ext4 -b 4096 -m 0 -O has_journal,extent,bigalloc,inline_data,^resize_inode,^dir_index,^dir_nlink,large_file,huge_file -C 1M -I 1024 /dev/loop6
+
+# Для диска с g2
+sudo mke2fs -t ext4 -b 4096 -m 0 -O has_journal,extent,inline_data,^resize_inode,large_file,huge_file -I 1024 /dev/loop
+
+Новая проба для нового диска с ключами
+sudo mke2fs -t ext4 -b 1024 -m 0 -O extent,^has_journal,^inline_data,^64bit,^large_file,^huge_file,^resize_inode,^dir_index,^dir_nlink -I 128 /dev/loop
+
+
+# Для нового диска с литературой
+sudo mke2fs -t ext4 -b 4096 -m 0 -O has_journal,extent,inline_data,^resize_inode,^large_file,^huge_file,^64bit,^dir_index,^dir_nlink -I 1024 /dev/loop
+
+# Для диска для виртуальных машин
+sudo mke2fs -t ext4 -b 4096 -m 0 -O has_journal,extent,bigalloc,inline_data,^resize_inode,large_file,huge_file -I 1024 -C 1M -L 'VMs' /dev/loop

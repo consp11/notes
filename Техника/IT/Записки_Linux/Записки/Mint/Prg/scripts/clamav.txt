@@ -1,0 +1,34 @@
+Запуски в файле /home/vinny/_/plans/Планы/Списки/ClamAV/clamav
+
+-i выводить только инфецированные файлы
+-o Пропускать печать нормальных файлов
+-z детектировать в файле все, а не только первое совпадение
+-r рекурсивно
+-v verbose
+
+--statistics=none/bytecode/pcre  - собирать статистику и вывести её
+--heuristic-alerts=yes использовать эвристику
+--scan-pdf=yes
+--alert-encrypted=yes
+--alert-exceeds-max=yes  Оповещать о файлах, которые превышают максимально разрешённую длину для сканирования
+--max-filesize=256M (25 Мб по умолчанию)
+--max-scansize=256M (100Мб по умолчанию) - разархивирование архивов
+--max-recursion=128 (17)
+--max-dir-recursion=128 (15)
+
+--alert-partition-intersection      Обнаруживать пересечения разделов
+
+--disable-cache    Выключает использование кеша
+
+--follow-dir-symlinks=2 по умолчанию 1. Переходить по символическим ссылкам в файловой системе
+--follow-file-symlinks=2
+
+--bytecode-timeout=15000 по умолчанию - 5000 (5s)
+
+sudo clamscan -iozr --follow-dir-symlinks=2 --follow-file-symlinks=2 --max-filesize=256M --max-scansize=256M --max-recursion=128 --max-dir-recursion=128 --alert-encrypted=yes --bytecode-timeout=30000  /home > /inRam/av.txt
+
+11 сентября
+sudo clamscan -iozr --max-filesize=256M --max-scansize=256M --max-recursion=128 --max-dir-recursion=128 --alert-encrypted=yes --bytecode-timeout=30000 /home >> /inRam/avh.txt &
+
+sudo clamscan -iozr --max-filesize=256M --max-scansize=256M --max-recursion=128 --max-dir-recursion=128 --alert-encrypted=yes --bytecode-timeout=30000 /usr/ >> /inRam/avu.txt &
+

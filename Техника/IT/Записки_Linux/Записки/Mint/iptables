@@ -1,0 +1,173 @@
+# WHOIS
+# https://xseo.in/ipinfo
+# Информация о настройках iptables
+# https://ipset.netfilter.org/iptables.man.html
+# https://ipset.netfilter.org/iptables-extensions.man.html
+# https://linux16.ru/articles/nastrojka-iptables-primery-chast-2.html
+
+# Обновления через прокси
+# https://losst.ru/nastrojka-obnovleniya-ubuntu-cherez-proksi
+# Расширения быть не должно
+sudo xed /etc/apt/apt.conf.d/vinny-proxy
+
+Вставить (http обязательно вставлять, т.к. он пользуется именно им)
+Acquire::http::Proxy "http://127.0.0.1:8889";
+Acquire::https { Proxy "https://127.0.0.1:8889"; };
+Acquire::::Proxy "true";
+
+# Privoxy при настройке https работает только если настроить "http" на прокси
+# Acquire::https { Proxy "http://127.0.0.1:8889"; };
+# На некоторых Linux вместо директории строки нужно добавлять в файл /etc/apt/apt.conf
+# socks аналогично: Acquire::socks::Proxy "socks://127.0.0.1:8889";
+# Также, в Synaptic в настройках есть вкладках "Сеть" и там можно вставить http-прокси
+
+# Однако, проще всего настроить обновления напрямую
+# Разрешаем обновления и прочие операции для _apt
+-A OUTPUT -p tcp -m multiport --dports 80,443 -m owner --uid-owner _apt -j ACCEPT
+
+# Разрешение DNS под Linux
+# см. https://www.man7.org/linux/man-pages/man5/resolved.conf.5.html
+# /etc/systemd/resolved.conf
+
+
+
+# ----------------------------------------------------------------
+Не забыть, что есть две утилиты:
+iptables
+ip6tables
+
+Чтобы сохранить настройки, самый простой вариант, это пакет iptables-persistent
+sudo apt-get install iptables-persistent
+Теперь все настройки будут в /etc/iptables/rules.v4 и /etc/iptables/rules.v6 и при перезагрузке будут оттуда автоматически загружаться
+См. также iptables-save и iptables-restore
+# https://help.ubuntu.com/community/IptablesHowTo
+
+Типы ICMP-сообщений
+# Сильная штука!
+# https://www.frozentux.net/iptables-tutorial/iptables-tutorial.html#ICMPTYPES
+# Iptables Tutorial 1.2.2
+# Oskar Andreasson
+
+# ICMP echo reply - 0; * Unreachable - 3; TTL equals 0 * - 11
+-A INPUT -p icmp --icmp-type 0 -j ACCEPT
+-A INPUT -p icmp --icmp-type 3 -j ACCEPT
+
+
+Просмотр того, что есть
+
+Сортировка по цепочкам
+sudo iptables -L имя_цепочки_если_надо
+
+Без сортировки по цепочкам
+sudo iptables -S имя_цепочки_если_надо
+
+
+sudo iptables -L --line-numbers
+Удаление команды
+sudo iptables -D INPUT 3
+# INPUT - цепочка
+# 3 - номер в --line-numbers
+
+
+Очистка правил (всё удаляет вообще, если не указано имя цепочки; однако, политика по умолчанию не будет сброшена: если блокировать всё, значит - блокировать всё)
+sudo iptables -F имя_цепочки_если_надо
+
+Разрешение всего траффика
+sudo iptables -P INPUT ACCEPT
+sudo iptables -P FORWARD ACCEPT
+sudo iptables -P OUTPUT ACCEPT
+
+
+Типы пакетов
+Input   - входящие
+output  - исходящие
+forward - форвардинг (перенаправление на другие адреса в шлюзе)
+
+
+ACCEPT	- разрешить прохождение пакета дальше по цепочке правил;
+DROP	- удалить пакет;
+REJECT	- отклонить пакет, отправителю будет отправлено сообщение, что пакет был отклонен;
+LOG		- сделать запись о пакете в лог файл;
+ULOG    - ещё один лог
+QUEUE	- отправить пакет пользовательскому приложению.
+RETURN  - выйти из цепочки
+
+# https://www.kyrylenkoanatolii.com/2018/12/09/nastrojka-iptables/
+Каждый пакет может иметь одно из четырёх возможных состояний:
+NEW – пакет является первым для данного соединения (открывает новый сеанс). Классический пример — пакет TCP с флагом SYN.
+RELATED – пакет открывает новый сеанс, связанный с уже открытым сеансом (например пассивный FTP).
+ESTABLISHED – говорит о том что это не первый пакет в соединении (является частью уже существующего сеанса).
+INVALID – пакет не идентифицирован, поэтому не имеет статуса (все прочие пакеты).
+
+
+Разные таблицы. Фильтрация осуществляется в filter. Если параметр -t не указан, то используется таблица filter
+raw - предназначена для работы с сырыми пакетами, пока они еще не прошли обработку;
+mangle - предназначена для модификации пакетов;
+nat - обеспечивает работу nat, если вы хотите использовать компьютер в качестве маршрутизатора;
+filter - основная таблица для фильтрации пакетов, используется по умолчанию
+
+Команды
+-A - добавить правило в цепочку;
+-С - проверить все правила;
+-D - удалить правило;
+-I - вставить правило с нужным номером;
+-L - вывести все правила в текущей цепочке;
+-S - вывести все правила;
+-F - очистить все правила;
+-N - создать цепочку;
+-X - удалить цепочку;
+-P - установить действие по умолчанию.
+
+-p - указать протокол, один из tcp, udp, udplite, icmp, icmpv6,esp, ah, sctp,
+mh;
+-s, --src, --source – указать ip адрес или подсеть устройства-отправителя пакета.
+При установленном флаге ! перед указанием фильтра – значение будет инвертировано (-s ~10/8)
+-d - указать ip адрес получателя;
+-i - входной сетевой интерфейс;
+-o - исходящий сетевой интерфейс;
+-j - выбрать действие, если правило подошло.
+-g - перейти на цепочку.
+
+--sport - порт отправителя
+--dport - порт получателя
+
+-m - дополнительные модули
+
+--src-range – диапазон IP источников между двумя конкретными адресами, а не подсетью.
+Пример iptables -A INPUT -p tcp -m iprange --src-range 192.168.1.13-192.168.2.19
+--length – допустимо указание диапазона размеров. Пример iptables -A INPUT -p tcp -m length –length 1400:1500
+
+--uid-owner – фильтр по UID (User ID) пользователя, который сгенерировал пакет. Пример iptables -A OUTPUT -m owner --uid-owner 500
+
+Если нужно узнать id пользователя, то есть команда
+id имя_пользователя
+
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+
+
+
+Пример правил
+
+
+# sudo ip6tables-restore /etc/iptables/rules.v6
+
+
+*filter
+:INPUT DROP
+:FORWARD DROP
+:OUTPUT DROP
+
+-A INPUT -i lo -j ACCEPT
+-A OUTPUT -o lo -j ACCEPT
+
+-A INPUT -p icmpv6  -j ACCEPT
+-A OUTPUT -p icmpv6  -j ACCEPT
+
+-A OUTPUT -j LOG
+-A INPUT  -j LOG
+
+COMMIT
+
+
+Пример разграничения доступа для IPv4 см. в файле iptables4

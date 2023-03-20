@@ -1,0 +1,23 @@
+# Задаём пароль для шифрования
+export BORG_PASSCOMMAND="cat /home/vinny/_/keys-var/Reserve/borg-sh.pass"
+# head -c 32 /dev/random | base64 -w 0 > ~/.borg-passphrase
+
+
+# Создаём новый репозиторий
+# https://borgbackup.readthedocs.io/en/stable/quickstart.html#encrypted-repos
+borg init --encryption=keyfile /Arcs/Repos/reserve/borg/
+
+# Экспортируем ключ
+borg key export /Arcs/Repos/reserve/borg/ /media/veracrypt8/Reserve/borg-sh.key
+
+# Создаём новую резервную копию в репозитории в архиве LinuxRecords
+borg create --stats --noatime --compression auto,lzma,9 /Arcs/Repos/reserve/borg/::LinuxRecords-{now} '/home/vinny/_/Linux_Записки/'
+или
+borg delete -a 'LinuxRecords*' /Arcs/Repos/reserve/borg/
+borg create --stats --noatime --compression auto,lzma,9 /Arcs/Repos/reserve/borg/::LinuxRecords '/home/vinny/_/Linux_Записки/'
+
+
+
+# Извлекаем архив из репозитория в текущую директорию (в другую нельзя)
+borg list /Arcs/Repos/reserve/borg/::LinuxRecords
+borg extract /Arcs/Repos/reserve/borg/::LinuxRecords

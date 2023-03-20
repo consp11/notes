@@ -1,0 +1,7 @@
+dotnet restore --interactive --disable-parallel
+
+
+https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-sln
+    dotnet new sln
+    dotnet new console --output p1
+    dotnet sln add p1

@@ -1,0 +1,38 @@
+Просмотр переменной PATH
+echo $PATH
+либо
+printenv PATH
+
+
+Либо всех переменных вообще
+printenv | less
+printenv | grep PATH
+
+
+Изменить PATH временно
+export PATH="$PATH:$HOME/bin"
+
+Это работает только в одном shell
+[VARIABLE_NAME]=[variable_value]
+unset, чтобы удалить значение
+
+Это при каждой загрузке bash
+Через скрипт bashrc
+~./bashrc
+
+Туда надо вставить команду выше
+
+
+To set permanent environment variables for all users, create an .sh file in the /etc/profile.d folder:
+
+sudo nano /etc/profile.d/[filename].sh
+
+
+Кажется, это более старое
+    ~/.bashrc – Variables stored here will reside in the user’s home directory and are only accessible by that user. The variables get loaded any time a new shell is opened.
+    /etc/profile – Variables stored here will be accessible by all users and are loaded whenever a new shell is opened.
+    /etc/environment – Variables stored here are accessible system-wide.
+
+If adding an environment variable to the /etc/environment file, you don’t need to precede the line with “export”.
+
+MY_SITE='linuxconfig.org'

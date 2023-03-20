@@ -1,0 +1,912 @@
+? Скопировать контрольный список и отмечать действия в копии
+
+? Создать основного пользователя-админа и пользователя-админа для того, чтобы монтировать диски
+
+? Проверить наличие сети
+	Если модем Yota не работает, попробовать обновить систему, установив ручную настройку IPv4 10.0.0.10	8	10.0.0.1
+	Если всё в порядке, то ping 77.88.8.88 должен работать с такими настройками. DNS установить в 77.88.8.88 и 77.88.8.2 (dns.yandex.ru)
+
+? Включить Gufw, если есть на системе (потом можно будет отключить)
+
+# Если используется файловый менеджер Thunar, то
+? войти в меню Вид | Боковая панель, установить флажок "Дерево"
+? Вид | Скрытые файлы
+? Вид | List view
+? Если надо, там же "Настроить столбцы"
+? Правка | Параметры:
+? Показывать эскизы: никогда
+? Запоминать настройки отображения для каждой вкладки (не обязательно)
+? Дата: формат: "сегодня в 19:18:21"
+? Поведение: открывать каталоги в новых вкладках по среднему щелчку
+
+На вкладке дополнительно "Настроить управление съёмными носителями", либо
+Настройки | Съёмные устройства ...
+? Мультимедиа: если надо, отключить автоматическое проигрывание
+
+
+? sudo apt-get install net-tools nethogs
+
+sudo xed /etc/sudoers.d/vinny
+User_Alias PWD_LIST=%forall,%passwords
+PWD_LIST ALL = NOPASSWD:/usr/sbin/nethogs
+
+
+
+Убираем историю команд из bashrc
+Можно даже добавить, а не для пользователя
+? sudo xed /etc/bash.bashrc
+? xed ~/.bashrc
+? Внести следующие изменения:
+Закомментировать shopt -s histappend
+Добавить shopt -u histappend
+Закомментировать
+HISTSIZE=1000
+HISTFILESIZE=2000
+Добавить
+export HISTFILE=/dev/null
+HISTSIZE=20
+HISTFILESIZE=0
+
+? Убираем историю файлов (заменить "inet" на имя пользователя)
+(если файл /home/inet/.local/share/recently-used.xbel есть, сначала удалить или переименовать его)
+sudo bash
+cat > /home/inet/.local/share/recently-used.xbel
+# или touch /home/inet/.local/share/recently-used.xbel
+chmod a-wx /home/inet/.local/share/recently-used.xbel
+# Это запрещает что-то большее, чем просто chmod a-r - это запрещает изменение и метаданных тоже. Просмотр командой lsattr
+chattr +i /home/inet/.local/share/recently-used.xbel
+Аналогично сделать с .recently-used
+
+
+Кстати, для эффективности можно попробовать добавить sudo chattr +T /home
+Эта штука распределяет каталоги по диску, не старается их сгруппировать рядом друг с другом
+Возможно, также стоит поставить в /etc/fstab на монтирование основных томов опцию lazytime
+
+? Настройки | Панель | Элементы - добавить модуль "Раскладка клавиатуры". Иначе переключение будет невозможным
+? Настройки | Панель | Количество строк: 2 (высота строки: можно 24 вместо 32)
+? Настройки | Клавиатура - настроить переключение раскладок и проверить, работает ли оно (у меня не работало)
+? Правой кнопкой мыши на часах: свойства, добавить пользовательский формат %H:%M:%S%n%a %b%n<span foreground="gray">%d.%m.%y</span>
+# https://docs.xfce.org/xfce/xfce4-panel/4.16/clock (описание формата часов)
+? Настройки | Окно входа в систему | Настройки | Формат времени %H:%M    %a %b    %d.%m.%y
+
+? Правой кнопкой мыши на Панели в районе окон (пустое место под открытым окном) | Свойства. Окно "кнопки окон". "Показывать плоские кнопки". Сортирока: отсутствует (перетаскивание). Группировать окна: всегда. Отображать рамку окна под курсором мыши и разворачивать окна на текущий рабочий стол.
+
+? sudo xed /etc/fstab
+? Закомментировать строку "/swapfile ..."
+# Если нужно, настроить swap, как описано в файле "swap"
+# Попоробовать удалить /swapfile (это путь) после swapoff -a (не знаю, потребуется ли umount)
+? Проверить, что монтирование тома данных есть. Должна быть строка по типу
+    # /Arcs was on /dev/sda2 during installation
+    UUID=bc5b6387-906e-482a-8883-c64cd0108742 /Arcs           ext4    defaults        0       2
+    # UUID=bc5b6387-906e-482a-8883-c64cd0108742   /Arcs   ext4    defaults,lazytime    0   2
+# Это делать не надо уже
+-- Добавить в этот том "defaults,noexec" вместо "defaults"
+
+
+# Открываем файл swap в этой же директории | /Arcs/Disks/Mega/MEGAsync/Записки/Mint/swap
+# sudo xed /etc/sysctl.conf
+sudo xed /etc/sysctl.d/swappiness.conf
+vm.swappiness=10
+
+
+Сделать диск в памяти tmpfs или ramfs
+Создаём директорию, в которую запрещено писать всем
+? sudo mkdir /inRam
+? sudo chmod 000 /inRam
+? sudo ls -al /inRam
+    В первой строке должен быть вывод по типу
+    d---------  2 root root 4096 июл 17 13:14 .
+
+# Ещё одну - сюда монтируются логи
+? sudo mkdir /inRam-Logs
+? sudo chmod 000 /inRam-Logs
+? sudo ls -al /inRam-Logs
+
+# Это группа для тех, кто может читать из /inRam-Logs
+? sudo adduser --group inram-logs
+? sudo gpasswd -a first inram-logs
+? sudo gpasswd -a a1    inram-logs
+? sudo gpasswd -a inet  inram-logs
+? sudo gpasswd -a inet  inram-logs
+? sudo gpasswd -a dev   inram-logs
+
+? sudo gpasswd -a vinny-proxy inram-logs
+? sudo gpasswd -a forTor      inram-logs
+
+
+# https://man7.org/linux/man-pages/man2/mount.2.html
+# https://man7.org/linux/man-pages/man5/fstab.5.html
+? sudo xed /etc/fstab
+? Добавить строку (заменить uid и gid на нужные значения; forall=1005; passwords=1008; inram-logs=1013)
+none                /inRam      tmpfs   rw,nosuid,nodev,size=512M,uid=1001,gid=1008,mode=0770
+none                /inRamA     tmpfs   rw,nosuid,nodev,size=8M,uid=1001,gid=1005,mode=0777
+? Добавить строку для логов
+# Это значит, что чужие для группы могут в неё писать
+none                /inRam-Logs tmpfs   noexec,rw,nosuid,nodev,size=32M,uid=1001,gid=1013,mode=0772
+
+# Отобразить нужные поддиректории как корневые
+/Arcs/A             /A          none    bind
+/Arcs/Disks/Mega/   /A/Mega     none    bind
+/Arcs/Disks/ya/     /A/Ya-disk  none    bind
+
+
+Аналогично, можно добавить
+# Не надо, а то может не хватить памяти или размера директории
+# none    /var/tmp  tmpfs   noexec,rw,nosuid,nodev,size=8G
+
+? Создать отдельный диск для /tmp и /var/tmp (его будет проще перезатирать)
+	fallocate -l 24G /Arcs/TMP/tmpfs
+	sudo losetup -v --show /dev/loop63 /Arcs/TMP/tmpfs
+	sudo mke2fs -t ext4 -b 4096 -m 0 -O ^has_journal,extent,inline_data,^resize_inode,large_file,huge_file -I 1024 /dev/loop63
+	sudo losetup -d /dev/loop63
+	sudo xed /etc/fstab
+	sudo chmod a-rw+t /Arcs/TMP/tmpfs
+	/Arcs/TMP/tmpfs     /tmp        ext4    loop,noexec,rw,nosuid,nodev
+	/Arcs/TMP/tmpfs     /var/tmp    ext4    loop,noexec,rw,nosuid,nodev
+	sudo rm -rf /tmp
+	sudo rm -rf /var/tmp
+	sudo mkdir /tmp
+	sudo mkdir /var/tmp
+	sudo chmod a-rw+t /tmp
+	sudo chmod a-rw+t /var/tmp
+	sudo mount /tmp
+	sudo mount /var/tmp
+	sudo chmod a+rwx /tmp
+	sudo chmod a+rwx /var/tmp
+
+
+? Провести для проверки успешное монтирование вручную
+# sudo mount -t tmpfs none -o noexec,rw,nosuid,nodev,size=512M /inRam
+sudo mount /inRam
+? sudo ls -al /inRam
+    В первой строке должен быть вывод по типу
+    drwxrwxrwt  2 root  root    60 июл 17 13:43 .
+
+
+# Размонтирование осуществляется путём sudo umount /inRam
+# -L label
+# -r, --read-only; -w, --rw, --read-write
+# --source device --target directory, если необходимо
+# noexec ro (readonly) rw nosymfollow
+# bs=512 (blocksize)
+# mount -t tmpfs none /inRam -o noexec
+# size=512M - ограничение на размер системы
+
+
+? В менеджере драйверов проверить необходимость обновления драйверов
+? Запустить "Менеджер обновлений". Установить локализованные источники обновлений ("Источники приложений")
+? Загрузить обновления ( "Менеджер обновлений" )
+? Если необходимо, отказаться от резервного копирования в TimeShift
+? Установить загруженные обновления
+
+Настройки | Диспетчер окон | Фокус
+установить удобный способ режима фокуса, если хочется:
+? фокус следует за мышью (ползунок рекомендуется ставить в правой половине) / возможно, это не так уж и удобно
+? поднимать окна на передний план
+(можно посмотреть и вкладку "Дополнительные")
+
+? Если необходимо, зайти в Настройки | Диспетчер окон (дополнительно)
+Пройти все настройки, в том числе, установить флажок предотвращения кражи фокуса
+
+? Настройки | Обо мне: всё убрать, если что есть
+? Настройки | Оповещения. Включить анимацию. Установить непрозрачность, испытать кнопкой "показать пример"
+? Скрывать после - 480 секунд (чтобы не скрывать как можно дольше)
+? Вкладка "Журнал": записывать все (для большей конфиденциальности, можно и наоборот)
+
+? Рабочие места: добавить до 8-ми рабочих мест
+
+? Если надо, в Настройки | Рабочий стол - изменить фоновое изображение
+? Если надо, там же, | Меню | Список окон | Использовать подменю для окон на каждом рабочем столе
+
+Настройки | Менеджер питания
+? При нажатии кнопки питания: выключить компьютер
+? Система | Ждущий режим - никогда (уже установлено)
+? Дисплей: погасить экран через: 11 мин; остальное - никогда
+? Безопасность: настроить блокировку экрана по желанию
+
+# В окне входа в систему будет гореть numlock
+sudo apt install numlockx
+Настройки | Окно входа в систему | Настройки | Включить numlock
+
+Установить usbguard
+# https://usbguard.github.io/
+# https://github.com/USBGuard/usbguard/issues/new
+# https://websetnet.net/ru/%D0%BA%D0%B0%D0%BA-%D0%B7%D0%B0%D1%89%D0%B8%D1%82%D0%B8%D1%82%D1%8C-%D1%81%D0%B2%D0%BE%D0%B9-Linux-%D0%BA%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80-%D0%BE%D1%82-%D0%BC%D0%BE%D1%88%D0%B5%D0%BD%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D1%85-USB-%D0%BD%D0%B0%D0%BA%D0%BE%D0%BF%D0%B8%D1%82%D0%B5%D0%BB%D0%B5%D0%B9/
+? sudo apt install usbguard
+# Проверить, что список правил сформирован
+? usbguard list-rules
+
+# Это уже делается автоматически в новых версиях
+? usbguard generate-policy > rules.conf
+? xed rules.conf
+? sudo install -m 0600 -o root -g root rules.conf /etc/usbguard/rules.conf
+? sudo systemctl restart usbguard
+
+# lsusb
+# sudo usbguard list-devices -b
+# -p - постоянное разрешение
+# sudo usbguard allow-device 10 -p
+# sudo systemctl restart usbguard
+# Удаление доступа
+# sudo usbguard list-devices -a
+# sudo usbguard reject-device 10 -p
+
+
+Настройки | Сеансы и запуск | Автозапуск приложений
+Удалить из автозапуска
+? Bluetooth
+? Geoclue
+? Sticky Notes (если не нужно)
+? Support for NVIDIA Prime
+? Warpinator
+? Апллет Blueman
+? Апплет очереди печати (если не нужно)
+
+? Настройки | Языки: применить для всей системы
+
+
+? Менеджер программ: удалить Thunderbird
+
+
+? Межсетевой экран: включить, пока по умолчанию
+? Правка: параметр: Уровень журнала: максимальный
+? Можно, также, удалить профили
+
+
+# Также можно выполнить поиск термометров, но лучше этого не делать, т.к. это операции на запись на угад (кроме этого, найденные термометры, почему-то, не отображаются в дальнейшем)
+# (нужно для определения температуры системы) sudo sensors-detect (первый и второй - yes, остальные - no; добавить обнаруженные устройства);
+# Это чтобы посмотреть на температуру жёсткого диска и процессорнных ядер
+? sudo apt install psensor
+# Если программа не показывает температуру жёсткого диска, то посмотреть в настройках, что нужно установить (поддерживает три разных программы для доступа к температуре жёсткого диска)
+
+# Регулировка плана электропитания (только частота процессора, да ещё и регулируется как-то странно, но регулировка явно влияет; флажок "для всех ЦПУ", устанавливать на минимальную частоту оба ползунка)
+sudo apt install cpufrequtils cpupower-gui
+
+# Можно установить минимальную частоту, чтобы беречь процессор. Для этого в cpupower-gui установить для всех ядер минимум и советник performance. И нужно отключить ondemand.service
+# При этом процессор всегда будет работать на минимуме. Но можно руками поставить powersafe.
+# Если используется такая конфигурация, то нужно добавить на панель задач cpupower-gui
+# Однако, max_freq не удаётся установить на минимум. В общем, после перезагрузки как-то не так работает. Так что лучше вручную устанавливать, когда нужно процессор подогреть.
+# Отключение ondemand.service
+# sudo systemctl disable ondemand.service
+# Ещё можно сделать правку в /lib/systemd/set-cpufreq (этот файл вызывается в /lib/systemd/system/ondemand.service)
+# https://www.kernel.org/doc/html/v4.12/admin-guide/pm/intel_pstate.html#passive-mode
+
+? Настроить faillock (см. файл faillock в этой же директории)
+
+
+# Файл
+#! /bin/sh
+# /lib/systemd/set-cpufreq
+
+# Изменения для установки governor: см. файл powersafe.sh в скриптах
+
+
+? Правая кнопка мыши на панели. Панель | Добавить новые элементы | Загрузка системы + Монитор частоты ЦПУ
+
+
+# Установка Notepadqq
+sudo apt-get install notepadqq
+
+# Notepadqq работает внутри директории ~/.config/Notepadqq/tabCache и ~/.config/Notepadqq/backupCache/
+# Если необходимо, чтобы он не сохранял открытые вкладки на диске, то это нужно организовывать отдельно
+# !! После этого не будет работать backup и сохранение вкладок без имени после перезагрузки!
+# Так что до перезагрузки обязательно нужно сохранить эти файлы на диск
+? Создать новый документ и не сохранять его
+? Ввести в него любую строку для поиска (только не пароль, т.к. информация о строке будет сохранена в системных логах)
+Проверить, что документ, содержащий эту строку, появился в папке ~/.config/Notepadqq/tabCache
+Лучше всего проверить командами, что нет других строк
+? cd ~
+? grep -r строка .
+
+# Начинаем работать по запрету сохранения на диске. Для этого сделаем эту папку не на диске, а в памяти
+# Это можно сделать и просто отключив в настройках notepad запоминание открытых вкладок и backup open documents
+? chmod 000 ~/.config/Notepadqq/tabCache
+? chmod 000 ~/.config/Notepadqq/backupCache/
+
+# У меня директория ~/.config/Notepadqq/backupCache/ имеет полное имя /home/vinny/.config/Notepadqq/tabCache
+# Вносим в fstab строки, аналогичные данным (заменить имя пользователя):
+none    /home/vinny/.config/Notepadqq/tabCache  tmpfs   noexec,rw,nosuid,nodev,size=32M
+none    /home/vinny/.config/Notepadqq/backupCache/  tmpfs   noexec,rw,nosuid,nodev,size=32M
+
+
+Установить на FireFox дополнения
+? security.OCSP.require установить в true
+? security.ssl3.* Отключить, если что не нужно
+? Установить network.captive-portal-service.enabled в false, чтобы он просто так не лез каждый раз проверять перехваты
+? browser.tabs.closeWindowWithLastTab если необходимо, переключить в false
+
+? Найти AdBlocker for YouTube или другой менеджер
+https://addons.mozilla.org/ru/firefox/search/?q=Adblock Youtube
+https://addons.mozilla.org/ru/firefox/addon/adblock-for-youtube/
+
+? Установить https://addons.mozilla.org/ru/firefox/addon/adblock-plus/
+Настройки FireFox
+? Файлы и приложения: Всегда выдавать запрос на сохранение
+? Просмотр сайтов | Искать текст на странице по мере его набора
+? Начало | Пустая страница по умолчанию
+? Снять всё с "Домашней страницы FireFox" на всякий случай
+? Логины и пароли: всё отключить, в том числе "пароли для взломанных сайтов" (это функция отслеживания; но если нужно - можно включить)
+? Панель адреса | "из поисковых систем" - отключить
+? Сбор и использование данных: всё отменить, если что-то установлено
+? Защита | Всё отменить, если возможно
+? Включить режим "Только HTTPS", если не нужно посещение http-узлов
+
+
+? Установить Mono, если нужно
+    https://www.mono-project.com/
+    зарегистрировать ключи, как описано, потом установить mono-complete
+	# В новых системах просто выполнить
+    sudo apt install mono-complete
+
+? Установить .NET
+	https://dotnet.microsoft.com/
+
+    The .NET tools collect usage data in order to help us improve your experience. I
+t is collected by Microsoft and shared with the community. You can opt-out of te
+lemetry by setting the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to '1' o
+r 'true' using your favorite shell.
+
+# Возможно, стоит DOTNET_CLI_TELEMETRY_OPTOUT добавлять везде, где можно
+? Это можно сделать, добавив строку DOTNET_CLI_TELEMETRY_OPTOUT=1 в /etc/environment.d/dotnet.conf
+# Либо
+sudo xed /etc/profile.d/dotnet.sh
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+sudo xed /etc/bash.bashrc
+
+
+? Посмотреть "Регулятор громкости PulseAudio" (величина громкости колонок)
+
+
+Установить keepass2 (из штатного репозитория)
+xdotool нужен для ввода паролей без копирования в буфер обмена
+sudo apt-get install xdotool keepass2
+
+Добавить пользователя для игр
+sudo adduser g --home /home/main/users/g
+
+
+? Установить TorBrowser
+
+? https://www.torproject.org/download/languages/
+? Настройки | Основные | Проверять наличие обновлений, но ...
+? Искать текст по мере его набора
+
+? Обработать файлы сервисов и их конфигурационные файлы
+	
+	sudo adduser --group fortor
+	sudo adduser forTor --system --ingroup fortor --home /home/forTor/
+	Перетащить фалы тора в /home/forTor/bin
+	
+	sudo usermod -a -G fortor first
+
+	cd /Arcs/Disks/Mega/MEGAsync/Privoxy/Privoxy/_ServicesFiles/
+	sudo cp -v tor* /lib/systemd/system/
+	sudo systemctl daemon-reload
+	sudo systemctl enable tor*
+
+	sudo adduser vinny-proxy --system --ingroup vinny-proxy --home /home/vinny-proxy/
+
+	sudo adduser --group passwords
+	sudo usermod -a -G passwords first
+	sudo usermod -a -G passwords a1
+	sudo usermod -a -G passwords inet
+
+	sudo usermod -a -G arcs-read first
+	sudo usermod -a -G arcs-read a1
+	sudo usermod -a -G arcs-read inet
+	sudo usermod -a -G arcs-read vinny-proxy
+	sudo usermod -a -G arcs-read forTor
+	# sudo usermod -a -G arcs-read dev
+
+
+? Добавить в TorBrowser в настройки torcc строку
+ExcludeExitNodes {RU}, {BY}, {GE}, {UA}, {??}
+
+? Установить сервис удаления логов
+	/Arcs/Disks/Mega/MEGAsync/Privoxy/Privoxy/_ServicesFiles/logdelete.service
+	sudo cp -v /Arcs/Disks/Mega/MEGAsync/Privoxy/Privoxy/_ServicesFiles/logdelete.service /lib/systemd/system/
+	sudo systemctl enable logdelete.service
+
+
+
+# Менеджер закачек
+# https://losst.ru/luchshie-menedzhery-zakachek-v-linux#2_Persepolis
+# https://persepolisdm.github.io/
+# ? apt-get install uGet
+? sudo add-apt-repository ppa:persepolis/ppa
+? sudo apt update
+? sudo apt install persepolis
+
+
+Установить VeraCrypt
+? https://www.veracrypt.fr/en/Downloads.html
+? Скачать также подпись, ключ (если его ещё нет) и chm-файл
+# Справка по gpg - https://www.gnupg.org/documentation/manuals.html
+# Для получения ключа также можно попробовать gpg --receive-keys 0x680D16DE
+? cd cd /Arcs/Prg/Crypto/VeraCrypt/
+sha512sum -c --ignore-missing veracrypt-1.25.9-sha512sum.txt
+Проверить отпечаток ключа
+? gpg --import --import-options show-only VeraCrypt_PGP_public_key.asc
+Импортировать в хранилище отпечаток ключа
+? gpg --import VeraCrypt_PGP_public_key.asc
+Проверить соответствие подписи и ключа
+gpg --verify ....sig
+    В ответе должно быть указано
+    Действительная подпись пользователя "VeraCrypt Team (2018 - Supersedes Key ID=0x54DDD393) <veracrypt@idrix.fr>
+Установить VeraCrypt
+? Дважды кликнуть на .deb-файл и следовать инструкциям
+
+# Создать для Veracrypt отдельную группу, которая может иметь доступ к файлам
+? sudo adduser --group crypto-main
+? sudo usermod -a -G crypto-main first
+? sudo usermod -a -G crypto-main a1
+? sudo chown a1:crypto-main /Arcs/keys-main.key
+
+? sudo adduser --group crypto
+? sudo usermod -a -G crypto first
+? sudo usermod -a -G crypto a1
+
+? sudo xed /etc/sudoers.d/veracrypt
+? ALL ALL = NOPASSWD:/usr/bin/veracrypt -t -d --force
+
+
+sudo chmod o-rwx /etc/sudoers.d/
+
+? Скопировать в удобное место TOR отдельно и взять настройки из резервной копии
+
+
+? Создать пользователя vr
+sudo adduser vr --home /home/vr
+cp -fv /Arcs/Disks/Mega/MEGAsync/Записки/Mint/Prg/scripts/exec.sh /home/vr
+# cp -fv /home/vr/exec.sh /Arcs/Disks/Mega/MEGAsync/Записки/Mint/Prg/scripts/
+sudo chown vr:vr /home/vr/exec.sh
+sudo chmod a+x /home/vr/exec.sh
+sudo xed /home/vr/.bashrc
+
+
+? Создать обычных пользователей, если ещё их нет
+
+# В группе nothing никого недолжно быть. Здесь мы просто исключаем для файла доступ других пользователей, кому бы этот файл не принадлежал
+? sudo adduser --group nothing
+? sudo adduser --group arcs-read
+? sudo adduser --group for-desktop
+
+? sudo adduser inet --home /home/main/users/inet --ingroup forall
+? sudo adduser dev  --home /home/main/users/dev  --ingroup forall
+
+? sudo adduser tor-browser --home /home/main/users/tor-browser --ingroup forall
+? sudo adduser quite-rss   --home /home/main/users/quite-rss   --ingroup forall
+? sudo adduser deluge      --home /home/main/users/deluge      --ingroup forall
+
+? sudo usermod -a -G for-desktop opera
+
+
+# Безопасное удаление файлов
+
+https://github.com/VinnySmallUtilities/sdel/releases/
+cd /usr/local/sbin
+sudo chmod a+xt sdel
+sudo xed /etc/sudoers.d/sdel
+
+User_Alias SDEL_LIST=vr,%first,%passwords,%crypto
+SDEL_LIST ALL = NOPASSWD:/usr/local/sbin/sdel
+
+ALL ALL = NOPASSWD:/usr/sbin/swapoff
+ALL ALL = NOPASSWD:/usr/bin/umount
+
+
+sudo chmod a-rwx /etc/sudoers.d/sdel
+
+sdel - настроить удаление логов
+Можно поставить в /home/first/.bash_logout
+sudo sdel ndd /var/log
+sudo sdel ndd /tmp/
+sudo sdel ndd /var/tmp
+
+
+Установить enswap
+
+Установить disk-wait
+sudo apt install dstat
+sudo cp -v /Arcs/Repos/smalls/disk-wait/build.dev/disk-wait /usr/local/sbin/
+
+
+Программные приложения
+Читалки указаны в /home/vinny/notes/Техника/IT/Software/Data/text.20
+
+
+
+# Настройка ntp
+# Это можно не осуществлять, если устраивают сервера по умолчанию.
+# К тому же, ntp в Linux, похоже, довольно часто обращается к серверам
+# так что лучше не устанавливать сервера, которые могут забанить
+# https://man.openbsd.org/ntpd.conf
+# https://www.ntp-servers.net
+# либо https://www.ntppool.org/ru/use.html
+# Если надо, проверить доступность сервера
+sudo systemctl stop ntp
+
+# Всё, сервера эти легли, похоже
+sudo ntpdate ntp3.stratum2.ru
+# Вывод должен быть примерно таким
+# 19 Jul 13:26:24 ntpdate[21578]: adjust time server 88.147.254.235 offset 0.024212 sec
+sudo systemctl start ntp
+
+? Добавить проверенный сервер в качестве основного
+sudo xed /etc/ntp.conf
+Внести ntp*.stratum2.ru в качестве ntp-серверов
+server ntp1.stratum2.ru minpool 12 maxpool 16
+server ntp2.stratum2.ru minpool 12 maxpool 16
+server ntp3.stratum2.ru minpool 12 maxpool 16
+server ntp4.stratum2.ru minpool 12 maxpool 16
+Остальные сервера закомментировать или так и оставить
+
+# Если добавляются сервера с ограничением на запросы (stratum2.ru из таких), то дополнительно надо ограничить количество запросов
+
+? Обязательно проверить, что всё нормально отработало (хотя бы, что сервер вообще запущен)
+# Серьёзные ошибки помечаются красным, содержат слово error.
+# Обычный вывод похож на
+# Soliciting pool server 95.163.183.223
+systemctl status ntp
+
+# Здесь просто должно сказать, что соединение прошло успешно
+# Waiting for ntpd to synchronize... OK!
+# "OK!" должно быть обязательно!
+# Если вместо этого он ждёт (нет "OK"), значит, что-то не так
+ntp-wait -v
+
+
+# Если не нужен менеджер печати
+? Отключить cupsd
+sudo systemctl disable cups-browsed.service
+sudo systemctl stop cups-browsed.service
+sudo systemctl disable cups.service
+sudo systemctl stop cups.service
+
+? Удалить ненужные cups-пакеты в менеджере пакетов (поиск по слову cups)
+? Заодно удалить пакеты, связанные с bluetooth (поиск по слову bluetooth)
+
+? sudo systemctl disable blueman-mechanism
+? sudo systemctl disable bluetooth.service
+
+# libbluetooth3 не удалять, а то network-manager удалиться вместе с ним: сеть перестанет работать
+# geoclue тоже удаляем: нам не нужно геопозиционирование
+sudo apt purge bluetooth pulseaudio-module-bluetooth nvidia-prime-applet geoclue* wpasupplicant wportuguese avahi*
+
+# От avahi зависит какой-то ipp-usb
+
+# Если не нужен обмен файлами по локальной сети
+sudo apt purge warpinator
+
+
+# Можно посмотреть, что вообще выдаёт команда sudo systemctl list-unit-files
+# setvtrgb.service - это цветной виртуальный терминал. Не стоит бить. rsyslog - сервис для логирования. getty - тоже терминальный сервис. finalrd.service - тоже не надо, это запуск каких-то вещей для завершения системы.
+# Ещё ненужные пакеты
+# Это NVidia
+? sudo systemctl disable gpu-manager
+# Отключить openvpn (он всё равно сам отключается)
+? sudo systemctl disable openvpn.service
+? sudo systemctl disable wpa_supplicant.service
+
+
+# ? Установить Wine	# wine-install ???
+
+Установить прокси-серверы
+# https://www.privoxy.org/
+# sudo apt-get install privoxy
+
+# Настроить Privoxy
+# /lib/systemd/system/privoxy.service
+# /Arcs/Disks/Mega/MEGAsync/Privoxy/Privoxy/general/config.txt
+
+# Проверить, что есть перенаправление через Privoxy можно с помощью url http://config.privoxy.org/show-status
+
+vinny-socks5-proxy
+
+
+? Настроить TOR и Privoxy
+
+# Обновления через прокси
+см. файл iptables в этой же директории, раздел "Обновления через прокси"
+
+# Кажется, не стоит
+? Настроить переменную
+# ALL_PROXY
+# export ALL_PROXY="http://127.0.0.1:8118"
+# для пользователя
+
+# Убираем avahi
+sudo systemctl disable avahi-daemon.service
+
+# https://linuxthebest.net/en/luchshie-torrent-klienty-dlya-linux/
+# Торрент-клиент
+? sudo apt-get install deluge
+? Установить нужные настройки
+
+
+Установка https://mega.io/sync
+? Скачать
+? sudo apt-get install -y /home/vinny/Загрузки/megasync-*.deb
+
+? sudo adduser mega --home /home/main/users/mega
+
+
+# Устанавливаем права на чтение везде
+cd /Arcs/Disks/Mega/
+sudo setfacl -R -m mega:r .
+sudo chown -R --from=:mega :arcs-read .
+sudo chown -R --from=:root :arcs-read .
+
+# Создаём папку для отображения для Mega
+sudo mkdir /A/Mega
+cd /A/Mega
+sudo chmod a-rwx .
+sudo chattr +iA .
+
+sudo xed /etc/fstab
+/Arcs/Disks/Mega/             /A/Mega          none    bind
+
+sudo mount /A/Mega
+
+
+cd /Arcs/Disks/Mega/
+
+# Устанавливаем права на чтение и запись на диске, где хранятся файлы для Mega
+# Вместо этого лучше /Arcs/Repos/smalls/dotnet-repos/setMegaR/mega-sec.sh
+FILE=/inRam/txt
+sudo find -type d > $FILE
+list=()
+while IFS=  read -r; do
+	#echo $REPLY
+	dir=`sudo realpath "$REPLY"`
+	#echo $dir
+	cnt=${#list[@]}
+	list[$cnt]=$dir
+	echo ${list[$cnt]}
+	echo ${#list[@]}
+done < $FILE
+# for dir in "${list[@]}" ; do echo $dir ; done
+
+for dir in "${list[@]}" ; do sudo  setfacl -m mega:rwx "$dir" ; done
+
+
+
+Скачать Opera
+? https://www.opera.com/ru/download
+? Установить двойным щелчком по пакету (при установке оставить установленным флажок автоматических обновлений)
+# opera://linux-proxy-config
+# --proxy-server="example.org:8080"
+# --proxy-server="socks://example.org:1080"
+# --proxy-server="https=example.org:8080;http=example.net:1080"
+? Установить на Opera параметр запуска "--proxy-server="127.0.0.1:8118" - это указание на используемый прокси-сервер
+? Настроить Opera
+
+? sudo adduser opera --home /home/main/users/opera
+
+? sudo apt install chromium
+sudo adduser chromium --home /home/main/users/chromium
+
+
+? QuiteRSS
+# https://quiterss.org/quiterss-for-other-os
+# sudo add-apt-repository ppa:quiterss/quiterss
+# sudo apt-get update
+# В совеременных репозиториях уже есть
+sudo apt-get install quiterss
+
+Восстановление из резеврной копии:
+~/.local/share/QuiteRss/QuiteRss/feeds.db
+~/.config/QuiteRss/QuiteRss.ini
+
+
+# Установить Yandex.disk
+# https://disk.yandex.ru/download
+# https://repo.yandex.ru/yandex-disk/?instant=1
+# https://yandex.ru/support/disk-desktop-linux/start.html
+# wget -O YANDEX-DISK-KEY.GPG http://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG
+? Скачать http://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG
+sudo apt-key add ./YANDEX-DISK-KEY.GPG
+
+# sudo echo "deb http://repo.yandex.ru/yandex-disk/deb/ stable main" >> /etc/apt/sources.list.d/yandex-disk.list
+sudo xed /etc/apt/sources.list.d/yandex-disk.list
+Добавить в файл
+deb http://repo.yandex.ru/yandex-disk/deb/ stable main
+sudo apt-get update
+sudo apt-get install yandex-disk
+
+sudo adduser yandex-disk --home /home/main/users/yandex-disk
+sudo xed /var/lib/AccountsService/users/yandex-disk
+SystemAccount=true
+
+
+? Настроить yandex.disk
+# https://yandex.ru/support/disk-desktop-linux/start.html
+# Конфигурация создаётся в ~/.config/yandex-disk
+# proxy=https,127.0.0.1,8889
+? Добавить пользователя adduser --system yandex-disk --ingroup vinny со своей домашней директорией, где vinny группа основного пользователя
+? Взять файл-пример настройки сервиса (готовый конфиг /Arcs/Disks/Mega/MEGAsync/Записки/Mint/Prg/yandex-disk)
+# Эту команду можно выполнить из любого пользователя
+# Затем перенести ~/.config/yandex-disk в домашнюю директорию нужного пользователя
+# Либо можно сделать
+sudo -u yandex-disk bash
+yandex-disk setup
+
+# ~/.config/yandex-disk/passwd
+# sudo yandex-disk token /home/yandex-disk/.config/yandex-disk/passwd --proxy=https,127.0.0.1,8889
+# Поменять владельца с помощью chown
+# Если не работает, то
+# cd /home/vinny/.config/yandex-disk/ 
+# chmod g+rw .
+
+# Устанавливаем права на чтение везде
+cd /Arcs/Disks/ya/
+sudo setfacl -d -m yandex-disk:r .
+sudo setfacl    -m yandex-disk:r .
+sudo chown -R --from=:yandex-disk :arcs-read .
+sudo chown -R --from=:root        :arcs-read .
+
+# Создаём папку для отображения для Mega
+sudo mkdir /A/Ya-disk
+cd /A/Ya-disk
+sudo chmod a-rwx .
+sudo chattr +iA .
+
+sudo xed /etc/fstab
+/Arcs/Disks/ya/             /A/Ya-disk          none    bind
+
+sudo mount /A/Ya-disk
+
+
+cd /Arcs/Disks/ya/
+
+
+# https://yandex.ru/support/disk-desktop-linux/cli-commands.html
+? Настроить конфигурацию
+cd ~/.config/yandex-disk
+xed config.cfg
+? Настроить как минимум параметр dir в конфигурации. Если нужно, настроить прокси.
+# yandex-disk start настроен в файле службы
+# Просмотр ошибок при запуске сервиса sudo journalctl -u yandex-disk
+systemctl enable yandex-disk
+systemctl start yandex-disk
+systemctl status yandex-disk
+cd директорияЯндексДиска
+# Настраиваем невозможность удаления файлов yandex-disk'ом (если нужно)
+# А также невозможность их перезаписи
+# (это может быть нужно для защиты файлов от сбоев yandex.диска, если yandex.disk используется только на одном компьютере)
+chmod -R a+t .
+chmod -R a-w .
+
+# Проверка того, что всё впорядке с диском
+# sudo yandex-disk status --config=/home/yandex-disk/.config/yandex-disk/config.cfg --proxy=https,127.0.0.1,8889
+
+# Установить git (git-all - это очень много всего ненужного, его не надо)
+# https://git-scm.com/docs/git-gui/
+# Если нужно, установить клиенты https://git-scm.com/download/gui/linux
+sudo apt install git git-gui
+# Для каждого пользователя, который пользуется git
+git config --global user.email "fdsc@yandex.ru"
+git config --global user.name  "fdsc"
+
+? Внести в ~/.gitconfig конфигурацию прокси-сервера
+[http]
+    proxy = http://127.0.0.1:8889
+
+? А в самом прокси-сервере прописать разрешение на домен github.com
+
+Включить аутентификацию на github для каждого репозитория
+# Кажется, это нужно делать для пользователя, а не для репозитория
+# https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token
+# Зайти в директорию репозитория
+cd /Arcs/Repos/timer
+git remote -v
+
+# Убедиться, что вид url в выводе примерно такой
+# > origin  https://github.com/USERNAME/REPOSITORY.git
+# Например, origin	https://github.com/fdsc/timer
+# Может быть такое, что вид будет для подключения по SSH, а не по HTTPS: git@github.com:USERNAME/REPOSITORY.git
+# Если нет, то см. выше; использовать git remote set-url origin ...
+# Если необходимо, переименовать имена url git remote rename origin destination
+# Удаление этого имени осуществляется командой git remote rm destination (origin тоже сейчас нет)
+# Доп. справка по git https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes
+
+? Получить token
+Зайти на github.com в settings | developer settings | Personal acces tokens | Generate new token
+
+# Для каждого пользователя
+# Включить кеширование авторизационной информации
+git config --global credential.helper cache
+git config --global credential.helper 'cache --timeout=86400'
+# Проверка установленного значения: git config --global --get credential.helper cache
+
+
+? Посмотреть на логи. Если нужно, удалить их командой, аналогичной sudo truncate -s 0 /var/log/ufw.log (или sdel ndd /var/log)
+ls -alhS /var/log/*.log
+
+? Устанавливаем iptables-persistent для сохранения настроек iptables
+sudo apt-get install iptables-persistent
+Теперь все настройки будут в /etc/iptables/rules.v4 и /etc/iptables/rules.v6 и при перезагрузке будут оттуда автоматически загружаться
+Также можно вместо этих файлов сделать там символические ссылки, чтобы не таскать туда файлы каждый раз при изменении
+
+? Отключить Gufw
+? Настроить все опции iptables, в том числе, TorBrowser
+# sudo -u forTor /home/vinny/bin/tor-browser_ru/Browser/start-tor-browser
+
+# Просто отключить logrotate
+## В файле /etc/logrotate.conf произвести замену, как указано в logNotes
+sudo systemctl disable logrotate
+sudo systemctl disable logrotate.timer
+
+# Это делать не надо, от него зависит clamav
+# sudo apt remove logrotate
+
+
+? Установить FileZilla
+sudo apt install -y filezilla
+
+? Установить VirtualBox
+sudo apt-get install virtualbox
+# Для создания виртуальной машины, см. файл
+# /media/veracrypt2/Планы/Списки/Список VBox настройка Ubuntu/VBox-созданиеМашины.txt
+
+# Можно также установить fuseiso для открытия iso-файлов
+
+
+# ? Установить MonoDevelop
+
+# https://gitlab.com/apparmor/apparmor/-/wikis/manpage_aa-notify.8
+? Разграничить privoxy в AppArmor (или не разграничивать, если лень)
+sudo apt install apparmor-notify apparmor-utils
+# Посмотреть настройки разрешений для sudoers в /Arcs/Disks/Mega/MEGAsync/Записки/Mint/apparmor
+
+? Посмотреть, какие порты открыты. Возможно, что-то стоит закрыть
+netstat -46pan | grep -i listen
+
+
+# apt download mint-meta-codecs
+
+
+? borg резервное копирование
+sudo apt install borgbackup
+
+
+? Возможно, стоит установить ещё один файловый менеджер
+sudo apt install xfe
+
+
+? Перезагрузится и посмотреть, не нужно ли удалить драйвер f71882fg
+sudo xed /etc/modules-load.d/modules.conf
+
+
+? Установить calibre
+# sudo apt install -y calibre
+# Либо скачать с сайта https://calibre-ebook.com/download_linux
+
+? Установить AIDE
+/Arcs/Disks/Mega/MEGAsync/Записки/Mint/aide
+
+
+? Установить clamav
+/Arcs/Disks/Mega/MEGAsync/Записки/Mint/Prg/clamav
+
+? Установить Octave
+sudo apt install -y octave
+Добавить в ~/.octaverc следующие строки
+disp("~/.octaverc executed");
+
+pkg load symbolic
+format long eng
+
+
+
+Настроить резервное копирование aide, facl и подумать, что ещё служебное нужно скопировать
+
+
+# Нотный редактор
+denemo
+# Редактор звука
+audacity
+
+
+
+************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************

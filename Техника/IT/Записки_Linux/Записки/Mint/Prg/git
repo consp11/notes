@@ -1,0 +1,22 @@
+Удаление конфиденциальной информации из репозитория
+
+https://docs.github.com/ru/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+https://github.com/newren/git-filter-repo/blob/main/INSTALL.md#simple-installation
+
+git-filter-repo --invert-paths --path Linux_Записки.7z
+
+git push https://github.com/consp11/reserve --force --all
+
+
+
+Пример настройки .gitconfig
+[http]
+    proxy = http://127.0.0.1:8889
+
+[safe]
+	directory = /Arcs/Repos/timer
+[user]
+	email = fdsc@yandex.ru
+	name = fdsc
+[credential]
+	helper = cache --timeout=86400
