@@ -15,6 +15,12 @@ sdel ndd /var/log
 echo "start $0" 	&>  $OF
 echo $dateOfBegin   &>> $OF
 
+#systemctl status sys-fs-fuse-connections.mount &>> $OF
+#echo
+#echo
+#systemctl status &>> $OF
+#ls -1 /sys/fs/fuse/ &>> $OF
+
 echo -e "\n\n\n\n" 	&>> $OF
 
 bash /usr/local/bin/unmount.sh 0 &>> $OF

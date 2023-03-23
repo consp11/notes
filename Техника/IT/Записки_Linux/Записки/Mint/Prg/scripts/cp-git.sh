@@ -14,12 +14,12 @@ whoami | fgrep -vx a1
 ping -c 1 77.88.8.88
 while [ $? -ne 0 ]
 do
-  ping -c 1 77.88.8.88 >& /dev/null
   sleep 5
+  ping -c 1 77.88.8.88 >& /dev/null
 done
 
 
-local gold=`pwd`
+gold=`pwd`
 cd /Arcs/Repos
 
 function commit()
