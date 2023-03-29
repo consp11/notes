@@ -1,0 +1,13 @@
+Получить список доступных сервисов
+sudo dbus-send --print-reply --dest=org.freedesktop.DBus  /org/freedesktop/DBus org.freedesktop.DBus.ListNames
+
+sudo dbus-send --system --print-reply --dest=org.freedesktop.DBus  /org/freedesktop/DBus org.freedesktop.DBus.ListNames
+
+
+За DNS похоже, отвечает это:
+org.freedesktop.resolve1
+
+Видимо, разрешение по DBUS для DNS можно отключить через
+sudo xed /lib/systemd/system/systemd-resolved.service
+Закомментировать
+BusName=org.freedesktop.resolve1
