@@ -38,3 +38,5 @@ sudo clamscan -iozr --follow-dir-symlinks=0 --follow-file-symlinks=0 --max-files
 
 sudo clamscan -iozr --follow-dir-symlinks=0 --follow-file-symlinks=0 --max-filesize=256M --max-scansize=256M --max-recursion=128 --max-dir-recursion=128 --alert-encrypted=yes --bytecode-timeout=600000 /usr/bin /usr/sbin /usr/**/bin /usr/**/sbin /usr/lib* /usr/local/lib* /opt
 
+
+

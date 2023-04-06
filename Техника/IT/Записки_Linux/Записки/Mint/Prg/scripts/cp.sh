@@ -13,7 +13,8 @@ cp -fvu /Arcs/Big/Crypto/keys-var /Arcs/Disks/Mega/MEGAsync/Keys/
 # Обновляем резервные копии скриптов в Mega
 cp -fvu /media/veracrypt1/*.sh /home/a1/_/Linux_Записки_Prg/scripts/
 cp -fvu /media/veracrypt8/*.sh /home/a1/_/Linux_Записки_Prg/scripts/
-cp -fvu /home/main/bin/*.sh    /home/a1/_/Linux_Записки_Prg/scripts/exec
+# Это делаем отдельно после монтирования
+#cp -fvu /home/main/bin/*.sh    /home/a1/_/Linux_Записки_Prg/scripts/exec
 
 
 # Копируем всё в https://github.com/fdsc/reserve
@@ -53,7 +54,7 @@ cp -fvu /Arcs/Repos/reserve/keys-primary.7z /Arcs/Disks/ya/Ключи/key_disk/
 
 # Копируем записки Linux в notes
 cp -rfvu /Arcs/Disks/Mega/MEGAsync/Записки /A/notes/Техника/IT/Записки_Linux/
-chmod -R g+rwX /A/notes/Техника/IT/Записки_Linux/Записки/
+chmod -Rf g+rwX /A/notes/Техника/IT/Записки_Linux/Записки/
 
 ## Работа с borg
 #echo -e '\n\nbegin of borg section\n'
