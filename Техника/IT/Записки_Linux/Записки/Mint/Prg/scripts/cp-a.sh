@@ -2,7 +2,7 @@
 # Записываем unmount.sh, чтобы было легче размонтировать потом всё. Обновляем end.sh
 # cp -fvu /media/veracrypt8/unmount.sh /home/a1/_/unmount.sh
 cp -fvu /media/veracrypt8/unmount.sh /usr/local/bin/
-chmod a+x /usr/local/bin/unmount.sh
+
 
 # cp -fvu /Arcs/Disks/Mega/MEGAsync/Записки/Mint/Prg/scripts/end.sh /usr/local/bin/
 END_FILE_OR=/Arcs/Disks/Mega/MEGAsync/Записки/Mint/Prg/scripts/end.sh
@@ -13,3 +13,7 @@ echo -e "# ---------------- DO NOT CHANGE THE FILE ----------------\n# THIS IS A
 # echo -e "# date of copy: "  `date`  >> $END_FILE_CP/end.sh
 echo -e "\n\n"  >> $END_FILE_CP/end.sh
 cat $END_FILE_OR >> $END_FILE_CP/end.sh
+
+
+# Копируем правила /etc/sudoers.d
+cp -rfvu /etc/sudoers.d /Arcs/Disks/Mega/MEGAsync/Записки/Mint/Prg/scripts/sudoers.d

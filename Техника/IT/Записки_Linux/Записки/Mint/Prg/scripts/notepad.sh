@@ -16,7 +16,7 @@ disk-wait 1
 
 # /usr/bin/ebook-viewer '/home/main/users/inet/Docs/Сергей Лукьяненко-Собрание сочинений/Соглашение/3. Прыжок.fb2' &  &> /dev/null
 
-Thunar '/home/main/users/inet/Docs/Звездная Елена/FB2/СИ/Лесная ведунья/'
+Thunar '/home/main/users/inet/Docs/Звездная Елена/FB2/Долина драконов/'
 
 # ./_sh/kgk.sh
 
