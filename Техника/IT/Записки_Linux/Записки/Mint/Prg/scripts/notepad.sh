@@ -11,7 +11,7 @@ date &>> /inRam/startup.log
 disk-wait 1
 
 # --new-window
-/usr/lib/notepadqq/notepadqq-bin --new-window '/home/main/users/inet/_/keys-var/notepad.sh' '/home/main/users/inet/_/plans/Планы/Дела/--0' '/home/main/users/inet/_/plans/Планы/+' "/home/main/users/inet/_/plans/Планы/Дела/Частые" '/home/main/users/inet/_/lit/Корректура/Прыжок.txt' '/home/main/users/inet/_/lit/Литература/Религия/Пост/11 Немного о голодании.txt' '/home/main/users/inet/_/plans/Голодание/2023/Март.txt' &  &> /inRam/startup-nqq-pl.log
+/usr/lib/notepadqq/notepadqq-bin --new-window '/home/main/users/inet/_/keys-var/notepad.sh' '/home/main/users/inet/_/plans/Планы/Дела/--0' '/home/main/users/inet/_/plans/Планы/+' "/home/main/users/inet/_/plans/Планы/Дела/Частые" '/home/main/users/inet/_/lit/Литература/Религия/Пост/11 Немного о голодании.txt' &  &> /inRam/startup-nqq-pl.log
 
 
 # /usr/bin/ebook-viewer '/home/main/users/inet/Docs/Сергей Лукьяненко-Собрание сочинений/Соглашение/3. Прыжок.fb2' &  &> /dev/null

@@ -1,3 +1,8 @@
+youtube-dl -F --prefer-free-formats --proxy http://forall:9LWgfpeOvjOaYZH0DRPhul19HS9wg4HU@127.0.0.1:8120 https://www.youtube.com/watch?v=zzz
+
+youtube-dl -f "bestaudio" --proxy http://127.0.0.1:8888 https://www.youtube.com/watch?v=zzz
+
+
 youtube-dl -F --prefer-free-formats --proxy http://127.0.0.1:8118 https://www.youtube.com/watch?v=zzz
 
 youtube-dl -k -f "bestvideo[height<=360]+bestaudio/best[height<=360]" --prefer-free-formats --proxy http://127.0.0.1:8118 https://www.youtube.com/watch?v=zzz
@@ -6,7 +11,7 @@ youtube-dl -k --sub-lang ru --write-sub --write-auto-sub -f 255 --proxy http://1
 
 # Аудио
 youtube-dl -f 251 --proxy http://127.0.0.1:8118 https://www.youtube.com/watch?v=zzz
-youtube-dl -f "bestaudio" --proxy http://127.0.0.1:8118 https://www.youtube.com/watch?v=zzz
+youtube-dl -f "bestaudio" --proxy http://127.0.0.1:8888 https://www.youtube.com/watch?v=zzz
 
 youtube-dl -k --sub-lang ru --write-sub --write-auto-sub -f "bestvideo[width<=1280]+bestaudio/best[width<=1280]" --prefer-free-formats --proxy http://127.0.0.1:8118 https://www.youtube.com/watch?v=zzz
 
