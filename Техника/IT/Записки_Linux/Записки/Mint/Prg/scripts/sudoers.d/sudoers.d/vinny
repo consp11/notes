@@ -15,6 +15,10 @@ DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr +iA -- *
 DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr +A -- *
 DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr +i -- *
 
+DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr -R +iA -- *
+DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr -R +A -- *
+DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr -R +i -- *
+
 
 DMESG_LIST vinny = NOPASSWD:/usr/bin/systemctl restart vinny@10010.service
 DMESG_LIST vinny = NOPASSWD:/usr/bin/systemctl restart tor.service
