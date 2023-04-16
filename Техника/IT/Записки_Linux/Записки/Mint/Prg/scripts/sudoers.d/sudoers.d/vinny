@@ -4,9 +4,14 @@ DMESG_LIST vinny = NOPASSWD:/usr/bin/dmesg -e
 DMESG_LIST vinny = /usr/bin/dmesg -ec
 DMESG_LIST vinny = /usr/sbin/iptables-restore /etc/iptables/rules.v4
 
-DMESG_LIST vinny = /usr/bin/cpulimit
+# DMESG_LIST vinny = /usr/bin/cpulimit
+DMESG_LIST vinny = /usr/bin/nice -n [0-9]* cpulimit *
+
 DMESG_LIST vinny = /usr/bin/clamscan
+DMESG_LIST vinny = /usr/bin/nice -n [0-9]* clamscan *
+
 DMESG_LIST vinny = (clamav:clamav) NOPASSWD:/usr/bin/freshclam ""
+
 
 DMESG_LIST vinny = /usr/bin/truncate -s 0 /var/run/faillock/a1
 DMESG_LIST vinny = /usr/bin/truncate -s 0 /var/run/faillock/first
