@@ -124,7 +124,7 @@
 
 # Разрешаем локальный доступ к 53-им портам для разрешённых пользователей
 -A DNS_LO -m owner -j ACCEPT -m limit --limit  10/minute --limit-burst  10 --uid-owner root
--A DNS_LO -m owner -j ACCEPT -m limit --limit  10/minute --limit-burst  20 --uid-owner ntp
+-A DNS_LO -m owner -j ACCEPT -m limit --limit  10/minute --limit-burst  30 --uid-owner ntp
 -A DNS_LO -m owner -j ACCEPT -m limit --limit  10/minute --limit-burst 600 --uid-owner _apt
 -A DNS_LO -m owner -j ACCEPT -m limit --limit 120/minute --limit-burst 512 --uid-owner vinny-proxy
 

@@ -1,0 +1,88 @@
+sudo -k - аутентификация не запоминается на 15 минут, а сразу же сбрасывается. То есть после этой команды снова придётся вводить пароль администратора.
+less /var/log/auth.log видны все входы, в том числе - неудачные
+
+
+https://blog.sedicomm.com/2019/10/09/kak-zapustit-komandu-sudo-bez-vvoda-parolya-v-linux/
+
+
+sudo без пароля
+man sudoers
+
+
+# /etc/sudoers
+Лучше это делать в отдельном файле в папке /etc/sudoers.d/
+
+ALL ALL = NOPASSWD:path_to_command
+
+# host - это если используется контроллер домена
+user host = ...
+
+
+Например
+
+User_Alias SDEL_LIST=vr,%first,%passwords,%crypto
+
+
+SDEL_LIST ALL = NOPASSWD:/usr/local/sbin/sdel
+ALL ALL = NOPASSWD:/usr/sbin/swapoff
+ALL ALL = NOPASSWD:/usr/bin/umount
+vr ALL = NOPASSWD:/usr/bin/veracrypt
+vr ALL = NOPASSWD:/usr/bin/killall
+vr ALL = NOPASSWD:/usr/sbin/shutdown
+
+User_Alias DMESG_LIST=%first,inet
+DMESG_LIST ALL = NOPASSWD:/usr/bin/dmesg
+DMESG_LIST ALL = NOPASSWD:/usr/sbin/iptables-restore /etc/iptables/rules.v4
+
+DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr    +iA -- *
+DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr    +A  -- *
+DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr    +i  -- *
+DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr -R +iA -- *
+DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr -R +A  -- *
+DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr -R +i  -- *
+
+DMESG_LIST ALL = (clamav:clamav) /usr/bin/freshclam ""
+
+sudo xed /etc/sudoers.d/vinny-apparmor
+a1 ALL=NOPASSWD:/usr/sbin/aa-logprof
+
+DMESG_LIST vinny = /usr/bin/less /var/log/auth.log
+DMESG_LIST vinny = /usr/bin/killall -u [! ]*
+
+
+user_list host_list=effective_user_list tag_list command_list
+user_list – список пользователей или псевдонимов пользователей.
+host_list – список хостов или псевдонимов хостов, на которых пользователи могут запускать sudo.
+ffective_user_list – список пользователей или их псевдонимов, которых будут запускаться без пароля.
+tag_list – список тегов, таких как NOPASSWD.
+command_list – список команд или псевдонимов команд, которые будут запускаться пользователем(-ями) с помощью sudo.
+
+user_name ALL = (ALL) NOPASSWD:/G/sdel
+вместо user_name можно подставить группу: символ "%" и потом имя группы
+
+
+
+
+
+User_Alias DMESG_LIST=%first,inet
+DMESG_LIST vinny = NOPASSWD:/usr/bin/dmesg ""
+DMESG_LIST vinny = NOPASSWD:/usr/bin/dmesg -e
+DMESG_LIST vinny = /usr/bin/dmesg -ec
+DMESG_LIST vinny = /usr/sbin/iptables-restore /etc/iptables/rules.v4
+
+DMESG_LIST vinny = /usr/bin/cpulimit
+DMESG_LIST vinny = /usr/bin/clamscan
+DMESG_LIST vinny = (clamav:clamav) NOPASSWD:/usr/bin/freshclam ""
+
+DMESG_LIST vinny = /usr/bin/truncate -s 0 /var/run/faillock/a1
+DMESG_LIST vinny = /usr/bin/truncate -s 0 /var/run/faillock/first
+
+DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr +iA -- *
+
+DMESG_LIST vinny = NOPASSWD:/usr/bin/systemctl restart vinny@10010.service
+DMESG_LIST vinny = NOPASSWD:/usr/bin/systemctl restart tor.service
+
+User_Alias PWD_LIST=%forall,%passwords
+PWD_LIST vinny = NOPASSWD:/usr/sbin/nethogs ""
+
+

@@ -1,0 +1,61 @@
+
+Ограничения памяти и процессора
+systemd-run --scope -p MemoryLimit=1000M ./myProcess.sh
+systemd-run --scope -p CPUQuota=10% ./myProcess.sh
+systemd-run --scope -p MemoryLimit=1000M -p CPUQuota=10% ./myProcess.sh
+
+
+Ограничения по памяти для пользователя (для каждого процесса пользователя)
+ulimit -Sv 1000000
+
+Максимальный размер файла
+ulimit -Sf 2000
+
+Просмотр ограничений
+ulimit -a
+
+
+Ограничения дискового ввода-вывода
+ionice --class 3 ./myProcess.sh
+
+Классы:
+3 (Idle): получение возможности ввода-вывода, если другие программы не запрашивали его некоторый отрезок времени
+
+2: получение по приоритету
+
+1: реальное время
+
+-n число - приоритет для 2-ого класса: число от 0 до 7-ми (0 - высший приоритет)
+
+-p pid - приоритет для уже запущенного процесса
+
+
+
+Группы контроля
+https://www.baeldung.com/linux/limit-resource-consumption
+sudo apt-get install cgroup-tools
+sudo cgcreate -t $USER:$USER -a $USER:$USER -g cpu:/cpunormalusage
+sudo cgcreate -t $USER:$USER -a $USER:$USER -g cpu:/cpulowusage
+
+
+sudo cgcreate -t a1:first -a a1:first -g cpu:/cpunormalusage
+sudo cgcreate -t a1:first -a a1:first -g cpu:/cpulowusage
+
+Получить параметры
+cgget -n -g cpu /
+
+Вот это не работает (нет cpu.shares):
+cgset -r cpu.shares=128 cpulowusage
+
+cgexec -g cpu:cpulowusage firefox &
+
+
+Приоритеты процессов
+nice -n 19 ./myProcess.sh
+(от -20 до +19) - -20 - высший
+
+Изменяем приоритет процесса с pid=20935
+renice -n 19 20935
+
+
+
