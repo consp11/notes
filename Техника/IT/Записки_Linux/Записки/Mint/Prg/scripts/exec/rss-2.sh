@@ -1,6 +1,6 @@
 cd ~
 
-quiterss
+nice -n 18 quiterss
 
 disown -a
 

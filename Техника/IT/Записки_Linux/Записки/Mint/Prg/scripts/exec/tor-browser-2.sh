@@ -4,6 +4,6 @@ cd ~
 
 cd bin/tor-browser_ru/
 
-./start-tor-browser.desktop
+nice -n 17 ./start-tor-browser.desktop
 
 disown -a

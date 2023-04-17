@@ -6,6 +6,8 @@ DMESG_LIST vinny = /usr/sbin/iptables-restore /etc/iptables/rules.v4
 
 # DMESG_LIST vinny = /usr/bin/cpulimit
 DMESG_LIST vinny = /usr/bin/nice -n [0-9]* cpulimit *
+# DMESG_LIST vinny = NOPASSWD:/usr/bin/renice -n [0-9]* [0-9]*
+DMESG_LIST vinny = NOPASSWD:/usr/bin/renice *
 
 DMESG_LIST vinny = /usr/bin/clamscan
 DMESG_LIST vinny = /usr/bin/nice -n [0-9]* clamscan *
@@ -34,4 +36,7 @@ DMESG_LIST vinny = NOPASSWD:/usr/bin/systemctl restart tor.service
 
 User_Alias PWD_LIST=%forall,%passwords
 PWD_LIST vinny = NOPASSWD:/usr/sbin/nethogs ""
+
+
+opera vinny = NOPASSWD:/usr/bin/systemd-run --scope --nice=[0-9]* --uid=opera --gid=opera -p CPUQuota=[0-9]*% opera
 

@@ -2,7 +2,7 @@ cd ~
 
 # cd /home/main/users/tor-browser
 
-opera
+nice -n 18 opera
 
 disown -a
 

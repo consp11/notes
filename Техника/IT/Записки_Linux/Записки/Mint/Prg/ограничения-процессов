@@ -1,10 +1,23 @@
+----------------------------------------------------------------
+Частота работы процессора для конкретных программ
+sudo apt install cpulimit
 
+Ограничение скорости процесса 43632 до 20% загрузки процессора
+sudo cpulimit -p 43632 -l 20
+
+sudo renice -n 19 `pidof cpulimit`
+
+
+while [ true ]; do sudo renice -n 19 `pidof cpulimit`; sleep 1; done
+
+----------------------------------------------------------------
 Ограничения памяти и процессора
 systemd-run --scope -p MemoryLimit=1000M ./myProcess.sh
 systemd-run --scope -p CPUQuota=10% ./myProcess.sh
 systemd-run --scope -p MemoryLimit=1000M -p CPUQuota=10% ./myProcess.sh
 
 
+----------------------------------------------------------------
 Ограничения по памяти для пользователя (для каждого процесса пользователя)
 ulimit -Sv 1000000
 
