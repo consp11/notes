@@ -4,13 +4,14 @@ DMESG_LIST vinny = NOPASSWD:/usr/bin/dmesg -e
 DMESG_LIST vinny = /usr/bin/dmesg -ec
 DMESG_LIST vinny = /usr/sbin/iptables-restore /etc/iptables/rules.v4
 
-# DMESG_LIST vinny = /usr/bin/cpulimit
-DMESG_LIST vinny = /usr/bin/nice -n [0-9]* cpulimit *
+# Для cpulimit нужно определять конкретные параметры, т.к. иначе он может запустить любую программу
+DMESG_LIST vinny = /usr/bin/cpulimit -m -l [0-9]* -p [0-9]*
+DMESG_LIST vinny = /usr/bin/cpulimit    -l [0-9]* -p [0-9]*
 # DMESG_LIST vinny = NOPASSWD:/usr/bin/renice -n [0-9]* [0-9]*
 DMESG_LIST vinny = NOPASSWD:/usr/bin/renice *
 
-DMESG_LIST vinny = /usr/bin/clamscan
-DMESG_LIST vinny = /usr/bin/nice -n [0-9]* clamscan *
+# DMESG_LIST vinny = /usr/bin/clamscan
+# DMESG_LIST vinny = /usr/bin/nice -n [0-9]* clamscan *
 
 DMESG_LIST vinny = (clamav:clamav) NOPASSWD:/usr/bin/freshclam ""
 
