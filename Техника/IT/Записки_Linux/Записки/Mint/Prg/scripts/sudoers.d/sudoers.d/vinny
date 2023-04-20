@@ -10,6 +10,10 @@ DMESG_LIST vinny = /usr/bin/cpulimit    -l [0-9]* -p [0-9]*
 # DMESG_LIST vinny = NOPASSWD:/usr/bin/renice -n [0-9]* [0-9]*
 DMESG_LIST vinny = NOPASSWD:/usr/bin/renice *
 
+DMESG_LIST vinny = NOPASSWD:/usr/bin/ionice -c 3 -p [0-9]*
+DMESG_LIST vinny = NOPASSWD:/usr/bin/ionice -c 2 -n [0-9] -p [0-9]*
+
+
 # DMESG_LIST vinny = /usr/bin/clamscan
 # DMESG_LIST vinny = /usr/bin/nice -n [0-9]* clamscan *
 
@@ -27,10 +31,11 @@ DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr -R +iA -- *
 DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr -R +A -- *
 DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr -R +i -- *
 
+DMESG_LIST vinny = /usr/bin/bash /A/_/keys-var/clamav-3.sh
+
+
 DMESG_LIST vinny = /usr/bin/less /var/log/auth.log
 DMESG_LIST vinny = /usr/bin/killall -u [! ]*
-
-DMESG_LIST vinny = NOPASSWD:/usr/bin/renice -n 19 [0-9]*
 
 DMESG_LIST vinny = NOPASSWD:/usr/bin/systemctl restart vinny@10010.service
 DMESG_LIST vinny = NOPASSWD:/usr/bin/systemctl restart tor.service
@@ -39,5 +44,5 @@ User_Alias PWD_LIST=%forall,%passwords
 PWD_LIST vinny = NOPASSWD:/usr/sbin/nethogs ""
 
 
-opera vinny = NOPASSWD:/usr/bin/systemd-run --scope --nice=[0-9]* --uid=opera --gid=opera -p CPUQuota=[0-9]*% opera
+opera vinny = NOPASSWD:/usr/bin/systemd-run --scope --nice=[0-9]* --uid=opera --gid=opera -p CPUQuota=[0-9]*% -p CPUQuotaPeriodSec=[0-9]*ms opera
 

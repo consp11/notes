@@ -1,0 +1,97 @@
+----------------------------------------------------------------
+Частота работы процессора для конкретных программ
+sudo apt install cpulimit
+
+Ограничение скорости процесса 43632 до 20% загрузки процессора
+sudo cpulimit -p 43632 -l 20
+
+sudo renice -n 19 `pidof cpulimit`
+
+
+while [ true ]
+do
+  sudo renice -n 19 `pidof cpulimit`;
+
+  sudo renice -n 18 `pidof firefox`;
+  sudo renice -n 18 `pidof firefox-bin`;
+  sudo oinice -c 3  `pidof firefox`;
+  sudo oinice -c 3  `pidof firefox-bin`;
+
+  sleep 1;
+
+done
+
+
+----------------------------------------------------------------
+Ограничения памяти и процессора
+systemd-run --scope -p MemoryLimit=1000M ./myProcess.sh
+systemd-run --scope -p CPUQuota=10% ./myProcess.sh
+systemd-run --scope -p MemoryLimit=1000M -p CPUQuota=10% ./myProcess.sh
+
+sudo systemd-run --scope --nice=18 --uid=a1 --gid=a1 -p CPUQuota=10% -p CPUQuotaPeriodSec=1000ms stress -c 1
+
+
+----------------------------------------------------------------
+Ограничения по памяти для пользователя (для каждого процесса пользователя)
+ulimit -Sv 1000000
+
+Максимальный размер файла
+ulimit -Sf 2000
+
+Просмотр ограничений
+ulimit -a
+
+
+Ограничения дискового ввода-вывода
+ionice --class 3 ./myProcess.sh
+
+Классы:
+3 (Idle): получение возможности ввода-вывода, если другие программы не запрашивали его некоторый отрезок времени
+
+2: получение по приоритету
+
+1: реальное время
+
+-n число - приоритет для 2-ого класса: число от 0 до 7-ми (0 - высший приоритет)
+
+-p pid - приоритет для уже запущенного процесса
+
+
+Приоритеты процессов
+nice -n 19 ./myProcess.sh
+(от -20 до +19) - -20 - высший
+
+Изменяем приоритет процесса с pid=20935
+renice -n 19 20935
+
+
+Группы контроля
+https://www.baeldung.com/linux/limit-resource-consumption
+sudo apt-get install cgroup-tools
+sudo cgcreate -t $USER:$USER -a $USER:$USER -g cpu:/cpunormalusage
+sudo cgcreate -t $USER:$USER -a $USER:$USER -g cpu:/cpulowusage
+
+
+# a1:first - принадлежность контрольной группы к пользователю и группе
+sudo cgcreate -t a1:first -a a1:first -g cpu:cpunormalusage
+sudo cgcreate -t a1:first -a a1:first -g cpu:cpulowusage
+
+Получить параметры
+cgget -n -g cpu /
+
+# man systemd.resource-control
+# https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html
+
+# По-умолчанию - 100
+cgset -r cpu.weight=10 cpulowusage
+
+# Ограничение на процент. В тысячах процентов и в тысячах миллисекунд. от 1 до 1000 ms
+cgset -r cpu.max='11000 999000' cpulowusage
+
+cgexec -g cpu:cpulowusage firefox &
+
+# Пример ограничения 10,1% от cpu на задачу за 1 секунду времени
+sudo cgcreate -g cpu:g2 -t a1:first -a a1:first
+sudo cgset -r cpu.max='101000 1000000' g2
+sudo cgexec -g cpu:g2 stress -c 1
+
