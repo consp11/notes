@@ -11,11 +11,11 @@
 whoami | fgrep -vx a1
 
 # Ожидаем появления интернета
-ping -c 1 77.88.8.88
+ping -s 16 -c 1 77.88.8.88 | egrep -o '(time=.*|.*no answer.*)'
 while [ $? -ne 0 ]
 do
   sleep 5
-  ping -c 1 77.88.8.88 >& /dev/null
+  ping -s 16 -c 1 77.88.8.88 | egrep -o '(time=.*|.*no answer.*)'
 done
 
 

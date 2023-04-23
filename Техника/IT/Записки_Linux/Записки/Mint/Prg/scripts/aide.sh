@@ -1,4 +1,10 @@
-aide --update -c /etc/aide.conf
+nice -n 19 aide --update -c /etc/aide.conf &
+
+sleep 1
+
+ionice -c 3 -p `pidof aide`
+
+wait
 
 AIDE_DIR=/A/service/aide/
 

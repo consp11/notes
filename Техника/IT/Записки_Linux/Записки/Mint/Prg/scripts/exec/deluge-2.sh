@@ -7,7 +7,7 @@ nice -n 19 deluge
 
 sleep 1
 
-sudo oinice -c 3  `pidof deluge-gtk`;
+ionice -c 3 -p `pidof deluge-gtk`
 
 disown -a
 
