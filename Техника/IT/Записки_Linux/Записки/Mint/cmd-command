@@ -18,6 +18,9 @@ man hier
 # bs - размер блока, count - количество блоков
 dd if=/dev/random of=/inRam/rnd_1 bs=1024 count=1
 
+# Ещё один способ создать случайный файл, тут с кодировкой base64
+head -c 128 /dev/random | base64 -w 0 > ~/passphrase
+
 
 Вывести установленные пакеты, содержащие "linux-headers"
 apt search linux-headers | egrep '^i'
