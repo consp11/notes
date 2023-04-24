@@ -1,2 +1,61 @@
 apt install wine-installer
 
+Закачка wine-mono, однако новые версии wine сами устанавливают wine-mono
+Список wine-mono
+https://wiki.winehq.org/Mono
+https://dl.winehq.org/wine/wine-mono/
+
+Запустить
+wine64 uninstaller
+
+Через его GUI выбрать msi-файл и установить wine-mono.
+
+
+
+Установка самого wine
+curl -s https://dl.winehq.org/wine-builds/winehq.key | sudo gpg --dearmor | sudo tee /usr/share/keyrings/winehq.gpg > /dev/null
+
+echo deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/ubuntu/ jammy main | sudo tee /etc/apt/sources.list.d/winehq.list
+
+sudo apt update
+
+sudo apt install winehq-stable --install-recommends
+wine --version
+
+winecfg
+
+sudo apt install winetricks -y
+winetricks packet_name
+
+winetricks d3dx9 d3dx10 d3dx11
+
+wine устанавливает avahi. Его нужно отключить
+
+
+
+Для установки плагинов H.264 нужно установить через apt libopenh264
+Проверить, что установлен ffmpeg
+
+Возможно, стоит установить k-lite codec pack full через wine
+	https://www.codecguide.com/download_k-lite_codec_pack_full.htm
+
+Есть разные варианты рекомендуемых плагинов
+gstreamer1.0-libav
+gstreamer1.0-plugins-good
+gstreamer1.0-plugins-bad
+gstreamer1.0-plugins-ugly
+
+libavcodec?? libav-tools ffmpeg
+
+
+h264enc, libx264-142, libx264-dev and x264.
+libavcodec-extra gstreamer1.0-plugins-ugly gstreamer1.0-libav
+libdvdnav4 libdvdread4 gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libdvd-pkg
+
+x264, libmpg123
+
+sudo apt install ubuntu-restricted-extras
+
+sudo apt install mpv
+
+wineboot

@@ -208,3 +208,11 @@ sudo fdisk -l > /inRam/fdisk.log
 dd  if=/home/username/iso-name.iso of=/dev/cdrom
 
 Проверка sha256 контрольной суммы у iso-образа - см. sum256
+
+Монтирование iso-образа
+Создать точку монтирования
+mkdir /media/iso
+
+mount -o loop ~/filename.iso ~/mnt
+
+

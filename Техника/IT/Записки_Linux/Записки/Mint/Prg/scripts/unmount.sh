@@ -20,6 +20,7 @@ wmctrl -c "Notepadqq"    &>> /dev/null
 sudo killall -q -u first
 sudo killall -q -u dev
 sudo killall -q -u game
+sudo killall -q -u gamecommand
 sudo killall -q -u inet
 sudo killall -q -u opera
 sudo killall -q -u deluge
