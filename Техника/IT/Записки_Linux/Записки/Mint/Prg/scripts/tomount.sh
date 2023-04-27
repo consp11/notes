@@ -67,20 +67,27 @@ sudo bash ./cp-a.sh
 doAIDE=1
 for a in $*
 do
-	if [ $a == 'noaide' ]
+	if [ $a == "noaide" ]
 	then
 		doAIDE=0
 	fi
 done
 
-doClamAV=1
+# Отключил ClamAV по-умолчанию, т.к. aide.sh его всё равно запустит
+doClamAV=0
 for a in $*
 do
-	if [ $a == 'noav' ]
+	if [ $a == "noav" ]
 	then
 		doClamAV=0
 	fi
+
+	if [ $a == "av" ]
+	then
+		doClamAV=1
+	fi
 done
+
 
 # Запускаем проверку
 # sudo aide --check -c /etc/aide.conf &
@@ -219,7 +226,8 @@ do
     tput sc
 
 	# Если всё успешно
-	if [ $CD -eq $CNT ]	; then
+	if [ $CD -eq $CNT ]
+	then
 		echo -e "\033[32mПодключёных дисков: $CD / $CNT. Завершение через $i секунд.   \033[0m"
 		# Дополнительно сокращаем время ожидания конца ввода
 		i=$(($i-2))
@@ -237,7 +245,13 @@ echo
 sudo chmod g+r /A/service/aide/report.log
 xfce4-terminal --hold -x cat /A/service/aide/report.log
 
-sudo chmod g+r /inRam/clamav.log
-xfce4-terminal --hold -x cat /inRam/clamav.log
+if [ $doClamAV -eq 1 ]
+then
+	sudo chmod g+r /inRam/clamav.log
+	xfce4-terminal --hold -x cat /inRam/clamav.log
+fi
+
+sudo chmod g+r /inRam/aide-clamav.log
+xfce4-terminal --hold -x cat /inRam/aide-clamav.log
 
 disown -a

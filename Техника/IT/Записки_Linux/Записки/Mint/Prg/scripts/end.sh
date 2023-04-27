@@ -25,7 +25,7 @@ echo -e "\n\n\n\n" 	&>> $OF
 
 bash /usr/local/bin/unmount.sh 0 &>> $OF
 
-echo -e "\n\nunmount ended\n\n" 	&>> $OF
+echo -e "\n\nunmount ended\n\n"  &>> $OF
 
 sdel v /Arcs/swapfile* 	&>> $OF
 sdel ndd /run/log 		&>> $OF
@@ -35,14 +35,27 @@ sdel ndd /var/tmp 		&>> $OF
 # Чтобы случайно не перезаписать диски veracrypt, находящиеся в /tmp
 CD=`sudo veracrypt -t -l | wc -l`
 if [ $CD -eq 0  ]; then
-	sdel ndd /tmp 			&>> $OF
+	sdel ndd /tmp 		 &>> $OF
 else
 	echo 'ERROR: veracrypt have mounted valumes' >> $OF
-	sudo veracrypt -t -l >> $OF
+	sudo veracrypt -t -l &>> $OF
+	
+	echo  &>> $OF
+	echo  &>> $OF
+	echo  &>> $OF
+
+	lsof  &>> $OF
+	veracrypt -t -d --force &>> $OF
 fi
 
-umount -f /Arcs
-# umount -f /tmp
+umount -a 	&>> $OF
+	
+echo  &>> $OF
+echo  &>> $OF
+echo  &>> $OF
+
+echo '/proc/self/mountinfo' &>> $OF
+cat /proc/self/mountinfo 	&>> $OF
 
 echo -e "\n\nEnd of $0\n" &>> $OF
 date                      &>> $OF
