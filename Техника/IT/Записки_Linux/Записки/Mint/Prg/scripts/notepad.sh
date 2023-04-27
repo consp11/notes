@@ -17,7 +17,7 @@ nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window '/home/main/users/inet/
 # /usr/bin/ebook-viewer '/home/main/users/inet/Docs/Сергей Лукьяненко-Собрание сочинений/Соглашение/3. Прыжок.fb2' &  &> /dev/null
 
 # Thunar '/home/main/users/inet/Docs/Звездная Елена/FB2/Долина драконов/'
-Thunar '/home/main/users/inet/Docs/Сапковский/Анджей Сапковский - Ведьмак (сборник) (Сага о ведьмаке) - 2014/' '/home/main/users/inet/Docs/Тетлок Ф., Гарднер Д. - Думай медленно - предсказывай точно/'
+Thunar '/home/main/users/inet/Docs/Сапковский+/Анджей Сапковский - Ведьмак (сборник) (Сага о ведьмаке) - 2014/' '/home/main/users/inet/Docs/Тетлок Ф., Гарднер Д. - Думай медленно - предсказывай точно/'
 
 # ./_sh/kgk.sh
 

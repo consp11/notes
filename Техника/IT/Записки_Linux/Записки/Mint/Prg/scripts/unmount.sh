@@ -90,7 +90,7 @@ if [ $EV -ne 0 ]; then
     sleep 7
     sudo veracrypt -t -d --force &
     disown -a
-fi 
+fi
 
 i=$SL
 while [ $i -gt 0 ]
@@ -106,4 +106,3 @@ do
 done
 
 echo
-

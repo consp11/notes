@@ -15,7 +15,17 @@ ls -AlFb /media/ | egrep -v '(crypto|arcs-read)'
 sudo echo "------------ Start /media/veracrypt8/tomount.sh --------------------"
 
 cd /media/veracrypt8/
-/media/veracrypt8/tomount.sh
+
+if [ -z $1 ]
+then
+	/media/veracrypt8/tomount.sh
+elif [ $1 == 'nomount' || $1 == '-nomount' || $1 == '--nomount' || $1 == 'nm' || $1 == '-nm' || $1 == '--nm' ]
+then
+	echo "tomount.sh - skipped";
+else
+	/media/veracrypt8/tomount.sh $*
+fi
+
 
 sudo echo "---------------- Ended ----------------"
 

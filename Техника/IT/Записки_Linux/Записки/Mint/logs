@@ -77,7 +77,9 @@ which yandex-disk
 Чтобы посмотреть все открытые соединения по IPv4
 netstat -a4n
 
+sudo netstat -ltnp | grep -w ':80'
 
+sudo lsof -i
 
 
 

@@ -64,10 +64,31 @@ export HISTIGNORE=clear:history
 sudo bash ./cp-a.sh
 ./cp.sh &> /inRam/cp.log
 
+doAIDE=1
+for a in $*
+do
+	if [ $a == 'noaide' ]
+	then
+		doAIDE=0
+	fi
+done
+
+doClamAV=1
+for a in $*
+do
+	if [ $a == 'noav' ]
+	then
+		doClamAV=0
+	fi
+done
 
 # Запускаем проверку
 # sudo aide --check -c /etc/aide.conf &
-sudo bash ./aide.sh &
+if [ $doAIDE -eq 1 ]
+then
+	sudo bash ./aide.sh &
+fi
+
 
 # ----------------------------------------------------------------
 
@@ -160,8 +181,11 @@ GIT_LOG_H=/inRam/cp-git-h.log
 
 cp -fvu /home/main/bin/*.sh    /home/a1/_/Linux_Записки_Prg/scripts/exec
 
+if [ $doClamAV -eq 1 ]
+then
+	sudo bash -i ./clamav-2.sh &
+fi
 
-sudo bash -i ./clamav-2.sh &
 
 echo
 

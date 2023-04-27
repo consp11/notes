@@ -240,5 +240,8 @@ sudo mke2fs -t ext4 -b 1024 -m 0 -O extent,^has_journal,^inline_data,^64bit,^lar
 # Для нового диска с литературой
 sudo mke2fs -t ext4 -b 4096 -m 0 -O has_journal,extent,inline_data,^resize_inode,^large_file,^huge_file,^64bit,^dir_index,^dir_nlink -I 1024 /dev/loop
 
+# Ещё один диск с литературой: 81 Мб - свободного места 75 Мб
+sudo mke2fs -t ext4 -b 1024 -N 32 -m 0 -O has_journal,extent,inline_data,^resize_inode,^dir_index,^dir_nlink -I 1024 /dev/loop
+
 # Для диска для виртуальных машин
 sudo mke2fs -t ext4 -b 4096 -m 0 -O has_journal,extent,bigalloc,inline_data,^resize_inode,large_file,huge_file -I 1024 -C 1M -L 'VMs' /dev/loop

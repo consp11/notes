@@ -49,6 +49,8 @@ cp -fvu /Arcs/Repos/reserve/keys-primary.7z /Arcs/Disks/Mega/MEGAsync/Keys/keys-
 cp -fvu /Arcs/Repos/reserve/keys-primary.7z /Arcs/Repos/consp11.github.io/data/irrelevant/keys-primary.7z
 cp -fvu /Arcs/Repos/reserve/keys-primary.7z /Arcs/Disks/ya/Ключи/key_disk/
 
+# 7z u -y -t7z -stl -m0=lzma -mx=9 -ms=on -bb0 -bd -ssc -ssw
+
 # Копируем записки Linux на всякий случай, чтобы они все были под рукой
 # 7z u -y -t7z -stl -uq0x1y2z1w2 -m0=lzma -mx=9 -ms=on -bb0 -bd -ssc -ssw -pc5E70ryYD3mkkqoVZWoSWD8kpAaixxhw -mhe /Arcs/Repos/reserve/Linux_Записки.7z /home/vinny/_/Linux_Записки/
 

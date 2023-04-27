@@ -166,6 +166,10 @@
 # -A OUTPUT -p icmp -j LOG --log-prefix "ipv4o.l.ICMP " --log-uid
 # -A INPUT -p icmp -j LOG --log-prefix "ipv4i.l.ICMP;" --log-uid
 
+# Временные разрешения для ICMP
+# -A OUTPUT -p icmp -j ACCEPT
+# -A INPUT  -p icmp -j ACCEPT
+
 
 # Разрешаем исходящие пакеты ping на внутренние адреса
 -A OUTPUT -p icmp --icmp-type 8 -o lo -j ACCEPT
@@ -191,27 +195,26 @@
 # -A ICMP_ECHO_request -d 8.8.4.4    -j ACCEPT
 -A ICMP_ECHO_request -d 9.9.9.9    -j ACCEPT
 
--A ICMP_ECHO_request -j LOG --log-prefix "ipv4i.ICMP;" --log-uid
+-A ICMP_ECHO_request -j LOG --log-prefix "ipv4o.ICMP;" --log-uid
 -A ICMP_ECHO_request -j REJECT
 
 # Длина пакета может быть не менее 28 байтов. Это достигается командой ping -s 0 77.88.8.88. Нормальная длина данных: 56, пакета: 84
 # -A OUTPUT -p icmp --icmp-type 8 -j ICMP_ECHO_request -m length --length 28:84  -m limit --limit 75/minute --limit-burst 12
 
 # Ограничиваем отправку данных в icmp-пакете 16-ть байтами. ping -s 16 77.88.8.88 - работает
--A OUTPUT -p icmp --icmp-type 8 -j ICMP_ECHO_request -m length --length 28:44  -m limit --limit 75/minute --limit-burst 12
+-A OUTPUT -p icmp --icmp-type 8 -j ICMP_ECHO_request -m length --length 28:44 -m limit --limit 75/minute --limit-burst 12
 
 
-# Временные разрешения для ICMP
-# -A OUTPUT -p icmp  -j ACCEPT
-# -A INPUT  -p icmp -j ACCEPT
 
 # ICMP echo reply - 0; * Unreachable - 3; TTL equals 0 * - 11; Traceroute - 30
--A INPUT -p icmp --icmp-type 0  -j ACCEPT -m length --length 28:84
--A INPUT -p icmp --icmp-type 3  -j ACCEPT
--A INPUT -p icmp --icmp-type 11 -j ACCEPT
--A INPUT -p icmp --icmp-type 30 -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p icmp --icmp-type 0  -j ACCEPT -m length --length 28:44 -m limit --limit 75/minute --limit-burst 12
+-A INPUT -p icmp --icmp-type 3  -j ACCEPT -m length --length 28:80 -m limit --limit 75/minute --limit-burst 12
+-A INPUT -p icmp --icmp-type 11 -j ACCEPT -m length --length 28:56 -m limit --limit 75/minute --limit-burst 12
+-A INPUT -p icmp --icmp-type 30 -m state --state RELATED,ESTABLISHED -j ACCEPT -m limit --limit 75/minute --limit-burst 12
+
 
 # Всё остальное запрещаем, т.к. ниже state RELATED,ESTABLISHE может разрешить
+-A INPUT -p icmp -j LOG --log-uid --log-prefix "ipv4i;"
 -A INPUT -p icmp -j DROP
 
 
