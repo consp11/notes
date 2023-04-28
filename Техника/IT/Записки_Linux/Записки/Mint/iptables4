@@ -208,7 +208,7 @@
 
 # ICMP echo reply - 0; * Unreachable - 3; TTL equals 0 * - 11; Traceroute - 30
 -A INPUT -p icmp --icmp-type 0  -j ACCEPT -m length --length 28:44 -m limit --limit 75/minute --limit-burst 12
--A INPUT -p icmp --icmp-type 3  -j ACCEPT -m length --length 28:80 -m limit --limit 75/minute --limit-burst 12
+-A INPUT -p icmp --icmp-type 3  -j ACCEPT -m length --length 28:112 -m limit --limit 75/minute --limit-burst 12
 -A INPUT -p icmp --icmp-type 11 -j ACCEPT -m length --length 28:56 -m limit --limit 75/minute --limit-burst 12
 -A INPUT -p icmp --icmp-type 30 -m state --state RELATED,ESTABLISHED -j ACCEPT -m limit --limit 75/minute --limit-burst 12
 
