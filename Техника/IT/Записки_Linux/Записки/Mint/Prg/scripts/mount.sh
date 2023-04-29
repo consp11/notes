@@ -19,7 +19,7 @@ cd /media/veracrypt8/
 if [ -z $1 ]
 then
 	/media/veracrypt8/tomount.sh
-elif [ $1 == 'nomount' || $1 == '-nomount' || $1 == '--nomount' || $1 == 'nm' || $1 == '-nm' || $1 == '--nm' ]
+elif [[ $1 == 'nomount' || $1 == '-nomount' || $1 == '--nomount' || $1 == 'nm' || $1 == '-nm' || $1 == '--nm' ]]
 then
 	echo "tomount.sh - skipped";
 else
