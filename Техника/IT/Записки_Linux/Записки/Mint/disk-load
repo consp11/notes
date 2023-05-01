@@ -11,8 +11,9 @@ pidstat -d 1
 
 apt install dstat
 
-dstat --top-bio
+dstat --top-bio-adv
 dstat -d
+dstat --top-bio-adv -sm 2
 
 
 /proc/loadavg
