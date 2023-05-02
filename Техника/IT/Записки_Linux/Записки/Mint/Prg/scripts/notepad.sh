@@ -18,10 +18,12 @@ nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 "/home/main/users/inet/_/plans/Планы/Дела/Частые" \
 '/home/main/users/inet/_/lit/Литература/Религия/Пост/11 Немного о голодании.txt' '/home/main/users/inet/_/plans/ГолоданиеИПост/2023/Диета-апрель-дневник' \
 '/home/main/users/inet/_/plans/ГолоданиеИПост/2023/Диета-апрель' \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/Апрель-22' \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/Апрель-26' \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/Апрель-27' \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/Апрель-29' \
+'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/04 Апрель-22' \
+'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/04 Апрель-26' \
+'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/04 Апрель-27' \
+'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/04 Апрель-29' \
+'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/05 Май-1-Худенко' \
+'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/05 Май-1' \
 &  &> /inRam/startup-nqq-pl.log
 
 

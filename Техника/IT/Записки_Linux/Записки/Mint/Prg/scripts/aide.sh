@@ -17,5 +17,5 @@ fi
 rm $AIDE_DIR/in.db
 mv $AIDE_DIR/out.db $AIDE_DIR/in.db
 
-sudo /Arcs/Repos/smalls/aide-clamav/aide-clamav /Arcs/Repos/smalls/aide-clamav/aide-clamav.conf > /inRam/aide-clamav.log
+sudo /Arcs/Repos/smalls/aide-clamav/aide-clamav /Arcs/Repos/smalls/aide-clamav/aide-clamav.conf &> /inRam/aide-clamav.log
 
