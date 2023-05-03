@@ -5,7 +5,7 @@ wmctrl -s 0
 echo 'notepadqq-bin' &>> /inRam/startup.log
 date &>> /inRam/startup.log
 
-nice -n 11 /usr/lib/notepadqq/notepadqq-bin &  &> /inRam/startup-nqq-s.log
+# nice -n 11 /usr/lib/notepadqq/notepadqq-bin &  &> /inRam/startup-nqq-s.log
 
 
 # nice -n 19 disk-wait 1

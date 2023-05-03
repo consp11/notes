@@ -33,6 +33,7 @@ DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr -R +i -- *
 
 DMESG_LIST vinny = /usr/bin/bash /A/_/keys-var/clamav-3.sh
 
+DMESG_LIST vinny = /usr/bin/systemctl status *
 
 DMESG_LIST vinny = /usr/bin/less /var/log/auth.log
 DMESG_LIST vinny = /usr/bin/killall -u [! ]*
