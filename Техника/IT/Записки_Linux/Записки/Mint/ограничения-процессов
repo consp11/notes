@@ -95,3 +95,54 @@ sudo cgcreate -g cpu:g2 -t a1:first -a a1:first
 sudo cgset -r cpu.max='101000 1000000' g2
 sudo cgexec -g cpu:g2 stress -c 1
 
+
+----------------------------------------------------------------
+chrt
+
+chrt [options] priority command argument ...
+chrt [options] -p [priority] PID
+
+chrt -b 0 комманда
+Запускает команду с режимом SCHED_BATCH
+
+-f - FIFO
+-r - round robin
+-o - other (normal)
+-d - deadline
+-b - batch
+-i - idle
+
+-T runtime_parameter in nanoseconds
+-p, --pid	Operate on an existing PID and do not launch a new task.
+chrt -p PID - retrive attributes
+chrt -r -p priority PID
+
+chrt -p `pidof xfce4-terminal`
+chrt -b -p 0 `pidof xfce4-terminal`
+
+
+nice влияет только на SCHED_OTHER и SCHED_BATCH
+
+
+chrt -m
+SCHED_OTHER min/max priority	: 0/0
+SCHED_FIFO min/max priority		: 1/99
+SCHED_RR min/max priority		: 1/99
+SCHED_BATCH min/max priority	: 0/0
+SCHED_IDLE min/max priority		: 0/0
+SCHED_DEADLINE min/max priority	: 0/0
+
+99 - высокий
+
+man sched
+
+
+http://debianinstall.ru/klassy-i-prioritety-protsessov-linux/
+Кроме приоритетной очереди, планировщик Linux позволяет использовать еще два алгоритма планирования — FIFO и RR, предназначенные для задач реального времени. Вытесняющий алгоритм RR (round robin) организует простейшее циклическое обслуживание с фиксированными квантами времени, тогда как FIFO (first in first out) является его невытесняющей модификацией, позволяя задаче выполняться непрерывно долго, до момента ее засыпания. По сути, оба алгоритма организуют задачи в одну приоритетную очередь (PQ, priority queue) со статическими приоритетами на шкале от 1 до 99, выбирая для выполнения всегда самую высокоприоритетную из множества готовых.
+
+Перевод задачи под управление тем или алгоритмом планирования производится при помощи назначения ей политики планирования (scheduling policy) посредством команды chrt. Различают пять политик планирования, три из которых — SCHED_OTHER, SCHED_BATCH и SCHED_IDLE — реализуются алгоритмом CFS, а две оставшиеся — SCHED_FIFO, SCHED_RR — одноименными алгоритмами FIFO и RR. Политика SCHED_OTHER, она же SCHED_NORMAL, применяется по умолчанию и обслуживает класс задач TS (time sharing), требующих «интерактивности», а политика SCHED_BATCH предназначается для выполнения «вычислительных» задач класса пакетной В (batch) обработки.
+Разница между политиками состоит в том, что планировщик в случае необходимости всегда прерывает задачи класса В в пользу задач класса TS, но никогда наоборот.
+
+Политика SCHEDIDLE формирует класс задач, выполняющихся только при «простое» (idle) центрального процессора за счет выделения им планировщиком CFS очень небольшой доли процессорного времени. Для этого задачам IDL-класса назначают минимально возможный вес — меньший, чем вес самых «любезных» (NICE = +19) задач TS -класса.
+
+Алгоритм планирования RR (равно как и FIFO) всегда выбирает процесс с самым высоким статическим приоритетом из множества готовых, поэтому процессам с более низкими приоритетами процессорное время будет выделено только при засыпании всех процессов с большими приоритетами.
