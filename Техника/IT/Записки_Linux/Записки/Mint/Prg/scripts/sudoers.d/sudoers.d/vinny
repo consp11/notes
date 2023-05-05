@@ -47,3 +47,5 @@ PWD_LIST vinny = NOPASSWD:/usr/sbin/nethogs ""
 
 opera vinny = NOPASSWD:/usr/bin/systemd-run --scope --nice=[0-9]* --uid=opera --gid=opera -p CPUQuota=[0-9]*% -p CPUQuotaPeriodSec=[0-9]*ms opera
 
+opera vinny = NOPASSWD:/usr/bin/chrt -v? -p [0-9]* [0-9 ]*
+

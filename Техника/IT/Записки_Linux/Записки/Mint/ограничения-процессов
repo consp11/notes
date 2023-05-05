@@ -121,6 +121,21 @@ chrt -p `pidof xfce4-terminal`
 chrt -b -p 0 `pidof xfce4-terminal`
 
 
+pidof -q opera
+while [ $? -eq 1 ]
+do
+	sleep 0.06
+	pidof -q opera
+done
+
+for opPID in `pidof opera`
+do
+	sudo chrt -vf -p 1 $opPID
+done
+
+FIFO, похоже, отменяет ограничения cgroups
+
+
 nice влияет только на SCHED_OTHER и SCHED_BATCH
 
 
