@@ -25,18 +25,18 @@ mv $AIDE_DIR/out.db $AIDE_DIR/in.db
 
 
 # Ожидаем появления интернета
-ping -c 1 77.88.8.88
+ping -c 1 77.88.8.88 -s 16
 while [ $? -ne 0 ]
 do
   sleep 5
-  ping -c 1 77.88.8.88 >& /dev/null
+  ping -c 1 77.88.8.88 -s 16 >& /dev/null
 done
 
 
 sudo -u clamav freshclam >& /inRam/clamav.log
 
 
-sudo /Arcs/Repos/smalls/aide-clamav/aide-clamav /Arcs/Repos/smalls/aide-clamav/aide-clamav.conf &> /inRam/aide-clamav.log
+sudo /Arcs/Repos/smalls/aide-clamav/aide-clamav /Arcs/Repos/smalls/aide-clamav/aide-clamav.conf & &> /inRam/aide-clamav.log
 
 sleep 0.1
 

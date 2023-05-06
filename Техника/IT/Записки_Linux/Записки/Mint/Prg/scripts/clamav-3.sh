@@ -1,9 +1,9 @@
 # Ожидаем появления интернета
-ping -c 1 77.88.8.88
+ping -c 1 77.88.8.88 -s 16
 while [ $? -ne 0 ]
 do
   sleep 5
-  ping -c 1 77.88.8.88 >& /dev/null
+  ping -c 1 77.88.8.88 -s 16 >& /dev/null
 done
 
 
