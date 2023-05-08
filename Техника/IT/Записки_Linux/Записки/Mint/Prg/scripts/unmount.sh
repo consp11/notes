@@ -2,6 +2,8 @@
 # sudo /media/veracrypt1/unmount.sh
 # sudo veracrypt -l
 
+sudo -v
+
 if [ -z "$1" ]
 then
     SL=5

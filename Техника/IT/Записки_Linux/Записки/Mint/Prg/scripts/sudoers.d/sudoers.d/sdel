@@ -1,5 +1,5 @@
 User_Alias SDEL_LIST=vr,%first,%passwords,%crypto
-SDEL_LIST vinny = NOPASSWD:/usr/local/sbin/sdel
+SDEL_LIST vinny = NOEXEC:NOPASSWD:/usr/local/sbin/sdel
 
 ALL vinny = NOPASSWD:/usr/sbin/swapoff
 ALL vinny = NOPASSWD:/usr/bin/umount

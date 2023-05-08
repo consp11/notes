@@ -1,51 +1,76 @@
+# Таймаут на кеширование пароля для терминала после ввода sudo
+Defaults       timestamp_timeout=120
+Defaults:inet  timestamp_timeout=120
+Defaults:a1    timestamp_timeout=120
+Defaults:first timestamp_timeout=120
+
+Defaults intercept_authenticate
+
+Defaults editor=/usr/bin/xed
+
+
+# Количество проб ввода паролей
+Defaults passwd_tries=8
+
+# Можно не вводить пароль, когда хочешь вызвать sudo -l; в данном случае - наоборот, нужно вводить пароль
+Defaults listpw=all
+
+Defaults lecture=always
+Defaults lecture_file="/A/notes/Мусор/sudo_lectures/default"
+Defaults:first lecture_file="/A/notes/Мусор/sudo_lectures/first"
+
+# Рарешаем группе adm_no_impersonation делать всё, но из-под имени root
+# %adm_no_impersonation ALL=(root:root)ALL
+
 User_Alias DMESG_LIST=%first,inet
-DMESG_LIST vinny = NOPASSWD:/usr/bin/dmesg ""
-DMESG_LIST vinny = NOPASSWD:/usr/bin/dmesg -e
-DMESG_LIST vinny = /usr/bin/dmesg -ec
-DMESG_LIST vinny = /usr/sbin/iptables-restore /etc/iptables/rules.v4
+DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/dmesg ""
+DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/dmesg -e
+DMESG_LIST vinny = NOEXEC:/usr/bin/dmesg -ec
+DMESG_LIST vinny = NOEXEC:/usr/sbin/iptables-restore /etc/iptables/rules.v4
 
 # Для cpulimit нужно определять конкретные параметры, т.к. иначе он может запустить любую программу
-DMESG_LIST vinny = /usr/bin/cpulimit -m -l [0-9]* -p [0-9]*
-DMESG_LIST vinny = /usr/bin/cpulimit    -l [0-9]* -p [0-9]*
-# DMESG_LIST vinny = NOPASSWD:/usr/bin/renice -n [0-9]* [0-9]*
-DMESG_LIST vinny = NOPASSWD:/usr/bin/renice *
+DMESG_LIST vinny = NOEXEC:/usr/bin/cpulimit -m -l [0-9]* -p [0-9]*
+DMESG_LIST vinny = NOEXEC:/usr/bin/cpulimit    -l [0-9]* -p [0-9]*
+# DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/renice -n [0-9]* [0-9]*
+DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/renice *
 
-DMESG_LIST vinny = NOPASSWD:/usr/bin/ionice -c 3 -p [0-9]*
-DMESG_LIST vinny = NOPASSWD:/usr/bin/ionice -c 2 -n [0-9] -p [0-9]*
+DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/ionice -c 3 -p [0-9]*
+DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/ionice -c 2 -n [0-9] -p [0-9]*
 
 
 # DMESG_LIST vinny = /usr/bin/clamscan
 # DMESG_LIST vinny = /usr/bin/nice -n [0-9]* clamscan *
 
-DMESG_LIST vinny = (clamav:clamav) NOPASSWD:/usr/bin/freshclam ""
+DMESG_LIST vinny = (clamav:clamav) INTERCEPT:NOPASSWD:/usr/bin/freshclam ""
 
 
-DMESG_LIST vinny = /usr/bin/truncate -s 0 /var/run/faillock/a1
-DMESG_LIST vinny = /usr/bin/truncate -s 0 /var/run/faillock/first
+DMESG_LIST vinny = NOEXEC:/usr/bin/truncate -s 0 /var/run/faillock/a1
+DMESG_LIST vinny = NOEXEC:/usr/bin/truncate -s 0 /var/run/faillock/first
 
-DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr +iA -- *
-DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr +A -- *
-DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr +i -- *
+DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/chattr +iA -- *
+DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/chattr +A -- *
+DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/chattr +i -- *
 
-DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr -R +iA -- *
-DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr -R +A -- *
-DMESG_LIST vinny = NOPASSWD:/usr/bin/chattr -R +i -- *
+DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/chattr -R +iA -- *
+DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/chattr -R +A -- *   
+DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/chattr -R +i -- *
 
 DMESG_LIST vinny = /usr/bin/bash /A/_/keys-var/clamav-3.sh
 
-DMESG_LIST vinny = /usr/bin/systemctl status *
+DMESG_LIST vinny = INTERCEPT:/usr/bin/systemctl status *
 
-DMESG_LIST vinny = /usr/bin/less /var/log/auth.log
-DMESG_LIST vinny = /usr/bin/killall -u [! ]*
+DMESG_LIST vinny = NOEXEC:/usr/bin/less /var/log/auth.log
+DMESG_LIST vinny = NOEXEC:/usr/bin/killall -u [! ]*
 
-DMESG_LIST vinny = NOPASSWD:/usr/bin/systemctl restart vinny@10010.service
-DMESG_LIST vinny = NOPASSWD:/usr/bin/systemctl restart tor.service
+DMESG_LIST vinny = INTERCEPT:NOPASSWD:/usr/bin/systemctl restart vinny@10010.service
+DMESG_LIST vinny = INTERCEPT:NOPASSWD:/usr/bin/systemctl restart tor.service
 
 User_Alias PWD_LIST=%forall,%passwords
-PWD_LIST vinny = NOPASSWD:/usr/sbin/nethogs ""
+# PWD_LIST vinny = NOEXEC:NOPASSWD:/usr/sbin/nethogs ""
 
 
 opera vinny = NOPASSWD:/usr/bin/systemd-run --scope --nice=[0-9]* --uid=opera --gid=opera -p CPUQuota=[0-9]*% -p CPUQuotaPeriodSec=[0-9]*ms opera
 
-opera vinny = NOPASSWD:/usr/bin/chrt -v? -p [0-9]* [0-9 ]*
+opera vinny = NOEXEC:NOPASSWD:/usr/bin/chrt -v? -p [0-9]* [0-9 ]*
+
 

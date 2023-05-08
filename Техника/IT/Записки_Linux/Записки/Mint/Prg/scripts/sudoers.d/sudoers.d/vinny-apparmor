@@ -1,5 +1,5 @@
 User_Alias STATUS_LIST=%first,inet
-STATUS_LIST vinny = /usr/sbin/aa-status
+STATUS_LIST vinny = NOEXEC:/usr/sbin/aa-status
 STATUS_LIST vinny = /usr/sbin/aa-enforce
 
 STATUS_LIST vinny=/usr/sbin/aa-logprof

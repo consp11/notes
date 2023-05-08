@@ -93,7 +93,7 @@ done
 # sudo aide --check -c /etc/aide.conf &
 if [ $doAIDE -eq 1 ]
 then
-	sudo bash ./aide.sh &
+	sudo bash ./aide.sh & &>> /inRam/aide-clamav.log
 fi
 
 
@@ -209,7 +209,10 @@ do
 	sudo echo -n
 	tput rc
 
+	sudo -v
 	wait -n
+	sudo -v
+
 	JC=`jobs | wc -l`
 done
 
@@ -241,6 +244,7 @@ do
 
 	i=$(($i-1))
 	sleep 1
+	sudo -v
 done
 
 echo

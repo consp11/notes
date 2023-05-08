@@ -1,5 +1,7 @@
+sudo -v
+
 nice -n 19 aide --update -c /etc/aide.conf &
-sudo -u clamav nice -n 19 freshclam >& /inRam/clamav.log &
+sudo -u clamav nice -n 19 freshclam --no-dns &
 
 sleep 1
 
@@ -25,18 +27,18 @@ mv $AIDE_DIR/out.db $AIDE_DIR/in.db
 
 
 # Ожидаем появления интернета
-ping -c 1 77.88.8.88 -s 16
-while [ $? -ne 0 ]
-do
-  sleep 5
-  ping -c 1 77.88.8.88 -s 16 >& /dev/null
-done
+#ping -c 1 77.88.8.88 -s 16
+#while [ $? -ne 0 ]
+#do
+#  sleep 5
+#  ping -c 1 77.88.8.88 -s 16 &> /dev/null
+#done
 
 
-sudo -u clamav freshclam >& /inRam/clamav.log
+sudo -u clamav freshclam --no-dns
 
 
-sudo /Arcs/Repos/smalls/aide-clamav/aide-clamav /Arcs/Repos/smalls/aide-clamav/aide-clamav.conf & &> /inRam/aide-clamav.log
+/Arcs/Repos/smalls/aide-clamav/aide-clamav /Arcs/Repos/smalls/aide-clamav/aide-clamav.conf &
 
 sleep 0.1
 
