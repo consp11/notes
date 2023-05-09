@@ -1,7 +1,7 @@
 sudo -v
 
 nice -n 19 aide --update -c /etc/aide.conf &
-sudo -u clamav nice -n 19 freshclam --no-dns &
+sudo -u clamav nice -n 19 freshclam --no-dns --stdout &
 
 sleep 1
 
@@ -35,7 +35,7 @@ mv $AIDE_DIR/out.db $AIDE_DIR/in.db
 #done
 
 
-sudo -u clamav freshclam --no-dns
+sudo -u clamav freshclam --no-dns --stdout
 
 
 /Arcs/Repos/smalls/aide-clamav/aide-clamav /Arcs/Repos/smalls/aide-clamav/aide-clamav.conf &
@@ -44,3 +44,6 @@ sleep 0.1
 
 ionice -c 3 -p `pidof aide-clamav`
 chrt -b -p 0 `pidof aide-clamav`
+
+
+wait

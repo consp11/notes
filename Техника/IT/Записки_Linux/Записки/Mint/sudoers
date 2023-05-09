@@ -10,6 +10,11 @@ less /var/log/auth.log видны все входы, в том числе - не
 
 https://blog.sedicomm.com/2019/10/09/kak-zapustit-komandu-sudo-bez-vvoda-parolya-v-linux/
 
+Проверка файлов sudoers:
+	sudo -v - этой же командой поддерживается таймаут на аутентификацию
+	visudo -c
+	visudo -c _путь_к_главному_файлу_sudoers - здесь можно проверить абсолютно любой файл перед тем, как его записать в sudoers
+
 
 sudo без пароля
 man sudoers
