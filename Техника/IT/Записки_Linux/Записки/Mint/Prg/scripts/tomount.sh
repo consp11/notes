@@ -23,6 +23,10 @@
 # Это нужно, чтобы сразу ввести пароль, а не делать это много раз
 sudo echo "Начинаем расшифровку и монтирование"
 
+# Проверяем, что всё верно в sudoers
+sudo echo -en "\033[41m" ; sudo visudo -c | fgrep -iv 'parsed OK' ; sudo echo -e "\033[0m"
+
+
 # Если произошла ошибка (например, три раза неверно введён пароль)
 if [ $? -ne 0 ]
 then
@@ -64,6 +68,13 @@ export HISTIGNORE=clear:history
 sudo bash ./cp-a.sh
 ./cp.sh &> /inRam/cp.log
 
+mkdir /inRam/keys
+chmod go-rwx /inRam/keys
+# chmod u-r    /inRam/keys
+chmod ug+rwX /inRam/keys
+setfacl -m d::wX /inRam/keys
+
+
 doAIDE=1
 for a in $*
 do
@@ -93,7 +104,7 @@ done
 # sudo aide --check -c /etc/aide.conf &
 if [ $doAIDE -eq 1 ]
 then
-	sudo bash ./aide.sh & &>> /inRam/aide-clamav.log
+	sudo bash ./aide.sh &>> /inRam/aide-clamav.log &
 fi
 
 

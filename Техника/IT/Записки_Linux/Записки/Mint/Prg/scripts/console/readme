@@ -1,0 +1,38 @@
+Чтобы зайти из-под рута
+
+inet
+inettoroot
+sudo bash -i /usr/local/sbin/consoleusers/inet-root
+
+a1
+sudo bash -i /usr/local/sbin/consoleusers/a1-root
+
+inet -> ch
+inettoch
+sudo bash -i /usr/local/sbin/consoleusers/inet-ch
+
+
+Для выкладывания ключа, для безопасности, нужно создать директорию в памяти (можно использовать и veracrypt-носитель)
+В /etc/fstab /inRam может быть смонтировано примерно так
+none                /inRam      tmpfs   rw,nosuid,nodev,noexec,size=1M,mode=0777
+
+Далее создаём директорию, которая недоступна для чтения ни для кого
+mkdir /inRam/keys
+chmod go-rwx /inRam/keys
+chmod u-r    /inRam/keys
+chmod ug+wx  /inRam/keys
+setfacl -m d::wX /inRam/keys
+
+Для создания файла-эталона используем get-etalon.sh (см. команды там)
+
+
+Скрипт /home/main/users/inet/_/Linux_Записки_Prg/scripts/console/consoleuser.sh
+используется в sudoers.d примерно следующим образом
+создаётся вспомогательный скрипт (который никому не позволено менять)
+
+echo 'inet vinny = (root) PASSWD:/usr/bin/bash /usr/local/sbin/consoleusers/inet-root'  > /etc/sudoers.d/inettoroot~
+
+# Если необходимо, чтобы правило работало, тильду на конце имени файла нужно убрать
+
+В inet-ch записано следующее:
+bash /usr/local/sbin/consoleusers/consoleuser.sh /usr/local/sbin/consoleusers/key-inet-ch.etalon /inRam/keys/key-inet-ch ch

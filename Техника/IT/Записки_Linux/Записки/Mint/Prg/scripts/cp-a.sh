@@ -17,3 +17,9 @@ cat $END_FILE_OR >> $END_FILE_CP/end.sh
 
 # Копируем правила /etc/sudoers.d
 cp -rfvu /etc/sudoers.d /Arcs/Disks/Mega/MEGAsync/Записки/Mint/Prg/scripts/sudoers.d
+
+mkdir -p /usr/local/sbin/consoleusers/ --mode=a-rwx+t
+setfacl -m d::--- /usr/local/sbin/consoleusers/
+
+cp -fvu /A/_/Linux_Записки_Prg/scripts/console/* /usr/local/sbin/consoleusers/
+chmod a-rwx /usr/local/sbin/consoleusers/*

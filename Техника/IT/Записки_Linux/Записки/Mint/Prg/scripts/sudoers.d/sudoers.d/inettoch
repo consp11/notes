@@ -1,0 +1,4 @@
+inet vinny = (root) PASSWD:/usr/bin/bash -i /usr/local/sbin/consoleusers/inet-ch
+#inet vinny = NOPASSWD:sudoedit /inRam/consoleuser/
+inet vinny = (root) NOPASSWD:sudoedit /inRam/consoleuser/out, NOPASSWD:sudoedit /inRam/consoleuser/in
+

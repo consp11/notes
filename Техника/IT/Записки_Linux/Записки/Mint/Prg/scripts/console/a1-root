@@ -1,0 +1,1 @@
+bash -i /usr/local/sbin/consoleusers/consoleuser.sh /usr/local/sbin/consoleusers/key-a1-root.etalon /inRam/keys/key-a1-root

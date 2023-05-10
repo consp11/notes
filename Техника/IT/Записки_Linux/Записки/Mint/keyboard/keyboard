@@ -1,4 +1,37 @@
 Файл с конфигурацией быстрых клавиш
 /home/vinny/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
 
+Установка возможности смены на клавиатуре раскладок (из man keyboard)
+
+cd /etc/default
+sudo dte keyboard
+
+Откроется файл вида
+# KEYBOARD CONFIGURATION FILE
+# Consult the keyboard(5) manual page.
+
+XKBMODEL="pc105"
+XKBLAYOUT="us,ru"
+XKBVARIANT=",typewriter"
+XKBOPTIONS="grp:alt_shift_toggle,grp_led:scroll"
+
+BACKSPACE="guess"
+
+--------------------------------------
+
+В XKBOPTIONS как раз указаны клавиши переключения. alt_shift_toggle - это нужные клавиши.
+Если их нет, их нужно добавить. toggle - это слово всегда присутствует в конце, если я верно понял
+
+В XKBLAYOUT указано, какие именно локализации включены, а в XKBVARIANT указаны соответствующие раскладки клавиатур (если требуется)
+
+Далее нужно применить эти опции к клавиатуре. Команды для этого указаны в man keyboard
+
+Для виртуальной консоли:
+sudo setupcon
+
+Для X11:
+sudo udevadm trigger --subsystem-match=input --action=change
+
+Если это не сделать, то опции начнут работать только после перезагрузки
+
 

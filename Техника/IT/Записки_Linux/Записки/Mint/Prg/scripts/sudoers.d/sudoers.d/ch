@@ -1,0 +1,53 @@
+# Этот пользователь почти неограниченный администратор
+
+Defaults:ch verifypw
+Defaults:ch listpw
+Defaults:ch passwd_tries=0
+Defaults:ch !authenticate
+# Defaults:ch intercept
+Defaults:ch intercept_authenticate
+
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/apt-cache
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/apt-get
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/cat
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/chattr
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/chmod
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/chown
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/cp
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/dmesg
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/egrep
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/fgrep
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/getfacl
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/grep
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/journalctl
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/kill
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/killall
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/less
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/ls
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/mount
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/mv
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/ps
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/rm
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/rmdir
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/tee
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/touch
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/top
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/tree
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/truncate
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/setfacl
+
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/systemctl
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/umount
+
+ch vinny = (ALL:ALL) INTERCEPT:/usr/local/bin/apt
+
+
+ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/aa-enforce
+ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/aa-logprof
+ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/mke2fs
+ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/swapoff
+ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/swapon
+
+ch vinny = (ALL:ALL) NOEXEC:/usr/local/sbin/sdel
+
+

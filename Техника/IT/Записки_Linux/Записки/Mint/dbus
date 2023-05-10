@@ -11,3 +11,4 @@ org.freedesktop.resolve1
 sudo xed /lib/systemd/system/systemd-resolved.service
 Закомментировать
 BusName=org.freedesktop.resolve1
+(похоже, это не работает)

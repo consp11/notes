@@ -103,7 +103,7 @@ vm.swappiness=10
 ? sudo ls -al /inRam-Logs
 
 # Это группа для тех, кто может читать из /inRam-Logs
-? sudo adduser --group inram-logs
+? sudo adduser --group  inram-logs
 ? sudo gpasswd -a first inram-logs
 ? sudo gpasswd -a a1    inram-logs
 ? sudo gpasswd -a inet  inram-logs
@@ -112,6 +112,27 @@ vm.swappiness=10
 
 ? sudo gpasswd -a vinny-proxy inram-logs
 ? sudo gpasswd -a forTor      inram-logs
+
+Сделать отдельного пользователя ch, который может делать truncate, chattr, chmod, chown, usbguard, cp, rm, sdel, setfacl, getfacl, ls, cat, touch и т.п. При этом chown должен быть переименован или вообще разграничен спец. программой
+?
+cd /home
+mkdir systems
+sudo adduser ch --home /home/systems/ch
+sudo gpasswd -a ch first
+sudo gpasswd -a ch crypto
+sudo gpasswd -a ch crypto-main
+sudo gpasswd -a ch passwords
+sudo gpasswd -a ch arcs-read
+sudo gpasswd -a ch forall
+sudo gpasswd -a ch inram-logs
+
+
+
+sudo -i
+ch -L userName -e ''
+# ch == usermod
+
+скопировать файл ch с настройками sudoers
 
 
 # https://man7.org/linux/man-pages/man2/mount.2.html
@@ -282,6 +303,11 @@ sudo apt install cpufrequtils cpupower-gui
 
 
 ? Правая кнопка мыши на панели. Панель | Добавить новые элементы | Загрузка системы + Монитор частоты ЦПУ
+
+
+# Установка редактора dte и консольной tree (выводит дерево в файловой системе: tree -aL 2 /home или tree --prune -afL 5 -P '.*' /home )
+
+apt install dte, tree
 
 
 # Установка Notepadqq

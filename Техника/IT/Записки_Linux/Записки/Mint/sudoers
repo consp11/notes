@@ -32,8 +32,14 @@ Defaults listpw=all
 # Это для запуска текстовых редакторов из-под sudoedit
 Defaults editor=/usr/bin/xed
 
+Временные файлы хранятся в /tmp (можно использовать на них visudo -c)
+
+
 # Это нужно, чтобы программы, запущенные в режиме перехвата "INTERCEPT:", могли далее авторизовываться без истечения таймаута на сессию аутентификации
 Defaults intercept_authenticate
+
+Отмена флага intercept_authenticate для пользователя ch
+Defaults:ch !intercept_authenticate
 
 
 # /etc/sudoers
@@ -113,3 +119,6 @@ User_Alias PWD_LIST=%forall,%passwords
 PWD_LIST vinny = NOPASSWD:/usr/sbin/nethogs ""
 
 
+
+
+см. также примеры в ControlListForMint.txt, в т.ч. sudo adduser ch --home /home/systems/ch
