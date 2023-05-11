@@ -77,7 +77,7 @@ fi
 echo
 CD=`sudo veracrypt -t -l | wc -l`
 if [ $CD -eq 0  ]; then
-	echo -e "\033[32mВсе диски отключены"
+	echo -e "\033[32mВсе диски отключены\033[0m"
 else
 	echo -e "\033[04;41mПодключёных дисков: $CD\033[0m"
 	SL=$(($SL+$CNT))

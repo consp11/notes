@@ -1,0 +1,17 @@
+#inet vinny = (root) NOINTERCEPT:NOPASSWD:/usr/bin/unshare --net=/tmp/un/net /home/main/users/inet/bin/cg-unshare
+#inet vinny = (root) NOEXEC:NOPASSWD:/usr/bin/touch /tmp/un/net
+#inet vinny = (root) NOEXEC:NOPASSWD:/usr/bin/umount /tmp/un/net
+#inet vinny = (root) NOEXEC:NOPASSWD:/usr/sbin/ip link add inet-host type veth peer name inet-un
+#inet vinny = (root) NOEXEC:NOPASSWD:/usr/sbin/ip link set inet-un netns /tmp/un/net
+#inet vinny = (root) NOEXEC:NOPASSWD:/usr/sbin/ip addr add 10.0.3.1/24 dev inet-host
+#inet vinny = (root) NOEXEC:NOPASSWD:/usr/sbin/ip link set inet-host up
+#inet vinny = (root) NOEXEC:NOPASSWD:/usr/sbin/ip link del inet-host
+#inet vinny = (root) NOEXEC:NOPASSWD:/usr/sbin/ip link del inet-un
+
+inet vinny = (root) NOINTERCEPT:NOPASSWD:/usr/bin/unshare
+inet vinny = (root) NOEXEC:NOPASSWD:/usr/bin/touch
+inet vinny = (root) NOEXEC:NOPASSWD:/usr/bin/rm
+inet vinny = (root) NOEXEC:NOPASSWD:/usr/bin/rmdir
+inet vinny = (root) NOEXEC:NOPASSWD:/usr/bin/umount
+inet vinny = (root) NOEXEC:NOPASSWD:/usr/sbin/ip
+

@@ -5,15 +5,7 @@
 # https://ipset.netfilter.org/iptables-extensions.man.html
 # https://linux16.ru/articles/nastrojka-iptables-primery-chast-2.html
 
-# Обновления через прокси
-# https://losst.ru/nastrojka-obnovleniya-ubuntu-cherez-proksi
-# Расширения быть не должно
-sudo xed /etc/apt/apt.conf.d/vinny-proxy
-
-Вставить (http обязательно вставлять, т.к. он пользуется именно им)
-Acquire::http::Proxy "http://127.0.0.1:8889";
-Acquire::https { Proxy "https://127.0.0.1:8889"; };
-Acquire::::Proxy "true";
+Обновления через прокси: см. файл apt
 
 # Privoxy при настройке https работает только если настроить "http" на прокси
 # Acquire::https { Proxy "http://127.0.0.1:8889"; };

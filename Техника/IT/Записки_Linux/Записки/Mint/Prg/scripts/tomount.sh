@@ -69,6 +69,7 @@ sudo bash ./cp-a.sh
 ./cp.sh &> /inRam/cp.log
 
 mkdir /inRam/keys
+chown :passwords /inRam/keys
 chmod go-rwx /inRam/keys
 # chmod u-r    /inRam/keys
 chmod ug+rwX /inRam/keys

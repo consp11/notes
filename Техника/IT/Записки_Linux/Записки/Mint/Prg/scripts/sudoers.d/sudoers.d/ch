@@ -7,6 +7,11 @@ Defaults:ch !authenticate
 # Defaults:ch intercept
 Defaults:ch intercept_authenticate
 
+ch vinny = (ALL:ALL) NOEXEC:/usr/bin/dte
+ch vinny = (root) sudoedit /etc/sudoers.d/ch
+ch vinny = (root) sudoedit /etc/sudoers.d/inet-unshare
+ch vinny = (root) sudoedit /etc/sudoers.d/*
+
 ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/apt-cache
 ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/apt-get
 ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/cat
@@ -16,6 +21,7 @@ ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/chown
 ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/cp
 ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/dmesg
 ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/egrep
+ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/echo
 ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/fgrep
 ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/getfacl
 ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/grep
@@ -45,9 +51,11 @@ ch vinny = (ALL:ALL) INTERCEPT:/usr/local/bin/apt
 ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/aa-enforce
 ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/aa-logprof
 ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/mke2fs
+ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/ip
+ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/iptables
+ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/iptables-restore
 ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/swapoff
 ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/swapon
+ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/sysctl
 
 ch vinny = (ALL:ALL) NOEXEC:/usr/local/sbin/sdel
-
-

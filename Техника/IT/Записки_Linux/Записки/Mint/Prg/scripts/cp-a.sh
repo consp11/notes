@@ -21,5 +21,5 @@ cp -rfvu /etc/sudoers.d /Arcs/Disks/Mega/MEGAsync/Записки/Mint/Prg/script
 mkdir -p /usr/local/sbin/consoleusers/ --mode=a-rwx+t
 setfacl -m d::--- /usr/local/sbin/consoleusers/
 
-cp -fvu /A/_/Linux_Записки_Prg/scripts/console/* /usr/local/sbin/consoleusers/
+cp -rfvu /A/_/Linux_Записки_Prg/scripts/console/* /usr/local/sbin/consoleusers/
 chmod a-rwx /usr/local/sbin/consoleusers/*

@@ -67,8 +67,8 @@ DMESG_LIST vinny = INTERCEPT:/usr/bin/systemctl status *
 DMESG_LIST vinny = NOEXEC:/usr/bin/less /var/log/auth.log
 DMESG_LIST vinny = NOEXEC:/usr/bin/killall -u [! ]*
 
-DMESG_LIST vinny = INTERCEPT:NOPASSWD:/usr/bin/systemctl restart vinny@10010.service
-DMESG_LIST vinny = INTERCEPT:NOPASSWD:/usr/bin/systemctl restart tor.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart vinny@10010.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart tor.service
 
 # User_Alias PWD_LIST=%forall,%passwords
 # PWD_LIST vinny = NOEXEC:NOPASSWD:/usr/sbin/nethogs ""

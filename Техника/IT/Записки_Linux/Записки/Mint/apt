@@ -1,0 +1,9 @@
+# Обновления через прокси
+# https://losst.ru/nastrojka-obnovleniya-ubuntu-cherez-proksi
+# Расширения быть не должно
+sudo xed /etc/apt/apt.conf.d/vinny-proxy
+
+Вставить (http обязательно вставлять, т.к. он пользуется именно им) (apt)
+Acquire::http::Proxy "http://127.0.0.1:8889";
+# Acquire::https { Proxy "https://127.0.0.1:8889"; };
+Acquire::::Proxy "true";

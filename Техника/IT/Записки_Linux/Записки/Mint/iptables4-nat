@@ -1,0 +1,3 @@
+# sudo iptables-restore -T nat /home/main/users/inet/_/Linux_Записки/Mint/iptables4-nat
+
+# -t nat -D POSTROUTING -s 10.0.3.0/24 -o enx00093bf01a40 -j MASQUERADE

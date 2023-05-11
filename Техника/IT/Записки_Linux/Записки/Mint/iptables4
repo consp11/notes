@@ -11,14 +11,27 @@
 # -A INPUT -p ip -s 127.0.0.1  -j ACCEPT
 
 
-# -A OUTPUT -p ip -d 10.0.3.1/24 -s 10.0.3.1/24 -j ACCEPT
-# -A INTPUT -p ip -d 10.0.3.2/24 -s 10.0.3.2/24 -j ACCEPT
+# Это эксперименты с виртуальными устройствами под namespace
+-A OUTPUT -o inet-host -p icmp -s 10.0.3.1 -d 10.0.3.2 -j ACCEPT
+-A OUTPUT -o inet-un   -p icmp -s 10.0.3.2 -d 10.0.3.1 -j ACCEPT
+-A INPUT  -i inet-host -p icmp -s 10.0.3.2 -d 10.0.3.1 -j ACCEPT
+-A INPUT  -i inet-un   -p icmp -s 10.0.3.1 -d 10.0.3.2 -j ACCEPT
+
+-A OUTPUT -o inet-host -p tcp -s 10.0.3.1 --sport 1027 -d 10.0.3.2              -j ACCEPT
+-A OUTPUT -o inet-un   -p tcp -s 10.0.3.2              -d 10.0.3.1 --dport 1027 -j ACCEPT
+-A INPUT  -i inet-host -p tcp -s 10.0.3.2              -d 10.0.3.1 --dport 1027 -j ACCEPT
+-A INPUT  -i inet-un   -p tcp -s 10.0.3.1 --sport 1027 -d 10.0.3.2              -j ACCEPT
+
+# -A FORWARD -o enx00093bf01a40 -i inet-host -j ACCEPT
+# -A FORWARD -i enx00093bf01a40 -o inet-host -j ACCEPT
+
+
 
 # Пробы с unshare
-#-A OUTPUT -o veth-host -j ACCEPT
-#-A INPUT  -i veth-host -j ACCEPT
-#-A OUTPUT -o veth-net  -j ACCEPT
-#-A INPUT  -i veth-net  -j ACCEPT
+# -A OUTPUT -o inet-host -j ACCEPT
+# -A INPUT  -i inet-host -j ACCEPT
+# -A OUTPUT -o inet-un   -j ACCEPT
+# -A INPUT  -i inet-un   -j ACCEPT
 
 
 # ----------------------------------------------------------------
@@ -201,8 +214,8 @@
 # Длина пакета может быть не менее 28 байтов. Это достигается командой ping -s 0 77.88.8.88. Нормальная длина данных: 56, пакета: 84
 # -A OUTPUT -p icmp --icmp-type 8 -j ICMP_ECHO_request -m length --length 28:84  -m limit --limit 75/minute --limit-burst 12
 
-# Ограничиваем отправку данных в icmp-пакете 16-ть байтами. ping -s 16 77.88.8.88 - работает
--A OUTPUT -p icmp --icmp-type 8 -j ICMP_ECHO_request -m length --length 28:44 -m limit --limit 75/minute --limit-burst 12
+# Ограничиваем отправку данных в icmp-пакете 16-тью байтами. ping -s 16 77.88.8.88 - работает
+-A OUTPUT -p icmp --icmp-type 8 -j ICMP_ECHO_request -m length --length 28:44 -m limit --limit 120/minute --limit-burst 12
 
 
 
@@ -251,8 +264,10 @@
 
 # ----------------------------------------------------------------
 # Разрешаем обновления и прочие операции для _apt
--A OUTPUT -p tcp -m multiport --dports 80,443 -m owner --uid-owner _apt   -j ACCEPT
--A OUTPUT									  -m owner --uid-owner _apt   -j LOG --log-prefix "ipv4o.APT" --log-uid
+#-A OUTPUT -p tcp -m multiport --dports 80,443 -m owner --uid-owner _apt   -j ACCEPT
+#-A OUTPUT									  -m owner --uid-owner _apt   -j LOG --log-prefix "ipv4o.APT" --log-uid
+-A OUTPUT -o lo -p tcp --dport 8121 -m owner --uid-owner _apt   -j ACCEPT
+
 
 # Без этого не работает обновление ключей
 # Это порядка 16 пакетов на одно соединение: 8 туда, 8 обратно
