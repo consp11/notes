@@ -1,0 +1,44 @@
+#!/bin/bash
+
+if [[ -z $1 ]]
+then
+    echo 'lec command_name_for_help [e|n]'
+    exit 1
+fi
+
+second=$2
+if [[ -z $second ]]
+then
+    second='0'
+fi
+
+dir='/home/main/users/inet/_/notes/Мусор/sudo_lectures/prg_l/'
+
+filee=`realpath $dir/$1/$second`
+filer=`realpath $dir/$1/$second.r`
+file=filee
+
+isR=false
+
+if [[ ! -z $filee ]]
+then
+    file=$filer
+    isR=true
+fi
+
+if [[ ! -r $file ]]
+then
+    if [[ ! -z $file ]]
+    then
+        echo "File '$file' not exists\n('$filee' or '$filer')"
+    else
+        echo "File '$file' not readable\n('$filee' or '$filer')"
+    fi
+fi
+
+if [ isR ]
+then
+    cat $file
+else
+    bash -i $file
+fi
