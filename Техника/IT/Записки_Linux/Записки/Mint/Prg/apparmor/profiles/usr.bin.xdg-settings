@@ -1,0 +1,21 @@
+# Last Modified: Wed May 17 10:02:08 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/xdg-settings {
+  include <abstractions/base>
+  include <abstractions/bash>
+
+  /etc/ld.so.cache r,
+  /etc/ld.so.preload r,
+  /etc/locale.alias r,
+  /usr/bin/cut mrix,
+  /usr/bin/dash ix,
+  /usr/bin/dash r,
+  /usr/bin/grep mrix,
+  /usr/bin/xdg-settings r,
+  owner /home/main/users/opera/.config/xfce4/* r,
+  owner /proc/** r,
+
+}

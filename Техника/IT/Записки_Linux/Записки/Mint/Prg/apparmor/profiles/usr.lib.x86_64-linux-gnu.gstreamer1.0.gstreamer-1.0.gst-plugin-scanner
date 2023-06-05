@@ -1,0 +1,24 @@
+# Last Modified: Sun May 21 11:22:51 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner {
+  include <abstractions/base>
+
+  network netlink raw,
+
+  unix,
+
+  /dev/dri/ r,
+  /dev/dri/card0 rw,
+  /dev/dri/renderD128 rw,
+  /etc/** r,
+  /run/udev/data/* r,
+  /sys/**/ r,
+  /sys/devices/** r,
+  /usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner mr,
+  owner /home/*/.Xauthority r,
+  owner /home/main/users/*/.Xauthority r,
+
+}

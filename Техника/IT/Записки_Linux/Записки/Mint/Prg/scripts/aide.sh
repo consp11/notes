@@ -39,11 +39,30 @@ sudo -u clamav freshclam --no-dns --stdout
 
 
 /Arcs/Repos/smalls/aide-clamav/aide-clamav /Arcs/Repos/smalls/aide-clamav/aide-clamav.conf &
+bash -i /Arcs/Repos/smalls/dotnet-temp-utils/setBinExecute/exec-aide.sh &
 
-sleep 0.1
+sleep 1
 
 ionice -c 3 -p `pidof aide-clamav`
 chrt -b -p 0 `pidof aide-clamav`
 
+ionice -c 3 -p `pidof setBinExecute`
+chrt -b -p 0 `pidof setBinExecute`
+
+echo
+echo ----------------------------------------------------------------
+sudo ausearch -i -sv no
+echo ----------------------------------------------------------------
+#sudo aa-logprof
+sudo cat /var/log/audit/audit.log | egrep apparmor=\"D
+echo ----------------------------------------------------------------
+echo ----------------------------------------------------------------
+echo
 
 wait
+
+echo
+echo ----------------------------------------------------------------
+echo end
+echo ----------------------------------------------------------------
+echo

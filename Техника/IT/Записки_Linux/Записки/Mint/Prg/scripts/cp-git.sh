@@ -103,6 +103,7 @@ then
 
 	egrep -i ^POST.* $1 &> $2
 	egrep -i ^fatal:.* $1 &>> $2
+    egrep -i ^error:.* $1 &>> $2
 	cat $2
 
 	xfce4-terminal --hold -x cat $1

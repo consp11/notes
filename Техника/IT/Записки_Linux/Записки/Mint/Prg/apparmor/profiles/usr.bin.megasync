@@ -1,0 +1,55 @@
+# Last Modified: Sat May 20 00:56:40 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/megasync {
+  include <abstractions/base>
+
+  network inet dgram,
+  network inet stream,
+  network inet6 dgram,
+  network netlink dgram,
+
+  dbus,
+
+  unix,
+
+  deny /A/ r,
+  deny /A/_/ r,
+  deny /media/veracrypt1/ rw,
+  deny /media/veracrypt8/ rw,
+
+  / r,
+  /A/Mega/ r,
+  /A/Mega/** rw,
+  /dev/dri/ r,
+  /dev/tty rw,
+  /etc/** r,
+  /opt/mega/** mrwk,
+  /proc/sys/kernel/random/* r,
+  /run/dbus/system_bus_socket rw,
+  /run/systemd/resolve/stub-resolv.conf r,
+  /sys/devices/** r,
+  /usr/bin/bash mrix,
+  /usr/bin/firefox Px,
+  /usr/bin/gawk mrix,
+  /usr/bin/grep mrix,
+  /usr/bin/megasync mr,
+  /usr/bin/megasync mrix,
+  /usr/bin/xfconf-query px,
+  /usr/bin/xrdb px,
+  /usr/lib/ r,
+  /usr/lib32/ r,
+  /usr/lib64/ r,
+  /usr/local/lib/ r,
+  /usr/local/share/** r,
+  /usr/share/** r,
+  /var/cache/fontconfig/** r,
+  owner /home/main/users/mega/ r,
+  owner /home/main/users/mega/** l,
+  owner /home/main/users/mega/** rwk,
+  owner /proc/** r,
+  owner /tmp/**/ w,
+
+}

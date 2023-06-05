@@ -7,55 +7,79 @@ Defaults:ch !authenticate
 # Defaults:ch intercept
 Defaults:ch intercept_authenticate
 
+ch vinny = (ALL:ALL) INTERCEPT:/usr/local/sbin/sdel
+
 ch vinny = (ALL:ALL) NOEXEC:/usr/bin/dte
+ch vinny = (ALL:ALL) NOEXEC:/usr/bin/xed
+ch vinny = (ALL:ALL) NOINTERCEPT:/bin/bash
+#ch vinny = (ALL:ALL)   INTERCEPT:/bin/bash
+
 ch vinny = (root) sudoedit /etc/sudoers.d/ch
-ch vinny = (root) sudoedit /etc/sudoers.d/inet-unshare
 ch vinny = (root) sudoedit /etc/sudoers.d/*
 
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/apt-cache
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/apt-get
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/cat
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/chattr
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/chmod
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/chown
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/cp
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/dmesg
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/egrep
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/echo
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/fgrep
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/getfacl
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/grep
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/journalctl
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/kill
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/killall
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/less
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/ls
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/mount
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/mv
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/ps
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/rm
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/rmdir
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/tee
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/touch
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/top
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/tree
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/truncate
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/setfacl
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/bin/apt-cache
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/bin/apt-get
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/cat
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/chattr
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/chmod
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/chown
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/cp
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/dmesg
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/egrep
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/echo
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/fgrep
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/getfacl
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/grep
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/bin/gpasswd
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/journalctl
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/kill
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/killall
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/less
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/ln 
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/ls
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/bin/mintsources
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/mount
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/mv
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/netstat
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/ps
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/rm
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/rmdir
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/tail
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/tee
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/touch
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/top
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/tree
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/truncate
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/setfacl
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/watch
 
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/systemctl
-ch vinny = (ALL:ALL) INTERCEPT:/usr/bin/umount
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/bin/systemctl
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/umount
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/bin/whoami
 
-ch vinny = (ALL:ALL) INTERCEPT:/usr/local/bin/apt
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/local/bin/apt
 
-
-ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/aa-enforce
-ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/aa-logprof
-ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/mke2fs
-ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/ip
-ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/iptables
-ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/iptables-restore
-ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/swapoff
-ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/swapon
-ch vinny = (ALL:ALL) INTERCEPT:/usr/sbin/sysctl
-
-ch vinny = (ALL:ALL) NOEXEC:/usr/local/sbin/sdel
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/sbin/aa-complain
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/sbin/aa-disable
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/sbin/aa-enforce
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/sbin/aa-genprof
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/sbin/aa-logprof
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/sbin/aa-remove-unknown
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/sbin/adduser
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/sbin/apparmor_parser
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/sbin/auditctl
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/sbin/augenrules
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/sbin/aureport
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/sbin/ausearch
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/sbin/groupadd
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/sbin/groupdel
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/sbin/mke2fs
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/sbin/ip
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/sbin/iptables
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/sbin/iptables-restore
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/sbin/userdel
+ch vinny = (ALL:ALL) NOINTERCEPT:/usr/sbin/service
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/sbin/swapoff
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/sbin/swapon
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/sbin/sysctl
+ch vinny = (ALL:ALL)   INTERCEPT:/usr/sbin/visudo

@@ -73,7 +73,8 @@ chown :passwords /inRam/keys
 chmod go-rwx /inRam/keys
 # chmod u-r    /inRam/keys
 chmod ug+rwX /inRam/keys
-setfacl -m d::wX /inRam/keys
+setfacl -dm u::wX /inRam/keys
+setfacl -dm g::wX /inRam/keys
 
 
 doAIDE=1

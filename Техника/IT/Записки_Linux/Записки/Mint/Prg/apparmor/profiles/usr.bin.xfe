@@ -1,0 +1,20 @@
+# Last Modified: Wed Feb  8 00:46:21 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/xfe {
+  include <abstractions/base>
+  include <abstractions/fonts>
+  include <abstractions/lightdm>
+
+  deny /boot/ r,
+
+  /** r,
+  /usr/bin/dash mrix,
+  /usr/bin/xfe mr,
+  owner /** rw,
+  owner /home/**/.Xauthority r,
+  owner /proc/*/mounts r,
+
+}

@@ -3,6 +3,7 @@ ping -s 16 -c 1 77.88.8.88 | egrep -o '(time=.*|.*no answer.*)'
 while [ $? -ne 0 ]
 do
   sleep 5
+  sudo -v
   ping -s 16 -c 1 77.88.8.88 | egrep -o '(time=.*|.*no answer.*)'
 done
 

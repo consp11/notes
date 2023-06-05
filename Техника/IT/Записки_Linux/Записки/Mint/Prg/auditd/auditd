@@ -1,0 +1,73 @@
+sudo apt-get -y install auditd
+
+auditctl        управление
+autrace         (трассировка, аналогично strace)
+ausearch        работа с логами
+aureport        генерация отчётов о работе системы
+
+/etc/audit/auditd.conf
+log_file = /var/log/audit/audit.log
+
+Вывести список имеющихся правил
+auditctl -l
+
+Добавить правило, удалить правило, удалить все правила
+auditctl -a
+auditctl -d
+auditctl -D
+
+
+# В /etc/audit/audit.rules ничего не записываем: оно автоматически перезаписывается
+/etc/audit/rules.d/
+
+Перезапуск сервиса при изменении правил /etc/audit/rules.d/
+sudo service auditd restart
+
+
+sudo dte /etc/audit/rules.d/bin.rules
+## Для проверки
+sudo augenrules --load
+sudo service auditd restart
+sudo service auditd status
+sudo auditctl -l
+sudo truncate -s 0 /var/log/audit/audit.log /var/log/audit/audit.log.1 /var/log/audit/audit.log.2 /var/log/audit/audit.log.3 /var/log/audit/audit.log.4
+# sudo sdel -- /var/log/audit/audit.log*
+sudo cat /var/log/audit/audit.log | fgrep -i UsrBinXWatcher
+sudo ausearch -k UsrBinXWatcher
+
+# Читаем логи: неуспех операций, все операции
+sudo ausearch -i -sv no
+
+
+# указываем, что делать в критической ситуации (например, при переполнении буферов): 
+0 - ничего не делать; 1 - отправлять сообщение в dmesg, 2 -  отправлять ядро в панику
+-f 1
+
+
+auditctl -a <список>, <действие> -S <имя системного вызова> -F <фильтры>
+
+    task — события, связанные с созданием новых процессов;
+    entry — события, которые имеют место при входе в системный вызов;
+    exit — события, которые имеют место при выходе из системного вызова;
+    user — события, использующие параметры пользовательского пространства;
+    exclude — используется для исключения событий.
+
+Затем указывается, что нужно делать после наступления события. Здесь возможны два варианта: always (события будут записываться в журнал) и never (не будут). 
+
+После опции -S идёт имя системного вызова, при котором событие нужно перехватить (open, close и т.п.).
+После опции -F указываются дополнительные параметры фильтрации. Например, если нам требуется вести аудит обращений к файлам из каталога /etc, правило будет выглядеть так:
+
+sudo auditctl -a exit,always -S open -F path =/etc/ -F perm = aw -k NameOfRule
+
+Аббревиатура aw означает следующее: а — изменение атрибута (attribute change), w — запись (write). Формулировка perm = aw указывает, что для директории /etc нужно отслеживать все факты изменения атрибутов (а — attribute change) и w (w — write).
+
+Установка правила, по которому мы отслеживаем неудачные запуски в директории /usr/bin
+sudo auditctl -w /usr/bin -p x -F success=0 -k UsrBinXWatcher -F uid=opera
+# -a always,exit -S all -F dir=/usr/bin -F perm=x -F success=0 -F key=UsrBinXWatcher
+Вместо uid можно сделать gid - фильтрация по группе
+
+Посмотреть записи логов с этим правилом
+sudo ausearch -k UsrBinXWatcher
+
+Если отозваны права на запуск /usr/bin/X или /usr/bin/X11, то запуск даже в логах не отображается
+sudo setfacl -Rx g:noaccess_sbin /usr/bin/X /usr/bin/X11

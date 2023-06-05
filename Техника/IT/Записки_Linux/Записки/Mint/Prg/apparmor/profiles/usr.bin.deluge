@@ -1,0 +1,55 @@
+# Last Modified: Sat May 27 20:37:02 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/deluge {
+  include <abstractions/base>
+  include <abstractions/python>
+
+  network inet dgram,
+  network inet stream,
+  network inet6 dgram,
+  network inet6 stream,
+  network netlink dgram,
+  network netlink raw,
+
+  dbus,
+
+  unix,
+
+  deny /.dpkg-old r,
+
+  / r,
+  /Arcs/ r,
+  /Arcs/Prg/ r,
+  /Arcs/Prg/** rwk,
+  /Arcs/Prg/**/ r,
+  /etc/ r,
+  /etc/** r,
+  /inRamA/ r,
+  /inRamA/** r,
+  /run/dbus/system_bus_socket rw,
+  /run/systemd/resolve/stub-resolv.conf r,
+  /run/systemd/userdb/ r,
+  /run/systemd/userdb/io.systemd.DynamicUser rw,
+  /usr/bin/ r,
+  /usr/bin/deluge r,
+  /usr/bin/firefox Px,
+  /usr/bin/python3.10 ix,
+  /usr/bin/uname Px,
+  /usr/local/share/** r,
+  /usr/local/share/fonts/** r,
+  /usr/share/** r,
+  /var/cache/fontconfig/** r,
+  /var/lib/flatpak/exports/share/** r,
+  owner /home/main/users/deluge/ r,
+  owner /home/main/users/deluge/** rw,
+  owner /inRamA/** w,
+  owner /proc/** r,
+  owner /proc/**/ r,
+  owner /tmp/** r,
+  owner /tmp/** w,
+  owner /var/tmp/** w,
+
+}

@@ -1,0 +1,44 @@
+Добавить группу noaccess_sbin
+
+sudo groupadd noaccess_sbin
+sudo groupadd noaccess_sbin_deluge
+sudo groupadd noaccess_sbin_mega
+
+sudo gpasswd -a opera noaccess_sbin
+sudo gpasswd -a tor-browser noaccess_sbin
+sudo gpasswd -a quite-rss noaccess_sbin
+sudo gpasswd -a deluge noaccess_sbin_deluge
+sudo gpasswd -a mega noaccess_sbin_mega
+
+
+cd /usr/sbin
+
+# Так делать не будем
+# sudo setfacl -RPm g:noaccess_sbin:- /usr/sbin
+# sudo setfacl -dRPm g:noaccess_sbin:- /usr/sbin
+# sudo setfacl -dm g:noaccess_sbin:- /usr/bin
+
+# Это тоже делать не надо
+sudo setfacl -m g:noaccess_sbin:- /usr/bin/chown /usr/bin/chmod
+sudo setfacl -m g:noaccess_sbin:- /usr/bin/passwd /usr/bin/gpasswd
+sudo setfacl -m g:noaccess_sbin:- /usr/bin/mount /usr/bin/df
+# Выдаёт версию Linux
+sudo setfacl -m g:noaccess_sbin:- /usr/bin/uname
+sudo setfacl -m g:noaccess_sbin:- /usr/bin/uptime /usr/bin/who
+sudo setfacl -m g:noaccess_sbin:- /usr/bin/netstat /usr/bin/ip
+sudo setfacl -m g:noaccess_sbin:- /usr/bin/*trace /usr/bin/ld /usr/bin/ldd /usr/bin/nm
+sudo setfacl -m g:noaccess_sbin:- /usr/bin/wget /usr/bin/GET /usr/bin/POST /usr/bin/HEAD /usr/bin/lwp-request /usr/bin/mail
+sudo setfacl -m g:noaccess_sbin:- /usr/bin/gcc /usr/bin/as
+
+# К питону Linux обращается для того, чтобы получить предложения, если введена неверная команда
+# Так что это блокировать не всегда хорошо
+sudo setfacl -m g:noaccess_sbin:- /usr/bin/python*
+
+Далее работать с вот этим:
+/Arcs/Repos/smalls/dotnet-temp-utils/setBinExecute/
+
+sudo bash /Arcs/Repos/smalls/dotnet-temp-utils/setBinExecute/exec.sh > /tmp/ex.sh
+sudo bash /tmp/ex.sh
+
+Настроить белый список для тех программ, которые нужно запускать
+

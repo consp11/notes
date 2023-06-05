@@ -1,0 +1,23 @@
+# Last Modified: Tue May 16 16:11:04 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/local/sbin/sdel {
+  include <abstractions/base>
+  include <abstractions/lightdm>
+
+  capability sys_nice,
+
+  /** rwk,
+  /**/ rwk,
+  /sys/devices/system/node/possible rwk,
+  /sys/fs/cgroup/** rw,
+  /usr/bin/mv mrix,
+  /usr/local/sbin/sdel mrix,
+  /usr/share/** rwk,
+  /usr/share/dotnet/** mr,
+  owner /proc/** rw,
+  owner /tmp/* rw,
+
+}

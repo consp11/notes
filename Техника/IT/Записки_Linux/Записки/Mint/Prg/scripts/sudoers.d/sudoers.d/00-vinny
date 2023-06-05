@@ -33,6 +33,10 @@ DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/dmesg -e
 DMESG_LIST vinny = NOEXEC:/usr/bin/dmesg -ec
 DMESG_LIST vinny = NOEXEC:/usr/sbin/iptables-restore /etc/iptables/rules.v4
 
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/apt-get update
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/apt-get upgrade
+
+
 # Для cpulimit нужно определять конкретные параметры, т.к. иначе он может запустить любую программу
 DMESG_LIST vinny = NOEXEC:/usr/bin/cpulimit -m -l [0-9]* -p [0-9]*
 DMESG_LIST vinny = NOEXEC:/usr/bin/cpulimit    -l [0-9]* -p [0-9]*
@@ -62,13 +66,22 @@ DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/chattr -R +i -- *
 
 # DMESG_LIST vinny = /usr/bin/bash /A/_/keys-var/clamav-3.sh
 
-DMESG_LIST vinny = INTERCEPT:/usr/bin/systemctl status *
+DMESG_LIST vinny = NOINTERCEPT:/usr/bin/systemctl status *
 
 DMESG_LIST vinny = NOEXEC:/usr/bin/less /var/log/auth.log
 DMESG_LIST vinny = NOEXEC:/usr/bin/killall -u [! ]*
 
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart vinny@10010.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart vinny@tor.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart tor.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart tor@8081.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart tor@8084.service
+
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status vinny@10010.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status vinny@tor.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor@8081.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor@8084.service
 
 # User_Alias PWD_LIST=%forall,%passwords
 # PWD_LIST vinny = NOEXEC:NOPASSWD:/usr/sbin/nethogs ""

@@ -11,8 +11,8 @@ cp -fvu /Arcs/Big/Crypto/keys-var /Arcs/Disks/Mega/MEGAsync/Keys/
 
 
 # Обновляем резервные копии скриптов в Mega
-cp -fvu /media/veracrypt1/*.sh /home/a1/_/Linux_Записки_Prg/scripts/
-cp -fvu /media/veracrypt8/*.sh /home/a1/_/Linux_Записки_Prg/scripts/
+cp -fvu /media/veracrypt1/*.sh /A/_/Linux_Записки_Prg/scripts/
+cp -fvu /media/veracrypt8/*.sh /A/_/Linux_Записки_Prg/scripts/
 # Это делаем отдельно после монтирования
 #cp -fvu /home/main/bin/*.sh    /home/a1/_/Linux_Записки_Prg/scripts/exec
 

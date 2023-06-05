@@ -1,0 +1,20 @@
+# Last Modified: Wed May 31 15:17:02 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/sbin/ldconfig.real {
+  include <abstractions/base>
+
+  capability sys_chroot,
+
+  /etc/ld.so.cache r,
+  /usr/sbin/ldconfig.real mr,
+  owner /etc/ld.so.cache rw,
+  owner /etc/ld.so.cache~ rw,
+  owner /usr/lib/ r,
+  owner /usr/local/lib/ r,
+  owner /var/** r,
+  owner /var/** w,
+
+}

@@ -1,1 +1,1 @@
-bash -i /usr/local/sbin/consoleusers/consoleuser.sh /usr/local/sbin/consoleusers/key-inet-root.etalon /inRam/keys/key-inet-root
+bash -i /usr/local/sbin/consoleusers/consoleuser.sh /usr/local/sbin/consoleusers/key-inet-root.etalon /inRam/keys/key-inet-root root inet

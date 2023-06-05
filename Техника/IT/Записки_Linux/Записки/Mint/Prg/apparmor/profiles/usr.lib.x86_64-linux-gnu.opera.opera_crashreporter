@@ -1,0 +1,21 @@
+# Last Modified: Sun May 28 16:44:31 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/lib/x86_64-linux-gnu/opera/opera_crashreporter {
+  include <abstractions/base>
+
+  capability sys_ptrace,
+
+  signal send set=cont peer=/usr/lib/x86_64-linux-gnu/opera/opera,
+
+  unix,
+
+  /proc/sys/kernel/yama/ptrace_scope r,
+  /usr/lib/x86_64-linux-gnu/opera/opera_crashreporter mr,
+  owner /home/main/users/*/.config/opera/** w,
+  owner /home/main/users/opera/.config/opera/** r,
+  owner /proc/**/ r,
+
+}

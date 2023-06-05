@@ -44,20 +44,21 @@
 # Для игрового аккаунта
 
 # -A OUTPUT -m owner --uid-owner game  -j ACCEPT
--A OUTPUT -m owner --uid-owner gamecommand  -j ACCEPT
+# -A OUTPUT -m owner --uid-owner gamecommand  -j ACCEPT
 
 # Для аккаунта для разработки
 -A OUTPUT -m owner --uid-owner dev  -j ACCEPT
 
-# TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Для Opera
 -A OUTPUT -m owner --uid-owner opera  -j ACCEPT
 
 
-# Описания портнов в /home/main/users/inet/_/Privoxy_МСЭ/desc.txt
+# Описания портов в /home/main/users/inet/_/Privoxy_МСЭ/desc.txt
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 8888  -m owner --uid-owner a1    -j ACCEPT
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 8889  -m owner --uid-owner a1    -j ACCEPT
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 8118  -m owner --uid-owner inet  -j ACCEPT
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 8119  -m owner --uid-owner inet  -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 8120  -m owner --uid-owner inet  -j ACCEPT
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 8888  -m owner --uid-owner inet  -j ACCEPT
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 8889  -m owner --uid-owner inet  -j ACCEPT
 
@@ -96,22 +97,16 @@
 -A INPUT  -p tcp -i vboxnet0 -s 192.168.56.1 -j VBoxO
 -A OUTPUT -p tcp -o vboxnet0 -s 192.168.56.1 -j VBoxO
 
-# -A VBoxO  -d 192.168.56.100 -j ACCEPT
-# -A VBoxO  -d 192.168.56.101 -j ACCEPT
-# -A VBoxO  -d 192.168.56.104 -j ACCEPT
-# -A VBoxO  -d 192.168.56.108 -j ACCEPT
-# -A VBoxO  -d 192.168.56.111 -j ACCEPT
+-A VBoxO  -d 192.168.56.101 -j ACCEPT
+-A VBoxO  -d 192.168.56.108 -j ACCEPT
 
 -N VBoxI
 
 -A INPUT  -i vboxnet0 -p tcp -d 192.168.56.1 -j VBoxI
 -A OUTPUT -o vboxnet0 -p tcp -d 192.168.56.1 -j VBoxI
 
-# -A VBoxI -s 192.168.56.100 -p tcp --dport 40081 -j ACCEPT
-# -A VBoxI -s 192.168.56.101 -p tcp --dport 40081 -j ACCEPT
-# -A VBoxI -s 192.168.56.104 -p tcp --dport 40084 -j ACCEPT
-# -A VBoxI -s 192.168.56.108 -p tcp --dport 40088 -j ACCEPT
-# -A VBoxI -s 192.168.56.111 -p tcp --dport 40091 -j ACCEPT
+-A VBoxI -s 192.168.56.101 -p tcp --dport 40081 -j ACCEPT
+-A VBoxI -s 192.168.56.108 -p tcp --dport 40088 -j ACCEPT
 
 
 -A INPUT  -i vboxnet0 -p udp -d 224.0.0.0/8 -j REJECT
@@ -233,7 +228,8 @@
 
 # ----------------------------------------------------------------
 # Разрешаем обращение в сеть для пользователя с именем privoxy (смотрим вывод id privoxy и далее указываем в правилах его userid)
--A OUTPUT -p tcp -m owner --uid-owner vinny-proxy -j ACCEPT
+-A OUTPUT             -p tcp -m owner --uid-owner vinny-proxy     -j ACCEPT
+-A OUTPUT -o enx00093bf01a40 -m owner --uid-owner vinny-proxy-tor -j REJECT
 
 # ----------------------------------------------------------------
 -N NTP
@@ -270,12 +266,14 @@
 
 
 # Без этого не работает обновление ключей
-# Это порядка 16 пакетов на одно соединение: 8 туда, 8 обратно
--A OUTPUT -p tcp -m multiport --dports 80,443 -m owner --uid-owner root -j ACCEPT -m limit --limit 8/hour --limit-burst 512
+# Это порядка 16 пакетов на одно соединение: 8 туда, 8 обратно: то есть 8 пакетов в час
+# Также это нужно для команд типа sudo add-apt-repository ppa:deluge-team/stable
+-A OUTPUT -p tcp -m multiport --dports 80,443 -m owner --uid-owner root -j ACCEPT -m limit --limit 24/hour --limit-burst 512
+# -A OUTPUT -p tcp -m multiport --dports 80,443 -m owner --uid-owner root -j ACCEPT
 
 
 # Разрешаем root обращаться к модему Yota
--A OUTPUT -j ACCEPT -s 10.0.0.10 -d 10.0.0.1 -m limit --limit 8/hour --limit-burst 128 -m owner --uid-owner root
+-A OUTPUT -j ACCEPT -s 10.0.0.10 -d 10.0.0.1 -m limit --limit 16/hour --limit-burst 128 -m owner --uid-owner root
 
 
 # ----------------------------------------------------------------
@@ -284,10 +282,21 @@
 # -A OUTPUT -p tcp -m owner --uid-owner forTor -j ACCEPT
 -A OUTPUT -m owner --uid-owner forTor -j ACCEPT
 
+# sudo netstat -4pln | fgrep tor
 
-# -A OUTPUT -o lo -p tcp --dport 8080 -m owner ! --uid-owner privoxy -j REJECT
-# -A OUTPUT -o lo -p tcp --dport 8081 -m owner ! --uid-owner privoxy -j REJECT
-# -A OUTPUT -o lo -p tcp --dport 8084 -m owner ! --uid-owner privoxy -j REJECT
+-A OUTPUT -o lo -p tcp --dport 8080 -m owner ! --uid-owner vinny-proxy     -j REJECT
+
+-A OUTPUT -o lo -p tcp --dport 8081 -m owner ! --uid-owner vinny-proxy-tor -j REJECT
+-A OUTPUT -o lo -p tcp --dport 8084 -m owner ! --uid-owner vinny-proxy-tor -j REJECT
+-A OUTPUT -o lo -p tcp --dport 8088 -m owner ! --uid-owner vinny-proxy-tor -j REJECT
+-A OUTPUT -o lo -p tcp --dport 8091 -m owner ! --uid-owner vinny-proxy-tor -j REJECT
+-A OUTPUT -o lo -p tcp --dport 8180 -m owner ! --uid-owner vinny-proxy-tor -j REJECT
+
+-A OUTPUT -o lo -p tcp --dport 8081 -m owner   --uid-owner vinny-proxy-tor -j ACCEPT
+-A OUTPUT -o lo -p tcp --dport 8084 -m owner   --uid-owner vinny-proxy-tor -j ACCEPT
+-A OUTPUT -o lo -p tcp --dport 8088 -m owner   --uid-owner vinny-proxy-tor -j ACCEPT
+-A OUTPUT -o lo -p tcp --dport 8091 -m owner   --uid-owner vinny-proxy-tor -j ACCEPT
+-A OUTPUT -o lo -p tcp --dport 8180 -m owner   --uid-owner vinny-proxy-tor -j ACCEPT
 
 
 # ----------------------------------------------------------------
@@ -295,16 +304,28 @@
 # Это должно быть ниже, чем DNS, т.к. DNS разграничивается и на lo
 # Также это должно быть ниже, чем tor, т.к. для TOR доступ также ограничивается
 
+# sudo netstat -4pln
+# sudo netstat -4pln | fgrep vinny
 # @proxy-denied
 # Запрещаем локальные порты прокси-серверов
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 1027  -j REJECT
 -A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 10010 -j REJECT
 -A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8080  -j REJECT
 -A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8081  -j REJECT
 -A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8084  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8088  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8091  -j REJECT
 -A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8112  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8119  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8120  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8121  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8180  -j REJECT
 -A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8888  -j REJECT
 -A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8889  -j REJECT
 -A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8890  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8891  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8892  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 9001  -j REJECT
 -A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 40088 -j REJECT
 -A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 40091 -j REJECT
 

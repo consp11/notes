@@ -1,0 +1,263 @@
+~/.config/firejail
+
+man firejail-profile
+man firejail
+
+
+sudo apt-get install -y firejail
+
+https://github.com/netblue30/firejail.git
+https://unixhow.com/2549/bezopasnyj-zapusk-nenadezhnyx-prilozhenij-v-linux
+https://nanomode.ru/how/kak-ustanovit-i-ispolzovat-firejail-v-ubuntu/
+
+net none
+dbus-system none
+dbus-user none
+x11 none
+
+
+Список всех изолированных приложений
+firejail --list
+firejail --top
+
+firejail --tracelog --profile=profilename program
+tracelog будет выводить в syslog все блокированные запросы к blacklist
+profile указывает путь к профилю
+sudo cat syslog | fgrep firejail
+
+
+Остановка процесса с идентификатором PID
+firejail --shutdown=PID
+
+Запуск программы (запускаем xed) в приватном режиме (скрытые файлы в домашней директории)
+firejail --private xed
+
+Просто запуск
+firejail xed
+
+Использование в качестве домашнего каталога иного каталога
+firejail --private=/A/notes/Мусор/sudo_lectures/prg_l/ xed
+
+В этом случае каталог будет казаться расположенным по обычному пути к домашнему каталогу, но содержимое будет такое, как у установленного каталога. Каталог должен принадлежать соответствующему пользователю
+
+
+Профили хранятся в /etc/firejail
+# Если собрано из исходников, то  path-to-firejail/etc/
+
+Профили конкретного пользователя должны быть размещены в каталоге
+~/.config/firejail
+mkdir -p  ~/.config/firejail/
+
+Если мы хотим расширить профиль, можно создать новый и сослаться на старый
+
+cat ~/.config/firejail/ping.profile
+include /etc/firejail/ping.profile
+net none
+
+При запуске без этого профиля ping даст ответ
+С запуском из-под этого профиля будет следующее
+firejail ping 77.88.8.88
+.Reading profile /home/main/users/inet/.config/firejail/ping.profile
+ping: connect: Network is unreachable
+
+127.0.0.1 - доступен
+
+# man firejail-profile
+
+Для ограничения доступа приложения к некоторым каталогам внести в профиль:
+blacklist ${HOME}/Documents
+Это же можно сделать
+blacklist ~/Documents
+
+Можно использовать "*" и ${PATH} - то есть будет подставляться всё, что есть в PATH
+
+Файлы могут содержать пробелы (даже без кавычек)
+
+Файлы только для чтения
+read-only /inRam
+
+Обратная картина:
+read-write
+
+tmpfs dir
+Делает tmpfs папку в директории, принадлежащей текущему пользователю
+
+private
+Домашняя директория и корень файловой системы сокрыты. При этом туда можно сохранять, но изменения будут не видны из-вне песочницы
+
+private directory
+Использование директории в качестве домашней, см. выше
+
+private-cache
+Директория .cache в домашней директории будет очищена после закрытия песочницы
+
+private-cwd directory
+Устанавливает рабочую директорию (то есть workingdir)
+
+private-etc file,directory
+Приватная /etc с копированием туда определённых файлов. Все изменения отменяются после выхода из песочницы
+
+private-home file,directory
+Приватная домашняя директория
+
+Аналогично, private-lib file,directory; private-opt file,directory; private-tmp; private-bin; private-srv; writable-etc и т.п.
+
+whitelist
+даёт возможность изменять данные файлы вне песочницы
+
+
+apparmor
+Включает обвязку apparmor
+
+caps.drop capability,capability,capability
+Запрещает определённые возможности Linux
+
+caps.drop all
+Все запрещает
+
+caps.keep capability,capability,capability
+Разрешает
+
+memory-deny-write-execute
+??? Похоже, не позволяет создавать одновременно исполняемые и запускаемые участки памяти
+
+nonewprivs
+Запрет на получение новых привилегий. Например, невозможно их получить через suid
+
+noroot
+Только один аккаунт в пространстве имён. Нет root
+
+protocol protocol1,protocol2,protocol3
+Фильтр протоколов: unix, inet, inet6, netlink, packet and bluetooth
+
+seccomp
+seccomp.32
+??? Блокирует системные вызовы????  See man 1 firejail 
+
+seccomp syscall,syscall,syscall
+seccomp.32 syscall,syscall,syscall
+блокирование конкретных вызовов
+
+seccomp.drop syscall,syscall,syscall
+тоже блокирование, но, кажется, выше блокирование идёт на вершине списка вызовов
+
+x11
+Песочница для X11
+
+x11 none
+Наоборот, не позволяет x11
+
+dbus-system none
+полностью запрещает системный dbus без возможности его переопределить другими фильтрами
+
+dbus-user none
+полностью запрещает сессионный dbus без возможности его переопределить другими фильтрами
+
+dbus-system filter
+Фильтрованный доступ с помощью команд dbus-system.talk; dbus-system.own
+
+dbus-system.own org.gnome.ghex.*
+Позволяет доступ приложению по соотв. пути, в том числе, его взятие себе в пользование
+
+dbus-system.talk org.freedesktop.Notifications
+Разрешение на обещение по этому адресу
+
+dbus-system.see org.freedesktop.Notifications
+можно видеть, но не общаться
+
+dbus-system.call  org.freedesktop.Notifications=org.freedesktop.Notifications.*@/org/freedesktop/Notifications
+можно вызывать методы
+
+Аналогичные методы для сессионного dbus
+
+cgroup /sys/fs/cgroup/g1/tasks
+песочница будет работать в отдельной указанной cgroups
+
+nice -5
+Приоритет
+
+rlimit-as 123456789012
+Максимальное ограничение на виртуальную память
+
+rlimit-cpu 123
+Максимальное время cpu во секундах. Только целые числа. Снимает процесс, если потрачено больше времени
+
+rlimit-fsize 1024
+Можно создавать файлы, размером не более 1кб
+
+timeout hh:mm:ss
+снимает процесс в определённое время
+
+есть и другие ограничения
+
+allusers
+видны домашние директории других пользователей. По-умолчанию видна лишь домашняя директория текущего пользователя (это буквально - другие директории не видны)
+
+noinput
+устройства ввода. Не очень понял, о чём это - клавиатура точно работает
+nosound
+нет звука
+novideo
+нет захвата видео
+
+shell none
+программы не запускаются через оболочку
+
+и т.п.
+
+defaultgw address
+gateway по умолчанию (сетевой шлюз по этому адресу)
+
+dns address
+dns-сервер по этому адресу
+
+hostname name
+Имя хоста
+hosts-file file
+Это /etc/hosts
+
+net eth0
+ip 10.10.20.56
+Создать интерфейс и привязать к нему ip-адрес
+
+net eth0
+ip none
+Никаких адресов и шлюзов для этого интерфейса
+
+net br0
+ip dhcp
+Использовать dhcp. Для этого он должен быть установлен и запущен в песочнице
+
+Для ipv6 используются аналогичные команды ip6
+
+mac address
+добавить верный mac-адрес
+
+mtu number
+другой размер mtu
+
+net bridge_interface
+создание чего-то типа NAT, если я верно понял. Автоматически
+
+net none
+неприсоединённое ни к чему сетевое пространство имён (loopback есть)
+
+netfilter
+netfilter filename
+Похоже, включается стандартный netfilter
+
+netns namespace
+Выполнить программу в отдельно сконфигурированном сетевом пространстве имён (созданном с помощью ip netns)
+При попытке выполнить это не получилось - сеть присутствовала там, где должна была отсутствовать
+
+veth-name name
+Использовать для наименования виртуального сетевого устройства
+
+deterministic-exit-code
+возвращать после выхода из песочницы код выхода из дочернего процесса
+
+join-or-start sandboxname
+присоединиться к уже созданной песочнице. Аналог запуска с опцией firejail --join=sandboxname
+Аналог name sandboxname - устанавливает имя песочницы
+
+man firemon

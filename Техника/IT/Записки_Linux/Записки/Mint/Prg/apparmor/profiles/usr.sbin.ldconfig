@@ -1,0 +1,15 @@
+# Last Modified: Thu May 18 08:20:27 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/sbin/ldconfig {
+  include <abstractions/base>
+  include <abstractions/bash>
+
+  /usr/bin/dash ix,
+  /usr/bin/dash r,
+  /usr/sbin/ldconfig r,
+  /usr/sbin/ldconfig.real px,
+
+}

@@ -25,7 +25,7 @@ unset, чтобы удалить значение
 
 To set permanent environment variables for all users, create an .sh file in the /etc/profile.d folder:
 
-sudo nano /etc/profile.d/[filename].sh
+sudo dte /etc/profile.d/[filename].sh
 
 
 Кажется, это более старое

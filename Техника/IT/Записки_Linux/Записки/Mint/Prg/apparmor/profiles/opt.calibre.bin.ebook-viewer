@@ -1,0 +1,67 @@
+# Last Modified: Mon May 22 21:45:52 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/opt/calibre/bin/ebook-viewer {
+  include <abstractions/base>
+
+  capability sys_admin,
+  capability sys_chroot,
+  capability sys_ptrace,
+
+  deny network inet6 dgram,
+
+  network inet dgram,
+  network netlink raw,
+
+  dbus,
+
+  unix,
+
+  deny /home/main/users/*/.config/chromium/*/ r,
+  deny /home/main/users/*/.mozilla/*/ r,
+  deny /media/veracrypt1/ rw,
+  deny /media/veracrypt8/ rw,
+
+  /dev/dri/ r,
+  /dev/zero mrw,
+  /etc/** r,
+  /home/main/users/inet/Docs/** r,
+  /opt/calibre/** mr,
+  /opt/calibre/bin/calibre-parallel mrix,
+  /opt/calibre/calibre-parallel mrix,
+  /opt/calibre/libexec/QtWebEngineProcess mrix,
+  /proc/ r,
+  /proc/** r,
+  /run/systemd/resolve/stub-resolv.conf r,
+  /sys/devices/** r,
+  /usr/bin/x86_64-linux-gnu-gcc-11 cx,
+  /usr/local/share/** r,
+  /usr/sbin/ldconfig Px,
+  /usr/share/** r,
+  /var/cache/fontconfig/** r,
+  owner /dev/shm/* rw,
+  owner /home/main/users/*/.Xauthority r,
+  owner /home/main/users/*/.cache/calibre/** rwlk,
+  owner /home/main/users/*/.cache/mesa_shader_cache/* rw,
+  owner /home/main/users/*/.cache/mesa_shader_cache/** r,
+  owner /home/main/users/*/.config/QtProject.conf r,
+  owner /home/main/users/*/.config/calibre/** rw,
+  owner /home/main/users/*/.config/user-dirs.dirs r,
+  owner /home/main/users/*/.local/share/** r,
+  owner /home/main/users/inet/.cache/qtshadercache-*/** r,
+  owner /proc/** w,
+  owner /proc/**/ r,
+  owner /run/user/*/ICEauthority r,
+  owner /run/user/*/bus rw,
+  owner /tmp/** rw,
+
+
+  profile /usr/bin/x86_64-linux-gnu-gcc-11 {
+    include <abstractions/base>
+
+    /usr/bin/x86_64-linux-gnu-gcc-11 mr,
+
+  }
+}

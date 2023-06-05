@@ -1,0 +1,25 @@
+# Last Modified: Wed May 31 15:17:01 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/lsb_release {
+  include <abstractions/base>
+  include <abstractions/python>
+
+  /etc/ld.so.cache r,
+  /etc/ld.so.preload r,
+  /usr/bin/ r,
+  /usr/bin/dpkg-query mrix,
+  /usr/bin/lsb_release r,
+  /usr/bin/python3.10 ix,
+  /usr/bin/python3.10 r,
+  /usr/share/** r,
+  /var/lib/dpkg/* r,
+  /var/lib/dpkg/** r,
+  /var/lib/dpkg/*/ r,
+  owner /etc/nsswitch.conf r,
+  owner /etc/passwd r,
+  owner /proc/**/ r,
+
+}

@@ -1,0 +1,9 @@
+User_Alias SDEL_LIST=vr,%first,%passwords,%crypto
+SDEL_LIST vinny = INTERCEPT:NOPASSWD:/usr/local/sbin/sdel
+SDEL_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/mv
+
+ALL vinny = NOPASSWD:/usr/sbin/swapoff
+ALL vinny = NOPASSWD:/usr/bin/umount
+
+ALL vinny = NOPASSWD:/usr/local/bin/unmount.sh
+

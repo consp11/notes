@@ -79,6 +79,9 @@ netstat -a4n
 
 sudo netstat -ltnp | grep -w ':80'
 
+sudo netstat -4pln
+
+
 sudo lsof -i
 
 

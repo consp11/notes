@@ -1,0 +1,11 @@
+# Last Modified: Tue May 16 16:00:13 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/mono-sgen flags=(complain) {
+  include <abstractions/base>
+
+  /usr/bin/mono-sgen mr,
+
+}

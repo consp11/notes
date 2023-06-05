@@ -1,0 +1,16 @@
+# Last Modified: Tue May 23 20:33:00 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/xfconf-query {
+  include <abstractions/base>
+
+  dbus,
+
+  /etc/** r,
+  /proc/filesystems r,
+  /usr/bin/xfconf-query mr,
+  owner /run/user/*/bus rw,
+
+}

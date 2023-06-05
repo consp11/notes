@@ -1,0 +1,29 @@
+# Last Modified: Sun May  7 12:03:46 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/sbin/nethogs {
+  include <abstractions/base>
+  include <abstractions/lightdm>
+  include <abstractions/ubuntu-konsole>
+
+#  capability dac_read_search,
+  capability net_raw,
+#  capability syslog,
+
+  network packet raw,
+  deny ptrace,
+#  ptrace read peer=/usr/bin/**,
+#  ptrace read peer=/usr/lib/**,
+#  ptrace read peer=/usr/sbin/**,
+#  ptrace read peer=unconfined,
+
+  /proc/*/cmdline r,
+  /proc/*/fd/ r,
+  /proc/*/net/tcp r,
+  /proc/*/net/tcp6 r,
+  /usr/sbin/nethogs mr,
+  owner /proc/ r,
+
+}

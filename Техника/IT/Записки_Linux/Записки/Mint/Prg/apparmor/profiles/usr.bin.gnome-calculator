@@ -1,0 +1,21 @@
+# Last Modified: Sat May 27 20:10:43 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/gnome-calculator {
+  include <abstractions/base>
+  include <abstractions/dbus-session>
+  include <abstractions/lightdm>
+
+  /run/dbus/system_bus_socket mrwk,
+  /usr/bin/gnome-calculator mr,
+  owner /home/*/users/inet/.Xauthority r,
+  owner /home/*/users/inet/.config/dconf/user r,
+  owner /home/main/users/*/.cache/yelp/WebKitCache/** rw,
+  owner /home/main/users/*/.config/mimeapps.list r,
+  owner /home/main/users/*/.local/share/** r,
+  owner /home/main/users/*/.local/share/** w,
+  owner /home/main/users/*/.local/share/**/ r,
+
+}

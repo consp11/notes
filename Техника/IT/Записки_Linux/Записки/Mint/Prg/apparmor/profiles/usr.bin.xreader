@@ -1,0 +1,40 @@
+# Last Modified: Thu May 18 08:42:14 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/xreader {
+  include <abstractions/base>
+
+  network netlink raw,
+
+  deny /media/veracrypt1/ rw,
+  deny /media/veracrypt8/ rw,
+
+  unix,
+  dbus,
+
+  /**.djvu r,
+  /**.pdf r,
+  /etc/** r,
+  /proc/** r,
+  /run/dbus/system_bus_socket rw,
+  /sys/devices/** r,
+  /usr/bin/xreader mr,
+  /usr/lib/x86_64-linux-gnu/webkit2gtk-4.0/WebKitNetworkProcess mrix,
+  /usr/lib/x86_64-linux-gnu/webkit2gtk-4.0/WebKitWebProcess mrix,
+  /usr/local/share/** r,
+  /usr/share/** r,
+  /var/cache/fontconfig/** r,
+  /var/lib/flatpak/exports/share/** r,
+  owner /**/ r,
+  owner /home/main/users/*/.Xauthority r,
+  owner /home/main/users/*/.cache/xreader/** rw,
+  owner /home/main/users/*/.config/dconf/user r,
+  owner /home/main/users/*/.local/share/** rw,
+  owner /run/user/*/ICEauthority r,
+  owner /run/user/*/at-spi/bus_1 rw,
+  owner /run/user/*/bus rw,
+  owner /run/user/*/dconf/user rw,
+
+}

@@ -1,0 +1,69 @@
+# Last Modified: Sun Jun  4 18:50:07 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/quiterss {
+  include <abstractions/base>
+
+  network inet dgram,
+  network inet stream,
+  network netlink dgram,
+
+  dbus,
+
+  unix,
+
+  deny / r,
+  deny /.dpkg-old r,
+  deny /media/veracrypt1/ rw,
+  deny /media/veracrypt1/** rw,
+  deny /media/veracrypt8/ rw,
+  deny /media/veracrypt8/** rw,
+  deny /net r,
+
+  "/media/veracrypt2/Планы/Резервное копирование/" rw,
+  "/media/veracrypt2/Планы/Резервное копирование/*" rw,
+  /dev/ r,
+  /dev/dri/ r,
+  /etc/** r,
+  /media/ r,
+  /media/veracrypt2/ r,
+  /media/veracrypt2/Планы/ r,
+  /media/veracrypt4/ mrwlk,
+  /proc/** r,
+  /run/dbus/system_bus_socket mrwk,
+  /sys/devices/** r,
+  /tmp/.ICE-unix/* rw,
+  /usr/bin/quiterss mr,
+  /usr/lib/ r,
+  /usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner px,
+  /usr/lib32/ r,
+  /usr/lib64/ r,
+  /usr/local/lib/ r,
+  /usr/local/share/** r,
+  /usr/share/** r,
+  /var/cache/fontconfig/* r,
+  /var/lib/flatpak/exports/share/** r,
+  owner /home/*/users/quite-rss/ r,
+  owner /home/*/users/quite-rss/.local/share/** rwk,
+  owner /home/main/users/quite-rss/.ICEauthority r,
+  owner /home/main/users/quite-rss/.Xauthority r,
+  owner /home/main/users/quite-rss/.bash_history r,
+  owner /home/main/users/quite-rss/.bash_logout r,
+  owner /home/main/users/quite-rss/.bashrc r,
+  owner /home/main/users/quite-rss/.cache/** r,
+  owner /home/main/users/quite-rss/.cache/** w,
+  owner /home/main/users/quite-rss/.config/** rwk,
+  owner /home/main/users/quite-rss/.config/** rwl,
+  owner /home/main/users/quite-rss/.dmrc r,
+  owner /home/main/users/quite-rss/.gtkrc-2.0 r,
+  owner /home/main/users/quite-rss/.gtkrc-xfce r,
+  owner /home/main/users/quite-rss/.lesshst r,
+  owner /home/main/users/quite-rss/.profile r,
+  owner /home/main/users/quite-rss/.xsession-errors r,
+  owner /media/veracrypt4/* l,
+  owner /media/veracrypt4/* rw,
+  owner /tmp/** rwk,
+
+}

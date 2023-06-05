@@ -18,6 +18,11 @@ cat $END_FILE_OR >> $END_FILE_CP/end.sh
 # Копируем правила /etc/sudoers.d
 cp -rfvu /etc/sudoers.d /Arcs/Disks/Mega/MEGAsync/Записки/Mint/Prg/scripts/sudoers.d
 
+# Копируем профили apparmor
+cp -fvu /etc/apparmor.d/* /A/_/Linux_Записки_Prg/apparmor/profiles/
+chown inet:forall /A/_/Linux_Записки_Prg/apparmor/profiles/*
+chmod a+r,a-wx /A/_/Linux_Записки_Prg/apparmor/profiles/*
+
 mkdir -p /usr/local/sbin/consoleusers/ --mode=a-rwx+t
 setfacl -m d::--- /usr/local/sbin/consoleusers/
 

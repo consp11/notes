@@ -1,12 +1,18 @@
+https://gitlab.com/apparmor/apparmor/-/wikis/QuickProfileLanguage
 https://www.apparmor.net
 https://wiki.ubuntu.com/AppArmor
 https://help.ubuntu.com/community/AppArmor
+https://wiki.ubuntu.com/Security/Features#apparmor
+
 
 Установка (на Ubuntu и иже с ними уже установлено, однако нет нужных утилит)
 sudo apt-get install apparmor-utils
 
 sudo xed /etc/sudoers.d/apparmor
 sudo xed /etc/sudoers.d/vinny-apparmor
+
+После изменения профиля
+sudo apparmor_parser -r /etc/apparmor.d/путь_к_профилю
 
 Можно разрешить запуск apparmor-status без ввода каких-либо паролей
 sudo xed /etc/sudoers.d/apparmor
@@ -17,6 +23,21 @@ STATUS_LIST ALL = NOPASSWD:/usr/sbin/aa-enforce
 
 Даёт возможность посмотреть, в каком режиме запущены профили
 sudo aa-status
+
+sudo aa-remove-unknown
+Удаляет все профили apparmor, загруженные в ядро, которых уже нет в каталоге /etc/apparmor.d/
+
+r - read
+w - write
+a - append (implied by w)
+x - execute
+m - memory map executable
+k - lock (requires r or w, AppArmor 2.1 and later)
+l - link
+
+# Разрешает или запрещает определённое capabilities
+capability sys_admin,
+deny capability sys_admin,
 
 
 aa-nofity -p -s 1 -w 60
@@ -56,8 +77,24 @@ sudo apparmor_parser -r /etc/apparmor.d/bin.ping
 
 
 Всё вообще выключить
+# Это не должно работать. Если нужно перезапустить apparmor, нужно использовать restart
 sudo systemctl stop apparmor
+# После этого нужно перезагрузится. А то и вообще удалить apparmor надо
 sudo systemctl disable apparmor
 
 
 
+
+sudo aa-genprof /home/main/users/tor-browser/bin/tor-browser_ru/start-tor-browser.desktop
+sudo apparmor_parser -r home.main.users.tor-browser.bin.tor-browser_ru.start-tor-browser.desktop
+sudo aa-remove-unknown
+
+
+
+Turn off deny audit quieting
+By default, operations that trigger "deny" rules are not logged.  This
+is called deny audit quieting.
+
+To turn off deny audit quieting, run:
+
+echo -n noquiet > /sys/module/apparmor/parameters/audit

@@ -1,0 +1,25 @@
+# Last Modified: Wed May 17 11:55:53 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/lib/firefox/firefox {
+  include <abstractions/base>
+
+  network inet stream,
+
+  dbus,
+
+  unix,
+
+  deny /media/veracrypt1/ rw,
+  deny /media/veracrypt8/ rw,
+
+  /etc/** r,
+  /run/systemd/resolve/stub-resolv.conf r,
+  /usr/lib/firefox/firefox mr,
+  /usr/lib/firefox/firefox-bin px,
+  /usr/share/fonts/** r,
+  owner /home/main/users/mega/.local/share/** a,
+
+}

@@ -16,14 +16,11 @@ nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 '/home/main/users/inet/_/plans/Планы/Дела/--0' \
 '/home/main/users/inet/_/plans/Планы/+' \
 "/home/main/users/inet/_/plans/Планы/Дела/Частые" \
-'/home/main/users/inet/_/lit/Литература/Религия/Пост/11 Немного о голодании.txt' '/home/main/users/inet/_/plans/ГолоданиеИПост/2023/Диета-апрель-дневник' \
-'/home/main/users/inet/_/plans/ГолоданиеИПост/2023/Диета-апрель' \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/04 Апрель-22' \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/04 Апрель-26' \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/04 Апрель-27' \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/05 Май-1-Худенко' \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/05 Май-1' \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/05 Май-10' \
+'/home/main/users/inet/_/lit/Литература/Религия/Пост/11 Немного о голодании.txt' \
+'/home/main/users/inet/_/plans/ГолоданиеИПост/2023/Диета-май-июнь' \
+'/home/main/users/inet/_/plans/ГолоданиеИПост/2023/Диета-май-июнь-дневник' \
+'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/Апрель-22-вопр' \
+'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/05 Май-14-Маск' \
 &  &> /inRam/startup-nqq-pl.log
 
 
@@ -45,6 +42,7 @@ Thunar \
 # bash -i /home/vinny/_/keys-var/_sh/tree-lang.sh
 # bash -i /home/vinny/_/keys-var/_sh/vinkekfish-csharp.sh
 
+# xmessage 'Persepolis Ubuntu'
 
 disown -a
 # nice -n 19 disk-wait 1

@@ -2,6 +2,7 @@
 # sudo cp -fv /Arcs/Disks/Mega/MEGAsync/Записки/Mint/Prg/scripts/end.sh /usr/local/bin/
 # /Arcs/Disks/Mega/MEGAsync/Privoxy/Privoxy/_ServicesFiles/logdelete.service
 
+# также в ip1-service-remove
 OF=/var/log/cleanup-vinny.log
 dateOfBegin=`date`
 
@@ -49,13 +50,13 @@ else
 fi
 
 umount -a 	&>> $OF
-	
+
 echo  &>> $OF
 echo  &>> $OF
 echo  &>> $OF
 
-echo '/proc/self/mountinfo' &>> $OF
-cat /proc/self/mountinfo 	&>> $OF
+#echo '/proc/self/mountinfo' &>> $OF
+#cat /proc/self/mountinfo 	&>> $OF
 
 echo -e "\n\nEnd of $0\n" &>> $OF
 date                      &>> $OF

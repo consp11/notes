@@ -1,1 +1,1 @@
-bash -i /usr/local/sbin/consoleusers/consoleuser.sh /usr/local/sbin/consoleusers/key-inet-ch.etalon /inRam/keys/key-inet-ch ch
+bash -i /usr/local/sbin/consoleusers/consoleuser.sh /usr/local/sbin/consoleusers/key-inet-ch.etalon /inRam/keys/key-inet-ch ch inet nopwd

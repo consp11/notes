@@ -1,0 +1,15 @@
+echo 'exec start' >> /tmp/ip1
+
+ip netns add ip1 &&
+namespaceName='/run/netns/ip1' &&
+
+ip link add inet-host type veth peer name inet-un &&
+ip link set inet-un netns $namespaceName &&
+ip addr add 10.0.3.1/24 dev inet-host &&
+ip link set inet-host up &&
+
+ip netns exec ip1 ip link set lo up &&
+ip netns exec ip1 ip addr add 10.0.3.2/24 dev inet-un &&
+ip netns exec ip1 ip link set inet-un up &&
+
+exit 0

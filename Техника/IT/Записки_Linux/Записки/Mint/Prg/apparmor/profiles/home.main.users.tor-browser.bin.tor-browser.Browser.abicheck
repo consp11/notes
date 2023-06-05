@@ -1,0 +1,11 @@
+# Last Modified: Tue May 16 12:35:28 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/home/main/users/tor-browser/bin/tor-browser/Browser/abicheck {
+  include <abstractions/base>
+
+  /home/main/users/tor-browser/bin/tor-browser/Browser/abicheck mr,
+
+}

@@ -1,0 +1,11 @@
+# также в end.sh
+OF=/var/log/cleanup-vinny.log
+
+echo 'exec ip1-service-remove' &>> $OF
+
+ip link del inet-host &>> $OF
+ip netns del ip1      &>> $OF
+
+bash /usr/local/bin/unmount.sh &>> $OF
+
+exit 0

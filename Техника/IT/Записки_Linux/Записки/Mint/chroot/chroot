@@ -1,4 +1,7 @@
 https://josephmuia.ca/2018-05-16-net-namespaces-veth-nat/
+https://linuxize.com/post/linux-ip-command/
+https://superuser.com/questions/764986/howto-setup-a-veth-virtual-network
+
 
 # Эта штука создаёт пространство имён с изолированной сетью и корнем файловой системы в директории DirForNewRoot
 # unshare -Urn -R DirForNewRoot
@@ -15,13 +18,26 @@ man veth
 # Затем создаём само пространство имён
 mkdir /tmp/un
 touch /tmp/un/net
+
+# В другом терминале делаем команду - тут будет наше новое пространство имён
 sudo unshare --net=/tmp/un/net
 
+# Вместо unshare, которая создаёт пространство имён под нужную команду (в данном случае это bash),
+# Можно создать сетевое пространство имён и напрямую
+ip netns add ip1
+# Имя данного namespace будет /run/netns/ip1
+# В таком случае команды запускаются следующим образом
+# ip netns exec ip1 команда
 
 # Это не в unshare
 # Создаём пару стройств veth-host и veth-net, которые являются концами виртуального канала
 # Говорим, что veth-net является алиасом /tmp/un/net (не уверен, что верно понимаю)
 # Присваиваем IP-адрес и поднимаем сеть
+
+# Создаём пару связанных друг с другом виртуальных стройств veth-host и veth-net
+# Привязываем устройство veth-net к пространству имён /tmp/un/net
+# Привязываем адрес 10.0.3.1 в сети /24 к устройству veth-host
+# Наконец, включаем устройство veth-host
 sudo ip link add veth-host type veth peer name veth-net
 sudo ip link set veth-net netns /tmp/un/net
 sudo ip addr add 10.0.3.1/24 dev veth-host
@@ -40,6 +56,25 @@ ping 10.0.3.2
 # Аналогично, можем поднять loopback интерфейс одной командой (в unshare)
 ip link set lo up
 
+
+Всё - закончили
+Устанавливаем ip-форвардинг
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+# Проверяем, что форвардинг включили
+sysctl -a | grep ip_forward
+
+# Включаем IP-маскарадинг
+sudo iptables -t nat -A POSTROUTING -s 10.0.3.0/24 -o enx00093bf01a40 -j MASQUERADE
+
+# Default gateway
+# Просматриваем пути
+# ip netns exec /tmp/un/net route
+# Это мы пытаемся в unshare запустить команду route просто
+# Там же, в unshare пытаемся установить путь маршрутизации по умолчанию
+ip route add default via 10.0.3.1
+
+# Всё готово. Теперь у нас внутри есть сеть
 
 
 

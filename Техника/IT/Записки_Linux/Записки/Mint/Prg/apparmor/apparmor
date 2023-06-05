@@ -1,0 +1,149 @@
+man apparmor.d
+man apparmor_xattrs
+
+https://gitlab.com/apparmor/apparmor/-/wikis/QuickProfileLanguage
+https://www.apparmor.net
+https://wiki.ubuntu.com/AppArmor
+https://help.ubuntu.com/community/AppArmor
+https://wiki.ubuntu.com/Security/Features#apparmor
+
+
+Установка (на Ubuntu и иже с ними уже установлено, однако нет нужных утилит)
+sudo apt-get install apparmor-utils
+
+sudo xed /etc/sudoers.d/apparmor
+sudo xed /etc/sudoers.d/vinny-apparmor
+
+После изменения профиля
+sudo apparmor_parser -r /etc/apparmor.d/путь_к_профилю
+
+Можно разрешить запуск apparmor-status без ввода каких-либо паролей
+sudo xed /etc/sudoers.d/apparmor
+User_Alias STATUS_LIST=%first,inet
+STATUS_LIST ALL = NOPASSWD:/usr/sbin/aa-status
+STATUS_LIST ALL = NOPASSWD:/usr/sbin/aa-enforce
+
+
+Даёт возможность посмотреть, в каком режиме запущены профили
+sudo aa-status
+
+sudo aa-remove-unknown
+Удаляет все профили apparmor, загруженные в ядро, которых уже нет в каталоге /etc/apparmor.d/
+
+r - read
+w - write
+a - append (implied by w)
+x - execute
+m - memory map executable
+k - lock (requires r or w, AppArmor 2.1 and later)
+l - link
+
+# Разрешает или запрещает определённое capabilities
+capability sys_admin,
+deny capability sys_admin,
+
+
+aa-nofity -p -s 1 -w 60
+
+Разрешить aa-logprof для какого-либо пользователя в sudoers для того, чтобы дальше могла работать aa-notify
+aa-nofity -p -s 1 -w 60 -u a1
+Возможно, стоит разрешить в sudoers всех частых пользователей
+(кажется, aa-notify всё равно не работает)
+
+К сожалению, aa-logprof не всегда смотрит нужные логи, когда включён auditd (реально, кажется, только в syslog попадает)
+sudo aa-logprof ; sudo aa-logprof -f /var/log/syslog; sudo aa-logprof -f /var/log/kern.log; sudo aa-logprof -f /var/log/auth.log
+
+
+
+Профили
+/etc/apparmor.d/
+
+Смотрим, что включено и включено ли
+
+sudo aa-status
+
+Смотрим логи и устанавливаем новые разрешения
+sudo aa-logprof
+
+Создать профиль и получать данные из логов, что именно нужно добавить в этот профиль (нужно запустить приложение)
+sudo aa-genprof executable
+# sudo aa-genprof opera
+
+# aa-logprof не видит, иногда, некоторых событий. Например, запрета на unix-сокеты
+sudo cat /var/log/audit/audit.log | fgrep -i apparmor=\"D
+sudo cat /var/log/audit/audit.log | egrep -i apparmor=\"[^A]
+
+sudo ausearch -i -sv no
+
+
+
+Профиль в слабый режим
+sudo aa-complain /bin/ping
+
+Профиль в сильный режим
+sudo aa-enforce /bin/ping
+
+
+Перезагрузить все профили
+sudo service apparmor reload
+
+Переагрузить один профиль
+sudo apparmor_parser -r /etc/apparmor.d/bin.ping
+Параметр -a - просто загрузить
+
+
+sudo systemctl restart apparmor
+Всё вообще выключить
+# Это не должно работать. Если нужно перезапустить apparmor, нужно использовать restart
+sudo systemctl stop apparmor
+# После этого нужно перезагрузится. А то и вообще удалить apparmor надо
+sudo systemctl disable apparmor
+
+
+
+
+sudo aa-genprof /home/main/users/tor-browser/bin/tor-browser_ru/start-tor-browser.desktop
+sudo apparmor_parser -r home.main.users.tor-browser.bin.tor-browser.Browser.start-tor-browser
+sudo aa-remove-unknown
+
+Если после aa-remove-unknown что-то выводится, значит нужно задавать профиль в complain режиме и снова-здорова всё проходить. При этом, все запускаемые файлы из профилей добавлять в ix, если это необходимо
+
+
+echo -n noquiet > /sys/module/apparmor/parameters/audit
+echo -n normal > /sys/module/apparmor/parameters/audit
+
+
+sudo aa-remove-unknown
+sudo apparmor_parser -r usr.bin.quiterss
+sudo apparmor_parser -r usr.bin.firefox
+sudo apparmor_parser -r usr.bin.xdg-settings
+sudo apparmor_parser -r usr.lib.firefox.firefox
+sudo apparmor_parser -r usr.lib.firefox.firefox-bin
+sudo apparmor_parser -r usr.lib.x86_64-linux-gnu.opera.opera
+sudo apparmor_parser -r usr.lib.x86_64-linux-gnu.opera.opera_crashreporter
+sudo apparmor_parser -r usr.lib.x86_64-linux-gnu.gstreamer1.0.gstreamer-1.0.gst-plugin-scanner
+
+
+sudo aa-enforce usr.bin.quiterss
+sudo aa-enforce usr.bin.firefox
+sudo aa-enforce usr.bin.xdg-settings
+sudo aa-enforce usr.lib.firefox.firefox
+sudo aa-enforce usr.lib.firefox.firefox-bin
+sudo aa-enforce usr.lib.x86_64-linux-gnu.opera.opera
+sudo aa-enforce usr.lib.x86_64-linux-gnu.opera.opera_crashreporter
+sudo aa-enforce usr.lib.x86_64-linux-gnu.gstreamer1.0.gstreamer-1.0.gst-plugin-scanner
+
+
+sudo truncate -s 0 /var/log/audit/audit.log /var/log/audit/audit.log.1 /var/log/audit/audit.log.2 /var/log/audit/audit.log.3 /var/log/audit/audit.log.4 /var/log/syslog /var/log/kern.log /var/log/syslog /var/log/auth.log
+
+sudo aa-logprof ; sudo aa-logprof -f /var/log/syslog
+
+Назначение /etc/apparmor.d/usr.lib.notepadqq.notepadqq-bin претензионного режима.
+Назначение /etc/apparmor.d/usr.lib.notepadqq.notepadqq.sh претензионного режима.
+
+sudo aa-remove-unknown
+sudo apparmor_parser -r usr.bin.thunar
+sudo apparmor_parser -r opt.calibre.*
+sudo apparmor_parser -r usr.sbin.ldconfig
+sudo apparmor_parser -r usr.bin.xreader
+

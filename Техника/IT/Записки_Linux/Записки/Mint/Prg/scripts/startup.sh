@@ -18,6 +18,7 @@ date &>> /inRam/startup.log
 
 # keepass2 '/media/veracrypt8/Пароли/often.kdbx' -keyfile:'/media/veracrypt1/Пароли/often.key' &
 # keepass2 '/media/veracrypt8/Пароли/often.kdbx' -keyfile:'/inRam/--/often.key' &
+# keepass2 '/media/veracrypt8/Пароли/users.kdbx' -keyfile:'/media/veracrypt1/Пароли/users.keyx'
 
 echo -e 'executing readers.sh'
 # xfce4-terminal --tab -x bash -i ./readers.sh

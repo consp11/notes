@@ -1,2 +1,3 @@
-ALL ALL = NOPASSWD:/usr/bin/veracrypt -t -d --force
+ALL ALL = (root) NOPASSWD:/usr/bin/veracrypt -t -d --force
+a1  ALL = (root)  NOPASSWD:/usr/bin/veracrypt
 

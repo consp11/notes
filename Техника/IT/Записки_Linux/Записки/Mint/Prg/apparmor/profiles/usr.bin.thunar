@@ -1,0 +1,48 @@
+# Last Modified: Thu May 25 21:56:36 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/thunar {
+  deny capability dac_read_search,
+  deny capability net_admin,
+  deny capability sys_admin,
+
+  capability audit_write,
+  capability setgid,
+  capability setuid,
+  capability sys_nice,
+  capability sys_ptrace,
+  capability sys_resource,
+
+  network netlink raw,
+
+  dbus,
+
+  signal receive set=exists peer=unconfined,
+  signal receive set=kill peer=unconfined,
+  signal receive set=term peer=unconfined,
+  signal send set=exists peer=unconfined,
+
+  deny ptrace read peer=unconfined,
+  deny ptrace readby peer=/usr/sbin/nethogs,
+
+  unix,
+
+  deny /opt/wine-stable/bin/wine x,
+
+  / r,
+  /** r,
+  /** rw,
+  /opt/calibre/ebook-viewer Px,
+  /usr/** PUx,
+  /usr/bin/dash mrix,
+  /usr/bin/thunar mr,
+  /usr/lib/x86_64-linux-gnu/** mr,
+  owner /** rwk,
+  owner /** rwl,
+  owner /home/main/users/inet/.config/Thunar/** r,
+  owner /home/main/users/inet/.local/share/** r,
+  owner /proc/*/mountinfo r,
+
+}

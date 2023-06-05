@@ -1,0 +1,60 @@
+# Last Modified: Thu May 25 21:57:30 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/lib/notepadqq/notepadqq-bin {
+  include <abstractions/base>
+
+  deny capability sys_admin,
+  deny capability sys_ptrace,
+
+  capability audit_write,
+  capability dac_override,
+  capability dac_read_search,
+  capability setgid,
+  capability sys_chroot,
+  capability sys_nice,
+
+  network inet6 dgram,
+  network netlink raw,
+
+  dbus,
+
+  deny ptrace,
+
+  unix,
+
+  / r,
+  /** rw,
+  /**/ rw,
+  /etc/** r,
+  /etc/fonts/** r,
+  /proc/** r,
+  /sys/bus/*/devices/ r,
+  /sys/devices/** r,
+  /usr/bin/cp mrix,
+  /usr/bin/pkexec mrix,
+  /usr/lib/notepadqq/notepadqq-bin mr,
+  /usr/lib/x86_64-linux-gnu/qt5/libexec/QtWebEngineProcess mrix,
+  /usr/local/share/** r,
+  /usr/share/** r,
+  /var/cache/fontconfig/** r,
+  owner /** rwlk,
+  owner /dev/shm/* rw,
+  owner /home/main/users/*/.Xauthority r,
+  owner /home/main/users/*/.cache/mesa_shader_cache/** rw,
+  owner /home/main/users/*/.cache/qtshadercache-*/* r,
+  owner /home/main/users/*/.config/Notepadqq/** rwlk,
+  owner /home/main/users/*/.config/QtProject.conf rw,
+  owner /home/main/users/*/.config/qt5ct/qt5ct.conf r,
+  owner /home/main/users/*/.config/user-dirs.dirs r,
+  owner /home/main/users/*/.gtkrc-2.0 r,
+  owner /home/main/users/*/.gtkrc-xfce r,
+  owner /home/main/users/*/.local/share/** r,
+  owner /home/main/users/*/.local/share/** rwk,
+  owner /proc/** w,
+  owner /run/user/** rw,
+  owner /tmp/** rw,
+
+}

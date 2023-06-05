@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# На всякий случай
+# sudo umount /tmp/un/net &> /dev/null
+
+namespaceDir='/tmp/un'
+
+mkdir $namespaceDir
+sudo touch $namespaceDir/net
+
+sudo unshare --net=$namespaceDir/net xfce4-terminal -x ~/bin/cg-unshare &
+
+# Создаём пару связанных виртуальных устройств
+# inet-host и inet-un - это два виртуальных интерфейса (inet-un - внутри пространства имён)
+sudo ip link add inet-host type veth peer name inet-un
+sudo ip link set inet-un netns $namespaceDir/net
+sudo ip addr add 10.0.3.1/24 dev inet-host
+sudo ip link set inet-host up
+
+echo 'Enter in new bash'
+
+wait
+# bash -i
+
+echo 'Existed from new bash'
+
+sudo ip link del inet-un
+sudo ip link del inet-host
+sudo umount $namespaceDir/net
+
+sudo rm       $namespaceDir/net
+sudo rmdir -v $namespaceDir
+
+exit

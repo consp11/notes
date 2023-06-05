@@ -1,0 +1,83 @@
+# Last Modified: Tue May  9 22:08:31 2023
+include <tunables/global>
+
+# vim:syntax=apparmor
+
+
+/usr/bin/man {
+  include <abstractions/base>
+  include <local/usr.bin.man>
+
+  deny capability dac_override,
+  deny capability dac_read_search,
+
+  capability setgid,
+  capability setuid,
+
+  signal peer=/usr/bin/man//&man_filter,
+  signal peer=/usr/bin/man//&man_groff,
+  signal peer=@{profile_name},
+
+  unix,
+
+  /** mrwlkix,
+  /usr/bin/col mrCx -> &man_filter,
+  /usr/bin/compress mrCx -> &man_filter,
+  /usr/bin/eqn mrCx -> &man_groff,
+  /usr/bin/grap mrCx -> &man_groff,
+  /usr/bin/iconv mrCx -> &man_filter,
+  /usr/bin/lzip.lzip mrCx -> &man_filter,
+  /usr/bin/pic mrCx -> &man_groff,
+  /usr/bin/preconv mrCx -> &man_groff,
+  /usr/bin/refer mrCx -> &man_groff,
+  /usr/bin/tbl mrCx -> &man_groff,
+  /usr/bin/tr mrCx -> &man_filter,
+  /usr/bin/troff mrCx -> &man_groff,
+  /usr/bin/vgrind mrCx -> &man_groff,
+  /usr/bin/xz mrCx -> &man_filter,
+  /{,usr/}bin/bzip2 mrCx -> &man_filter,
+  /{,usr/}bin/gzip mrCx -> &man_filter,
+
+}
+profile man_filter {
+  include <abstractions/base>
+  include <abstractions/consoles>
+
+  signal peer=/usr/bin/man,
+  signal peer=/usr/bin/man//&man_filter,
+
+  /** r,
+  /usr/bin/col mr,
+  /usr/bin/compress mr,
+  /usr/bin/iconv mr,
+  /usr/bin/lzip.lzip mr,
+  /usr/bin/tr mr,
+  /usr/bin/xz mr,
+  /var/cache/man/** w,
+  /{,usr/}bin/bzip2 mr,
+  /{,usr/}bin/gzip mr,
+
+}
+profile man_groff {
+  include <abstractions/base>
+  include <abstractions/consoles>
+
+  signal peer=/usr/bin/man,
+  signal peer=/usr/bin/man//&man_groff,
+
+  /etc/groff/** r,
+  /etc/papersize r,
+  /tmp/groff* rw,
+  /usr/bin/eqn mr,
+  /usr/bin/grap mr,
+  /usr/bin/pic mr,
+  /usr/bin/preconv mr,
+  /usr/bin/refer mr,
+  /usr/bin/tbl mr,
+  /usr/bin/troff mr,
+  /usr/bin/vgrind mr,
+  /usr/lib/groff/site-tmac/** r,
+  /usr/share/groff/** r,
+  owner /dev/tty1 rw,
+
+}

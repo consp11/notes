@@ -1,0 +1,31 @@
+# Last Modified: Tue May 16 14:20:04 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/bin/chromium {
+  include <abstractions/base>
+  include <abstractions/bash>
+
+  capability sys_admin,
+  capability sys_chroot,
+  capability sys_ptrace,
+
+  network inet dgram,
+  network inet6 dgram,
+
+  network inet stream,
+  network netlink raw,
+
+  unix,
+  dbus,
+
+  /usr/bin/chromium r,
+  /usr/bin/cut mix,
+  /usr/bin/dash mix,
+  /usr/bin/grep mix,
+  /usr/bin/xdg-settings mrix,
+  /usr/lib/chromium/chrome_crashpad_handler mrpx,
+  /usr/lib/chromium/chromium mrpx,
+}
+

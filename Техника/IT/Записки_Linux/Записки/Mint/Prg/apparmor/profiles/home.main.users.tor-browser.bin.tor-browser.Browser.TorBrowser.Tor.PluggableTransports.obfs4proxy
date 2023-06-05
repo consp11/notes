@@ -1,0 +1,33 @@
+# Last Modified: Tue May 16 15:38:44 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/obfs4proxy {
+  include <abstractions/base>
+
+  network inet stream,
+  network inet6 dgram,
+  network netlink raw,
+
+  signal receive set=kill peer=/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/tor,
+  signal receive set=term peer=/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/tor,
+  signal receive set=term peer=/home/main/users/tor-browser/bin/tor-browser/Browser/start-tor-browser,
+  signal receive set=kill peer=/home/main/users/tor-browser/bin/tor-browser/Browser/start-tor-browser,
+
+  unix,
+  dbus,
+
+  /etc/** r,
+  /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/obfs4proxy mr,
+  /proc/sys/net/core/somaxconn r,
+  /run/systemd/resolve/stub-resolv.conf r,
+  /sys/kernel/mm/transparent_hugepage/hpage_pmd_size r,
+  /usr/share/** r,
+  owner /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Data/** r,
+  owner /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Data/Browser/profile.default/.parentlock w,
+  owner /home/main/users/tor-browser/bin/tor-browser/Browser/browser/* r,
+  owner /home/main/users/tor-browser/bin/tor-browser/Browser/browser/features/* r,
+  owner /home/main/users/tor-browser/bin/tor-browser/Browser/omni.ja r,
+
+}

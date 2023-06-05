@@ -3,7 +3,91 @@
 # Расширения быть не должно
 sudo xed /etc/apt/apt.conf.d/vinny-proxy
 
+man apt-get
+
 Вставить (http обязательно вставлять, т.к. он пользуется именно им) (apt)
-Acquire::http::Proxy "http://127.0.0.1:8889";
+Acquire::http::Proxy "http://user:password@127.0.0.1:8889";
 # Acquire::https { Proxy "https://127.0.0.1:8889"; };
 Acquire::::Proxy "true";
+
+sudo apt-get --with-new-pkgs --fix-missing upgrade
+sudo apt-get install --fix-broken
+sudo apt-get -y --with-new-pkgs upgrade --fix-broken
+
+
+# Инсталляция конкретной версии пакета
+sudo apt-get install packet=1.0.1
+
+# Посмотреть приоритеты
+apt-cache policy dotnet-sdk-7.0
+
+
+/etc/apt/preferences.d/preferences:
+# Указание на приоритет репозитория
+Package: *
+Pin: origin download.opensuse.org
+Pin-Priority: 10
+
+
+Например
+apt-cache policy dotnet-runtime-7.0
+Выводит
+Таблица версий:
+ *** 7.0.105-0ubuntu1~22.04.1 500
+        500 http://mirror.yandex.ru/ubuntu jammy-updates/universe amd64 Packages
+        100 /var/lib/dpkg/status
+     7.0.5-1 500
+        500 https://packages.microsoft.com/ubuntu/22.10/prod kinetic/main amd64 Packages
+
+(видимо, версия 7.0.105 считается выше, чем 7.0.5)
+
+Чтобы установить из пакета microsoft, можно попробоват сделать следующее:
+sudo apt-get install dotnet-sdk-7.0/kinetic
+
+Тогда установятся пакеты именно из kinetic, в том числе, и зависимости тоже установятся именно из kinetic, даже если приоритет стоит у другого репозитория
+
+apt-cache policy '~ndotnet.*' | grep -v microsoft | grep '/ubuntu' | cut -d"/" -f3 | sort -u
+
+# security.ubuntu.com
+
+/etc/apt/preferences.d/preferences:
+Package: dotnet*
+Pin: origin "packages.microsoft.com"
+Pin-Priority: 1001
+
+Package: *netcore*
+Pin: origin "packages.microsoft.com"
+Pin-Priority: 1001
+
+Package: dotnet*
+Pin: release n=kinetic
+Pin-Priority: 1001
+
+Package: *netcore*
+Pin: release n=kinetic
+Pin-Priority: 1001
+
+
+Package: dotnet*
+Pin: release n=jammy
+Pin-Priority: -10
+
+Package: *netcore*
+Pin: release n=jammy
+Pin-Priority: -10
+
+#Package: dotnet*
+#Pin: origin "mirror.yandex.ru"
+#Pin-Priority: -10
+
+#Package: *netcore*
+#Pin: origin "mirror.yandex.ru"
+#Pin-Priority: -10
+
+#Package: dotnet*
+#Pin: origin "security.ubuntu.com"
+#Pin-Priority: -10
+
+#Package: *netcore*
+#Pin: origin "security.ubuntu.com"
+#Pin-Priority: -10

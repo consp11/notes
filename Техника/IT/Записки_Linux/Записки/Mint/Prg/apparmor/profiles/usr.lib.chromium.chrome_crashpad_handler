@@ -1,0 +1,23 @@
+# Last Modified: Mon May 22 13:11:34 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/lib/chromium/chrome_crashpad_handler {
+  include <abstractions/base>
+
+  dbus,
+
+  signal send set=cont peer=/usr/lib/chromium/chromium,
+
+  unix,
+
+  /etc/ld.so.cache r,
+  /etc/ld.so.preload r,
+  /proc/** r,
+  /usr/lib/chromium/chrome_crashpad_handler mr,
+  /usr/lib/chromium/chrome_crashpad_handler mrix,
+  owner /home/main/users/*/.config/chromium/** w,
+  owner /home/main/users/*/.config/chromium/**/ r,
+
+}

@@ -1,0 +1,12 @@
+# Last Modified: Wed May 17 18:38:44 2023
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/opt/calibre/ebook-viewer {
+  include <abstractions/base>
+
+  /opt/calibre/bin/ebook-viewer px,
+  /opt/calibre/ebook-viewer mr,
+
+}
