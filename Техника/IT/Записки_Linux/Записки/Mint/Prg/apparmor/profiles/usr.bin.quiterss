@@ -1,4 +1,4 @@
-# Last Modified: Sun Jun  4 18:50:07 2023
+# Last Modified: Wed Jun  7 17:26:18 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -43,6 +43,7 @@ include <tunables/global>
   /usr/local/lib/ r,
   /usr/local/share/** r,
   /usr/share/** r,
+  /var/cache/fontconfig/ w,
   /var/cache/fontconfig/* r,
   /var/lib/flatpak/exports/share/** r,
   owner /home/*/users/quite-rss/ r,
@@ -52,6 +53,7 @@ include <tunables/global>
   owner /home/main/users/quite-rss/.bash_history r,
   owner /home/main/users/quite-rss/.bash_logout r,
   owner /home/main/users/quite-rss/.bashrc r,
+  owner /home/main/users/quite-rss/.cache/** l,
   owner /home/main/users/quite-rss/.cache/** r,
   owner /home/main/users/quite-rss/.cache/** w,
   owner /home/main/users/quite-rss/.config/** rwk,

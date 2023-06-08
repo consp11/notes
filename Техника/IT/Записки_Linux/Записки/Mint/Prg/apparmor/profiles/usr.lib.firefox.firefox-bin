@@ -1,4 +1,4 @@
-# Last Modified: Sun Jun  4 20:12:46 2023
+# Last Modified: Wed Jun  7 17:26:18 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -20,29 +20,27 @@ include <tunables/global>
 
   unix,
 
+  deny / r,
   deny /media/veracrypt1/ rw,
   deny /media/veracrypt8/ rw,
 
   "/media/veracrypt2/Планы/Резервное копирование/" r,
+  /**/ r,
   /A/Ya-disk/Crypto/** r,
   /Arcs/Disks/ya/Arcs/books/* r,
-  /dev/ r,
-  /dev/dri/ r,
   /dev/dri/* rw,
-  /dev/shm/ r,
   /dev/snd/seq rw,
   /etc/** r,
-  /inRamA/ r,
   /proc/** r,
   /run/dbus/system_bus_socket rw,
   /run/systemd/resolve/stub-resolv.conf r,
   /sys/bus/*/devices/ r,
   /sys/devices/** r,
-  /tmp/ r,
   /usr/bin/dash mrix,
   /usr/bin/lsb_release px,
   /usr/lib/firefox/firefox-bin mr,
   /usr/lib/firefox/firefox-bin mrix,
+  /usr/lib/firefox/glxtest mrix,
   /usr/local/share/** r,
   /usr/share/** r,
   /usr/share/**/ r,
@@ -91,6 +89,7 @@ include <tunables/global>
   owner /home/main/users/mega/.cache/mozilla/**/ r,
   owner /home/main/users/mega/.local/share/** a,
   owner /home/main/users/mega/.local/share/** r,
+  owner /inRam/* w,
   owner /inRamA/** w,
   owner /proc/** rw,
   owner /run/user/** rw,

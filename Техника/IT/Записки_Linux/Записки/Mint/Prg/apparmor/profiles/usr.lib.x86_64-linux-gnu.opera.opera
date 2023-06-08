@@ -1,4 +1,4 @@
-# Last Modified: Sun May 28 16:44:31 2023
+# Last Modified: Wed Jun  7 18:40:31 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -26,6 +26,7 @@ include <tunables/global>
 
   unix,
 
+  deny /.dpkg-old r,
   deny /home/main/users/*/.local/share/recently-used.xbel r,
   deny /home/main/users/*/.local/share/recently-used.xbel rw,
   deny /home/main/users/*/.local/share/recently-used.xbel.* w,
@@ -34,14 +35,21 @@ include <tunables/global>
   deny /usr/lib/x86_64-linux-gnu/opera/opera_autoupdate mrwk,
   deny /usr/lib/x86_64-linux-gnu/opera/opera_autoupdate x,
 
-  /.dpkg-old r,
+  / r,
   /dev/ r,
   /dev/dri/ r,
   /dev/shm/ r,
   /etc/** r,
+  /home/main/users/opera/Загрузки/ r,
   /inRamA/ rw,
   /inRamA/* rw,
   /media/ r,
+  /media/ r,
+  /media/veracrypt3/ r,
+  /media/veracrypt3/Корректура/ rw,
+  /media/veracrypt3/Корректура/* rw,
+  /media/veracrypt3/Корректура/ДревниеБоги/ r,
+  /media/veracrypt3/Корректура/ДревниеБоги/* r,
   /proc/ r,
   /proc/*/* r,
   /proc/*/task/*/status r,
