@@ -1,4 +1,4 @@
-# Last Modified: Thu May 18 09:43:52 2023
+# Last Modified: Thu Jun 15 17:30:48 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -37,6 +37,7 @@ include <tunables/global>
   /home/main/users/tor-browser/bin/tor-browser/Browser/firefox ix,
   /home/main/users/tor-browser/bin/tor-browser/Browser/firefox.real ix,
   /home/main/users/tor-browser/bin/tor-browser/Browser/start-tor-browser r,
+  /home/main/users/tor-browser/bin/tor-browser/Browser/updater mrix,
   /inRamA/ r,
   /inRamA/** rw,
   /proc/sys/dev/i915/perf_stream_paranoid r,
