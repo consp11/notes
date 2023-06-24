@@ -1,4 +1,4 @@
-# Last Modified: Thu Jun 15 17:30:48 2023
+# Last Modified: Fri Jun 23 15:31:14 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -18,7 +18,9 @@ include <tunables/global>
 
   dbus,
 
+  signal send set=kill peer=/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/lyrebird,
   signal send set=kill peer=/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/obfs4proxy,
+  signal send set=term peer=/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/lyrebird,
   signal send set=term peer=/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/obfs4proxy,
 
   unix,
@@ -31,6 +33,7 @@ include <tunables/global>
   /etc/** r,
   /etc/**/ r,
   /home/main/users/tor-browser/** mrwk,
+  /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/lyrebird px,
   /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/obfs4proxy px,
   /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/tor px,
   /home/main/users/tor-browser/bin/tor-browser/Browser/abicheck ix,

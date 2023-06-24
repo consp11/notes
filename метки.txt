@@ -13,16 +13,16 @@
 ::Dev.OS								Операционные системы и загрузчики ОС
 ::Dev.System							Операционные системы
 ::Dev.Quality							Обеспечение качества
-	E:\works\bd\notes\notes\Техника\IT\Dev\Качество\качество.20
+	.\notes\Техника\IT\Dev\Качество\качество.20
 ::Dev.Quality.Verification				Верификация
 
 
 ::Creativity							Методы "творчества" - анализ и синтез задач
 	.\Творчество\creativity.md
 ::Religion.Buddha
-	E:\works\bd\notes\notes\Религия\budda
+	.\notes\Религия\budda
 ::Religion.Jesus
-	E:\works\bd\notes\notes\Религия\jesus
+	.\notes\Религия\jesus
 ::Religion.Jesus.link					Ссылки на сайты о религии
 ::IT.Software.ОперационныеСистемы		Перечень операционных систем
 ::IT.Software.Data						Обработка данных, текстовые редакторы
@@ -53,4 +53,7 @@
 ::Политика.Сайты						Всё подряд. Сайты, каналы и т.п.
 ::ПолитикаИПродажи.Реклама				Методы рекламы в политике и продажах
 ::Тактика								Военные методы, поиск преступников и т.п.
-	E:\works\bd\notes\notes\Тактика\tactics.20
+	./notes\Тактика\tactics.20
+
+::Химия
+    ./notes/Сайты/химия

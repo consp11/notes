@@ -1,4 +1,4 @@
-# Last Modified: Tue May 16 15:36:58 2023
+# Last Modified: Fri Jun 23 15:32:03 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -9,12 +9,15 @@ include <tunables/global>
   network inet stream,
   network netlink raw,
 
-  unix,
   dbus,
 
+  signal send set=term peer=/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/lyrebird,
   signal send set=term peer=/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/obfs4proxy,
   signal send set=term peer=/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/tor//null-/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/obfs4proxy,
 
+  unix,
+
+  /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/lyrebird px,
   /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/obfs4proxy px,
   /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/tor mr,
   /proc/sys/kernel/random/* r,
