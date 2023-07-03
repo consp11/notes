@@ -1,4 +1,4 @@
-# Last Modified: Thu May 18 08:42:14 2023
+# Last Modified: Sun Jul  2 09:38:45 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -8,11 +8,12 @@ include <tunables/global>
 
   network netlink raw,
 
-  deny /media/veracrypt1/ rw,
-  deny /media/veracrypt8/ rw,
+  dbus,
 
   unix,
-  dbus,
+
+  deny /media/veracrypt1/ rw,
+  deny /media/veracrypt8/ rw,
 
   /**.djvu r,
   /**.pdf r,
@@ -20,6 +21,7 @@ include <tunables/global>
   /proc/** r,
   /run/dbus/system_bus_socket rw,
   /sys/devices/** r,
+  /sys/fs/cgroup/user.slice/user-1003.slice/session-c4.scope/* r,
   /usr/bin/xreader mr,
   /usr/lib/x86_64-linux-gnu/webkit2gtk-4.0/WebKitNetworkProcess mrix,
   /usr/lib/x86_64-linux-gnu/webkit2gtk-4.0/WebKitWebProcess mrix,
