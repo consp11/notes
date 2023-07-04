@@ -1,0 +1,4 @@
+Это аккаунт a1
+
+Для разблокирования в faillock аккаунта введи
+sudo truncate -s 0 /var/run/faillock/user_name

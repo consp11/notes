@@ -17,8 +17,6 @@ nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 '/home/main/users/inet/_/plans/Планы/+' \
 "/home/main/users/inet/_/plans/Планы/Дела/Частые" \
 '/home/main/users/inet/_/lit/Литература/Религия/Пост/11 Немного о голодании.txt' \
-'/home/main/users/inet/_/plans/ГолоданиеИПост/2023/Диета-май-июнь' \
-'/home/main/users/inet/_/plans/ГолоданиеИПост/2023/Диета-май-июнь-дневник' \
 '/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/Апрель-22-вопр' \
 '/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/05 Май-14-Маск' \
 &  &> /inRam/startup-nqq-pl.log
@@ -31,6 +29,7 @@ Thunar \
 '/home/main/users/inet/Docs/Сапковский+/Анджей Сапковский - Ведьмак (сборник) (Сага о ведьмаке) - 2014/' \
 '/home/main/users/inet/Docs/Тетлок Ф., Гарднер Д. - Думай медленно - предсказывай точно/' \
 '/big/video-64/Waco/'\
+'/big/video-64/Томирис/' \
 &
 
 # ./_sh/kgk.sh
