@@ -28,7 +28,7 @@ nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 Thunar \
 '/home/main/users/inet/Docs/Сапковский+/Анджей Сапковский - Ведьмак (сборник) (Сага о ведьмаке) - 2014/' \
 '/home/main/users/inet/Docs/Тетлок Ф., Гарднер Д. - Думай медленно - предсказывай точно/' \
-'/big/video-64/Waco/'\
+'/big/video-64/Waco/' \
 '/big/video-64/Томирис/' \
 &
 

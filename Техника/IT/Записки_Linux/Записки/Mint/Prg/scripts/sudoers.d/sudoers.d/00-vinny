@@ -1,5 +1,5 @@
 # Таймаут на кеширование пароля для терминала после ввода sudo
-Defaults       timestamp_timeout=120
+Defaults       timestamp_timeout=12
 Defaults:inet  timestamp_timeout=120
 Defaults:a1    timestamp_timeout=120
 Defaults:first timestamp_timeout=120
@@ -22,6 +22,7 @@ Defaults listpw=all
 Defaults lecture=always
 Defaults lecture_file="/A/notes/Мусор/sudo_lectures/default"
 Defaults:first lecture_file="/A/notes/Мусор/sudo_lectures/first"
+Defaults:a1 lecture_file="/A/notes/Мусор/sudo_lectures/a1"
 Defaults:ch lecture_file="/A/notes/Мусор/sudo_lectures/ch"
 
 # Рарешаем группе adm_no_impersonation делать всё, но из-под имени root
