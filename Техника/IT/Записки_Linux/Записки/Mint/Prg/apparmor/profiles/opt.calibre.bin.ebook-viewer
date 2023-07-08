@@ -1,4 +1,4 @@
-# Last Modified: Wed Jun  7 17:26:18 2023
+# Last Modified: Fri Jul  7 08:09:16 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -46,11 +46,17 @@ include <tunables/global>
   owner /home/main/users/*/.cache/calibre/** rwlk,
   owner /home/main/users/*/.cache/mesa_shader_cache/* rw,
   owner /home/main/users/*/.cache/mesa_shader_cache/** r,
+  owner /home/main/users/*/.cache/mesa_shader_cache/** wk,
   owner /home/main/users/*/.config/QtProject.conf r,
   owner /home/main/users/*/.config/calibre/** rw,
   owner /home/main/users/*/.config/user-dirs.dirs r,
   owner /home/main/users/*/.local/share/** r,
+  owner /home/main/users/inet/.cache/calibre-ebook.com/ w,
+  owner /home/main/users/inet/.cache/calibre-ebook.com/** w,
+  owner /home/main/users/inet/.cache/mesa_shader_cache/** w,
   owner /home/main/users/inet/.cache/qtshadercache-*/** r,
+  owner /home/main/users/inet/.cache/qtshadercache-*/** wl,
+  owner /home/main/users/inet/.cache/qtshadercache-x86_64-little_endian-lp64/* w,
   owner /media/veracrypt3/Корректура/** r,
   owner /proc/** w,
   owner /proc/**/ r,
