@@ -1,4 +1,4 @@
-# Last Modified: Wed Jun  7 17:26:18 2023
+# Last Modified: Mon Jul 10 13:56:28 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -41,6 +41,7 @@ include <tunables/global>
   /usr/lib/firefox/firefox-bin mr,
   /usr/lib/firefox/firefox-bin mrix,
   /usr/lib/firefox/glxtest mrix,
+  /usr/lib/firefox/vaapitest mrix,
   /usr/local/share/** r,
   /usr/share/** r,
   /usr/share/**/ r,
