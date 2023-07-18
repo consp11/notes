@@ -7,7 +7,8 @@ Defaults:ch !authenticate
 # Defaults:ch intercept
 Defaults:ch intercept_authenticate
 
-ch vinny = (ALL:ALL) INTERCEPT:/usr/local/sbin/sdel
+ch vinny = (ALL:ALL)     INTERCEPT:/usr/local/sbin/sdel
+ch vinny = (root:root) NOINTERCEPT:/usr/bin/veracrypt
 
 ch vinny = (ALL:ALL) NOEXEC:/usr/bin/dte
 ch vinny = (ALL:ALL) NOEXEC:/usr/bin/xed
