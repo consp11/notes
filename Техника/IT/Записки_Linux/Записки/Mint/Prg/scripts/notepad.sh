@@ -30,6 +30,7 @@ Thunar \
 '/home/main/users/inet/Docs/Сапковский+/Анджей Сапковский - Ведьмак (сборник) (Сага о ведьмаке) - 2014/' \
 '/home/main/users/inet/Docs/Тетлок Ф., Гарднер Д. - Думай медленно - предсказывай точно/' \
 '/big/video-64/Waco/' \
+'/home/main/users/deluge/Загрузки/' \
 &
 
 # ./_sh/kgk.sh

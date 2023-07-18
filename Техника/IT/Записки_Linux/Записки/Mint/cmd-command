@@ -186,6 +186,7 @@ realpath - получает абсолютный путь по относите�
 
 Команды отладки strace ltrace readelf ld ldd ar nm ldconfig
 /Arcs/Repos/smalls/linux-assembler-ru/linux-commands.md
+    https://github.com/fdsc-memories/linux-assembler-ru/blob/main/linux-commands.md
 
 
 lsof - какой процесс блокирует файл? Блокировка файлов и демонтирования umount -f
