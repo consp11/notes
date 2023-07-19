@@ -1,4 +1,4 @@
-# Last Modified: Mon Jul 10 13:56:28 2023
+# Last Modified: Tue Jul 18 21:31:42 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -27,7 +27,10 @@ include <tunables/global>
   "/media/veracrypt2/Планы/Резервное копирование/" r,
   /**/ r,
   /A/Ya-disk/Crypto/** r,
+  /A/Ya-disk/Ключи/key_disk/* r,
+  /Arcs/Disks/ya/** r,
   /Arcs/Disks/ya/Arcs/books/* r,
+  /Arcs/Disks/ya/Crypto/* r,
   /dev/dri/* rw,
   /dev/snd/seq rw,
   /etc/** r,
