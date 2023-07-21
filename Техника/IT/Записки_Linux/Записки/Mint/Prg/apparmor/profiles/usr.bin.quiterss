@@ -1,4 +1,4 @@
-# Last Modified: Wed Jun  7 17:26:18 2023
+# Last Modified: Fri Jul 21 12:27:58 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -16,6 +16,11 @@ include <tunables/global>
 
   deny / r,
   deny /.dpkg-old r,
+  deny /A/ r,
+  deny /A/_/ r,
+  deny /home/ r,
+  deny /home/*/ r,
+  deny /home/main/users/ r,
   deny /media/veracrypt1/ rw,
   deny /media/veracrypt1/** rw,
   deny /media/veracrypt8/ rw,
