@@ -262,8 +262,11 @@ done
 
 echo
 
-sudo chmod g+r /A/service/aide/report.log
-xfce4-terminal --hold -x cat /A/service/aide/report.log
+if [ $doAIDE -eq 1 ]
+then
+	sudo chmod g+r /A/service/aide/report.log
+	xfce4-terminal --hold -x cat /A/service/aide/report.log
+fi
 
 if [ $doClamAV -eq 1 ]
 then
@@ -271,7 +274,10 @@ then
 	xfce4-terminal --hold -x cat /inRam/clamav.log
 fi
 
-sudo chmod g+r /inRam/aide-clamav.log
-xfce4-terminal --hold -x cat /inRam/aide-clamav.log
+if [ $doAIDE -eq 1 ]
+then
+	sudo chmod g+r /inRam/aide-clamav.log
+	xfce4-terminal --hold -x cat /inRam/aide-clamav.log
+fi
 
 disown -a
