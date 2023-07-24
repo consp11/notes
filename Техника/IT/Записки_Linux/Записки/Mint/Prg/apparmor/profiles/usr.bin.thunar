@@ -1,18 +1,18 @@
-# Last Modified: Thu May 25 21:56:36 2023
+# Last Modified: Sat Jul 22 15:12:23 2023
 abi <abi/3.0>,
 
 include <tunables/global>
 
 /usr/bin/thunar {
-  deny capability dac_read_search,
-  deny capability net_admin,
-  deny capability sys_admin,
-
   capability audit_write,
+  capability dac_override,
+  capability dac_read_search,
+  capability fowner,
   capability setgid,
   capability setuid,
   capability sys_nice,
   capability sys_ptrace,
+  capability sys_rawio,
   capability sys_resource,
 
   network netlink raw,

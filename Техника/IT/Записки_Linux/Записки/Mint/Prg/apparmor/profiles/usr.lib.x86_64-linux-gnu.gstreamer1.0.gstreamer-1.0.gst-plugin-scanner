@@ -1,10 +1,14 @@
-# Last Modified: Sun May 21 11:22:51 2023
+# Last Modified: Sat Jul 22 15:13:50 2023
 abi <abi/3.0>,
 
 include <tunables/global>
 
 /usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner {
   include <abstractions/base>
+
+  deny capability sys_admin,
+
+  capability sys_nice,
 
   network netlink raw,
 
@@ -18,6 +22,7 @@ include <tunables/global>
   /sys/**/ r,
   /sys/devices/** r,
   /usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner mr,
+  owner /etc/** rw,
   owner /home/*/.Xauthority r,
   owner /home/main/users/*/.Xauthority r,
 
