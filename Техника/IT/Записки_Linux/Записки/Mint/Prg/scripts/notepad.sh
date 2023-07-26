@@ -19,7 +19,7 @@ nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 '/home/main/users/inet/_/lit/Литература/Религия/Пост/11 Немного о голодании.txt' \
 '/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/Апрель-22-вопр' \
 '/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/05 Май-14-Маск' \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/Проектирование/ВМФ' \
+'/Arcs/Repos/consp11.github.io/free/05/Конспекты/Проектирование/Заметки' \
 &  &> /inRam/startup-nqq-pl.log
 
 
