@@ -1,4 +1,4 @@
-# Last Modified: Sat Jul 22 15:13:50 2023
+# Last Modified: Mon Aug  7 17:52:57 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -14,6 +14,7 @@ include <tunables/global>
 
   unix,
 
+  /dev/ r,
   /dev/dri/ r,
   /dev/dri/card0 rw,
   /dev/dri/renderD128 rw,
