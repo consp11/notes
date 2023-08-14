@@ -47,11 +47,12 @@ cd $pwd
 
 echo pidof aide-clamav
 pidof aide-clamav
-echo pidof setBinExecute
-pidof setBinExecute
 
 ionice -c 3 -p `pidof aide-clamav`
 chrt -b -p 0 `pidof aide-clamav`
+
+echo pidof setBinExecute
+pidof setBinExecute
 
 ionice -c 3 -p `pidof setBinExecute`
 chrt -b -p 0 `pidof setBinExecute`

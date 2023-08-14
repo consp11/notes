@@ -1,4 +1,4 @@
-# Last Modified: Sun Jul  2 09:38:45 2023
+# Last Modified: Sun Aug 13 08:43:04 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -34,6 +34,7 @@ include <tunables/global>
   owner /home/main/users/*/.cache/xreader/** rw,
   owner /home/main/users/*/.config/dconf/user r,
   owner /home/main/users/*/.local/share/** rw,
+  owner /home/main/users/inet/.local/share/xreader/* k,
   owner /run/user/*/ICEauthority r,
   owner /run/user/*/at-spi/bus_1 rw,
   owner /run/user/*/bus rw,
