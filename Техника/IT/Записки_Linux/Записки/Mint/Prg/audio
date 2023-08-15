@@ -1,0 +1,23 @@
+ecasound - multitrack-capable audio recorder and effect processor
+gnome-sound-recorder - simple and modern sound recorder for GNOME
+jack-tools - various JACK tools: dl, record, scope, osc, plumbing, udp, play, transport
+rotter - JACK client for transmission recording and audio logging
+timemachine - JACK audio recorder for spontaneous and conservatory use
+audacity - быстрый кросс-платформенный звуковой редактор
+kwave - Звуковой редактор для KDE
+rosegarden - музыкальный редактор и MIDI/аудио секвенсер
+
+
+nted - редактор партитур
+rosegarden - музыкальный редактор и MIDI/аудио секвенсер
+tuxguitar - мультитрековый редактор и проигрыватель гитарных табулатур (gp3-gp5)
+
+timidity TiMidity++ MIDI sequencer программный синтезатор звука
+
+nted
+rosegarden
+
+
+
+sudo apt install -y rosegarden kwave audacity timemachine gnome-sound-recorder ecasound
+
