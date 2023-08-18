@@ -37,13 +37,14 @@ mv $AIDE_DIR/out.db $AIDE_DIR/in.db
 
 sudo -u clamav freshclam --no-dns --stdout
 
+
 pwd=`pwd`
 cd /inRam
+
 /Arcs/Repos/smalls/aide-clamav/aide-clamav /Arcs/Repos/smalls/aide-clamav/aide-clamav.conf &
 bash -i /Arcs/Repos/smalls/dotnet-temp-utils/setBinExecute/exec-aide.sh &
 
-sleep 1
-cd $pwd
+sleep 0.3
 
 echo pidof aide-clamav
 pidof aide-clamav
@@ -56,6 +57,10 @@ pidof setBinExecute
 
 ionice -c 3 -p `pidof setBinExecute`
 chrt -b -p 0 `pidof setBinExecute`
+
+
+cd $pwd
+
 
 echo
 echo ----------------------------------------------------------------
