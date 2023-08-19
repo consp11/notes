@@ -44,7 +44,6 @@ cd /inRam
 /Arcs/Repos/smalls/aide-clamav/aide-clamav /Arcs/Repos/smalls/aide-clamav/aide-clamav.conf &
 bash -i /Arcs/Repos/smalls/dotnet-temp-utils/setBinExecute/exec-aide.sh &
 
-sleep 0.3
 
 echo pidof aide-clamav
 pidof aide-clamav
