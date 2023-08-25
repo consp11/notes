@@ -30,8 +30,13 @@ Thunar \
 '/home/main/users/inet/Docs/Тетлок Ф., Гарднер Д. - Думай медленно - предсказывай точно/' \
 &
 
+Thunar \
+'/media/veracrypt8/_sh/' \
+&
 
-nice -n 19 disk-wait 1
+
+#nice -n 19 disk-wait 1
+sleep 4
 wmctrl -s 1
 /home/main/users/inet/_/keys-var/_sh/dark-read.sh
 wmctrl -s 0
