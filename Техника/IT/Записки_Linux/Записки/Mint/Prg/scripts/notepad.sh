@@ -36,10 +36,10 @@ Thunar \
 
 
 #nice -n 19 disk-wait 1
-sleep 4
-wmctrl -s 1
-/home/main/users/inet/_/keys-var/_sh/dark-read.sh
-wmctrl -s 0
+#sleep 4
+#wmctrl -s 1
+#/home/main/users/inet/_/keys-var/_sh/dark-read.sh
+#wmctrl -s 0
 
 
 # '/big/video-64/Waco/' \
@@ -59,3 +59,6 @@ wmctrl -s 0
 
 disown -a
 # nice -n 19 disk-wait 1
+
+echo 'notepad.sh ended' &>> /inRam/startup.log
+date &>> /inRam/startup.log
