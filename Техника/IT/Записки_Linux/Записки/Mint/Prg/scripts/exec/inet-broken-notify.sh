@@ -18,7 +18,7 @@ do
     
     cnt2=0
     last=`date +%s`
-    while [[ cnt2 -le 60 ]]
+    while [[ $cnt2 -le 60 ]]
     do
         tput sc
         now=`date +%s`
