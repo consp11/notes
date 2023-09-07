@@ -13,6 +13,7 @@
 ? sudo systemctl restart usbguard
 
 # lsusb
+# Вывести список блокированных устройств
 # sudo usbguard list-devices -b
 # -p - постоянное разрешение
 # sudo usbguard allow-device 10 -p
