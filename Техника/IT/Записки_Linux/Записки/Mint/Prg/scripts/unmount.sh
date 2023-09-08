@@ -3,6 +3,15 @@
 # sudo veracrypt -l
 
 sudo -v
+# trap -l
+trap 'shutdown 0' SIGINT
+trap 'shutdown 0' SIGCHLD
+trap 'shutdown 0' SIGHUP
+trap 'shutdown 0' SIGKILL
+trap 'shutdown 0' SIGTRAP
+trap 'shutdown 0' SIGTERM
+trap 'shutdown 0' SIGSTOP
+
 
 if [ -z "$1" ]
 then
@@ -106,5 +115,29 @@ do
 	sleep 1
 	tput rc
 done
+
+# Разбираем параметры, если no или nosh - то не делаем shutdown 0
+doShutdown=1
+for a in $*
+do
+	if [ $a == "no" ]
+	then
+		doShutdown=0
+	fi
+
+    if [ $a == "nosh" ]
+	then
+		doShutdown=0
+	fi
+
+	if [ $a == "sh" ]
+	then
+		doShutdown=1
+	fi
+done
+
+if [ $doShutdown -ne 0 ]; then
+    shutdown 0
+fi
 
 echo
