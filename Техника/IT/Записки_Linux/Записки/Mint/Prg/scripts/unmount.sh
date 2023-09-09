@@ -5,11 +5,11 @@
 sudo -v
 # trap -l
 trap 'shutdown 0' SIGINT
-trap 'shutdown 0' SIGCHLD
-trap 'shutdown 0' SIGHUP
-trap 'shutdown 0' SIGKILL
-trap 'shutdown 0' SIGTERM
-trap 'shutdown 0' SIGSTOP
+#trap 'continue' SIGCHLD
+#trap 'continue' SIGHUP
+#trap 'continue' SIGKILL
+#trap 'continue' SIGTERM
+#trap 'continue' SIGSTOP
 
 
 if [ -z "$1" ]
