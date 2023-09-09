@@ -8,7 +8,6 @@ trap 'shutdown 0' SIGINT
 trap 'shutdown 0' SIGCHLD
 trap 'shutdown 0' SIGHUP
 trap 'shutdown 0' SIGKILL
-trap 'shutdown 0' SIGTRAP
 trap 'shutdown 0' SIGTERM
 trap 'shutdown 0' SIGSTOP
 
@@ -118,6 +117,7 @@ done
 
 # Разбираем параметры, если no или nosh - то не делаем shutdown 0
 doShutdown=1
+doReboot=0
 for a in $*
 do
 	if [ $a == "no" ]
@@ -130,6 +130,12 @@ do
 		doShutdown=0
 	fi
 
+    if [ $a == "r" || $a == "re" || $a == "reboot" || $a == "rb" ]
+	then
+		doShutdown=0
+        doReboot=1
+	fi
+
 	if [ $a == "sh" ]
 	then
 		doShutdown=1
@@ -138,6 +144,17 @@ done
 
 if [ $doShutdown -ne 0 ]; then
     shutdown 0
+else
+    trap '' SIGINT
+    trap '' SIGCHLD
+    trap '' SIGHUP
+    trap '' SIGKILL
+    trap '' SIGTERM
+    trap '' SIGSTOP
+
+    if [ $doReboot -ne 0 ]; then
+        reboot
+    fi
 fi
 
 echo
