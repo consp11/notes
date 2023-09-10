@@ -1,0 +1,69 @@
+Defaults:tor-browser-proxy !authenticate
+Defaults:tor-browser-proxy intercept_authenticate
+# Defaults:tor-browser-proxy !env_reset
+
+# Defaults:tor-browser-proxy use_pty
+# requiretty
+# Defaults:tor-browser-proxy runcwd=/home/main/users/tor-browser/bin/tor-browser
+
+
+# Для отладки
+tor-browser-proxy vinny = (tor-browser:forall) CWD=* NOEXEC:/usr/bin/whoami
+tor-browser-proxy vinny = (tor-browser:forall) CWD=* NOEXEC:/usr/bin/pwd
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* NOEXEC:/usr/bin/echo
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* NOEXEC:/usr/bin/which
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* NOEXEC:/usr/bin/ls
+
+# tor-browser-proxy vinny = (tor-browser:ALL) CWD=* NOEXEC:/usr/bin/dte
+
+# tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/
+
+
+tor-browser-proxy vinny = (tor-browser:ALL) INTERCEPT:/home/main/bin/tor-browser-2.sh
+tor-browser-proxy vinny = (tor-browser:ALL) INTERCEPT:/bin/bash -c /home/main/bin/tor-browser-2.sh
+# tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/bin/bash
+# tor-browser-proxy vinny = (tor-browser:ALL) CWD=* NOINTERCEPT:/bin/bash
+
+tor-browser-proxy vinny = (tor-browser:ALL) INTERCEPT:/bin/nice -n 17 ./start-tor-browser.desktop
+# tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/bin/nice -n 17 /usr/bin/env ./start-tor-browser.desktop
+# tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/bin/nice -n 17 /home/main/users/tor-browser/bin/tor-browser/start-tor-browser.desktop
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* NOINTERCEPT:/usr/bin/nice -n 17 /home/main/users/tor-browser/bin/tor-browser/Browser/start-tor-browser.desktop
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* NOINTERCEPT:/usr/bin/nice -n 17 /home/main/users/tor-browser/bin/tor-browser/start-tor-browser.desktop
+
+tor-browser-proxy vinny = (tor-browser:ALL) INTERCEPT:/usr/bin/bash /home/main/users/tor-browser/bin/tor-browser/Browser/execdesktop /home/main/users/tor-browser/bin/tor-browser/start-tor-browser.desktop
+tor-browser-proxy vinny = (tor-browser:ALL) INTERCEPT:/usr/bin/bash /home/main/users/tor-browser/bin/tor-browser/Browser/start-tor-browser --detach
+tor-browser-proxy vinny = (tor-browser:ALL) INTERCEPT:/usr/bin/bash /home/main/users/tor-browser/bin/tor-browser/Browser/execdesktop /home/main/users/tor-browser/bin/tor-browser/Browser/start-tor-browser.desktop
+
+
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/groups
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/passwd
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/bin/cut
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/bin/grep
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/sed
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/tail
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/file
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/expr
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/zenity
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/getconf
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/cp
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/ln
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/mkdir
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/basename
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/dirname
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/realpath
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/id
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/rm
+tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/bin/update-mime-database
+
+
+
+#tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/env
+#tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/env *
+#tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/env echo
+#tor-browser-proxy vinny = (tor-browser:ALL) CWD=* INTERCEPT:/usr/bin/env ./start-tor-browser.desktop
+
+tor-browser-proxy vinny = (tor-browser:ALL) NOINTERCEPT:/home/main/users/tor-browser/bin/tor-browser/
+tor-browser-proxy vinny = (tor-browser:ALL) NOINTERCEPT:/home/main/users/tor-browser/bin/tor-browser/Browser/
+tor-browser-proxy vinny = (tor-browser:ALL) NOINTERCEPT:/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor
+tor-browser-proxy vinny = (tor-browser:ALL) NOINTERCEPT:/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports
+

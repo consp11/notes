@@ -2,6 +2,8 @@
 # sudo /media/veracrypt1/unmount.sh
 # sudo veracrypt -l
 
+# shopt -s expand_aliases
+
 sudo -v
 # trap -l
 trap 'shutdown 0' SIGINT

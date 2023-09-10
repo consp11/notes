@@ -3,6 +3,7 @@ sudo setcap "cap_net_admin,cap_net_raw+pe" /usr/sbin/nethogs
 
 # Устанавливаются привилегии только один раз, потом файл просто запускается пользователем как обычно
 
+Запустив hostname можно узнать имя хоста
 
 sudo -k - аутентификация не запоминается на 15 минут, а сразу же сбрасывается. То есть после этой команды снова придётся вводить пароль администратора.
 less /var/log/auth.log видны все входы, в том числе - неудачные
@@ -40,6 +41,9 @@ Defaults intercept_authenticate
 
 Отмена флага intercept_authenticate для пользователя ch
 Defaults:ch !intercept_authenticate
+
+requiretty - требует для sudo виртуального терминала (tty)
+use_pty    - какая-то доп. защита от кражи псевдотерминала
 
 
 # /etc/sudoers

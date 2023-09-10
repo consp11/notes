@@ -66,7 +66,7 @@ sudo usermod -a -G ugroup username
 либо
 sudo gpasswd -a username ugroup
 
-Команда обновления без перелогина:
+Команда обновления без перелогина (нет, это не команда обновления, это смена эффективной группы, похоже):
 newgrp ugroup
 
 Удаление пользователя из группы
@@ -101,7 +101,17 @@ sudo systemctl restart accounts-daemon.service
 
 Либо здесь /etc/lightdm/users.conf (скорее всего, не здесь)
 	hidden-users=nobody nobody4 noaccess opera tor-browser qite-rss
+# https://ru.wikibooks.org/wiki/Lightdm#Файл_конфигурации
+При этом придётся ещё настроить файл /etc/lightdm/lightdm.conf
+# Вот это я не проверял
+greeter-hide-users=true
 
+lightdm --show-config
+
+# Не пробовал - нет, это не то
+#/usr/share/lightdm/lightdm.conf.d/50-xserver-command.conf
+#xserver-command=X -core
+# добавить -novtswitch
 
 # ----------------------------------------------------------------
 

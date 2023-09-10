@@ -1,0 +1,8 @@
+# Этот пользователь - почти никто
+# Он разграничен в SetBinExecute на очень малые права
+
+Defaults:ch !authenticate
+
+un vinny = (root:root) NOINTERCEPT:/usr/local/bin/unmount.sh
+# un vinny = (root:root) NOINTERCEPT:/inRamA/un.sh
+

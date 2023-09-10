@@ -1,4 +1,4 @@
-# Last Modified: Fri Jun 23 15:31:14 2023
+# Last Modified: Sat Sep  9 22:20:55 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -75,6 +75,7 @@ include <tunables/global>
   /usr/bin/** mix,
   /usr/bin/bash mrix,
   /usr/bin/env mix,
+  /usr/libexec/** mr,
   /usr/share/** r,
   /usr/share/**/ r,
   /var/lib/flatpak/exports/share/** r,

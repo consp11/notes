@@ -6,7 +6,7 @@ Defaults:first timestamp_timeout=120
 Defaults:ch    timestamp_timeout=0
 
 Defaults     intercept_authenticate
-Defaults:ch !intercept_authenticate
+# Defaults:ch !intercept_authenticate
 
 # Defaults editor=/usr/bin/xed:/usr/bin/dte
 Defaults      editor=/usr/bin/dte:/usr/bin/xed
@@ -24,6 +24,8 @@ Defaults lecture_file="/A/notes/Мусор/sudo_lectures/default"
 Defaults:first lecture_file="/A/notes/Мусор/sudo_lectures/first"
 Defaults:a1 lecture_file="/A/notes/Мусор/sudo_lectures/a1"
 Defaults:ch lecture_file="/A/notes/Мусор/sudo_lectures/ch"
+Defaults:un lecture_file="/A/notes/Мусор/sudo_lectures/un"
+
 
 # Рарешаем группе adm_no_impersonation делать всё, но из-под имени root
 # %adm_no_impersonation ALL=(root:root)ALL

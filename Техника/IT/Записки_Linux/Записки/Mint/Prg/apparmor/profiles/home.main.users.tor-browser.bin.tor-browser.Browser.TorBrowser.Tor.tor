@@ -1,4 +1,4 @@
-# Last Modified: Fri Jun 23 15:32:03 2023
+# Last Modified: Sat Sep  9 22:18:48 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -19,6 +19,7 @@ include <tunables/global>
   /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/lyrebird px,
   /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/tor mr,
   /proc/sys/kernel/random/* r,
+  /usr/libexec/sudo/sudo_intercept.so r,
   owner /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Data/** rwk,
   owner /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/* mr,
   owner /home/main/users/tor-browser/bin/tor-browser/Browser/browser/features/* r,
