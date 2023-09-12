@@ -42,7 +42,7 @@ Defaults intercept_authenticate
 Отмена флага intercept_authenticate для пользователя ch
 Defaults:ch !intercept_authenticate
 
-requiretty - требует для sudo виртуального терминала (tty)
+requiretty - требует для sudo виртуального терминала (tty). Правда, судя по всему, если пользователь залогинен в терминале, то всё остальное тоже может логиниться сколько угодно.
 use_pty    - какая-то доп. защита от кражи псевдотерминала
 
 
