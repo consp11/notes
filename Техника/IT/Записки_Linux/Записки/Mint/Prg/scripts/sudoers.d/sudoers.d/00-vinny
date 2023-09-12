@@ -1,7 +1,7 @@
 # Таймаут на кеширование пароля для терминала после ввода sudo
 Defaults       timestamp_timeout=12
 Defaults:inet  timestamp_timeout=120
-Defaults:a1    timestamp_timeout=15
+Defaults:a1    timestamp_timeout=120
 Defaults:first timestamp_timeout=120
 Defaults:ch    timestamp_timeout=0
 
