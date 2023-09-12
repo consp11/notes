@@ -12,15 +12,15 @@
 
 
 # Это эксперименты с виртуальными устройствами под namespace
--A OUTPUT -o inet-host -p icmp -s 10.0.3.1 -d 10.0.3.2 -j ACCEPT
--A OUTPUT -o inet-un   -p icmp -s 10.0.3.2 -d 10.0.3.1 -j ACCEPT
--A INPUT  -i inet-host -p icmp -s 10.0.3.2 -d 10.0.3.1 -j ACCEPT
--A INPUT  -i inet-un   -p icmp -s 10.0.3.1 -d 10.0.3.2 -j ACCEPT
+#-A OUTPUT -o inet-host -p icmp -s 10.0.3.1 -d 10.0.3.2 -j ACCEPT
+#-A OUTPUT -o inet-un   -p icmp -s 10.0.3.2 -d 10.0.3.1 -j ACCEPT
+#-A INPUT  -i inet-host -p icmp -s 10.0.3.2 -d 10.0.3.1 -j ACCEPT
+#-A INPUT  -i inet-un   -p icmp -s 10.0.3.1 -d 10.0.3.2 -j ACCEPT
 
--A OUTPUT -o inet-host -p tcp -s 10.0.3.1 --sport 1027 -d 10.0.3.2              -j ACCEPT
--A OUTPUT -o inet-un   -p tcp -s 10.0.3.2              -d 10.0.3.1 --dport 1027 -j ACCEPT
--A INPUT  -i inet-host -p tcp -s 10.0.3.2              -d 10.0.3.1 --dport 1027 -j ACCEPT
--A INPUT  -i inet-un   -p tcp -s 10.0.3.1 --sport 1027 -d 10.0.3.2              -j ACCEPT
+#-A OUTPUT -o inet-host -p tcp -s 10.0.3.1 --sport 1027 -d 10.0.3.2              -j ACCEPT
+#-A OUTPUT -o inet-un   -p tcp -s 10.0.3.2              -d 10.0.3.1 --dport 1027 -j ACCEPT
+#-A INPUT  -i inet-host -p tcp -s 10.0.3.2              -d 10.0.3.1 --dport 1027 -j ACCEPT
+#-A INPUT  -i inet-un   -p tcp -s 10.0.3.1 --sport 1027 -d 10.0.3.2              -j ACCEPT
 
 # -A FORWARD -o enx00093bf01a40 -i inet-host -j ACCEPT
 # -A FORWARD -i enx00093bf01a40 -o inet-host -j ACCEPT
@@ -70,6 +70,7 @@
 
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 9001  -m owner --uid-owner chromium   -j ACCEPT
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 9001  -m owner --uid-owner chromium-k -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 9001  -m owner --uid-owner ch-diet    -j ACCEPT
 
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 10010 -m owner --uid-owner tor-browser  -j ACCEPT
 # -A OUTPUT -m owner --uid-owner tor-browser  -j ACCEPT

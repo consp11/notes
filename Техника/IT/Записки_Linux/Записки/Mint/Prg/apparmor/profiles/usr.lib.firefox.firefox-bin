@@ -1,4 +1,4 @@
-# Last Modified: Tue Jul 18 21:31:42 2023
+# Last Modified: Mon Sep 11 20:23:18 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -17,6 +17,8 @@ include <tunables/global>
   network netlink raw,
 
   dbus,
+
+  ptrace trace peer=/usr/lib/firefox/firefox-bin,
 
   unix,
 
@@ -37,14 +39,23 @@ include <tunables/global>
   /proc/** r,
   /run/dbus/system_bus_socket rw,
   /run/systemd/resolve/stub-resolv.conf r,
+  /run/systemd/userdb/io.systemd.DynamicUser rw,
   /sys/bus/*/devices/ r,
   /sys/devices/** r,
+  /sys/kernel/security/apparmor/.access rw,
+  /sys/kernel/security/apparmor/features/dbus/mask r,
+  /sys/module/apparmor/parameters/enabled r,
   /usr/bin/dash mrix,
+  /usr/bin/dbus-daemon mrix,
+  /usr/bin/dbus-launch mrix,
   /usr/bin/lsb_release px,
   /usr/lib/firefox/firefox-bin mr,
   /usr/lib/firefox/firefox-bin mrix,
   /usr/lib/firefox/glxtest mrix,
+  /usr/lib/firefox/minidump-analyzer mrix,
   /usr/lib/firefox/vaapitest mrix,
+  /usr/libexec/sudo/* mr,
+  /usr/libexec/xdg-desktop-portal Ux,
   /usr/local/share/** r,
   /usr/share/** r,
   /usr/share/**/ r,
@@ -80,6 +91,14 @@ include <tunables/global>
   owner /home/main/users/*/.mozilla/** rwk,
   owner /home/main/users/*/.mozilla/firefox/** r,
   owner /home/main/users/*/Загрузки/** r,
+  owner /home/main/users/ch-diet/.cache/** rw,
+  owner /home/main/users/ch-diet/.config/** rw,
+  owner /home/main/users/ch-diet/.dbus/ rw,
+  owner /home/main/users/ch-diet/.dbus/session-bus/ rw,
+  owner /home/main/users/ch-diet/.dbus/session-bus/** w,
+  owner /home/main/users/ch-diet/.fontconfig/ rw,
+  owner /home/main/users/ch-diet/.mozilla/ rw,
+  owner /home/main/users/ch-diet/Загрузки/ rw,
   owner /home/main/users/inet/.Xauthority r,
   owner /home/main/users/inet/.cache/* k,
   owner /home/main/users/inet/.cache/* rw,

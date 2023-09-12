@@ -1,4 +1,4 @@
-# Last Modified: Mon May 22 13:11:34 2023
+# Last Modified: Mon Sep 11 19:28:10 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -10,14 +10,21 @@ include <tunables/global>
 
   signal send set=cont peer=/usr/lib/chromium/chromium,
 
+  ptrace read peer=/usr/lib/chromium/chromium,
+  ptrace trace peer=/usr/lib/chromium/chromium,
+
   unix,
 
   /etc/ld.so.cache r,
   /etc/ld.so.preload r,
+  /etc/sudo.conf r,
   /proc/** r,
+  /sys/devices/** r,
   /usr/lib/chromium/chrome_crashpad_handler mr,
   /usr/lib/chromium/chrome_crashpad_handler mrix,
+  /usr/libexec/sudo/* mr,
   owner /home/main/users/*/.config/chromium/** w,
   owner /home/main/users/*/.config/chromium/**/ r,
+  owner /home/main/users/ch-diet/.config/chromium/** rk,
 
 }

@@ -1,4 +1,4 @@
-# Last Modified: Wed May 17 11:55:53 2023
+# Last Modified: Mon Sep 11 20:19:39 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -19,6 +19,7 @@ include <tunables/global>
   /run/systemd/resolve/stub-resolv.conf r,
   /usr/lib/firefox/firefox mr,
   /usr/lib/firefox/firefox-bin px,
+  /usr/libexec/sudo/* mr,
   /usr/share/fonts/** r,
   owner /home/main/users/mega/.local/share/** a,
 

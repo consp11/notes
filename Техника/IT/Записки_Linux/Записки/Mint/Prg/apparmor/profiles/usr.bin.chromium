@@ -1,4 +1,4 @@
-# Last Modified: Thu Aug 24 10:01:29 2023
+# Last Modified: Mon Sep 11 19:23:37 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -21,6 +21,7 @@ include <tunables/global>
   unix,
 
   /dev/tty rw,
+  /etc/sudo.conf r,
   /usr/bin/chromium r,
   /usr/bin/cut mix,
   /usr/bin/dash mix,
@@ -28,6 +29,8 @@ include <tunables/global>
   /usr/bin/xdg-settings mrix,
   /usr/lib/chromium/chrome_crashpad_handler mrpx,
   /usr/lib/chromium/chromium mrpx,
+  /usr/libexec/sudo/libsudo_util.so.* mr,
+  /usr/libexec/sudo/sudo_intercept.so mr,
   owner /dev/pts/* rw,
 
 }

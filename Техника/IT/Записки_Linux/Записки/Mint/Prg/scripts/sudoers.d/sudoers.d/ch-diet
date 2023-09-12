@@ -1,0 +1,39 @@
+#Defaults:ch-diet       !authenticate
+#Defaults:ch-diet-proxy !authenticate
+
+
+#Defaults:ch-diet-proxy !env_reset
+#Defaults:ch-diet-proxy use_pty
+
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/bin/bash -c /home/main/bin/chromium-2.sh
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/home/main/bin/chromium-2.sh
+ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/locale-check C.UTF-8
+
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/nice -n 18 -- /usr/bin/chromium --proxy-server=*
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/chromium
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/lib/chromium/chrome_crashpad_handler
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/lib/chromium/chromium
+
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/head
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/sed
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/mkdir
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/touch
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/mktemp
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/wc
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/mv
+
+# Отладка
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/ls
+
+# FireFox
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/bin/bash -c /home/main/bin/ch-diet-3.sh
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/home/main/bin/ch-diet-3.sh
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/nice -n 18 -- /usr/bin/firefox
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/lsb_release
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/firefox
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/lib/firefox/firefox
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/lib/firefox/firefox-bin
+
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/bin/dbus-launch
+#ch-diet-proxy vinny = (ch-diet) INTERCEPT:/usr/lib/firefox/minidump-analyzer /home/main/users/ch-diet/.mozilla/* *
+

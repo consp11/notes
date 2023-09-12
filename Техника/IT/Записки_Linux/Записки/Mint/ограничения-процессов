@@ -30,6 +30,11 @@ systemd-run --scope -p MemoryLimit=1000M -p CPUQuota=10% ./myProcess.sh
 
 sudo systemd-run --scope --nice=18 --uid=a1 --gid=a1 -p CPUQuota=10% -p CPUQuotaPeriodSec=1000ms stress -c 1
 
+----------------------------------------------------------------
+кто потребляет больше памяти?
+# ps aux --sort=%mem | grep -v 'root' | head -n 35
+
+ps axo %mem,pid,user,cmd --sort=%mem | tail -n 2
 
 ----------------------------------------------------------------
 Ограничения по памяти для пользователя (для каждого процесса пользователя)
@@ -40,6 +45,9 @@ ulimit -Sf 2000
 
 Просмотр ограничений
 ulimit -a
+
+Здесь при выводе указываются ключи, которыми устанавливаются соотв. ограничения.
+-S - мягкое ограничение. -H - жёсткое ограничение.
 
 
 Ограничения дискового ввода-вывода
@@ -95,6 +103,32 @@ sudo cgcreate -g cpu:g2 -t a1:first -a a1:first
 sudo cgset -r cpu.max='101000 1000000' g2
 sudo cgexec -g cpu:g2 stress -c 1
 
+# Не проверенный пример
+1. create a memory cgroup
+    sudo cgcreate -g memory:$test_db -t $User:$User -a $User:$User
+
+2. limit the group's RAM usage to 1G. 
+    echo 1000M > /sys/fs/cgroup/memory/$test_db/memory.limit_in_bytes
+    or 
+    echo 1000M > /sys/fs/cgroup/memory/$test_db/memory.soft_limit_in_bytes
+
+3. run the database program in the $test_db cgroup
+   cgexec -g memory:$test_db $db_program_name
+
+
+
+/etc/security/limits.conf
+Правило выглядит так
+<domain> <type> <item> <item>
+domain — это пользователь или группа, для которых лимитируем ресурсы
+
+type — тип ограничения: soft или hard, ограничение soft может быть переопределено пользователем.
+
+item — ресурс, который ограничиваем — обычно это cpu (в минутах) или as — максимальное количество оперативной памяти (в Кб); также можно задать nice level, который не сможет быть превышен процессами пользователя/группы (минимум 20, максимум -19); здесь же можно задать chroot (только для debian)
+
+item — само численное значение
+
+Для того чтобы изменения вступили в силу нужна перезагрузка. (да????)
 
 ----------------------------------------------------------------
 chrt
