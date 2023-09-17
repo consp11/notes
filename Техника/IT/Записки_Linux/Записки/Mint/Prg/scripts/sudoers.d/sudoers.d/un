@@ -3,9 +3,13 @@
 
 Defaults:un !authenticate
 Defaults:un requiretty
-Defaults:un use_pty
+#Defaults:un use_pty
+
+un vinny = (a1:first)  NOINTERCEPT:/home/a1/mount.sh
 
 un vinny = (root:root) NOINTERCEPT:/usr/local/bin/unmount.sh
-un vinny = (a1:first)  NOINTERCEPT:/home/a1/mount.sh
+
+un vinny = (a1:first)  NOINTERCEPT:/usr/bin/su
+
 # un vinny = (root:root) NOINTERCEPT:/inRamA/un.sh
 

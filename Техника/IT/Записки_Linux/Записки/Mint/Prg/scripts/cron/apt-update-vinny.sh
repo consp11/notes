@@ -1,13 +1,13 @@
 #!/bin/bash
 
-sudo apt-get update -y
-sudo apt-get -y --with-new-pkgs --fix-broken upgrade
+sudo apt-get update -y &>> /inRam-Logs/upgrade
+sudo apt-get -y --with-new-pkgs --fix-broken upgrade &>> /inRam-Logs/upgrade
 
 if [[ $? -ne 0 ]]
 then
-sudo apt-get -y --with-new-pkgs --fix-broken upgrade
+sudo apt-get -y --with-new-pkgs --fix-broken upgrade &>> /inRam-Logs/upgrade
 fi
 
-sudo apt-get autoremove
-sudo apt-get autoclean
+sudo apt-get autoremove &>> /inRam-Logs/upgrade
+sudo apt-get autoclean &>> /inRam-Logs/upgrade
 

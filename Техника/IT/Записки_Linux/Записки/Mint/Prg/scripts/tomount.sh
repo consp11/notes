@@ -199,7 +199,7 @@ GIT_LOG_H=/inRam/cp-git-h.log
 # echo '!!!!!!!!!!!!!!!!!!!!!!!!'
 # xfce4-terminal --tab -x bash -i ./startup.sh &
 
-cp -fvu /home/main/bin/*.sh    /home/a1/_/Linux_Записки_Prg/scripts/exec
+cp -fvu /home/main/bin/*.sh    /A/_/Linux_Записки_Prg/scripts/exec
 
 if [ $doClamAV -eq 1 ]
 then

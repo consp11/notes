@@ -79,14 +79,27 @@ DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart vinny@tor.ser
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart tor.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart tor@8081.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart tor@8084.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart tor@check.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl start   tor@check.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl stop    tor@check.service
+
+
 
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status vinny@10010.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status vinny@tor.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor@8081.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor@8084.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor@check.service
+
 
 DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/cat /inRam-Logs/tor-8081.log
+DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/xed /inRam-Logs/tor-8081.log
+DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/cat /inRam-Logs/tor-check.log
+# DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/watch cat /inRam-Logs/tor-check.log
+DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/xed /inRam-Logs/tor-check.log
+
+
 
 
 # User_Alias PWD_LIST=%forall,%passwords

@@ -1,6 +1,6 @@
 xhost SI:localuser:tor-browser
 
-# bash /home/main/bin/ping.sh
+bash /home/main/bin/ping.sh
 
 echo 'tor-browser'
 

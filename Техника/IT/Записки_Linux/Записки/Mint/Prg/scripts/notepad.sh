@@ -20,9 +20,8 @@ nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 
 nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 '/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/05 Май-14-Маск' \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/Проектирование/Заметки' \
 '/home/main/users/inet/_/lit/Корректура/Живой доспех' \
-'/home/main/users/inet/_/lit/Литература/Публицистика/2023/Диета/4 Хорошая пища' \
+'/A/_/lit/Литература/Публицистика/2023/Диета/15 Интервальное голодание и дробное питание' \
 &  &> /inRam/startup-nqq-pl.log
 
 
