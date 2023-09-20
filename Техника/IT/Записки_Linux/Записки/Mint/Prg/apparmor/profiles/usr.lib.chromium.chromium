@@ -1,4 +1,4 @@
-# Last Modified: Mon Sep 11 19:39:24 2023
+# Last Modified: Sun Sep 17 15:42:05 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -78,6 +78,7 @@ include <tunables/global>
   owner /home/main/users/ch-diet/.cache/ w,
   owner /home/main/users/ch-diet/.cache/** r,
   owner /home/main/users/ch-diet/.cache/** w,
+  owner /home/main/users/ch-diet/.config/chromium/** m,
   owner /home/main/users/ch-diet/.config/xfce4/ w,
   owner /home/main/users/ch-diet/.config/xfce4/* rw,
   owner /home/main/users/ch-diet/.local/ rw,
