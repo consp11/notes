@@ -10,13 +10,18 @@
 
 whoami | fgrep -vx a1
 
-# Ожидаем появления интернета
-ping -s 16 -c 1 77.88.8.88 | egrep -o '(time=.*|.*no answer.*)'
-while [ $? -ne 0 ]
-do
-  sleep 5
-  ping -s 16 -c 1 77.88.8.88 | egrep -o '(time=.*|.*no answer.*)'
-done
+function waitPing()
+{
+    # Ожидаем появления интернета
+    ping -s 16 -c 1 77.88.8.88 | egrep -o '(time=.*|.*no answer.*)'
+    while [ $? -ne 0 ]
+    do
+      sleep 5
+      ping -s 16 -c 1 77.88.8.88 | egrep -o '(time=.*|.*no answer.*)'
+    done
+}
+
+waitPing
 
 
 gold=`pwd`
@@ -63,6 +68,8 @@ function commit()
 
 			# Это надо только один раз запустить для каждого пользователя. Далее закомментировать
 			# git config --global --add safe.directory `pwd`
+
+            waitPing
 
 			git add .
 			git commit -m "automatic commit"
