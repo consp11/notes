@@ -20,6 +20,7 @@ nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 
 nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 '/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/05 Май-14-Маск' \
+'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/09 сен-30' \
 '/home/main/users/inet/_/lit/Корректура/Живой доспех' \
 &  &> /inRam/startup-nqq-pl.log
 

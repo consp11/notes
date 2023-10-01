@@ -10,7 +10,10 @@ Acquire::http::Proxy "http://user:password@127.0.0.1:8889";
 # Acquire::https { Proxy "https://127.0.0.1:8889"; };
 Acquire::::Proxy "true";
 
-sudo apt-get --with-new-pkgs --fix-missing upgrade
+dpkg --configure -a
+
+sudo apt-get --with-new-pkgs --fix-missing upgrade  // Вот это лучше не делать, т.к. --fix-missing просто пропускает те пакеты, которые не удалось получить и устаналивает битую систему
+
 sudo apt-get install --fix-broken
 sudo apt-get -y --with-new-pkgs upgrade --fix-broken
 
