@@ -1,17 +1,18 @@
 #!/bin/bash
 
-function waitPing(i)
+function waitPing()
 {
+    i=$1
     # Ожидаем появления интернета
-    ping -s 16 -c 1 77.88.8.88 >> /dev/null
+    ping -s 16 -c 1 77.88.8.88 &>> /dev/null
     while [[ $? -ne 0 && $i -gt 0 ]]
     do
       sleep 5
       i=$(($i-1))
-      ping -s 16 -c 1 77.88.8.88 >> /dev/null
+      ping -s 16 -c 1 77.88.8.88 &>> /dev/null
     done
 
-    ping -s 16 -c 1 77.88.8.88 &>> /inRam-Logs/upgrade
+    ping -s 16 -c 1 77.88.8.88 | egrep -o '(time=.*|.*no answer.*)' &>> /inRam-Logs/upgrade
 }
 
 echo -e "\n\n\n" &>> /inRam-Logs/upgrade
