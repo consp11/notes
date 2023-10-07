@@ -61,6 +61,7 @@
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 8120  -m owner --uid-owner inet  -j ACCEPT
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 8888  -m owner --uid-owner inet  -j ACCEPT
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 8889  -m owner --uid-owner inet  -j ACCEPT
+# -A OUTPUT -d 127.0.0.1 -p tcp --dport 10011 -m owner --uid-owner inet  -j ACCEPT
 
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 8889  -m owner --uid-owner game  -j ACCEPT
 

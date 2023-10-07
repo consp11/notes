@@ -1,3 +1,40 @@
+gpg --import VeraCrypt_PGP_public_key.asc
+
+gpg --list-keys
+
+gpg --verify veracrypt-1.26.7-Ubuntu-22.04-amd64.deb.sig
+
+
+https://docs.github.com/ru/authentication/managing-commit-signature-verification
+https://docs.github.com/articles/generating-a-gpg-key/
+gpg --full-gen-key
+Vinogradov Sergey Vasilievich
+fdsc@yandex.ru
+https://github.com/fdsc
+672D5FAE0BE9AC076D55E4A5A024DF66C6E4AAA7
+
+git config --global user.signingkey 672D5FAE0BE9AC076D55E4A5A024DF66C6E4AAA7
+git config --global commit.gpgsign true
+
+gpg --export --armor 672D5FAE0BE9AC076D55E4A5A024DF66C6E4AAA7 > /inRamA/gpg-key.pub
+gpg --export-secret-keys 672D5FAE0BE9AC076D55E4A5A024DF66C6E4AAA7 > /media/veracrypt8/Пароли/672D5FAE0BE9AC076D55E4A5A024DF66C6E4AAA7.gpg.secret.key
+
+
+Проверка подлинности коммитов (e5c3f38 - хеш коммита; можно получить с помощью git log)
+git verify-commit e5c3f38
+
+
+gpg --import *.asc
+После импорта ключ можно добавить в доверенные
+gpg --edit-key key-id
+trust
+
+
+gpg --keyserver pgp.mit.edu    --keyserver-options "http-proxy=http://127.0.0.1:10011" --send-keys 672D5FAE0BE9AC076D55E4A5A024DF66C6E4AAA7
+#gpg --keyserver keys.gnupg.net --send-keys 672D5FAE0BE9AC076D55E4A5A024DF66C6E4AAA7
+gpg --keyserver keyserver.ubuntu.com:80 --send-keys 672D5FAE0BE9AC076D55E4A5A024DF66C6E4AAA7
+
+
 
 gpg -se -r Bob file
       sign and encrypt for user Bob
@@ -29,3 +66,6 @@ gpg --verify sigfile [datafile]
       --output is also used the signed data is  written  to  the  file
       specified by that option; use - to write the signed data to std‐
       out.
+
+
+gpg --keyserver pgp.mit.edu --recv-keys 0xABCDEF01234
