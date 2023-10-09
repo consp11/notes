@@ -93,13 +93,19 @@ DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor@8084.servi
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor@check.service
 
 
+DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/cat /inRam-Logs/tor-8080.log
+DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/xed /inRam-Logs/tor-8080.log
 DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/cat /inRam-Logs/tor-8081.log
 DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/xed /inRam-Logs/tor-8081.log
 DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/cat /inRam-Logs/tor-check.log
 # DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/watch cat /inRam-Logs/tor-check.log
 DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/xed /inRam-Logs/tor-check.log
 
+DMESG_LIST vinny = NOINTERCEPT:PASSWD:/usr/bin/systemctl restart usbguard.service
 
+DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/usbguard list-devices -b
+DMESG_LIST vinny = NOEXEC:NOPASSWD:/usr/bin/usbguard list-devices -a
+DMESG_LIST vinny = NOEXEC:PASSWD:/usr/bin/usbguard allow-device [0-9]* -p
 
 
 # User_Alias PWD_LIST=%forall,%passwords
