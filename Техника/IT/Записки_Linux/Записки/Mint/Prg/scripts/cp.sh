@@ -39,10 +39,10 @@ cd /Arcs/Repos/reserve/
 # На всякий случай, для начала копируем все bdc-файлы внутрь первичных ключей
 cp -fvu /Arcs/Disks/ya/*.bdc /Arcs/Disks/ya/Ключи/Первичные/
 
-7z a -y -t7z -m0=lzma -mx=0 -bb0 -bd -ssc -ssw /Arcs/Repos/reserve/keys-primary.7z /Arcs/Disks/ya/Ключи/Первичные/  > /dev/null
+7z a -y -t7z -m0=lzma2 -mx=0 -bb0 -bd -ssc -ssw /Arcs/Repos/reserve/keys-primary.7z /Arcs/Disks/ya/Ключи/Первичные/  > /dev/null
 
 # Добавляем в него файл keysreserve.txt
-7z a -y -t7z -m0=lzma -mx=0 -bb0 -bd -ssc -ssw /Arcs/Repos/reserve/keys-primary.7z /Arcs/Disks/Mega/MEGAsync/Keys/keysreserve.txt  > /dev/null
+7z a -y -t7z -m0=lzma2 -mx=0 -bb0 -bd -ssc -ssw /Arcs/Repos/reserve/keys-primary.7z /Arcs/Disks/Mega/MEGAsync/Keys/keysreserve.txt  > /dev/null
 
 # Копируем архив в другие места
 cp -fvu /Arcs/Repos/reserve/keys-primary.7z /Arcs/Disks/Mega/MEGAsync/Keys/keys-primary.7z
