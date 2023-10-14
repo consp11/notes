@@ -82,7 +82,8 @@ DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart tor@8084.serv
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl restart tor@check.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl start   tor@check.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl stop    tor@check.service
-
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl start   vkf.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl stop    vkf.service
 
 
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status vinny@10010.service
@@ -91,6 +92,8 @@ DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor@8081.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor@8084.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor@check.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status vkf.service
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status vkf
 
 
 DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/cat /inRam-Logs/tor-8080.log
