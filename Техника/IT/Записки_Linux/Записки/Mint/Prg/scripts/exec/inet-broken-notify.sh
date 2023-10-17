@@ -4,12 +4,7 @@
 date
 dateFormat='+%H:%M:%S'
 
-isHaveInternet=true
 ping -s 16 -c 2 77.88.8.88 -i 0.5 -O | egrep --color=never '(icmp_seq=|ping\:)'
-if [ $? -ne 0 ]
-then
-	isHaveInternet=
-fi
 
 cnt=0
 
@@ -51,50 +46,6 @@ do
     #pngres=$?
     # echo "$pngstr" | egrep --color=never '(icmp_seq=|ping\:)'
     ping -s 16 -c 2 77.88.8.88 -i 1.83 -O | egrep --color=never '(icmp_seq=|ping\:)'
-
-    if [ $? -ne 0 ]
-    then
-        if [ $isHaveInternet ]
-        then
-            dt=`date`
-            pn=`ping -s 16 -c 4 77.88.8.88 -i 0.83 -O`
-            if [ $? -eq 0 ]
-            then
-                continue
-            fi
-
-            notify-send -t 600000 "Интернет отвалился" "$dt\n\n$pn"
-
-            echo
-            echo
-            date
-            echo "Интернет отвалился"
-            echo
-
-            cnt=0
-            read -t 60
-        fi
-        echo $isHaveInternet
-        isHaveInternet=
-    else
-        if [ ! $isHaveInternet ]
-        then
-            dt=`date`
-            pn=`ping -s 16 -c 4 77.88.8.88 -i 0.83 -O | egrep -o '(time=.*|.*no answer.*)'`
-            notify-send -t 120000 "Интернет восстановился" "<i>$dt</i>"
-
-            echo
-            echo
-            date
-            echo "Интернет восстановился"
-            echo
-
-            cnt=0
-            read -t 60
-        fi
-
-        isHaveInternet=true
-    fi
 
 done
 

@@ -94,6 +94,7 @@ DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor@8084.servi
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status tor@check.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status vkf.service
 DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/systemctl status vkf
+DMESG_LIST vinny = NOINTERCEPT:NOPASSWD:/usr/bin/journalctl -u vkf
 
 
 DMESG_LIST vinny =   INTERCEPT:NOPASSWD:/usr/bin/cat /inRam-Logs/tor-8080.log
