@@ -34,7 +34,6 @@ mv $AIDE_DIR/out.db $AIDE_DIR/in.db
 #  ping -c 1 77.88.8.88 -s 16 &> /dev/null
 #done
 
-
 sudo -u clamav freshclam --no-dns --stdout
 
 
@@ -70,6 +69,17 @@ sudo cat /var/log/audit/audit.log | egrep apparmor=\"D
 echo ----------------------------------------------------------------
 echo ----------------------------------------------------------------
 echo
+
+# Ожидаем появления интернета
+ping -c 1 77.88.8.88 -s 16 | egrep -o '(time=.*|.*no answer.*)'
+while [ $? -ne 0 ]
+do
+  sudo -v
+  sleep 5
+  ping -c 1 77.88.8.88 -s 16 &> /dev/null
+done
+
+sudo -u clamav freshclam --no-dns --stdout
 
 wait
 
