@@ -1,15 +1,39 @@
 sudo -v
 
-nice -n 19 aide --update -c /etc/aide.conf &
-sudo -u clamav nice -n 19 freshclam --no-dns --stdout &
+function waitPing()
+{
+    i=$1
+    # Ожидаем появления интернета
+    ping -s 16 -c 1 77.88.8.88 &>> /dev/null
+    while [[ $? -ne 0 && $i -gt 0 ]]
+    do
+      sleep 5
+      i=$(($i-1))
+      ping -s 16 -c 1 77.88.8.88 &>> /dev/null
+    done
 
-sleep 1
+    ping -s 16 -c 1 77.88.8.88 | egrep -o '(time=.*|.*no answer.*)'
+}
+
+nice -n 19 aide --update -c /etc/aide.conf &
+
+sleep 0.3
 
 ionice -c 3 -p `pidof aide`
-ionice -c 3 -p `pidof freshclam`
-
 chrt -b -p 0 `pidof aide`
+
+
+# Ждём интернета 30 минут
+waitPing 360
+
+sudo -u clamav nice -n 19 freshclam --no-dns --stdout &
+
+sleep 0.3
+
+ionice -c 3 -p `pidof freshclam`
 chrt -i -p 0 `pidof freshclam`
+
+
 
 
 wait
@@ -25,16 +49,6 @@ fi
 rm $AIDE_DIR/in.db
 mv $AIDE_DIR/out.db $AIDE_DIR/in.db
 
-
-# Ожидаем появления интернета
-#ping -c 1 77.88.8.88 -s 16
-#while [ $? -ne 0 ]
-#do
-#  sleep 5
-#  ping -c 1 77.88.8.88 -s 16 &> /dev/null
-#done
-
-sudo -u clamav freshclam --no-dns --stdout
 
 
 pwd=`pwd`
@@ -70,16 +84,6 @@ echo ----------------------------------------------------------------
 echo ----------------------------------------------------------------
 echo
 
-# Ожидаем появления интернета
-ping -c 1 77.88.8.88 -s 16 | egrep -o '(time=.*|.*no answer.*)'
-while [ $? -ne 0 ]
-do
-  sudo -v
-  sleep 5
-  ping -c 1 77.88.8.88 -s 16 &> /dev/null
-done
-
-sudo -u clamav freshclam --no-dns --stdout
 
 wait
 

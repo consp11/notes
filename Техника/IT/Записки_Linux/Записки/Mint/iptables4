@@ -181,9 +181,13 @@
 # -A INPUT  -p icmp -j ACCEPT
 
 
-# Разрешаем исходящие пакеты ping на внутренние адреса
+# Разрешаем исходящие пакеты ping на внутренние адреса без ограничений
 -A OUTPUT -p icmp --icmp-type 8 -o lo -j ACCEPT
 -A INPUT  -p icmp --icmp-type 8 -i lo -j ACCEPT
+# Разрешаем эхо-ответы с внутренних адресов без ограничений
+-A OUTPUT -p icmp --icmp-type 0 -o lo  -j ACCEPT
+-A INPUT  -p icmp --icmp-type 0 -i lo  -j ACCEPT
+
 
 # ICMP echo request
 -N ICMP_ECHO_request
