@@ -1,10 +1,13 @@
-# Last Modified: Sat Sep  9 22:18:48 2023
+# Last Modified: Sat Nov 25 23:06:15 2023
 abi <abi/3.0>,
 
 include <tunables/global>
 
-/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/tor {
+/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/tor flags=(complain) {
   include <abstractions/base>
+
+  capability dac_override,
+  capability dac_read_search,
 
   network inet stream,
   network netlink raw,
@@ -16,6 +19,9 @@ include <tunables/global>
 
   unix,
 
+  deny owner /root/.tor/ w,
+
+  /etc/ssl/openssl.cnf r,
   /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/lyrebird px,
   /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/tor mr,
   /proc/sys/kernel/random/* r,

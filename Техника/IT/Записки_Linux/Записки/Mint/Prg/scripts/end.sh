@@ -12,6 +12,7 @@ killall -u a1 -u first -u dev -u game -u gamecommand -u inet -u opera -u chromiu
 
 veracrypt -t -d --force &
 sdel ndd /var/log
+sdel v   /var/lib/systemd/coredump/*
 
 echo "start $0" 	&>  $OF
 echo $dateOfBegin   &>> $OF

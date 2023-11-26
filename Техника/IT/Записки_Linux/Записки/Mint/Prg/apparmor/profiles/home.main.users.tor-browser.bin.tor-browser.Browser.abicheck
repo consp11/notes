@@ -3,7 +3,7 @@ abi <abi/3.0>,
 
 include <tunables/global>
 
-/home/main/users/tor-browser/bin/tor-browser/Browser/abicheck {
+/home/main/users/tor-browser/bin/tor-browser/Browser/abicheck flags=(complain) {
   include <abstractions/base>
 
   /home/main/users/tor-browser/bin/tor-browser/Browser/abicheck mr,

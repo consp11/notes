@@ -1,9 +1,9 @@
-# Last Modified: Sat Sep  9 22:20:55 2023
+# Last Modified: Sat Nov 25 12:08:56 2023
 abi <abi/3.0>,
 
 include <tunables/global>
 
-/home/main/users/tor-browser/bin/tor-browser/Browser/start-tor-browser {
+/home/main/users/tor-browser/bin/tor-browser/Browser/start-tor-browser flags=(complain) {
   include <abstractions/base>
 
   capability sys_admin,
@@ -39,8 +39,10 @@ include <tunables/global>
   /home/main/users/tor-browser/bin/tor-browser/Browser/abicheck ix,
   /home/main/users/tor-browser/bin/tor-browser/Browser/firefox ix,
   /home/main/users/tor-browser/bin/tor-browser/Browser/firefox.real ix,
+  /home/main/users/tor-browser/bin/tor-browser/Browser/glxtest mrix,
   /home/main/users/tor-browser/bin/tor-browser/Browser/start-tor-browser r,
   /home/main/users/tor-browser/bin/tor-browser/Browser/updater mrix,
+  /home/main/users/tor-browser/bin/tor-browser/Browser/vaapitest mrix,
   /inRamA/ r,
   /inRamA/** rw,
   /proc/sys/dev/i915/perf_stream_paranoid r,
