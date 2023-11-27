@@ -3,7 +3,7 @@ abi <abi/3.0>,
 
 include <tunables/global>
 
-/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/obfs4proxy flags=(complain) {
+/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/lyrebird {
   include <abstractions/base>
 
   network inet stream,
@@ -19,7 +19,7 @@ include <tunables/global>
   dbus,
 
   /etc/** r,
-  /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/obfs4proxy mr,
+  /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/lyrebird mr,
   /proc/sys/net/core/somaxconn r,
   /run/systemd/resolve/stub-resolv.conf r,
   /sys/kernel/mm/transparent_hugepage/hpage_pmd_size r,

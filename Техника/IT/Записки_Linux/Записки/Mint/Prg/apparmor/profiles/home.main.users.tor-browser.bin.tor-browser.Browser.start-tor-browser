@@ -1,9 +1,9 @@
-# Last Modified: Sat Nov 25 12:08:56 2023
+# Last Modified: Sun Nov 26 19:10:11 2023
 abi <abi/3.0>,
 
 include <tunables/global>
 
-/home/main/users/tor-browser/bin/tor-browser/Browser/start-tor-browser flags=(complain) {
+/home/main/users/tor-browser/bin/tor-browser/Browser/start-tor-browser {
   include <abstractions/base>
 
   capability sys_admin,
@@ -19,9 +19,7 @@ include <tunables/global>
   dbus,
 
   signal send set=kill peer=/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/lyrebird,
-  signal send set=kill peer=/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/obfs4proxy,
   signal send set=term peer=/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/lyrebird,
-  signal send set=term peer=/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/obfs4proxy,
 
   unix,
 
@@ -33,8 +31,6 @@ include <tunables/global>
   /etc/** r,
   /etc/**/ r,
   /home/main/users/tor-browser/** mrwk,
-  /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/lyrebird px,
-  /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/obfs4proxy px,
   /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/tor px,
   /home/main/users/tor-browser/bin/tor-browser/Browser/abicheck ix,
   /home/main/users/tor-browser/bin/tor-browser/Browser/firefox ix,
@@ -74,15 +70,31 @@ include <tunables/global>
   /sys/devices/system/node/node[0-9]/meminfo r,
   /sys/devices/virtual/input/mice/uevent r,
   /sys/kernel/mm/transparent_hugepage/hpage_pmd_size r,
-  /usr/bin/** mix,
   /usr/bin/bash mrix,
+  /usr/bin/cp mrix,
+  /usr/bin/dirname mrix,
   /usr/bin/env mix,
+  /usr/bin/expr mrix,
+  /usr/bin/file mrix,
+  /usr/bin/getconf mrix,
+  /usr/bin/grep mrix,
+  /usr/bin/id mrix,
+  /usr/bin/ln mrix,
+  /usr/bin/mkdir mrix,
+  /usr/bin/rm mrix,
+  /usr/bin/sed mrix,
+  /usr/bin/zenity mrix,
   /usr/libexec/** mr,
+  /usr/local/share/fonts/ r,
+  /usr/local/share/fonts/** r,
   /usr/share/** r,
   /usr/share/**/ r,
+  /var/cache/fontconfig/ w,
+  /var/cache/fontconfig/* r,
   /var/lib/flatpak/exports/share/** r,
   /var/lib/flatpak/exports/share/**/ r,
   owner /dev/shm/* rw,
+  owner /home/main/users/tor-browser/** mrwlk,
   owner /proc/** rwk,
   owner /tmp/** rwk,
   owner /tmp/**/ rwk,

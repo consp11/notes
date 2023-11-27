@@ -3,7 +3,7 @@ abi <abi/3.0>,
 
 include <tunables/global>
 
-/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/tor flags=(complain) {
+/home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/tor {
   include <abstractions/base>
 
   capability dac_override,
