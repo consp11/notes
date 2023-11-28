@@ -32,8 +32,8 @@ include <tunables/global>
   deny /home/main/users/*/.local/share/recently-used.xbel.* w,
   deny /media/veracrypt1/ rw,
   deny /media/veracrypt8/ rw,
-  deny /usr/lib/x86_64-linux-gnu/opera/opera_autoupdate mrwk,
-  deny /usr/lib/x86_64-linux-gnu/opera/opera_autoupdate x,
+#  deny /usr/lib/x86_64-linux-gnu/opera/opera_autoupdate mrwk,
+#  deny /usr/lib/x86_64-linux-gnu/opera/opera_autoupdate x,
 
   / r,
   /**/ r,
@@ -83,6 +83,7 @@ include <tunables/global>
   /usr/bin/xdg-settings px,
   /usr/lib/x86_64-linux-gnu/opera/opera mrix,
   /usr/lib/x86_64-linux-gnu/opera/opera_crashreporter mrpx,
+  /usr/lib/x86_64-linux-gnu/opera/opera_autoupdate mrwkix,
   /usr/local/share/** r,
   /usr/share/** r,
   /var/cache/fontconfig/ mrwk,
