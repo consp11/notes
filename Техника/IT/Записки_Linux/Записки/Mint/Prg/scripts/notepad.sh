@@ -16,6 +16,7 @@ nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 '/home/main/users/inet/_/plans/Планы/+' \
 "/home/main/users/inet/_/plans/Планы/Дела/Частые" \
 '/Arcs/Repos/consp11.github.io/free/05/Конспекты/Проектирование/Заметки' \
+'/home/main/users/inet/_/plans/ГолоданиеИПост/2023/ПотреблениеВитаминов' \
 &  &> /inRam/startup-nqq-pl.log
 
 nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
@@ -34,9 +35,9 @@ nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 #'/home/main/users/inet/Docs/Тетлок Ф., Гарднер Д. - Думай медленно - предсказывай точно/' \
 #&
 
-Thunar \
-'/media/veracrypt8/_sh/' \
-&
+#Thunar \
+#'/media/veracrypt8/_sh/' \
+#&
 
 
 #nice -n 19 disk-wait 1
