@@ -1,4 +1,4 @@
-# Last Modified: Sun Nov 26 19:10:11 2023
+# Last Modified: Fri Dec 15 13:19:41 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -31,6 +31,7 @@ include <tunables/global>
   /etc/** r,
   /etc/**/ r,
   /home/main/users/tor-browser/** mrwk,
+  /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/PluggableTransports/lyrebird px,
   /home/main/users/tor-browser/bin/tor-browser/Browser/TorBrowser/Tor/tor px,
   /home/main/users/tor-browser/bin/tor-browser/Browser/abicheck ix,
   /home/main/users/tor-browser/bin/tor-browser/Browser/firefox ix,

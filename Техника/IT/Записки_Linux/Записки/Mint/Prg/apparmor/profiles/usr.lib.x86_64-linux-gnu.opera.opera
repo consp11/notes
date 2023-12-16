@@ -80,7 +80,7 @@ include <tunables/global>
   /usr/bin/dash ix,
   /usr/bin/egrep mrix,
   /usr/bin/grep mrix,
-  /usr/bin/xdg-settings px,
+  /usr/bin/xdg-settings Px,
   /usr/lib/x86_64-linux-gnu/opera/opera mrix,
   /usr/lib/x86_64-linux-gnu/opera/opera_crashreporter mrpx,
   /usr/lib/x86_64-linux-gnu/opera/opera_autoupdate mrwkix,
