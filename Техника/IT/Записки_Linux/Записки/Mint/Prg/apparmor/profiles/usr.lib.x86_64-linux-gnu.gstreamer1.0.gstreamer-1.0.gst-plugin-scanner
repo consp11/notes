@@ -1,4 +1,4 @@
-# Last Modified: Mon Aug  7 17:52:57 2023
+# Last Modified: Thu Dec 21 13:56:01 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -23,8 +23,10 @@ include <tunables/global>
   /sys/**/ r,
   /sys/devices/** r,
   /usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner mr,
+  /usr/local/lib/python3.10/dist-packages/ r,
   owner /etc/** rw,
   owner /home/*/.Xauthority r,
   owner /home/main/users/*/.Xauthority r,
+  owner /usr/lib/python3/dist-packages/gi/overrides/__pycache__/* rw,
 
 }

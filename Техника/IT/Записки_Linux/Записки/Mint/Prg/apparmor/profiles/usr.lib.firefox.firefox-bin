@@ -1,4 +1,4 @@
-# Last Modified: Mon Sep 11 20:23:18 2023
+# Last Modified: Thu Dec 21 13:56:00 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -104,6 +104,7 @@ include <tunables/global>
   owner /home/main/users/inet/.cache/* rw,
   owner /home/main/users/inet/.cache/mesa_shader_cache/* rw,
   owner /home/main/users/inet/.cache/mozilla/** rw,
+  owner /home/main/users/inet/.cache/thumbnails/** r,
   owner /home/main/users/inet/.local/share/** r,
   owner /home/main/users/inet/.local/share/**/ r,
   owner /home/main/users/inet/Загрузки/** w,
@@ -113,6 +114,7 @@ include <tunables/global>
   owner /home/main/users/mega/.local/share/** a,
   owner /home/main/users/mega/.local/share/** r,
   owner /inRam/* w,
+  owner /inRamA/** r,
   owner /inRamA/** w,
   owner /proc/** rw,
   owner /run/user/** rw,
