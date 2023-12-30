@@ -1,4 +1,4 @@
-# Last Modified: Fri Jul  7 08:09:16 2023
+# Last Modified: Fri Dec 29 23:51:51 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -28,8 +28,11 @@ include <tunables/global>
   /dev/zero mrw,
   /etc/** r,
   /home/main/users/inet/Docs/** r,
+  /inRamA/* r,
   /opt/calibre/** mr,
   /opt/calibre/bin/calibre-parallel mrix,
+  /opt/calibre/bin/pdfinfo mrix,
+  /opt/calibre/bin/pdftohtml mrix,
   /opt/calibre/calibre-parallel mrix,
   /opt/calibre/libexec/QtWebEngineProcess mrix,
   /proc/ r,

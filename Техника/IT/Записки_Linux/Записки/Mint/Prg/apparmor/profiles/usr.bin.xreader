@@ -1,4 +1,4 @@
-# Last Modified: Sun Aug 13 08:43:04 2023
+# Last Modified: Fri Dec 29 23:52:39 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -17,14 +17,22 @@ include <tunables/global>
 
   /**.djvu r,
   /**.pdf r,
+  /dev/dri/ r,
+  /dev/dri/card0 rw,
+  /dev/dri/renderD128 rw,
   /etc/** r,
   /proc/** r,
   /run/dbus/system_bus_socket rw,
   /sys/devices/** r,
+  /sys/fs/cgroup/user.slice/user-1003.slice/session-c2.scope/memory.current r,
+  /sys/fs/cgroup/user.slice/user-1003.slice/session-c2.scope/memory.high r,
+  /sys/fs/cgroup/user.slice/user-1003.slice/session-c2.scope/memory.max r,
   /sys/fs/cgroup/user.slice/user-1003.slice/session-c4.scope/* r,
   /usr/bin/xreader mr,
   /usr/lib/x86_64-linux-gnu/webkit2gtk-4.0/WebKitNetworkProcess mrix,
   /usr/lib/x86_64-linux-gnu/webkit2gtk-4.0/WebKitWebProcess mrix,
+  /usr/lib/x86_64-linux-gnu/webkit2gtk-4.1/WebKitNetworkProcess mrix,
+  /usr/lib/x86_64-linux-gnu/webkit2gtk-4.1/WebKitWebProcess mrix,
   /usr/local/share/** r,
   /usr/share/** r,
   /var/cache/fontconfig/** r,
@@ -34,10 +42,12 @@ include <tunables/global>
   owner /home/main/users/*/.cache/xreader/** rw,
   owner /home/main/users/*/.config/dconf/user r,
   owner /home/main/users/*/.local/share/** rw,
+  owner /home/main/users/inet/.cache/mesa_shader_cache/* rw,
   owner /home/main/users/inet/.local/share/xreader/* k,
   owner /run/user/*/ICEauthority r,
   owner /run/user/*/at-spi/bus_1 rw,
   owner /run/user/*/bus rw,
   owner /run/user/*/dconf/user rw,
+  owner /run/user/1003/at-spi/* rw,
 
 }

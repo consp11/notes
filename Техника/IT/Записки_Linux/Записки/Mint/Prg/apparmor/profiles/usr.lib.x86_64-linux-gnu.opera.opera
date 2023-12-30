@@ -1,4 +1,4 @@
-# Last Modified: Sat Nov 18 13:04:36 2023
+# Last Modified: Fri Dec 29 23:50:58 2023
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -32,8 +32,6 @@ include <tunables/global>
   deny /home/main/users/*/.local/share/recently-used.xbel.* w,
   deny /media/veracrypt1/ rw,
   deny /media/veracrypt8/ rw,
-#  deny /usr/lib/x86_64-linux-gnu/opera/opera_autoupdate mrwk,
-#  deny /usr/lib/x86_64-linux-gnu/opera/opera_autoupdate x,
 
   / r,
   /**/ r,
@@ -82,8 +80,8 @@ include <tunables/global>
   /usr/bin/grep mrix,
   /usr/bin/xdg-settings Px,
   /usr/lib/x86_64-linux-gnu/opera/opera mrix,
-  /usr/lib/x86_64-linux-gnu/opera/opera_crashreporter mrpx,
   /usr/lib/x86_64-linux-gnu/opera/opera_autoupdate mrwkix,
+  /usr/lib/x86_64-linux-gnu/opera/opera_crashreporter mrpx,
   /usr/local/share/** r,
   /usr/share/** r,
   /var/cache/fontconfig/ mrwk,
@@ -105,6 +103,7 @@ include <tunables/global>
   owner /home/main/users/*/Загрузки/* rw,
   owner /home/main/users/*/Загрузки/* rwk,
   owner /inRamA/* rw,
+  owner /inRamA/** rw,
   owner /proc/** rw,
   owner /tmp/** rw,
 

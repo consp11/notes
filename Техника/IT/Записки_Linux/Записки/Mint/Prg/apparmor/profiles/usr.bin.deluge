@@ -1,10 +1,11 @@
-# Last Modified: Sat May 27 20:37:02 2023
+# Last Modified: Fri Dec 29 23:50:57 2023
 abi <abi/3.0>,
 
 include <tunables/global>
 
 /usr/bin/deluge {
   include <abstractions/base>
+  include <abstractions/bash>
   include <abstractions/python>
 
   network inet dgram,
@@ -29,17 +30,20 @@ include <tunables/global>
   /etc/** r,
   /inRamA/ r,
   /inRamA/** r,
+  /proc/sys/kernel/random/boot_id r,
   /run/dbus/system_bus_socket rw,
   /run/systemd/resolve/stub-resolv.conf r,
   /run/systemd/userdb/ r,
   /run/systemd/userdb/io.systemd.DynamicUser rw,
   /usr/bin/ r,
+  /usr/bin/dash ix,
   /usr/bin/deluge r,
   /usr/bin/firefox Px,
   /usr/bin/python3.10 ix,
   /usr/bin/uname Px,
   /usr/local/share/** r,
   /usr/local/share/fonts/** r,
+  /usr/sbin/ldconfig mrix,
   /usr/share/** r,
   /var/cache/fontconfig/** r,
   /var/lib/flatpak/exports/share/** r,
