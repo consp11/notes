@@ -16,7 +16,6 @@ nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 '/home/main/users/inet/_/plans/Планы/+' \
 "/home/main/users/inet/_/plans/Планы/Дела/Частые" \
 '/Arcs/Repos/consp11.github.io/free/05/Конспекты/Проектирование/Заметки' \
-'/home/main/users/inet/_/plans/ГолоданиеИПост/2023/ПотреблениеВитаминов' \
 &  &> /inRam/startup-nqq-pl.log
 
 nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
