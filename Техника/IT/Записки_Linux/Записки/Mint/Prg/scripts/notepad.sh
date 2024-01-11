@@ -36,7 +36,7 @@ nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 #'/media/veracrypt8/_sh/' \
 #&
 
-Thunar '/Arcs/tmp/ВидеоПроекты/2023-12-заметки/' &
+# Thunar '/Arcs/tmp/ВидеоПроекты/2023-12-заметки/' &
 
 
 #nice -n 19 disk-wait 1
