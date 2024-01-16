@@ -117,16 +117,16 @@ CNT=PRE
 
 
 # ----------------------------------------------------------------
-# Монтируем музыку
-mkdir -p /inRam/Music
-/usr/bin/veracrypt -t -v --slot=64 -p "" --pim=1 --protect-hidden=no --mount-options=ts,ro --fs-options=ro,relatime,noexec --keyfiles="/media/veracrypt1/books/Music/books-m1-gXLm3HWPYpXR-1.key","/media/veracrypt1/books/Music/books-m1-gXLm3HWPYpXR-2.key" "/Arcs/Big/books/books-m1-gXLm3HWPYpXR" "/inRam/Music"
+# Монтируем основных пользователей
+# sudo mkdir -p /home/main; sudo chmod a-rw+t /home/main; sudo chattr +i /home/main
+/usr/bin/veracrypt -t -v --slot=33 -p "" --pim=1 --protect-hidden=no --mount-options=ts --fs-options=rw,relatime --keyfiles="/media/veracrypt1/Диски/users.key" "/Arcs/Big/users" "/home/main"
 CNT=$(($CNT+1))
 
 
 # ----------------------------------------------------------------
-# Монтируем основных пользователей
-# sudo mkdir -p /home/main; sudo chmod a-rw+t /home/main; sudo chattr +i /home/main
-/usr/bin/veracrypt -t -v --slot=33 -p "" --pim=1 --protect-hidden=no --mount-options=ts --fs-options=rw,relatime --keyfiles="/media/veracrypt1/Диски/users.key" "/Arcs/Big/users" "/home/main"
+# Монтируем музыку
+mkdir -p /inRam/Music
+/usr/bin/veracrypt -t -v --slot=64 -p "" --pim=1 --protect-hidden=no --mount-options=ts,ro --fs-options=ro,relatime,noexec --keyfiles="/media/veracrypt1/books/Music/books-m1-gXLm3HWPYpXR-1.key","/media/veracrypt1/books/Music/books-m1-gXLm3HWPYpXR-2.key" "/Arcs/Big/books/books-m1-gXLm3HWPYpXR" "/inRam/Music"
 CNT=$(($CNT+1))
 
 
