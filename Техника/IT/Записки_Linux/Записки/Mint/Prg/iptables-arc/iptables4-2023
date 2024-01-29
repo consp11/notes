@@ -1,0 +1,388 @@
+# sudo iptables-restore /etc/iptables/rules.v4
+
+*filter
+:INPUT   DROP
+:FORWARD DROP
+:OUTPUT  DROP
+
+# -A OUTPUT -j ACCEPT
+# -A INPUT  -j ACCEPT
+# -A OUTPUT -p ip -d 127.0.0.1 -j ACCEPT
+# -A INPUT -p ip -s 127.0.0.1  -j ACCEPT
+
+
+# Это эксперименты с виртуальными устройствами под namespace
+#-A OUTPUT -o inet-host -p icmp -s 10.0.3.1 -d 10.0.3.2 -j ACCEPT
+#-A OUTPUT -o inet-un   -p icmp -s 10.0.3.2 -d 10.0.3.1 -j ACCEPT
+#-A INPUT  -i inet-host -p icmp -s 10.0.3.2 -d 10.0.3.1 -j ACCEPT
+#-A INPUT  -i inet-un   -p icmp -s 10.0.3.1 -d 10.0.3.2 -j ACCEPT
+
+#-A OUTPUT -o inet-host -p tcp -s 10.0.3.1 --sport 1027 -d 10.0.3.2              -j ACCEPT
+#-A OUTPUT -o inet-un   -p tcp -s 10.0.3.2              -d 10.0.3.1 --dport 1027 -j ACCEPT
+#-A INPUT  -i inet-host -p tcp -s 10.0.3.2              -d 10.0.3.1 --dport 1027 -j ACCEPT
+#-A INPUT  -i inet-un   -p tcp -s 10.0.3.1 --sport 1027 -d 10.0.3.2              -j ACCEPT
+
+# -A FORWARD -o enx00093bf01a40 -i inet-host -j ACCEPT
+# -A FORWARD -i enx00093bf01a40 -o inet-host -j ACCEPT
+
+
+
+# Пробы с unshare
+# -A OUTPUT -o inet-host -j ACCEPT
+# -A INPUT  -i inet-host -j ACCEPT
+# -A OUTPUT -o inet-un   -j ACCEPT
+# -A INPUT  -i inet-un   -j ACCEPT
+
+
+# ----------------------------------------------------------------
+# Для несистемных аккаунтов
+
+# Разрешаем всё для first
+-A OUTPUT -m owner --uid-owner first  -j ACCEPT
+
+
+# Для игрового аккаунта
+
+# -A OUTPUT -m owner --uid-owner game  -j ACCEPT
+# -A OUTPUT -m owner --uid-owner game2 -j ACCEPT
+# -A OUTPUT -m owner --uid-owner gamecommand  -j ACCEPT
+
+# Для аккаунта для разработки
+-A OUTPUT -m owner --uid-owner dev  -j ACCEPT
+
+# Для Opera
+-A OUTPUT -m owner --uid-owner opera  -j ACCEPT
+
+
+# Описания портов в /home/main/users/inet/_/Privoxy_МСЭ/desc.txt
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 8888  -m owner --uid-owner a1    -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 8889  -m owner --uid-owner a1    -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 8118  -m owner --uid-owner inet  -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 8119  -m owner --uid-owner inet  -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 8120  -m owner --uid-owner inet  -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 8888  -m owner --uid-owner inet  -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 8889  -m owner --uid-owner inet  -j ACCEPT
+# -A OUTPUT -d 127.0.0.1 -p tcp --dport 10011 -m owner --uid-owner inet  -j ACCEPT
+
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 8889  -m owner --uid-owner game  -j ACCEPT
+
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 8890  -m owner --uid-owner quite-rss  -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 8890  -m owner --uid-owner clamav     -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 8112  -m owner --uid-owner mega       -j ACCEPT
+
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 9001  -m owner --uid-owner chromium   -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 9001  -m owner --uid-owner chromium-k -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 9001  -m owner --uid-owner ch-diet    -j ACCEPT
+
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 10010 -m owner --uid-owner tor-browser  -j ACCEPT
+# -A OUTPUT -m owner --uid-owner tor-browser  -j ACCEPT
+
+
+# ----------------------------------------------------------------
+# Для торрент-клиента
+
+-A OUTPUT -m owner --uid-owner deluge  -j ACCEPT
+-A INPUT  -p tcp --dport 33333  -j ACCEPT
+-A INPUT  -p udp --dport 33333  -j ACCEPT
+
+# ----------------------------------------------------------------
+# Разрешение для всех на интерфейсе VirtualBox
+
+
+-A INPUT  -i vboxnet0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -o vboxnet0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+-A INPUT  -i vboxnet0 -p icmp -s 192.168.56.1/24 -d 192.168.56.1/24 -j ACCEPT
+-A OUTPUT -o vboxnet0 -p icmp -s 192.168.56.1/24 -d 192.168.56.1/24 -j ACCEPT
+
+-N VBoxO
+
+-A INPUT  -p tcp -i vboxnet0 -s 192.168.56.1 -j VBoxO
+-A OUTPUT -p tcp -o vboxnet0 -s 192.168.56.1 -j VBoxO
+
+-A VBoxO  -d 192.168.56.101 -j ACCEPT
+-A VBoxO  -d 192.168.56.108 -j ACCEPT
+
+-N VBoxI
+
+-A INPUT  -i vboxnet0 -p tcp -d 192.168.56.1 -j VBoxI
+-A OUTPUT -o vboxnet0 -p tcp -d 192.168.56.1 -j VBoxI
+
+-A VBoxI -s 192.168.56.101 -p tcp --dport 40081 -j ACCEPT
+-A VBoxI -s 192.168.56.108 -p tcp --dport 40088 -j ACCEPT
+
+
+-A INPUT  -i vboxnet0 -p udp -d 224.0.0.0/8 -j REJECT
+-A INPUT  -i vboxnet0 -j LOG --log-prefix "VBox In "  --log-uid
+-A OUTPUT -o vboxnet0 -j LOG --log-prefix "VBox Out " --log-uid
+-A INPUT  -i vboxnet0 -j REJECT
+-A OUTPUT -o vboxnet0 -j REJECT
+
+
+# ----------------------------------------------------------------
+# Chain DNS. Опции для фильтрации DNS-пакетов
+-N DNS
+-N DNS_OUT
+-N DNS_LO
+
+# Разрешаем обращение в сеть для разрешения доменных имён
+
+# Разрешаем доступ systemd-resolve к внешним DNS
+-A DNS_OUT -d 77.88.8.88 -j ACCEPT
+-A DNS_OUT -d 77.88.8.2  -j ACCEPT
+-A DNS_OUT -d 77.88.8.7  -j ACCEPT
+-A DNS_OUT -d 77.88.8.3  -j ACCEPT
+-A DNS_OUT -j RETURN
+
+# Разрешаем локальный доступ к 53-им портам для разрешённых пользователей
+-A DNS_LO -m owner -j ACCEPT -m limit --limit  10/minute --limit-burst  10 --uid-owner root
+-A DNS_LO -m owner -j ACCEPT -m limit --limit  10/minute --limit-burst  30 --uid-owner ntp
+-A DNS_LO -m owner -j ACCEPT -m limit --limit  10/minute --limit-burst 600 --uid-owner _apt
+-A DNS_LO -m owner -j ACCEPT -m limit --limit 120/minute --limit-burst 512 --uid-owner vinny-proxy
+
+# -A DNS_LO -m owner --uid-owner forTor  -j ACCEPT -m limit --limit  1/minute --limit-burst 10
+
+# -A DNS_LO -m owner --uid-owner clamav  -j ACCEPT -m limit --limit 1/minute   --limit-burst 60
+
+
+-A DNS_LO -j RETURN
+
+-A DNS -o  lo -j DNS_LO
+-A DNS ! -o lo -j DNS_OUT -m owner --uid-owner systemd-resolve -m limit --limit 150/minute --limit-burst 512
+
+
+-A DNS -j RETURN
+
+-N DNSrejected
+
+# Логируем пакеты, раскомментировать, если надо
+-A DNSrejected -m recent --name deniedDNS --rdest --rcheck --seconds 10 --reap  -j REJECT
+-A DNSrejected -m recent --name deniedDNS --rdest --set -j LOG --log-prefix "ipv4o.DNS;" --log-uid
+
+
+# Запрещаем доступ к systemd-resolve или другим портам :53
+# К сожалению, systemd-resolve может быть доступна через D-Bus
+-A DNSrejected -j REJECT
+
+
+# Если обнаружен пакет на порт 53, то переходим к DNS chain
+# Затем переходим к запрету DNS, если пакет не удовлетворил ACCEPT-правила
+-A OUTPUT -p udp --dport 53 -j DNS -m length --length 0:192
+-A OUTPUT -p udp --dport 53 -g DNSrejected
+-A OUTPUT -p tcp --dport 53 -g DNSrejected
+
+
+# ----------------------------------------------------------------
+# ICMP
+# -A OUTPUT -p icmp -j LOG --log-prefix "ipv4o.l.ICMP " --log-uid
+# -A INPUT -p icmp -j LOG --log-prefix "ipv4i.l.ICMP;" --log-uid
+
+# Временные разрешения для ICMP
+# -A OUTPUT -p icmp -j ACCEPT
+# -A INPUT  -p icmp -j ACCEPT
+
+
+# Разрешаем исходящие пакеты ping на внутренние адреса без ограничений
+-A OUTPUT -p icmp --icmp-type 8 -o lo -j ACCEPT
+-A INPUT  -p icmp --icmp-type 8 -i lo -j ACCEPT
+# Разрешаем эхо-ответы с внутренних адресов без ограничений
+-A OUTPUT -p icmp --icmp-type 0 -o lo  -j ACCEPT
+-A INPUT  -p icmp --icmp-type 0 -i lo  -j ACCEPT
+
+
+# ICMP echo request
+-N ICMP_ECHO_request
+
+# ping модема
+-A ICMP_ECHO_request -d 10.0.0.1   -j ACCEPT
+-A ICMP_ECHO_request -d 10.0.0.10  -j ACCEPT
+
+# ping разрешённых ip-адресов
+
+# Можно было бы ещё на 1.1.1.1 and 1.0.0.1 (DNS CloudFlare)
+# Также есть сервис 9.9.9.9 DNS https://www.quad9.net/
+-A ICMP_ECHO_request -d 77.88.8.88 -j ACCEPT
+-A ICMP_ECHO_request -d 77.88.8.2  -j ACCEPT
+-A ICMP_ECHO_request -d 77.88.8.7  -j ACCEPT
+-A ICMP_ECHO_request -d 77.88.8.3  -j ACCEPT
+
+# -A ICMP_ECHO_request -d 8.8.8.8    -j ACCEPT
+# -A ICMP_ECHO_request -d 8.8.4.4    -j ACCEPT
+-A ICMP_ECHO_request -d 9.9.9.9    -j ACCEPT
+
+-A ICMP_ECHO_request -j LOG --log-prefix "ipv4o.ICMP;" --log-uid
+-A ICMP_ECHO_request -j REJECT
+
+# Длина пакета может быть не менее 28 байтов. Это достигается командой ping -s 0 77.88.8.88. Нормальная длина данных: 56, пакета: 84
+# -A OUTPUT -p icmp --icmp-type 8 -j ICMP_ECHO_request -m length --length 28:84  -m limit --limit 75/minute --limit-burst 12
+
+# Ограничиваем отправку данных в icmp-пакете 16-тью байтами. ping -s 16 77.88.8.88 - работает
+-A OUTPUT -p icmp --icmp-type 8 -j ICMP_ECHO_request -m length --length 28:44 -m limit --limit 120/minute --limit-burst 12
+
+
+
+# ICMP echo reply - 0; * Unreachable - 3; TTL equals 0 * - 11; Traceroute - 30
+-A INPUT -p icmp --icmp-type 0  -j ACCEPT -m length --length 28:44 -m limit --limit 75/minute --limit-burst 12
+-A INPUT -p icmp --icmp-type 3  -j ACCEPT -m length --length 28:112 -m limit --limit 75/minute --limit-burst 12
+-A INPUT -p icmp --icmp-type 11 -j ACCEPT -m length --length 28:56 -m limit --limit 75/minute --limit-burst 12
+-A INPUT -p icmp --icmp-type 30 -m state --state RELATED,ESTABLISHED -j ACCEPT -m limit --limit 75/minute --limit-burst 12
+
+
+# Всё остальное запрещаем, т.к. ниже state RELATED,ESTABLISHE может разрешить
+-A INPUT -p icmp -j LOG --log-uid --log-prefix "ipv4i;"
+-A INPUT -p icmp -j DROP
+
+
+# ----------------------------------------------------------------
+# Разрешаем обращение в сеть для пользователя с именем privoxy (смотрим вывод id privoxy и далее указываем в правилах его userid)
+-A OUTPUT             -p tcp -m owner --uid-owner vinny-proxy     -j ACCEPT
+-A OUTPUT -o enx00093bf01a40 -m owner --uid-owner vinny-proxy-tor -j REJECT
+
+# ----------------------------------------------------------------
+-N NTP
+
+# Разрешаем обращение в сеть для ntpd
+# sudo ps -eal | grep ntpd - третий столбец - номер пользователя
+# ntpd сначала стартует socket под root,
+# а потом уменьшает свои права до пользователя ntp
+# (не знаю, насколько верно это объяснение)
+# Поэтому приходится разрешать для root тоже
+
+-A NTP -m owner --uid-owner ntp  -j ACCEPT
+# -A NTP -m owner --uid-owner root -j LOG --log-prefix "ipv4o.a.NTP(root)" --log-uid
+-A NTP -m owner --uid-owner root -j ACCEPT
+-A NTP -j REJECT
+
+-A OUTPUT -p udp --sport 123 --dport 123 -j NTP -m length --length 0:128 -m limit --limit 900/hour --limit-burst 512
+
+-A OUTPUT -p udp --sport 123 --dport 123 -j LOG --log-prefix "ipv4o.NTP;" --log-uid
+-A OUTPUT -p udp --sport 123 --dport 123 -j REJECT
+
+-A INPUT -p udp --sport 123 --dport 123 -m state --state RELATED,ESTABLISHED -j ACCEPT -m length --length 0:128 -m limit --limit 900/hour --limit-burst 512
+
+-A INPUT -p udp --sport 123 --dport 123 -j LOG --log-prefix "ipv4i.NTP;" --log-uid
+-A INPUT -p udp --sport 123 --dport 123 -j REJECT
+# Ниже ещё есть логирование NTP пакетов, если вдруг они были отфильтрованы
+
+
+# ----------------------------------------------------------------
+# Разрешаем обновления и прочие операции для _apt
+#-A OUTPUT -p tcp -m multiport --dports 80,443 -m owner --uid-owner _apt   -j ACCEPT
+#-A OUTPUT									  -m owner --uid-owner _apt   -j LOG --log-prefix "ipv4o.APT" --log-uid
+-A OUTPUT -o lo -p tcp --dport 8121 -m owner --uid-owner _apt   -j ACCEPT
+
+
+# Без этого не работает обновление ключей
+# Это порядка 16 пакетов на одно соединение: 8 туда, 8 обратно: то есть 8 пакетов в час
+# Также это нужно для команд типа sudo add-apt-repository ppa:deluge-team/stable
+-A OUTPUT -p tcp -m multiport --dports 80,443 -m owner --uid-owner root -j ACCEPT -m limit --limit 24/hour --limit-burst 512
+# -A OUTPUT -p tcp -m multiport --dports 80,443 -m owner --uid-owner root -j ACCEPT
+
+
+# Разрешаем root обращаться к модему Yota
+-A OUTPUT -j ACCEPT -s 10.0.0.10 -d 10.0.0.1 -m limit --limit 16/hour --limit-burst 128 -m owner --uid-owner root
+
+
+# ----------------------------------------------------------------
+# Разрешения для tor и запреты для коннекта tor всем, кроме пользователя privoxy
+# Вверху файла также записаны разрешения для TOR Bridges
+# -A OUTPUT -p tcp -m owner --uid-owner forTor -j ACCEPT
+-A OUTPUT -m owner --uid-owner forTor -j ACCEPT
+
+# sudo netstat -4pln | fgrep tor
+
+-A OUTPUT -o lo -p tcp --dport 8080 -m owner ! --uid-owner vinny-proxy     -j REJECT
+
+-A OUTPUT -o lo -p tcp --dport 8081 -m owner ! --uid-owner vinny-proxy-tor -j REJECT
+-A OUTPUT -o lo -p tcp --dport 8084 -m owner ! --uid-owner vinny-proxy-tor -j REJECT
+-A OUTPUT -o lo -p tcp --dport 8088 -m owner ! --uid-owner vinny-proxy-tor -j REJECT
+-A OUTPUT -o lo -p tcp --dport 8091 -m owner ! --uid-owner vinny-proxy-tor -j REJECT
+-A OUTPUT -o lo -p tcp --dport 8180 -m owner ! --uid-owner vinny-proxy-tor -j REJECT
+
+-A OUTPUT -o lo -p tcp --dport 8081 -m owner   --uid-owner vinny-proxy-tor -j ACCEPT
+-A OUTPUT -o lo -p tcp --dport 8084 -m owner   --uid-owner vinny-proxy-tor -j ACCEPT
+-A OUTPUT -o lo -p tcp --dport 8088 -m owner   --uid-owner vinny-proxy-tor -j ACCEPT
+-A OUTPUT -o lo -p tcp --dport 8091 -m owner   --uid-owner vinny-proxy-tor -j ACCEPT
+-A OUTPUT -o lo -p tcp --dport 8180 -m owner   --uid-owner vinny-proxy-tor -j ACCEPT
+
+
+# ----------------------------------------------------------------
+# Прочая локальная сеть
+# Это должно быть ниже, чем DNS, т.к. DNS разграничивается и на lo
+# Также это должно быть ниже, чем tor, т.к. для TOR доступ также ограничивается
+
+# sudo netstat -4pln
+# sudo netstat -4pln | fgrep vinny
+# @proxy-denied
+# Запрещаем локальные порты прокси-серверов
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 1027  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 10010 -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8080  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8081  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8084  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8088  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8091  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8112  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8119  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8120  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8121  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8180  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8888  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8889  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8890  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8891  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 8892  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 9001  -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 40088 -j REJECT
+-A OUTPUT -o lo -d 127.0.0.1 -p tcp --dport 40091 -j REJECT
+
+
+-A INPUT  -i lo -j ACCEPT
+-A OUTPUT -o lo -j ACCEPT
+
+
+# ----------------------------------------------------------------
+# Установленные соединения
+
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+# OUTPUT может выдавать RST флаг в tcp не от пользователя, а от системы
+-A OUTPUT -p tcp -m state --state ESTABLISHED -j ACCEPT
+
+
+# -A INPUT -m conntrack --ctstatus SEEN_REPLY   -j ACCEPT
+
+
+# ----------------------------------------------------------------
+# Логирование
+
+# Это чтобы a1 не логировался, а то захламляет лог
+# -A OUTPUT -m owner --uid-owner a1  -j REJECT
+
+# -A OUTPUT -p tcp --dport 443 -j LOG --log-prefix "ipv4o.TCP:443;" --log-uid
+# -A OUTPUT -p tcp --dport 443 -j REJECT
+
+-A INPUT -p udp --sport 123 --dport 123 -j LOG --log-prefix "ipv4i.NTP;" --log-uid
+
+-A OUTPUT -m recent --name deniedPackets --rdest --rcheck --seconds 30 --reap -j REJECT
+-A OUTPUT -m recent --name deniedPackets --rdest --set
+
+
+-A OUTPUT -m state --state NEW         -j LOG --log-uid --log-prefix "ipv4o.NEW;"
+-A OUTPUT -m state --state RELATED     -j LOG --log-uid --log-prefix "ipv4o.REL;"
+-A OUTPUT -m state --state ESTABLISHED -j LOG --log-uid --log-prefix "ipv4o.EST;"
+-A OUTPUT -m state --state INVALID     -j LOG --log-uid --log-prefix "ipv4o.INVALID;"
+-A OUTPUT -m state --state UNTRACKED   -j LOG --log-uid --log-prefix "ipv4o.UNT;"
+
+-A INPUT  -m state --state NEW         -j LOG --log-uid --log-prefix "ipv4i.NEW "
+-A INPUT  -m state --state RELATED     -j LOG --log-uid --log-prefix "ipv4i.REL "
+-A INPUT  -m state --state ESTABLISHED -j LOG --log-uid --log-prefix "ipv4i.EST "
+-A INPUT  -m state --state INVALID     -j LOG --log-uid --log-prefix "ipv4i.INVALID "
+
+
+-A OUTPUT -m recent --name deniedPackets --rdest --set -j LOG --log-prefix "ipv4o.all;" --log-uid
+-A INPUT  -j LOG --log-prefix "ipv4i.all;"  --log-uid
+
+-A OUTPUT -j REJECT
+
+COMMIT

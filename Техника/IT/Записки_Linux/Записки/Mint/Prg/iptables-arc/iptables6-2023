@@ -1,0 +1,29 @@
+# sudo ip6tables-restore /etc/iptables/rules.v6
+
+*filter
+:INPUT   DROP
+:FORWARD DROP
+:OUTPUT  DROP
+
+-A INPUT -i lo -j ACCEPT
+# -A INPUT -i lo -p ipv6-icmp -j ACCEPT
+# -A INPUT -j LOG
+# -A OUTPUT -p ipv6-icmp -j ACCEPT
+
+-A OUTPUT -o lo -j ACCEPT
+
+
+
+# -A OUTPUT -o lo -j ACCEPT -m owner --uid-owner first
+# -A OUTPUT -o lo -j ACCEPT -m owner --uid-owner root
+# -A OUTPUT -o lo -j ACCEPT -m owner --uid-owner _apt
+
+# root ntp _flatpak _apt systemd-network systemd-resolve
+# forTor
+# first a1
+
+# dmesg -e
+# -A OUTPUT -o lo -j LOG --log-prefix "ipv6;" --log-uid
+# -A OUTPUT -j REJECT
+
+COMMIT
