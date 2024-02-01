@@ -64,7 +64,7 @@
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 8889  -m owner --uid-owner inet  -j ACCEPT
 # -A OUTPUT -d 127.0.0.1 -p tcp --dport 10011 -m owner --uid-owner inet  -j ACCEPT
 
--A OUTPUT -d 127.0.0.1 -p tcp --dport 8889  -m owner --uid-owner game  -j ACCEPT
+# -A OUTPUT -d 127.0.0.1 -p tcp --dport 8889  -m owner --uid-owner game  -j ACCEPT
 
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 8890  -m owner --uid-owner quite-rss  -j ACCEPT
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 8890  -m owner --uid-owner clamav     -j ACCEPT
