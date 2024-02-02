@@ -1,0 +1,25 @@
+Настройка постоянных ограничений: /etc/security/limits.conf и /etc/security/limits.d/
+* (все пользователи, кроме root) hard или soft  name    value
+Например, запретить создание файлов дампа памяти ядра
+* hard core 0
+root hard core 0
+
+Кажется, это реально не работает.
+Просмотр этих ограничений для пользователя
+ulimit -H -c; ulimit -S -c
+(hard и soft соответственно)
+
+
+Куда сохраняется?
+cat /proc/sys/kernel/core_pattern
+
+
+Описывается либо
+/etc/sysctl.conf
+либо
+/etc/systemd/coredump.conf
+/etc/systemd/coredump.conf.d/*.conf
+
+Отключение в coredump.conf (man coredump.conf(5))
+[Coredump]
+Storage=none
