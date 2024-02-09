@@ -175,7 +175,8 @@ sudo chmod o-rwx /media/veracrypt2
 
 # ----------------------------------------------------------------
 # Монтируем диск для виртуальных машин
-/usr/bin/veracrypt -t -v --slot=62 -p "" --pim=1 --protect-hidden=no --mount-options=ts --fs-options=rw,relatime,noexec --keyfiles="/media/veracrypt1/vm/vm-2022-09-29.key" "/Arcs/Big/vm-2022-09-29" "/media/veracrypt62"
+# На них есть пользователь game2, так что будем монтировать его без noexec
+/usr/bin/veracrypt -t -v --slot=62 -p "" --pim=1 --protect-hidden=no --mount-options=ts --fs-options=rw,relatime --keyfiles="/media/veracrypt1/vm/vm-2022-09-29.key" "/Arcs/Big/vm-2022-09-29" "/media/veracrypt62"
 CNT=$(($CNT+1))
 
 sudo chown inet:arcs-read /media/veracrypt62
