@@ -205,7 +205,15 @@ xfe - возможность сделать две панели со списк�
 
 sudo fdisk -l > /inRam/fdisk.log
 
-dd  if=/home/username/iso-name.iso of=/dev/cdrom
+dd conv=fdatasync if=/home/username/iso-name.iso of=/dev/cdrom
+
+Пример реальной команды dd для создания образа Linux
+dd conv=fdatasync of=/dev/sdb if=/Arcs/Prg/System/UbuntuAndOther/Mint/linuxmint-21.3-cinnamon-64bit.iso
+
+или
+
+dd bs=4MiB conv=fdatasync status=progress of=/dev/sdb if=/Arcs/Prg/System/UbuntuAndOther/Mint/linuxmint-21.3-cinnamon-64bit.iso
+
 
 Проверка sha256 контрольной суммы у iso-образа - см. sum256
 

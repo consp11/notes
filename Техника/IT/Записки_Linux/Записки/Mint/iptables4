@@ -44,7 +44,7 @@
 # Для игрового аккаунта
 
 # -A OUTPUT -m owner --uid-owner game  -j ACCEPT
-# -A OUTPUT -m owner --uid-owner game2 -j ACCEPT
+-A OUTPUT -m owner --uid-owner game2 -j ACCEPT
 # -A OUTPUT -m owner --uid-owner gamecommand  -j ACCEPT
 
 # Для аккаунта для разработки

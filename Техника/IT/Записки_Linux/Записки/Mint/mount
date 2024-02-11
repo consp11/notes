@@ -39,6 +39,10 @@ sudo systemctl start точка_монтирования_без_начально
 sudo systemctl start inRam.mount
 
 
+Перезатирание устройства (логическое)
+dd status=progress if=/dev/zero of=/dev/sdb bs=1MiB
+
+
 Монтирование файла 
 # sudo mount -o loop /inRam/1 /inRam/2
 # sudo mount -o loop=/dev/loop11 /inRam/1 /inRam/2

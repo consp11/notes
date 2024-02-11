@@ -24,6 +24,9 @@ nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
 &  &> /inRam/startup-nqq-pl.log
 
 
+xreader /home/main/users/inet/Docs/Математика/2024/Ещё/Группы-симметрии-Флари.djvu
+
+
 # /usr/bin/ebook-viewer '/home/main/users/inet/Docs/Сергей Лукьяненко-Собрание сочинений/Соглашение/3. Прыжок.fb2' &  &> /dev/null
 
 # Thunar '/home/main/users/inet/Docs/Звездная Елена/FB2/Долина драконов/'
