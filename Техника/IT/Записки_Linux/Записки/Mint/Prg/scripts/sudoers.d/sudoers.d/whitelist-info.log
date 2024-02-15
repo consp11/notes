@@ -1,0 +1,190 @@
+The file destined only for information
+вторник, 13 февраля 2024 г.   19:54:20
+
+White listed files:
+/usr/bin/xdg-settings
+	/bin/xdg-settings
+
+/usr/bin/bash
+	/bin/bash
+
+/usr/bin/ls
+	/usr/bin/ls
+
+/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+	/lib64/ld-linux-x86-64.so.2
+
+/usr/bin/grep
+	/bin/grep
+
+/usr/bin/dash
+	/usr/bin/dash
+
+/usr/lib/x86_64-linux-gnu/libc.so.6
+	/usr/lib/x86_64-linux-gnu/libc.so.6
+
+/usr/lib/x86_64-linux-gnu/opera/opera
+	/usr/bin/opera
+
+/usr/bin/bash
+	/bin/bash
+
+/usr/bin/which.debianutils
+	/usr/bin/which
+
+/usr/bin/cut
+	/bin/cut
+
+/usr/bin/env
+	/usr/bin/env
+
+/usr/bin/passwd
+	/usr/bin/passwd
+
+/usr/bin/ping
+	/usr/bin/ping
+
+/usr/bin/locale-check
+	/usr/bin/locale-check
+
+
+	/home/main/users/tor-browser/bin/tor-browser_ru/start-tor-browser.desktop
+
+/usr/bin/groups
+	/usr/bin/groups
+
+/home/main/users/quite-rss
+	/home/main/users/quite-rss
+
+/usr/bin/date
+	/usr/bin/date
+
+/usr/bin/clear
+	/usr/bin/clear
+
+/usr/bin/sed
+	/usr/bin/sed
+
+/usr/lib/x86_64-linux-gnu/opera/opera_autoupdate
+	/usr/lib/x86_64-linux-gnu/opera/opera_autoupdate
+
+/usr/bin/groups
+	/usr/bin/groups
+
+/usr/bin/tail
+	/usr/bin/tail
+
+/usr/bin/sudo
+	/usr/bin/sudo
+
+/usr/bin/quiterss
+	/bin/quiterss
+
+/usr/bin/passwd
+	/usr/bin/passwd
+
+/usr/bin/su
+	/usr/bin/su
+
+/usr/bin/file
+	/usr/bin/file
+
+/usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner
+	/usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner
+
+/usr/bin/pwd
+	/usr/bin/pwd
+
+/usr/bin/chmod
+	/usr/bin/chmod
+
+/usr/bin/expr
+	/usr/bin/expr
+
+/usr/bin/whoami
+	/usr/bin/whoami
+
+/usr/bin/systemctl
+	/usr/sbin/shutdown
+
+/usr/bin/zenity
+	/usr/bin/zenity
+
+/usr/bin/echo
+	/usr/bin/echo
+
+/usr/bin/getconf
+	/usr/bin/getconf
+
+/usr/bin/nice
+	/usr/bin/nice
+
+/usr/bin/cp
+	/usr/bin/cp
+
+/usr/bin/renice
+	/usr/bin/renice
+
+/usr/bin/ln
+	/usr/bin/ln
+
+/usr/bin/ionice
+	/usr/bin/ionice
+
+/usr/bin/mkdir
+	/usr/bin/mkdir
+
+/usr/sbin/killall5
+	/usr/bin/pidof
+
+/usr/bin/basename
+	/usr/bin/basename
+
+/usr/bin/sleep
+	/usr/bin/sleep
+
+/usr/bin/dirname
+	/usr/bin/dirname
+
+/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+	/lib64/ld-linux-x86-64.so.2
+
+/usr/bin/realpath
+	/usr/bin/realpath
+
+/usr/lib/x86_64-linux-gnu/libc.so.6
+	/usr/lib/x86_64-linux-gnu/libc.so.6
+
+/usr/bin/id
+	/usr/bin/id
+
+/usr/bin/cp
+	/usr/bin/cp
+
+/usr/bin/rm
+	/usr/bin/rm
+
+/usr/bin/ls
+	/usr/bin/ls
+
+/usr/lib/dotnet/dotnet
+	/usr/bin/dotnet
+
+/usr/bin/rm
+	/usr/bin/rm
+
+/usr/bin/update-mime-database
+	/bin/update-mime-database
+
+/usr/bin/sed
+	/usr/bin/sed
+
+/usr/bin/7z
+	/usr/bin/7z
+
+/usr/lib/p7zip/7z
+	/usr/lib/p7zip/7z
+
+/usr/bin/mkdir
+	/usr/bin/mkdir
+

@@ -1,0 +1,2 @@
+ALL vinny = (ALL:ALL) INTERCEPT:/usr/bin/renice
+
