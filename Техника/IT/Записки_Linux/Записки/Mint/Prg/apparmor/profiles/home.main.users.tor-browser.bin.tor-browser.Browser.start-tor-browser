@@ -1,4 +1,4 @@
-# Last Modified: Fri Dec 15 13:19:41 2023
+# Last Modified: Thu Feb 15 10:24:07 2024
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -73,6 +73,7 @@ include <tunables/global>
   /sys/kernel/mm/transparent_hugepage/hpage_pmd_size r,
   /usr/bin/bash mrix,
   /usr/bin/cp mrix,
+  /usr/bin/dash mrix,
   /usr/bin/dirname mrix,
   /usr/bin/env mix,
   /usr/bin/expr mrix,

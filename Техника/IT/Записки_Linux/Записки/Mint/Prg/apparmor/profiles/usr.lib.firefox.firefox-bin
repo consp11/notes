@@ -1,4 +1,4 @@
-# Last Modified: Thu Dec 21 13:56:00 2023
+# Last Modified: Thu Feb 15 10:52:07 2024
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -116,6 +116,9 @@ include <tunables/global>
   owner /inRam/* w,
   owner /inRamA/** r,
   owner /inRamA/** w,
+  owner /media/veracrypt62/game2/** k,
+  owner /media/veracrypt62/game2/** l,
+  owner /media/veracrypt62/game2/** rw,
   owner /proc/** rw,
   owner /run/user/** rw,
   owner /run/user/*/ICEauthority r,

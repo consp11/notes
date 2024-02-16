@@ -1,4 +1,4 @@
-# Last Modified: Sat May 20 00:56:40 2023
+# Last Modified: Thu Feb 15 10:30:38 2024
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -23,6 +23,9 @@ include <tunables/global>
   / r,
   /A/Mega/ r,
   /A/Mega/** rw,
+  /Arcs/ r,
+  /Arcs/tmp/ r,
+  /Arcs/tmp/G/ r,
   /dev/dri/ r,
   /dev/tty rw,
   /etc/** r,
@@ -46,6 +49,7 @@ include <tunables/global>
   /usr/local/share/** r,
   /usr/share/** r,
   /var/cache/fontconfig/** r,
+  owner /Arcs/tmp/G/* rw,
   owner /home/main/users/mega/ r,
   owner /home/main/users/mega/** l,
   owner /home/main/users/mega/** rwk,
