@@ -24,7 +24,7 @@
 sudo echo "Начинаем расшифровку и монтирование"
 
 # Проверяем, что всё верно в sudoers
-sudo echo -en "\033[41m" ; sudo visudo -c | fgrep -iv 'parsed OK' ; sudo echo -e "\033[0m"
+sudo echo -en "\033[41m" ; sudo visudo -c | egrep -iv '(parsed OK)|(успешно обработан)' ; sudo echo -e "\033[0m"
 
 
 # Если произошла ошибка (например, три раза неверно введён пароль)
