@@ -10,18 +10,18 @@ date &>> /inRam/startup.log
 # nice -n 19 disk-wait 1
 
 # --new-window
-nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
-'/home/main/users/inet/_/keys-var/notepad.sh' \
-'/home/main/users/inet/_/plans/Планы/Дела/--0' \
-'/home/main/users/inet/_/plans/Планы/+' \
-"/home/main/users/inet/_/plans/Планы/Дела/Частые" \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/Проектирование/Заметки' \
-&  &> /inRam/startup-nqq-pl.log
+#nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
+#'/home/main/users/inet/_/keys-var/notepad.sh' \
+#'/home/main/users/inet/_/plans/Планы/Дела/--0' \
+#'/home/main/users/inet/_/plans/Планы/+' \
+#"/home/main/users/inet/_/plans/Планы/Дела/Частые" \
+#'/Arcs/Repos/consp11.github.io/free/05/Конспекты/Проектирование/Заметки' \
+#&  &> /inRam/startup-nqq-pl.log
 
-nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
-'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/05 Май-14-Маск' \
-'/home/main/users/inet/_/lit/Корректура/Живой доспех' \
-&  &> /inRam/startup-nqq-pl.log
+#nice -n 11 /usr/lib/notepadqq/notepadqq-bin --new-window \
+#'/Arcs/Repos/consp11.github.io/free/05/Конспекты/2023/05 Май-14-Маск' \
+#'/home/main/users/inet/_/lit/Корректура/Живой доспех' \
+#&  &> /inRam/startup-nqq-pl.log
 
 
 xreader /home/main/users/inet/Docs/Математика/2024/Ещё/Группы-симметрии-Флари.djvu
