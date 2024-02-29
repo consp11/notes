@@ -1,4 +1,4 @@
-# Last Modified: Thu Feb 15 10:30:38 2024
+# Last Modified: Wed Feb 28 09:51:47 2024
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -30,6 +30,7 @@ include <tunables/global>
   /dev/tty rw,
   /etc/** r,
   /opt/mega/** mrwk,
+  /proc/sys/dev/i915/perf_stream_paranoid r,
   /proc/sys/kernel/random/* r,
   /run/dbus/system_bus_socket rw,
   /run/systemd/resolve/stub-resolv.conf r,

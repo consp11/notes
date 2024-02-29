@@ -1,4 +1,4 @@
-# Last Modified: Fri Dec 29 23:50:57 2023
+# Last Modified: Wed Feb 28 09:51:47 2024
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -41,6 +41,7 @@ include <tunables/global>
   /usr/bin/firefox Px,
   /usr/bin/python3.10 ix,
   /usr/bin/uname Px,
+  /usr/bin/x86_64-linux-gnu-ld.bfd mrix,
   /usr/local/share/** r,
   /usr/local/share/fonts/** r,
   /usr/sbin/ldconfig mrix,
