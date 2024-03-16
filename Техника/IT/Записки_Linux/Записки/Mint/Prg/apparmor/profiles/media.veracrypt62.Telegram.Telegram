@@ -1,0 +1,11 @@
+# Last Modified: Fri Mar 15 12:03:30 2024
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/media/veracrypt62/Telegram/Telegram flags=(complain) {
+  include <abstractions/base>
+
+  /media/veracrypt62/Telegram/Telegram mr,
+
+}

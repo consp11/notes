@@ -75,6 +75,7 @@
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 9001  -m owner --uid-owner ch-diet    -j ACCEPT
 
 -A OUTPUT -d 127.0.0.1 -p tcp --dport 10010 -m owner --uid-owner tor-browser  -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --dport 10010 -m owner --uid-owner inet         -j ACCEPT
 # -A OUTPUT -m owner --uid-owner tor-browser  -j ACCEPT
 
 
