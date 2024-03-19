@@ -1,4 +1,4 @@
-# Last Modified: Sat Nov 25 12:55:43 2023
+# Last Modified: Mon Mar 18 11:01:41 2024
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -13,7 +13,7 @@ include <tunables/global>
   /etc/** r,
   /proc/filesystems r,
   /usr/bin/xfconf-query mr,
-  owner "/home/main/users/mega/.local/share/data/Mega Limited/MEGAsync/logs/MEGAsync.log" a,
+  owner "/home/main/users/mega/.local/share/data/Mega Limited/MEGAsync/logs/MEGAsync.log" w,
   owner /run/user/*/bus rw,
 
 }

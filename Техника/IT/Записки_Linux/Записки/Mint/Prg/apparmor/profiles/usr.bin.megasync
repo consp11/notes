@@ -1,4 +1,4 @@
-# Last Modified: Wed Feb 28 09:51:47 2024
+# Last Modified: Mon Mar 18 11:34:34 2024
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -24,8 +24,10 @@ include <tunables/global>
   /A/Mega/ r,
   /A/Mega/** rw,
   /Arcs/ r,
+  /Arcs/A/ r,
   /Arcs/tmp/ r,
   /Arcs/tmp/G/ r,
+  /dev/disk/by-uuid/ r,
   /dev/dri/ r,
   /dev/tty rw,
   /etc/** r,

@@ -1,4 +1,4 @@
-# Last Modified: Mon Sep 11 20:19:39 2023
+# Last Modified: Mon Mar 18 11:10:05 2024
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -21,6 +21,7 @@ include <tunables/global>
   /usr/lib/firefox/firefox-bin px,
   /usr/libexec/sudo/* mr,
   /usr/share/fonts/** r,
+  owner "/home/main/users/mega/.local/share/data/Mega Limited/**" w,
   owner /home/main/users/mega/.local/share/** a,
 
 }

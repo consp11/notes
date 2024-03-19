@@ -1,4 +1,4 @@
-# Last Modified: Sat Nov 25 12:55:43 2023
+# Last Modified: Mon Mar 18 11:01:41 2024
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -19,5 +19,6 @@ include <tunables/global>
   owner "/home/main/users/mega/.local/share/data/Mega Limited/MEGAsync/logs/MEGAsync.log" a,
   owner /home/*/.Xauthority r,
   owner /home/main/users/** r,
+  owner /home/main/users/mega/** w,
 
 }
